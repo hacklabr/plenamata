@@ -16,5 +16,9 @@ const assets_dir = root_dir + '/assets';
 const dist_dir = root_dir + '/dist';
 
 mix.js(assets_dir + '/javascript/app.js', dist_dir);
+
+// Generate critical CSS
+// Create "for loop" to compile all page files into individual CSSs
+
 mix.sass(assets_dir + '/scss/app.scss', dist_dir);
 
