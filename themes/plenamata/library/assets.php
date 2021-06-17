@@ -26,7 +26,7 @@ class Assets {
 	 */
 	public function initialize() {
         $this->enqueue_styles();
-
+        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_javascripts' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_style' ] );
 		add_action( 'after_setup_theme', [ $this, 'action_add_editor_styles' ] );
 		add_filter( 'wp_resource_hints', [ $this, 'filter_resource_hints' ], 10, 2 );
@@ -112,6 +112,29 @@ class Assets {
             }
 
             wp_style_add_data( $handle, 'precache', true );
+        }
+    }
+
+    public function enqueue_javascripts() {
+        $js_uri = get_theme_file_uri( '/dist/js/functionalities/' );
+        $js_dir = get_theme_file_path( '/dist/js/functionalities/' );
+
+        // ToDo: Create custom preloading for each enqueue
+        $preloading_styles_enabled = false;
+
+        $js_files = $this->get_js_files();
+        foreach ( $js_files as $handle => $data ) {
+            $src = $js_uri . $data['file'];
+            $version = (string) filemtime( $js_dir . $data['file'] );
+
+            $deps = [];
+            if ( isset( $data['deps'] ) && ! empty( $data['deps'] ) ) {
+                $deps = $data['deps'];
+            }
+
+            if ( $data['global'] || ! $preloading_styles_enabled && is_callable( $data['preload_callback'] ) && call_user_func( $data['preload_callback'] ) ) {
+                wp_enqueue_script( $handle, $src, $deps, $version, true );
+            }
         }
     }
 
@@ -300,7 +323,6 @@ class Assets {
 		 * enqueued instead of just being registered) and 'preload_callback' (callback)
 		 * function determining whether the file should be preloaded for the current request).
 		 */
-		$css_files = apply_filters( 'buddyx_css_files', $css_files );
 
 		$this->css_files = [];
 		foreach ( $css_files as $handle => $data ) {
@@ -325,6 +347,55 @@ class Assets {
 		return $this->css_files;
 	}
 
+
+    /**
+	 * Gets all JS files.
+	 *
+	 * @return array Associative array of $handle => $data pairs.
+	 */
+	protected function get_js_files() : array {
+		if ( is_array( $this->js_files ) ) {
+			return $this->js_files;
+		}
+
+		$js_files = [
+			'header'     => [
+                'file' => 'header.js',
+				'global' => true,
+			],
+
+            'page'     => [
+                'file' => 'page.js',
+                'preload_callback' => function() {
+                    return !is_home() && is_page();
+                }
+			],
+	
+ 		];
+
+
+		$this->js_files = [];
+		foreach ( $js_files as $handle => $data ) {
+			if ( is_string( $data ) ) {
+				$data = [ 'file' => $data ];
+			}
+
+			if ( empty( $data['file'] ) ) {
+				continue;
+			}
+
+			$this->js_files[ $handle ] = array_merge(
+				[
+					'global'           => false,
+					'preload_callback' => null,
+				],
+				$data
+			);
+		}
+
+		return $this->js_files;
+	}
+
 	/**
 	 * Returns Google Fonts used in theme.
 	 *
@@ -337,7 +408,6 @@ class Assets {
 
 		$google_fonts = [
             'Archivo' => [ '300', '400', '500', '700', '900' ],
-            // 'Roboto' => [ '100', '100i', '300', '400', '400i', '500', '500i', '700', '700i', '900', '900i&display=swap' ]
 		];
 
 		/**

@@ -6,5 +6,6 @@
     "/dist/css/_p-home.css": "/dist/css/_p-home.css",
     "/dist/css/_p-page.css": "/dist/css/_p-page.css",
     "/dist/css/_p-search.css": "/dist/css/_p-search.css",
-    "/dist/css/_p-single.css": "/dist/css/_p-single.css"
+    "/dist/css/_p-single.css": "/dist/css/_p-single.css",
+    "/dist/js/functionalities/page.js": "/dist/js/functionalities/page.js"
 }

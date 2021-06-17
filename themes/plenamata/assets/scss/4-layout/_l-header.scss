@@ -15,24 +15,26 @@ header.main-header {
             outline: none;
             background: none;
             position: relative;
+            width: 32px;
+            height: 32px;
 
-            &:before {
-                content: "";
-                display: block;
-                width: 21px;
-                height: 2px;
-                background-color: white;
-                
-            }
-
-            &:after {
+            &:before, &:after{
                 content: "";
                 display: block;
                 width: 21px;
                 height: 2px;
                 background-color: white;
                 position: absolute;
-                top: 7.3px;
+                top: 13px;
+            }
+
+            &:after {
+                top: 19.3px;
+            }
+
+
+            &.active {
+                
             }
         }
 
