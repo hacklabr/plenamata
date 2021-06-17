@@ -1,0 +1,20 @@
+header.main-header {    
+    .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 78px;
+
+        .menus {
+            display: flex;
+
+            .primary-menu {
+                margin-right: 85px;
+            }
+        }
+
+        @import "./../3-components/c-wpml-language-menu";
+        @import "./../3-components/c-main-menu";
+
+    }
+}

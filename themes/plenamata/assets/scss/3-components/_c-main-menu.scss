@@ -1,0 +1,21 @@
+ul {
+    display: flex;
+    list-style: none;
+
+    li {
+        font-size: 16px;
+
+        &:not(:last-child) {
+            margin-right: 40px;
+        }
+
+        a {
+            color: white;
+            transition: color .2s ease;
+            &:hover {
+                color: var(--c-primary);
+                text-decoration: none;
+            }
+        }
+    }
+}
