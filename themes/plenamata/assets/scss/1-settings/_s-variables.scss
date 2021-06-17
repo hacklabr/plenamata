@@ -37,3 +37,44 @@ $p_theme_assets: $p_theme + '/assets';
 $f_body: 'Source Sans Pro', sans-serif;
 $f_title: 'Source Sans Pro', sans-serif;
 
+
+:root {
+    // Sizes
+    // Typo sizes
+    $s_span: $s_p;
+    --s_p: $s_p;
+
+    --s_h1: $s_h1;
+    --s_h2: $s_h2;
+    --s_h3: $s_h3;
+    --s_h4: $s_h4;
+    --s_h5: $s_h5;
+    --s_h6: $s_h6;
+
+    // Spacing sizes
+    --s_h1_mt: $s_h1_mt;
+    --s_h1_mb: $s_h1_mb;
+
+    --s_h2_mt: $s_h2_mt;
+    --s_h2_mb: $s_h2_mb;
+
+    --s_h3_mt: $s_h3_mt;
+    --s_h3_mb: $s_h3_mb;
+
+    --s_h4_mt: $s_h4_mt;
+    --s_h4_mb: $s_h4_mb;
+
+    // Colors
+    --c_primary: $c_primary;
+    --c_secondary: $c_secondary;
+    --c_gray: $c_gray;
+    --c_gray__darker: $c_gray__darker;
+
+    // Paths
+    --p_theme: $p_theme;
+    --p_theme_assets: $p_theme + '/assets';
+
+    // Fonts
+    --f_body: $f_body;
+    --f_title: $f_title;
+}
