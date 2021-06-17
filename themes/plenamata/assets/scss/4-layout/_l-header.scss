@@ -1,4 +1,11 @@
-header.main-header {    
+header.main-header {
+
+    &.active {
+        background-color: var(--c-darkness-05);
+        transition: all .5s;
+        min-height: 100vh;
+    }
+
     .header-content {
         display: flex;
         justify-content: space-between;
@@ -6,7 +13,12 @@ header.main-header {
         min-height: 78px;
 
         .logo {
-
+            @include mobile {
+                img {
+                    width: 154px;
+                    height: auto;
+                }
+            }
         }
 
         button.toggle-menu {
@@ -17,6 +29,11 @@ header.main-header {
             position: relative;
             width: 32px;
             height: 32px;
+            display: none;
+
+            @include tablet {
+                display: block;
+            }
 
             &:before, &:after{
                 content: "";
@@ -35,6 +52,8 @@ header.main-header {
 
 
             &.active {
+                justify-self: flex-end;
+
                 &:before {
                     top: 16px;
                     transform: rotate(-45deg);
@@ -52,8 +71,34 @@ header.main-header {
         .menus {
             display: flex;
 
+            @include tablet {
+                display: none;
+            }
+
             .primary-menu {
                 margin-right: 85px;
+            }
+        }
+
+
+        &.active {
+            display: grid;
+            grid-template-columns: 164px 32px;
+            grid-template-rows: 78px auto;
+            grid-template-areas: "a b"
+                                 "c c";
+            .menus {    
+                display: flex;
+                flex-direction: column;
+                grid-area: c;
+
+                .primary-menu {
+                    ul {
+                        flex-direction: column;
+                        margin-left: 0;
+                        padding-left: 0;
+                    }
+                }
             }
         }
 
