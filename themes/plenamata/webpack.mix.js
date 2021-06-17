@@ -33,7 +33,7 @@ getDirFiles(pagesPath).forEach((filepath) => {
     mix.sass(pagesPath + filepath , dist_dir + '/css/pages/');
 })
 
-// Compile all JS functionalitis into  individual files
+// Compile all JS functionalitis into individual files
 const functionalitiesPath = assets_dir + '/javascript/functionalities/';
 getDirFiles(functionalitiesPath).forEach((filepath) => {
     mix.js(functionalitiesPath + filepath , dist_dir + '/js/functionalities');
