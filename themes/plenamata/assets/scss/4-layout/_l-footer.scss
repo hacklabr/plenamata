@@ -1,3 +1,36 @@
 footer.main-footer {
-    
+    background-color: var(--c-darkness-05);
+
+    .logos-area {
+        margin-left: auto;
+        margin-right: auto;
+        float: none;
+        margin-bottom: 140px;
+
+        @include mobile {
+            margin-bottom: 60px;
+        }
+
+        .before-logos {
+            font-size: size(20);
+            color: white;
+            margin-bottom: 90px;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            > div {
+                &:not(:last-child) {
+                    margin-right: 113px;
+
+                    @include mobile {
+                        margin: 0;
+                    }
+                }
+            }
+        }
+    }
 }
