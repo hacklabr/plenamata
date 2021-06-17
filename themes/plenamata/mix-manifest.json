@@ -1,4 +1,9 @@
 {
-    "/dist/app.js": "/dist/app.js",
+    "/dist/critical.css": "/dist/critical.css",
+    "/dist/pages/_p-404.css": "/dist/pages/_p-404.css",
+    "/dist/pages/_p-archive.css": "/dist/pages/_p-archive.css",
+    "/dist/pages/_p-home.css": "/dist/pages/_p-home.css",
+    "/dist/pages/_p-page.css": "/dist/pages/_p-page.css",
+    "/dist/pages/_p-search.css": "/dist/pages/_p-search.css",
     "/dist/app.css": "/dist/app.css"
 }

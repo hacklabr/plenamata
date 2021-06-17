@@ -1,4 +1,5 @@
 let mix = require('laravel-mix');
+let fs = require('fs');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,16 +12,30 @@ let mix = require('laravel-mix');
  |
  */
 
+const getDirFiles = function (dir) {
+    // get all 'files' in this directory
+    // filter directories
+    return fs.readdirSync(dir).filter(file => {
+        return fs.statSync(`${dir}/${file}`).isFile();
+    });
+};
+
 const root_dir = './';
 const assets_dir = root_dir + '/assets';
 const dist_dir = root_dir + '/dist';
 
-mix.js(assets_dir + '/javascript/app.js', dist_dir);
+// mix.js(assets_dir + '/javascript/app.js', dist_dir);
 
 // Generate critical CSS
-mix.sass(assets_dir + '/scss/critical-app.scss', dist_dir + '/critical');
+mix.sass(assets_dir + '/scss/critical-app.scss', dist_dir + '/critical.css');
 
-// Create "for loop" to compile all page files into individual CSSs
+// Compile all page files into individual CSSs
+const pagesPath = assets_dir + '/scss/6-pages/';
+
+getDirFiles(pagesPath).forEach((filepath) => {
+    mix.sass(pagesPath + filepath , dist_dir + '/pages/');
+})
+
 
 mix.sass(assets_dir + '/scss/app.scss', dist_dir);
 
