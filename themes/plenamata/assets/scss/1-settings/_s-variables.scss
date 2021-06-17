@@ -42,39 +42,39 @@ $f_title: 'Source Sans Pro', sans-serif;
     // Sizes
     // Typo sizes
     $s_span: $s_p;
-    --s_p: $s_p;
+    --s-p: #{$s_p};
 
-    --s_h1: $s_h1;
-    --s_h2: $s_h2;
-    --s_h3: $s_h3;
-    --s_h4: $s_h4;
-    --s_h5: $s_h5;
-    --s_h6: $s_h6;
+    --s-h1: #{$s_h1};
+    --s-h2: #{$s_h2};
+    --s-h3: #{$s_h3};
+    --s-h4: #{$s_h4};
+    --s-h5: #{$s_h5};
+    --s-h6: #{$s_h6};
 
     // Spacing sizes
-    --s_h1_mt: $s_h1_mt;
-    --s_h1_mb: $s_h1_mb;
+    --s-h1-mt: #{$s_h1_mt};
+    --s-h1-mb: #{$s_h1_mb};
 
-    --s_h2_mt: $s_h2_mt;
-    --s_h2_mb: $s_h2_mb;
+    --s-h2-mt: #{$s_h2_mt};
+    --s-h2-mb: #{$s_h2_mb};
 
-    --s_h3_mt: $s_h3_mt;
-    --s_h3_mb: $s_h3_mb;
+    --s-h3-mt: #{$s_h3_mt};
+    --s-h3-mb: #{$s_h3_mb};
 
-    --s_h4_mt: $s_h4_mt;
-    --s_h4_mb: $s_h4_mb;
+    --s-h4-mt: #{$s_h4_mt};
+    --s-h4-mb: #{$s_h4_mb};
 
     // Colors
-    --c_primary: $c_primary;
-    --c_secondary: $c_secondary;
-    --c_gray: $c_gray;
-    --c_gray__darker: $c_gray__darker;
+    --c-primary: #{$c_primary};
+    --c-secondary: #{$c_secondary};
+    --c-gray: #{$c_gray};
+    --c-gray--darker: #{$c_gray__darker};
 
     // Paths
-    --p_theme: $p_theme;
-    --p_theme_assets: $p_theme + '/assets';
+    --p-theme: #{$p_theme};
+    --p-theme-assets: #{$p_theme + '/assets'};
 
     // Fonts
-    --f_body: $f_body;
-    --f_title: $f_title;
+    --f-body: #{$f_body};
+    --f-title: #{$f_title};
 }

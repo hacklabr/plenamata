@@ -27,7 +27,7 @@ class Assets {
 	public function initialize() {
         $this->enqueue_styles();
 
-        add_action( 'admin_enqueue_scripts', [ $this, 'buddyx_enqueue_admin_style' ] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_style' ] );
 		add_action( 'after_setup_theme', [ $this, 'action_add_editor_styles' ] );
 		add_filter( 'wp_resource_hints', [ $this, 'filter_resource_hints' ], 10, 2 );
         add_filter( 'style_loader_tag', [ $this, 'add_rel_preload' ], 10, 4 );
@@ -62,9 +62,7 @@ class Assets {
             $content = file_get_contents($src);
 
 			if ( $data['global'] || ! $preloading_styles_enabled && is_callable( $data['preload_callback'] ) && call_user_func( $data['preload_callback'] ) && isset($data['inline']) && $data['inline'] ) {
-                echo "<style id='$handle'>";
-                echo $content;
-                echo "</style>";
+                echo "<style id='$handle-css'>" . $content . "</style>";
 			} 
 		}
     }
