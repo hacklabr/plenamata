@@ -30,7 +30,7 @@ mix.sass(assets_dir + '/scss/critical-app.scss', dist_dir + '/css/critical.css')
 // Compile all page files into individual CSSs
 const pagesPath = assets_dir + '/scss/6-pages/';
 getDirFiles(pagesPath).forEach((filepath) => {
-    mix.sass(pagesPath + filepath , dist_dir + '/css/pages/');
+    mix.sass(pagesPath + filepath , dist_dir + '/css/');
 })
 
 // Compile all JS functionalitis into individual files

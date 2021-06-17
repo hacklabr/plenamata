@@ -2,14 +2,9 @@
 
 namespace jaci;
 
-function enqueue_assets() {
-    wp_enqueue_style('app', get_template_directory_uri() . '/dist/css/critical.css', [], filemtime(get_template_directory() . '/dist/css/critical.css'));
-}
-
-add_action('wp_enqueue_scripts', 'jaci\\enqueue_assets');
-
 class Assets {
     private static $instances = [];
+	protected $google_fonts;
     protected $js_files;
     protected $css_files;
 
@@ -30,11 +25,14 @@ class Assets {
 	 * Adds the action and filter hooks to integrate with WordPress.
 	 */
 	public function initialize() {
-		add_action( 'wp_enqueue_scripts', [ $this, 'action_enqueue_styles' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'buddyx_enqueue_admin_style' ] );
-		add_action( 'wp_head', [ $this, 'action_preload_styles' ] );
+        $this->enqueue_styles();
+
+        add_action( 'admin_enqueue_scripts', [ $this, 'buddyx_enqueue_admin_style' ] );
 		add_action( 'after_setup_theme', [ $this, 'action_add_editor_styles' ] );
 		add_filter( 'wp_resource_hints', [ $this, 'filter_resource_hints' ], 10, 2 );
+        add_filter( 'style_loader_tag', [ $this, 'add_rel_preload' ], 10, 4 );
+
+		// add_action( 'wp_head', [ $this, 'action_preload_styles' ] );
 	}
 
     /**
@@ -42,27 +40,57 @@ class Assets {
 	 *
 	 * Stylesheets that are global are enqueued. All other stylesheets are only registered, to be enqueued later.
 	 */
-	public function action_enqueue_styles() {
+	public function enqueue_styles() {
+        add_action( 'wp_head', [ $this, 'enqueue_inline_styles' ], 0);
+        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_generic_styles' ] );
+	}
 
-		// Enqueue Google Fonts.
-		$google_fonts_url = $this->get_google_fonts_url();
-		if ( ! empty( $google_fonts_url ) ) {
-			wp_enqueue_style( 'jaci-fonts', $google_fonts_url, [], null );
-		}
-
-		$css_uri = get_theme_file_uri( '/dist/css/' );
-		$css_dir = get_theme_file_path( '/dist/css/' );
-
-		$preloading_styles_enabled = true;
+    public function add_rel_preload($html, $handle, $href, $media) {
+        if (!WP_DEBUG && (is_admin() || is_user_logged_in())) return $html;
+        
+        $html = "<link rel='stylesheet' onload=\"this.onload=null;this.media='all'\" id='$handle' href='$href' type='text/css' media='print' />";
+        return $html;
+    }
+    
+    public function enqueue_inline_styles() {
+        $preloading_styles_enabled = false;
+        $css_uri = get_theme_file_uri( '/dist/css/' );
 
 		$css_files = $this->get_css_files();
 		foreach ( $css_files as $handle => $data ) {
-            $src  = false;
-            $version = false;
+            $src = $css_uri . $data['file'];            
+            $content = file_get_contents($src);
+
+			if ( $data['global'] || ! $preloading_styles_enabled && is_callable( $data['preload_callback'] ) && call_user_func( $data['preload_callback'] ) && isset($data['inline']) && $data['inline'] ) {
+                echo "<style id='$handle'>";
+                echo $content;
+                echo "</style>";
+			} 
+		}
+    }
+
+    public function enqueue_generic_styles() {
+        // Enqueue Google Fonts.
+        $google_fonts_url = $this->get_google_fonts_url();
+        if ( ! empty( $google_fonts_url ) ) {
+            wp_enqueue_style( 'jaci-fonts', $google_fonts_url, [], null );
+        }
+
+        $css_uri = get_theme_file_uri( '/dist/css/' );
+        $css_dir = get_theme_file_path( '/dist/css/' );
+
+        // ToDo: Create custom preloading for each enqueue
+        $preloading_styles_enabled = false;
+
+        $css_files = $this->get_css_files();
+        foreach ( $css_files as $handle => $data ) {
+            // Skip inline styles
+            if(isset($data['inline']) && $data['inline']) {
+                continue;
+            }
 
             $src = $css_uri . $data['file'];
             $version = (string) filemtime( $css_dir . $data['file'] );
-
             
             /**
              * Depends
@@ -74,20 +102,20 @@ class Assets {
                 $deps = $data['deps'];
             }
 
-			/*
-			 * Enqueue global stylesheets immediately and register the other ones for later use
-			 * (unless preloading stylesheets is disabled, in which case stylesheets should be immediately
-			 * enqueued based on whether they are necessary for the page content).
-			 */
-			if ( $data['global'] || ! $preloading_styles_enabled && is_callable( $data['preload_callback'] ) && call_user_func( $data['preload_callback'] ) ) {
-				wp_enqueue_style( $handle, $src, $deps, $version, $data['media'] );
-			} else {
-				wp_register_style( $handle, $src, $deps, $version, $data['media'] );
-			}
+            /*
+            * Enqueue global stylesheets immediately and register the other ones for later use
+            * (unless preloading stylesheets is disabled, in which case stylesheets should be immediately
+            * enqueued based on whether they are necessary for the page content).
+            */
+            if ( $data['global'] || ! $preloading_styles_enabled && is_callable( $data['preload_callback'] ) && call_user_func( $data['preload_callback'] ) ) {
+                wp_enqueue_style( $handle, $src, $deps, $version, $data['media'] );
+            } else {
+                wp_register_style( $handle, $src, $deps, $version, $data['media'] );
+            }
 
-			wp_style_add_data( $handle, 'precache', true );
-		}
-	}
+            wp_style_add_data( $handle, 'precache', true );
+        }
+    }
 
 	/**
 	 * Register and enqueue a custom stylesheet in the WordPress admin.
@@ -361,3 +389,6 @@ class Assets {
 		return add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
 	}
 }
+
+
+$assets_manager = Assets::getInstance();
