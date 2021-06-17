@@ -77,6 +77,10 @@ header.main-header {
 
             .primary-menu {
                 margin-right: 85px;
+
+                @include mobile {
+                    margin-right: 0;
+                }
             }
         }
 
@@ -97,6 +101,10 @@ header.main-header {
                         flex-direction: column;
                         margin-left: 0;
                         padding-left: 0;
+                    }
+
+                    ul.sub-menu {
+                        padding-left: 20px
                     }
                 }
             }

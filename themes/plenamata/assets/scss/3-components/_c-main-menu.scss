@@ -14,6 +14,39 @@ ul {
             margin-right: 40px;
         }
 
+        &:hover {
+            position: relative;
+
+            .sub-menu {
+                min-width: 200px;
+                display: block;
+                position: absolute;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 10px;
+                border-left: 1px solid white;
+            }
+        }
+
+
+        ul.sub-menu {
+            display: none;
+
+            @include mobile {
+                display: block;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                padding-left: 10px;
+                border-left: 1px solid white;
+                margin-bottom: 20px;
+
+                li {
+                    font-size: 20px;
+                    line-height: 2;
+                }
+            }
+        }
+
         a {
             color: white;
             transition: color .2s ease;
@@ -22,5 +55,8 @@ ul {
                 text-decoration: none;
             }
         }
+
+        
+
     }
 }
