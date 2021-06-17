@@ -1,3 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    alert("HEADER");
+    document.querySelector('button.toggle-menu').addEventListener('click', function() {
+        this.classList.toggle('active');
+    })
 })

@@ -26,6 +26,7 @@ header.main-header {
                 background-color: white;
                 position: absolute;
                 top: 13px;
+                transition: all .4s;
             }
 
             &:after {
@@ -34,7 +35,17 @@ header.main-header {
 
 
             &.active {
-                
+                &:before {
+                    top: 16px;
+                    transform: rotate(-45deg);
+                    transition: all .2s;
+                }
+
+                &:after {
+                    top: 16px;
+                    transform: rotate(45deg);
+                    transition: all .2s;
+                }
             }
         }
 
