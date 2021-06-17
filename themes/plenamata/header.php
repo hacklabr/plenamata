@@ -26,6 +26,9 @@
                         ?>
                     </a>
                 </div>
+                <button class="toggle-menu" aria-label="<?= __("Toggle menu visibility", "jaci") ?>">
+
+                </button>
 
                 <div class="menus">
                     <?= wp_nav_menu(['theme_location' => 'main-menu', 'container' => 'nav', 'menu_id' => 'main-menu', 'menu_class' => 'menu', 'container_class' => 'primary-menu']) ?>

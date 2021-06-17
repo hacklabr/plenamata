@@ -5,6 +5,37 @@ header.main-header {
         align-items: center;
         min-height: 78px;
 
+        .logo {
+
+        }
+
+        button.toggle-menu {
+            appearance: none;
+            border: 0px;
+            outline: none;
+            background: none;
+            position: relative;
+
+            &:before {
+                content: "";
+                display: block;
+                width: 21px;
+                height: 2px;
+                background-color: white;
+                
+            }
+
+            &:after {
+                content: "";
+                display: block;
+                width: 21px;
+                height: 2px;
+                background-color: white;
+                position: absolute;
+                top: 7.3px;
+            }
+        }
+
         .menus {
             display: flex;
 
