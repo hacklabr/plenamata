@@ -15,6 +15,10 @@ footer.main-footer {
             font-size: size(20);
             color: white;
             margin-bottom: 90px;
+
+            @include mobile {
+                margin-bottom: 10px;
+            }
         }
 
         .logos {
@@ -22,14 +26,20 @@ footer.main-footer {
             justify-content: center;
             align-items: center;
 
+            @include mobile {
+                flex-direction: column;
+            }
+
             > div {
                 &:not(:last-child) {
                     margin-right: 113px;
 
                     @include mobile {
                         margin: 0;
+                        margin-bottom: 50px;
                     }
                 }
+
             }
         }
     }
