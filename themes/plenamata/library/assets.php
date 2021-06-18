@@ -474,7 +474,7 @@ class Assets {
                 wp_enqueue_style(
                     'featured-slider',
                     get_stylesheet_directory_uri() . '/dist/css/_b-featured-slider.css',
-                    [],
+                    ['tiny-slider'],
                     filemtime(get_stylesheet_directory() . '/dist/css/_b-featured-slider.css'),
                     'all'
                 );

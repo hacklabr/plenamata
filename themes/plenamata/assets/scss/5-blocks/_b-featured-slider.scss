@@ -1,3 +1,42 @@
+@import './../2-atoms/a-mixins';
+
 .featured-slider {
-    
+    .itens-wrapper {
+        .slide-item-wrapper {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 100%;
+                height: 100vh;
+                object-fit: cover;
+                position: absolute;
+            }
+
+            .wrapper {
+                .slide-content {
+                    max-width: 610px;
+
+                    .counter {
+                        color: white;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: size(14);
+                        line-height: size(24);
+                        letter-spacing: 0.02em;
+                    }
+                    .image-title {
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: size(48);
+                        line-height: size(64);
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
 }

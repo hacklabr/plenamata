@@ -1,4 +1,13 @@
 header.main-header {
+    position: fixed;
+    left: 0%;
+    top: 40px;
+    z-index: 999;
+    width: 100%;
+
+    .logged-in & {
+        top: 90px;
+    }
 
     &.active {
         background-color: var(--c-darkness-05);
