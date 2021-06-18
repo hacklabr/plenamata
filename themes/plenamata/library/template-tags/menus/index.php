@@ -24,7 +24,7 @@ function the_social_networks_menu($image = true) {
 
     foreach ($menu_items as $item) {
         if ($image) {
-            $html = '<img src="' . $icons_color_dir . strtolower($icons_color[sanitize_title($item->post_title)]) . '.svg' . '">';
+            $html = '<img src="' . $icons_color_dir . strtolower($icons_color[sanitize_title($item->post_title)]) . '.svg' . '" width="24" height="24">';
         } else {
             $html = '<i class="fab ' . $icons[sanitize_title($item->post_title)] . '"></i>';
         }

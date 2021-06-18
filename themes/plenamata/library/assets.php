@@ -275,13 +275,13 @@ class Assets {
             'home' => [
 				'file' => '_p-home.css',
                 'preload_callback' => function() {
-					return is_home();
+					return is_front_page();
 				},
 			],
             'page' => [
                 'file' => '_p-page.css',
                 'preload_callback' => function() {
-					return !is_home() && is_page();
+					return !is_front_page() && is_page();
 				},
             ],
 
@@ -367,7 +367,7 @@ class Assets {
             'page'     => [
                 'file' => 'page.js',
                 'preload_callback' => function() {
-                    return !is_home() && is_page();
+                    return !is_front_page() && is_page();
                 }
 			],
 	
