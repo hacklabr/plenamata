@@ -1,5 +1,6 @@
-let mix = require('laravel-mix');
-let fs = require('fs');
+const mix = require('laravel-mix');
+const fs = require('fs');
+const path = require( 'path' );
 
 /*
  |--------------------------------------------------------------------------
@@ -30,17 +31,35 @@ mix.sass(assets_dir + '/scss/critical-app.scss', dist_dir + '/css/critical.css')
 // Compile all page files into individual CSSs
 const pagesPath = assets_dir + '/scss/6-pages/';
 getDirFiles(pagesPath).forEach((filepath) => {
-    mix.sass(pagesPath + filepath , dist_dir + '/css/');
+    mix.sass(pagesPath + filepath , '/css/');
 })
 
 // Compile all JS functionalitis into individual files
 const functionalitiesPath = assets_dir + '/javascript/functionalities/';
 getDirFiles(functionalitiesPath).forEach((filepath) => {
-    mix.js(functionalitiesPath + filepath , dist_dir + '/js/functionalities');
+    mix.js(functionalitiesPath + filepath , '/js/functionalities');
 })
 
 // Compile all blocks into individual files
 const blocksPath = assets_dir + '/javascript/blocks/';
-getDirFiles(functionalitiesPath).forEach((filepath) => {
-    mix.react(functionalitiesPath + filepath , dist_dir + '/js/blocks');
-})
+mix.react(blocksPath + 'featuredSlider/index.js' , '/js/blocks/featured-slider.js');
+
+
+mix.webpackConfig({
+	...defaultConfig,
+	entry: {
+    },
+    
+    output: {
+        chunkFilename: dist_dir + '/[name].js',
+        path: path.resolve( __dirname, './dist/' ),
+        publicPath: dist_dir,
+        filename: '[name].js',
+    },
+
+    module: {
+		
+    },
+  
+	devtool: "inline-source-map" 
+});
