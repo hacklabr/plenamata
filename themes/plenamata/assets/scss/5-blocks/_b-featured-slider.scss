@@ -2,6 +2,8 @@
 
 .featured-slider {
     .itens-wrapper {
+        display: flex;
+        
         .slide-item-wrapper {
             height: 100vh;
             position: relative;
@@ -34,6 +36,16 @@
                         font-size: size(48);
                         line-height: size(64);
                         color: white;
+                    }
+
+                    .tns-controls {
+                        margin-top: 48px;
+                        
+                        button {
+                            appearance: none;
+                            background: none;
+                            border: none;
+                        }
                     }
                 }
             }
