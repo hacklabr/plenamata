@@ -1,12 +1,12 @@
 {
     "/js/blocks/featured-slider.js": "/js/blocks/featured-slider.js",
     "/js/functionalities/header.js": "/js/functionalities/header.js",
-    "/dist/css/critical.css": "/dist/css/critical.css",
-    "/../../../../../../css/_p-404.css": "/../../../../../../css/_p-404.css",
-    "/../../../../../../css/_p-archive.css": "/../../../../../../css/_p-archive.css",
-    "/../../../../../../css/_p-home.css": "/../../../../../../css/_p-home.css",
-    "/../../../../../../css/_p-page.css": "/../../../../../../css/_p-page.css",
-    "/../../../../../../css/_p-search.css": "/../../../../../../css/_p-search.css",
-    "/../../../../../../css/_p-single.css": "/../../../../../../css/_p-single.css",
+    "/css/critical.css": "/css/critical.css",
+    "/css/_p-404.css": "/css/_p-404.css",
+    "/css/_p-archive.css": "/css/_p-archive.css",
+    "/css/_p-home.css": "/css/_p-home.css",
+    "/css/_p-page.css": "/css/_p-page.css",
+    "/css/_p-search.css": "/css/_p-search.css",
+    "/css/_p-single.css": "/css/_p-single.css",
     "/js/functionalities/page.js": "/js/functionalities/page.js"
 }

@@ -27,23 +27,23 @@ const assets_dir = root_dir + '/assets';
 const dist_dir = root_dir + '/dist';
 
 // Generate critical CSS
-mix.sass(assets_dir + '/scss/critical-app.scss', dist_dir + '/css/critical.css');
+mix.sass(assets_dir + '/scss/critical-app.scss','./css/critical.css');
 
 // Compile all page files into individual CSSs
 const pagesPath = assets_dir + '/scss/6-pages/';
 getDirFiles(pagesPath).forEach((filepath) => {
-    mix.sass(pagesPath + filepath , '/css/');
+    mix.sass(pagesPath + filepath , './css/');
 })
 
 // Compile all JS functionalitis into individual files
 const functionalitiesPath = assets_dir + '/javascript/functionalities/';
 getDirFiles(functionalitiesPath).forEach((filepath) => {
-    mix.js(functionalitiesPath + filepath , '/js/functionalities');
+    mix.js(functionalitiesPath + filepath , './js/functionalities');
 })
 
 // Compile all blocks into individual files
 const blocksPath = assets_dir + '/javascript/blocks/';
-mix.react(blocksPath + 'featuredSlider/index.js' , '/js/blocks/featured-slider.js');
+mix.react(blocksPath + 'featuredSlider/index.js' , './js/blocks/featured-slider.js');
 
 
 mix.webpackConfig({
