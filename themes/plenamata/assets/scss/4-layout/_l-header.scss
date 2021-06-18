@@ -5,8 +5,16 @@ header.main-header {
     z-index: 999;
     width: 100%;
 
+    @include mobile {
+        top: 0px;
+    }
+
     .logged-in & {
         top: 90px;
+
+        @include mobile {
+            top: 50px;
+        }
     }
 
     &.active {

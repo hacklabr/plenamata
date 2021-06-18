@@ -19,8 +19,17 @@
             }
 
             .wrapper {
+                @include mobile {
+                    width: 100%;
+                }
+
                 .slide-content {
                     max-width: 610px;
+
+                    @include mobile {
+                        width: 100%;
+                        max-width: 280px;
+                    }
 
                     .counter {
                         color: white;
@@ -29,6 +38,12 @@
                         font-size: size(14);
                         line-height: size(24);
                         letter-spacing: 0.02em;
+
+                        @include mobile {
+                            font-size: size(12);
+                            line-height: size(18);
+                            margin-bottom: 10px;
+                        }
                     }
                     .image-title {
                         font-style: normal;
@@ -36,15 +51,28 @@
                         font-size: size(48);
                         line-height: size(64);
                         color: white;
+
+                        @include mobile {
+                            font-size: size(24);
+                            line-height: size(32);
+                        }
                     }
 
                     .tns-controls {
                         margin-top: 48px;
-                        
+
+                        @include mobile {
+                            margin-top: 38px;
+                        }
+
                         button {
                             appearance: none;
                             background: none;
                             border: none;
+                        }
+
+                        button:first-child {
+                            margin-right: 32px;
                         }
                     }
                 }
