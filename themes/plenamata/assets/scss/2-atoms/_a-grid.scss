@@ -33,7 +33,7 @@
 }
 
 #app .content {
-    & > * {
+    & > *:not(p) {
         margin-bottom: 100px;
     }
 }
