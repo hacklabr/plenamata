@@ -1,6 +1,7 @@
 const mix = require('laravel-mix');
 const fs = require('fs');
 const path = require( 'path' );
+const defaultConfig = require( './node_modules/@wordpress/scripts/config/webpack.config' );
 
 /*
  |--------------------------------------------------------------------------
