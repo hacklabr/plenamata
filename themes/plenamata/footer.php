@@ -13,6 +13,27 @@
                     </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <?php 
+                    $copyright_option = get_theme_mod( 'footer_copyright_text', '' );
+                    $show_name_and_year = checked( 1, get_theme_mod('footer_show_year_and_name'), false );
+                    if(!empty($copyright_option)): ?>
+                    <div class="copyright-info">
+                        <?= $copyright_option ?>
+                        <?php 
+                        if($show_name_and_year): 
+                            echo date("Y") . " "; 
+                            echo bloginfo("name");
+                        endif;
+                        ?>
+                    </div>
+                <?php
+                    endif;
+                ?>
+            </div>
+        </div>
     </div>
 </footer>
 <?php wp_footer() ?>
