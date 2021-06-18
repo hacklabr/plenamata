@@ -38,3 +38,9 @@ const functionalitiesPath = assets_dir + '/javascript/functionalities/';
 getDirFiles(functionalitiesPath).forEach((filepath) => {
     mix.js(functionalitiesPath + filepath , dist_dir + '/js/functionalities');
 })
+
+// Compile all blocks into individual files
+const blocksPath = assets_dir + '/javascript/blocks/';
+getDirFiles(functionalitiesPath).forEach((filepath) => {
+    mix.react(functionalitiesPath + filepath , dist_dir + '/js/blocks');
+})

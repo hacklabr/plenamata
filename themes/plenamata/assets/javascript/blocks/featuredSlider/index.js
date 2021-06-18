@@ -1,6 +1,5 @@
 import { MediaUpload, RichText } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
-import { SortableContainer, SortableElement } from 'react-sortable-hoc';
 import arrayMove from 'array-move';
 
 const DraggableImage = ({ title, button, description, image, removeImage, setDescription, setButtons, setTitle }) => {
@@ -14,7 +13,7 @@ const DraggableImage = ({ title, button, description, image, removeImage, setDes
                     className="title-field"
                     value={title}
                     onChange={setTitle}
-                    placeholder={__('Type the title here', 'jeo')}
+                    placeholder={__('Type the title here', 'jaci')}
                 />
                 </div>
                 
@@ -24,7 +23,7 @@ const DraggableImage = ({ title, button, description, image, removeImage, setDes
                     className="description-field"
                     value={description}
                     onChange={setDescription}
-                    placeholder={__('Type here your description', 'jeo')}
+                    placeholder={__('Type here your description', 'jaci')}
                 />
                 </div>
 
@@ -34,7 +33,7 @@ const DraggableImage = ({ title, button, description, image, removeImage, setDes
                         className="button-field"
                         value={button}
                         onChange={setButtons}
-                        placeholder={__('Type button text', 'jeo')}
+                        placeholder={__('Type button text', 'jaci')}
                     />
                 </div>
             </div>
@@ -114,8 +113,8 @@ const ImageGallery = ({ images, imagesTitle, imagesDescriptions, imagesButtons, 
     );
 };
 
-wp.blocks.registerBlockType('jeo-theme/featured-slider', {
-    title: __('Featured Slider', 'jeo'),
+wp.blocks.registerBlockType('jaci-theme/featured-slider', {
+    title: __('Featured Slider', 'jaci'),
     icon: 'format-gallery',
     category: 'common',
     keywords: [
