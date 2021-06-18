@@ -1,62 +1,64 @@
-ul {
-    display: flex;
-    list-style: none;
+.base-menu-component {
+    ul {
+        display: flex;
+        list-style: none;
 
-    li {
-        font-size: 16px;
+        li {
+            font-size: size(16);
 
-        @include tablet {
-            font-size: 32px;
-            line-height: 56px;
-        }
-
-        &:not(:last-child) {
-            margin-right: 40px;
-        }
-
-        &:hover {
-            position: relative;
-
-            .sub-menu {
-                min-width: 200px;
-                display: block;
-                position: absolute;
-                padding-top: 10px;
-                padding-bottom: 10px;
-                padding-left: 10px;
-                border-left: 1px solid white;
+            @include tablet {
+                font-size: size(32);
+                line-height: 56px;
             }
-        }
 
+            &:not(:last-child) {
+                margin-right: 40px;
+            }
 
-        ul.sub-menu {
-            display: none;
+            &:hover {
+                position: relative;
 
-            @include mobile {
-                display: block;
-                padding-top: 10px;
-                padding-bottom: 10px;
-                padding-left: 10px;
-                border-left: 1px solid white;
-                margin-bottom: 20px;
-
-                li {
-                    font-size: 20px;
-                    line-height: 2;
+                .sub-menu {
+                    min-width: 200px;
+                    display: block;
+                    position: absolute;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    padding-left: 10px;
+                    border-left: 1px solid white;
                 }
             }
-        }
 
-        a {
-            color: white;
-            transition: color .2s ease;
-            &:hover {
-                color: var(--c-primary);
-                text-decoration: none;
+
+            ul.sub-menu {
+                display: none;
+
+                @include mobile {
+                    display: block;
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                    padding-left: 10px;
+                    border-left: 1px solid white;
+                    margin-bottom: 20px;
+
+                    li {
+                        font-size: size(20);
+                        line-height: 2;
+                    }
+                }
             }
+
+            a {
+                color: white;
+                transition: color .2s ease;
+                &:hover {
+                    color: var(--c-primary);
+                    text-decoration: none;
+                }
+            }
+
+            
+
         }
-
-        
-
     }
 }

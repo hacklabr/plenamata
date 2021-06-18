@@ -1,4 +1,5 @@
 footer.main-footer {
+    --light-color-over-background: white;
     background-color: var(--c-darkness-05);
 
     .logos-area {
@@ -13,7 +14,7 @@ footer.main-footer {
 
         .before-logos {
             font-size: size(20);
-            color: white;
+            color: var(--light-color-over-background);
             margin-bottom: 90px;
 
             @include mobile {
@@ -40,6 +41,68 @@ footer.main-footer {
                     }
                 }
 
+            }
+        }
+    }
+
+    .addicional-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        @include mobile {
+            flex-direction: column;
+        }
+
+        .copyright-info {
+            color: var(--light-color-over-background);
+
+            @include mobile {
+                order: 1;
+            }
+        }
+
+        .social-networks {
+            display: flex;
+
+            @include mobile {
+                order: 0;
+                margin-bottom: 30px;
+            }
+
+            .social-icon {
+                padding: 20px;
+
+                a {
+                    &:hover {
+                        img {
+                            transform: scale(1.3);
+                            transition: all .2s;
+                        }
+                    }
+
+                    img {
+                        transition: all .2s;
+                    }
+                }
+            }
+        }
+
+        .footer-menu {
+            @extend .base-menu-component;
+
+            @include mobile {
+                order: 2;
+            }
+
+            @include mobile {
+                ul {
+                    padding-left: 0px;
+                    
+                    li {
+                        font-size: size(16);
+                    }
+                }
             }
         }
     }

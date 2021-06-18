@@ -111,7 +111,6 @@ header.main-header {
         }
 
         @import "./../3-components/c-wpml-language-menu";
-        @import "./../3-components/c-main-menu";
-
+        @extend .base-menu-component;
     }
 }
