@@ -4,6 +4,7 @@ header.main-header {
     top: 40px;
     z-index: 999;
     width: 100%;
+    transition: all .5s;
 
     @include mobile {
         top: 0px;
@@ -11,6 +12,10 @@ header.main-header {
 
     .logged-in & {
         top: 90px;
+
+        &.scrolled {
+            top: 32px;
+        }
 
         @include mobile {
             top: 50px;
@@ -21,6 +26,13 @@ header.main-header {
         background-color: var(--c-darkness-05);
         transition: all .5s;
         min-height: 100vh;
+    }
+
+
+    &.scrolled {
+        background-color: var(--c-darkness-05);
+        transition: all .5s;
+        top: 0;
     }
 
     .header-content {

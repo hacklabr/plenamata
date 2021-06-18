@@ -5,7 +5,7 @@ get_header();
 <div class="index-wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 content">
                 <?php the_content() ?>
             </div>
         </div>

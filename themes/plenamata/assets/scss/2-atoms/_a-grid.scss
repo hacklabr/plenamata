@@ -31,3 +31,9 @@
         width: calc(100% + 7px);
     }
 }
+
+#app .content {
+    & > * {
+        margin-bottom: 100px;
+    }
+}
