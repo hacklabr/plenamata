@@ -95,10 +95,10 @@ footer.main-footer {
                 order: 2;
             }
 
-            @include mobile {
+            @include tablet {
                 ul {
                     padding-left: 0px;
-                    
+
                     li {
                         font-size: size(16);
                     }
