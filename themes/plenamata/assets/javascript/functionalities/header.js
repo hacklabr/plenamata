@@ -7,14 +7,18 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const header = document.querySelector('.main-header');
 
-    document.addEventListener('scroll', function(e) {
-        const top = window.scrollY;
-
-        if(top >  78) {
+    const handler = (scroll, header) => {
+        if(scroll >  78) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
+    }
 
+    handler(window.scrollY, header);
+
+    document.addEventListener('scroll', function(e) {
+        const top = window.scrollY;
+        handler(top, header);
     });
 })
