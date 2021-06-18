@@ -121,6 +121,9 @@ wp.blocks.registerBlockType('jaci-theme/featured-slider', {
         __('photos'),
         __('images')
     ],
+    supports: {
+        align: true,
+    },
     attributes: {
         images: {
             type: 'array',
@@ -210,12 +213,22 @@ wp.blocks.registerBlockType('jaci-theme/featured-slider', {
                                 key={images.id}
                                 src={image.url}
                                 alt={image.alt}
+                                width={image.width}
+                                height={image.height}
+                                load="lazy"
                             />
-                            <div className="wrapper">
-                                <div class="image-meta">
-                                    <div class="image-title"> <RichText.Content tagName="span" value={imagesTitle[index]} /></div>
-                                    <div class="image-description"> <RichText.Content tagName="span" value={imagesDescriptions[index]} /></div>
-                                    <div class="image-button"> <RichText.Content tagName="span" value={imagesButtons[index]} /></div>
+                            <div className="wrapper container">
+                                <div class="image-meta row">
+                                    <div className="col-md-12">
+                                        <div className="slide-content">
+                                            <div className="counter">
+                                                { (index + 1 + '').padStart(2, '0')  + '-' + (images.length + '').padStart(2, '0') }
+                                            </div>
+                                            <div class="image-title"> <RichText.Content tagName="span" value={imagesTitle[index]} /></div>
+                                            { imagesDescriptions[index].length > 0 && <div class="image-description"> <RichText.Content tagName="span" value={imagesDescriptions[index]} /></div> }
+                                            { imagesButtons[index].length > 0 && <div class="image-button"> <RichText.Content tagName="span" value={imagesButtons[index]} /></div> }
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -226,9 +239,11 @@ wp.blocks.registerBlockType('jaci-theme/featured-slider', {
         }
 
         return (
-            <div className="featured-slider alignfull">
-                <div className="itens-wrapper">
-                    {displayImages(images)}
+            <div>
+                <div className="featured-slider">
+                    <div className="itens-wrapper">
+                        {displayImages(images)}
+                    </div>
                 </div>
             </div>
         );
