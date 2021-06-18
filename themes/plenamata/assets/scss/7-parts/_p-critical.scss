@@ -8,9 +8,9 @@
 @import '1-settings/s-globals';
 
 @import '2-atoms/a-spacing';
-@import '2-atoms/a-typography';
 @import '2-atoms/a-mixins';
 @import '2-atoms/a-grid';
+@import '2-atoms/a-typography';
 
 // Those components will be "extented" by the layouts parts avoiding code repeating
 @import '3-components/c-main-menu';
