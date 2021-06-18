@@ -35,6 +35,12 @@ getDirFiles(pagesPath).forEach((filepath) => {
     mix.sass(pagesPath + filepath , './css/');
 })
 
+// Compile all blocks files into individual CSSs
+const blocksCSSPath = assets_dir + '/scss/5-blocks/';
+getDirFiles(blocksCSSPath).forEach((filepath) => {
+    mix.sass(blocksCSSPath + filepath , './css/');
+})
+
 // Compile all JS functionalitis into individual files
 const functionalitiesPath = assets_dir + '/javascript/functionalities/';
 getDirFiles(functionalitiesPath).forEach((filepath) => {

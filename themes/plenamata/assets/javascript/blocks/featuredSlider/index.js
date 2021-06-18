@@ -1,3 +1,4 @@
+import { registerBlockType } from "@wordpress/blocks";
 import { MediaUpload, RichText } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 
@@ -112,7 +113,7 @@ const ImageGallery = ({ images, imagesTitle, imagesDescriptions, imagesButtons, 
     );
 };
 
-wp.blocks.registerBlockType('jaci-theme/featured-slider', {
+registerBlockType('jaci/featured-slider', {
     title: __('Featured Slider', 'jaci'),
     icon: 'format-gallery',
     category: 'common',

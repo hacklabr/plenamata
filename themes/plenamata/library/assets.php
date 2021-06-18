@@ -27,6 +27,7 @@ class Assets {
 	public function initialize() {
         $this->enqueue_styles();
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_javascripts' ] );
+        add_action( 'wp_enqueue_scripts', [ $this, 'gutenberg_block_enqueues' ] );
         add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_admin_style' ] );
 		add_action( 'after_setup_theme', [ $this, 'action_add_editor_styles' ] );
 		add_filter( 'wp_resource_hints', [ $this, 'filter_resource_hints' ], 10, 2 );
@@ -456,6 +457,40 @@ class Assets {
 
 		return add_query_arg( $query_args, 'https://fonts.googleapis.com/css' );
 	}
+
+    public function gutenberg_block_enqueues() {
+		$id = get_the_ID();
+
+        $block_list = [
+            'jaci/featured-slider' => function() {
+                wp_enqueue_style(
+                    'tiny-slider',
+                    get_stylesheet_directory_uri() . '/assets/vendor/tiny-slider/tiny-slider.css',
+                    [],
+                    filemtime(get_stylesheet_directory() . '/assets/vendor/tiny-slider/tiny-slider.css'),
+                    'all'
+                );
+
+                wp_enqueue_style(
+                    'featured-slider',
+                    get_stylesheet_directory_uri() . '/dist/css/_b-featured-slider.css',
+                    [],
+                    filemtime(get_stylesheet_directory() . '/dist/css/_b-featured-slider.css'),
+                    'all'
+                );
+
+                // wp_enqueue_script( 'tiny-slider', get_stylesheet_directory_uri() . '/assets/vendor/tiny-slider/tiny-slider.js', [], false, true );
+		        wp_enqueue_script( 'news-slider', get_stylesheet_directory_uri() . '/dist/js/functionalities/featured-slider.js', ['tiny-slider'], false, true );
+            }
+		];
+
+        // Enqueue only used blocks
+		foreach($block_list as $key => $block) {
+			if(has_block($key, $id)){
+				$block();
+			}
+		}
+    }
 }
 
 
