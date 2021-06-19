@@ -57,7 +57,6 @@ registerBlockType('jaci/estivatives-area', {
     edit: Editor,
 
     save: ({ attributes }) => {
-        console.log(attributes)
         return (
             null
         )

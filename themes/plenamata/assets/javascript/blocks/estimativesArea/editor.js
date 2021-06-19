@@ -18,17 +18,9 @@ export default ({ attributes, setAttributes }) => {
         hectares,
         baseDate } = attributes;
 
-    console.log(attributes);
-
     const updateAttribute = (attribute) => {
         
         return (attributeValue) => {
-            console.log(
-                {
-                    ...attributes,
-                    [attribute]: attributeValue,
-                }
-            )
             setAttributes({
                 ...attributes,
                 [attribute]: attributeValue,
@@ -38,6 +30,19 @@ export default ({ attributes, setAttributes }) => {
 
     function numberWithCommas(x) {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function calculateTreeEstimative(baseTrees, tressPerDay, baseDate ) {
+        const startDate = new Date(baseDate);
+        const currentDate = new Date(Date.now());
+        const secondsBetween = Math.abs((startDate.getTime() - currentDate.getTime()) / 1000);;
+        const treesDestroiedInAsec = parseInt(tressPerDay) / 86400;
+
+        // console.log("tressPerDay", tressPerDay, "baseTrees", baseTrees, seconds_between_dates)
+        // console.log("in a second", ( treesDestroiedInAsec ))
+        // console.log("total of trees in this time", Math.floor(treesDestroiedInAsec * secondsBetween))
+
+        return Math.floor(parseInt(baseTrees) + treesDestroiedInAsec * secondsBetween)
     }
 
     return (
@@ -71,7 +76,8 @@ export default ({ attributes, setAttributes }) => {
 
                 <div className="number">
                     <span>
-                        { numberWithCommas(baseTrees? baseTrees : 0) }
+                        {/* { numberWithCommas(baseTrees? baseTrees : 0) } */}
+                        { numberWithCommas(calculateTreeEstimative(baseTrees? baseTrees : 0, tressPerDay, baseDate)) }
                     </span>
                 </div>
 
@@ -110,7 +116,7 @@ export default ({ attributes, setAttributes }) => {
                     <div className="data">
                         <div className="area">
                             <span>
-                                <TextControl
+                                <NumberControl
                                     label={__("Trees per day", "jaci")}
                                     value={ tressPerDay }
                                     onChange={ updateAttribute('tressPerDay') }
@@ -120,7 +126,7 @@ export default ({ attributes, setAttributes }) => {
 
                         <div className="area">
                             <span>
-                                <TextControl
+                                <NumberControl
                                     label={__("Hectares per day", "jaci")}
                                     value={ hecPerDay }
                                     onChange={ updateAttribute('hecPerDay') }
@@ -141,7 +147,7 @@ export default ({ attributes, setAttributes }) => {
                     <div className="data">
                         <div className="area">
                             <span>
-                                <TextControl
+                                <NumberControl
                                     label={__("Warnings", "jaci")}
                                     value={ warnings }
                                     onChange={ updateAttribute('warnings') }
@@ -156,7 +162,7 @@ export default ({ attributes, setAttributes }) => {
 
                         <div className="area">
                             <span>
-                                <TextControl
+                                <NumberControl
                                     label={__("Hectares", "jaci")}
                                     value={ hectares }
                                     onChange={ updateAttribute('hectares') }
