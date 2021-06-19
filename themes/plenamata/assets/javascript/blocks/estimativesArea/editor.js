@@ -1,4 +1,4 @@
-import { DateTimePicker, TextControl, __experimentalNumberControl as NumberControl } from '@wordpress/components';
+import { DateTimePicker, TextControl, __experimentalNumberControl as NumberControl, ServerSideRender } from '@wordpress/components';
 import { RichText } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 import './dashboard.scss'
@@ -187,6 +187,9 @@ export default ({ attributes, setAttributes }) => {
                     placeholder={__('Type the final information', 'jaci')}
                 />
             </div>
+
+            <ServerSideRender
+                block={ "jaci/estimatives-area" } />
         </div>
     );
 }

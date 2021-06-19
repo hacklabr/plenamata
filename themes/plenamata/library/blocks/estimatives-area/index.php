@@ -1,7 +1,11 @@
 <?php 
+// require __DIR__ . '/render.php';
+
 /**
  * Estimatives area
  */
+
+
 function estimatives_area_block() {
 
 	// automatically load dependencies and version
@@ -17,6 +21,7 @@ function estimatives_area_block() {
 
 	register_block_type('jaci/estimatives-area', array(
 		'editor_script' => 'estimatives-area',
+        'render_callback' => 'aa',
         'attributes' => [
             // Strings
             "boxTitle" => [
@@ -58,8 +63,9 @@ function estimatives_area_block() {
                 "type" => "string"
             ]
         ],
+        
 		// 'editor_style'  => 'estimatives-area',
 	));
 }
 
-add_action('init', 'estimatives_area_block');
+add_action('init', 'estimatives_area_block', 13);

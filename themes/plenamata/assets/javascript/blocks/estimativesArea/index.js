@@ -7,11 +7,6 @@ registerBlockType('jaci/estivatives-area', {
     title: __('Estimatives Area', 'jaci'),
     icon: 'visibility',
     category: 'common',
-    keywords: [
-    ],
-    supports: {
-        align: false,
-    },
     attributes: {
         // Strings
         boxTitle: {
@@ -55,10 +50,5 @@ registerBlockType('jaci/estivatives-area', {
     },
 
     edit: Editor,
-
-    save: ({ attributes }) => {
-        return (
-            null
-        )
-    },
+    save: (props) => { return (null) },
 });
