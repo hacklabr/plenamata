@@ -5,6 +5,10 @@ const slider = tns({
     controls: false,
     slideBy: 'page',
     mouseDrag: true,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayButton: false,
+    autoplayButtonOutput: false,
     // gutter: 10,
 
     // responsive: {
