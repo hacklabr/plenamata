@@ -51,6 +51,7 @@ getDirFiles(functionalitiesPath).forEach((filepath) => {
 const blocksPath = assets_dir + '/javascript/blocks/';
 mix.react(blocksPath + 'featuredSlider/index.js' , './js/blocks/featured-slider.js');
 mix.react(blocksPath + 'estimativesArea/index.js' , './js/blocks/estimatives-area.js');
+mix.react(blocksPath + 'deforestationInfo/index.js' , './js/blocks/deforestation-info.js');
 
 mix.webpackConfig({
 	...defaultConfig,
