@@ -50,6 +50,7 @@ getDirFiles(functionalitiesPath).forEach((filepath) => {
 // Compile all blocks into individual files
 const blocksPath = assets_dir + '/javascript/blocks/';
 mix.react(blocksPath + 'featuredSlider/index.js' , './js/blocks/featured-slider.js');
+mix.react(blocksPath + 'estimativesArea/index.js' , './js/blocks/estimatives-area.js');
 
 
 mix.webpackConfig({
