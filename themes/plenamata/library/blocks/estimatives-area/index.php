@@ -1,5 +1,5 @@
 <?php 
-// require __DIR__ . '/render.php';
+require __DIR__ . '/render.php';
 
 /**
  * Estimatives area
@@ -21,7 +21,7 @@ function estimatives_area_block() {
 
 	register_block_type('jaci/estimatives-area', array(
 		'editor_script' => 'estimatives-area',
-        'render_callback' => 'aa',
+        'render_callback' => 'estimatives_area_render_callback',
         'attributes' => [
             // Strings
             "boxTitle" => [
@@ -48,24 +48,22 @@ function estimatives_area_block() {
                 "type" => "string"
             ],
             "tressPerDay" => [
-                "type" => "number"
+                "type" => "string"
             ],
             "hecPerDay" => [
-                "type" => "number"
+                "type" => "string"
             ],
             "hectares" => [
-                "type" => "number"
+                "type" => "string"
             ],
             "warnings" => [
-                "type" => "number"
+                "type" => "string"
             ],
             "baseDate" => [
                 "type" => "string"
             ]
         ],
-        
-		// 'editor_style'  => 'estimatives-area',
 	));
 }
 
-add_action('init', 'estimatives_area_block', 13);
+add_action('init', 'estimatives_area_block');

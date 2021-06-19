@@ -187,9 +187,6 @@ export default ({ attributes, setAttributes }) => {
                     placeholder={__('Type the final information', 'jaci')}
                 />
             </div>
-
-            <ServerSideRender
-                block={ "jaci/estimatives-area" } />
         </div>
     );
 }
