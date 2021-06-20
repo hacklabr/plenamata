@@ -16,7 +16,7 @@
             align-items: center;
             display: flex;
             height: 70px;
-            margin-right: var(--s-small);
+            margin-right: var(--s-large);
             width: 70px;
 
             svg {
@@ -26,13 +26,14 @@
 
         &.count {
             font-size: 80px;
+            font-weight: bold;
             line-height: 0.9;
         }
 
         &.legend {
             display: flex;
             align-items: flex-end;
-            padding: 0 0 0 var(--s-small);
+            padding: 0 0 0 var(--s-large);
         }
 
         &.data-source {
@@ -43,7 +44,7 @@
     .box-content {
         display: flex;
         justify-content: center;
-        margin-bottom: var(--s-small);
-        margin-top: var(--s-small);
+        margin-bottom: var(--s-large);
+        margin-top: var(--s-large);
     }
 }
