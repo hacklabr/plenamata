@@ -38,6 +38,9 @@ $p_theme_assets: $p_theme + '/assets';
 $f_body: 'Archivo', sans-serif;
 $f_title: 'Archivo', sans-serif;
 
+// Spacings
+$s_small: 20px;
+$s_large: 40px;
 
 :root {
     // Sizes
@@ -79,4 +82,8 @@ $f_title: 'Archivo', sans-serif;
     // Fonts
     --f-body: #{$f_body};
     --f-title: #{$f_title};
+
+    // Spacings
+    --s-small: #{$s_small};
+    --s-large: #{$s_large};
 }

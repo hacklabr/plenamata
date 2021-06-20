@@ -1,0 +1,49 @@
+.wp-block-jaci-deforestation-info {
+    background-color: var(--c-darkness-05);
+    border-radius: 8px;
+    margin-bottom: var(--s-small);
+    padding: var(--s-small);
+
+    span {
+        color: var(--c-gray);
+
+        &.box-title {
+            display: inline-block;
+            line-height: 1.9;
+            max-width: 190px;
+        }
+        &.icon {
+            align-items: center;
+            display: flex;
+            height: 70px;
+            margin-right: var(--s-small);
+            width: 70px;
+
+            svg {
+                max-width: 100%;
+            }
+        }
+
+        &.count {
+            font-size: 80px;
+            line-height: 0.9;
+        }
+
+        &.legend {
+            display: flex;
+            align-items: flex-end;
+            padding: 0 0 0 var(--s-small);
+        }
+
+        &.data-source {
+            font-size: 14px;
+        }
+    }
+
+    .box-content {
+        display: flex;
+        justify-content: center;
+        margin-bottom: var(--s-small);
+        margin-top: var(--s-small);
+    }
+}
