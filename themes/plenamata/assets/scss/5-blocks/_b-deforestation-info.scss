@@ -16,8 +16,12 @@
             align-items: center;
             display: flex;
             height: 70px;
-            margin-right: var(--s-large);
+            margin-right: var(--s-small);
             width: 70px;
+
+            @media screen and (min-width: 992px) {
+                margin-right: var(--s-large);
+            }
 
             svg {
                 max-width: 100%;
@@ -36,7 +40,11 @@
         &.legend {
             display: flex;
             align-items: flex-end;
-            padding: 0 0 0 var(--s-large);
+            padding: 0 0 0 var(--s-small);
+
+            @media screen and (min-width: 992px) {
+                padding: 0 0 0 var(--s-large);
+            }
         }
 
         &.data-source {
