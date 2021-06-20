@@ -3,6 +3,27 @@
         border-radius: 8px;
     }
 
+    #quem_somos {
+        position: relative;
+	    z-index: 2;
+    }
+
+    .cover-negative {
+        &.alignfull {
+            margin-top: -50vh;
+            height: 110vh;
+
+            .wp-block-cover__inner-container {
+                padding: 180px 15px 0 15px;
+
+                // @include mobile { @todo: fix error "Undefined mixin" on compilation
+                @media screen and (min-width: 1025px) {
+                    max-width: 45%;
+                }
+            }
+        }
+    }
+
     footer.main-footer {
         margin-top: -380px;
         padding-top: 295px;
