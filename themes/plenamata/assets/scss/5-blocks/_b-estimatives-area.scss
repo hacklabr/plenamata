@@ -4,6 +4,10 @@
     background-color: var(--c-secondary-05);
     padding: 16px 20px;
     border-radius: 8px;
+    
+    @include mobile {
+        margin-bottom: 20px;
+    }
 
     .heading {
         h4 {
