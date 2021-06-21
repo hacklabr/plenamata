@@ -50,8 +50,28 @@
     .flourish-iframe {
         border: 0;
         border-radius: 8px;
-        height: 259px;
+        height: 300px;
         width: 100%;
+
+        @media (min-width: 599px)  {
+            height: 252px;
+        }
+
+        @media (min-width: 699px)  {
+            height: 225px;
+        }
+
+        @media (min-width: 799px)  {
+            height: 310px;
+        }
+
+        @media (min-width: 1025px)  {
+            height: 225px;
+        }
+
+        @media (min-width: 1400px){
+            height: 259px;
+        }
     }
 
     .newsletter-container {
