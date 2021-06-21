@@ -16,6 +16,14 @@
         }
     }
 
+    #monitor .wp-block-column:not(:first-child) {
+        margin-left: 20px;
+
+        @include mobile {
+            margin-left: 0;
+        }
+    }
+
     .away {
         padding: 0 100px;
 
@@ -46,12 +54,17 @@
         width: 100%;
     }
 
-    .newsletter-container{
+    .newsletter-container {
         position: relative;
         background-color: #fff087;
         margin-top: -440px;
         z-index: 99;
         padding: 30px !important;
+        border-radius: 8px;
+
+        &:before {
+            border-radius: 8px;
+        }
 
         @include mobile {
             margin-top: -342px;
@@ -67,10 +80,11 @@
                 position: absolute;
                 top: 35px;
                 max-width: 260px;
-                @include mobile{
+
+                @include mobile {
                     display: none;
                 }
-                @include tablet{
+                @include tablet {
                     display: none;
                 }
             }
@@ -109,14 +123,14 @@
                 input[type='email']:focus{
                     outline: none;
                 }
-                
+
                 label {
                     display: grid;
                     grid-template-columns: min-content auto;
                     grid-gap: 0.5em;
                     place-items: center;
                     margin: 20px 0;
-    
+
                     input[type='checkbox'] {
                         -moz-appearance:initial;
                         height: 20px;
@@ -189,8 +203,28 @@
         }
     }
 
-    footer.main-footer {
-        // margin-top: -380px;
-        // padding-top: 295px;
+    .main-footer {
+        margin-top: -375px;
+        padding-top: 300px;
     }
+
+    // Global
+    .mb-0{
+        margin-bottom: 0 !important;
+    }
+
+    .fs-80 {
+        font-size: 80px
+    }
+
+    .br-8 {
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    h1.color-black,
+    span.color-black {
+        color: var(--c-darkness-05) !important;
+    }
+
 }

@@ -52,6 +52,7 @@ footer.main-footer {
 
         @include mobile {
             flex-direction: column;
+            margin-bottom: 30px;
         }
 
         .copyright-info {
@@ -92,7 +93,7 @@ footer.main-footer {
             @extend .base-menu-component;
 
             @include mobile {
-                order: 2;
+                order: 1;
             }
 
             @include tablet {
