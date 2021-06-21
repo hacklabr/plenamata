@@ -22,11 +22,11 @@ estimativeBlocks.forEach(block => {
         item.innerHTML = numberWithDots(item.innerHTML);
     })
 
-    // In the fucture we can use a 
+    // In the fucture we can use a endpoint to fetch server time and update de prevision
     setInterval(function() {
         const estimative = calculateTreeEstimative(baseTress, tressPerDay, dataDate);
         estimativeNumberEl.innerHTML = numberWithDots(estimative);
-    }, -1);
+    }, 10000000);
 
 
 });
