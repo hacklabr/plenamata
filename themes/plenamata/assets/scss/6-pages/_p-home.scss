@@ -45,6 +45,20 @@
         }
     }
 
+    .reverse-on-mobile {
+        @include tablet {
+            flex-direction: column-reverse;
+        }
+    }
+
+    .wp-block-image {
+        img {
+            @include tablet {
+                height: auto;
+            }
+        }
+    }
+
     footer.main-footer {
         margin-top: -380px;
         padding-top: 295px;
