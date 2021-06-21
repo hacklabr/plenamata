@@ -28,6 +28,8 @@
     .newsletter-container{
         position: relative;
         background-color: #fff087;
+        margin-top: -228px;
+        z-index: 99;
        
         .wp-block-cover__inner-container{
             p, h2, label{
@@ -38,6 +40,9 @@
                 position: absolute;
                 top: 35px;
                 max-width: 260px;
+                @include mobile{
+                    display: none;
+                }
             }
             .eye-left {
                 left: 0;
