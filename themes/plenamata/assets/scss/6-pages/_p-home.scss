@@ -206,6 +206,17 @@
     .main-footer {
         margin-top: -375px;
         padding-top: 300px;
+
+        .menu-item-855 a {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        @media(max-width: 768px){
+            .menu-item-855 {
+                text-align: center;
+                line-height: 1.2;
+            }
+        }
     }
 
     // Global
