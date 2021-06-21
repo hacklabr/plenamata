@@ -24,7 +24,7 @@ function deforestation_info_block() {
                 'type' => 'string'
             ],
             'count' => [
-                'type' => 'integer'
+                'type' => 'string'
             ],
             'dataSource' => [
                 'type' => 'string'
