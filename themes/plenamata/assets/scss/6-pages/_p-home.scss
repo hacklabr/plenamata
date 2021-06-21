@@ -108,6 +108,7 @@
                     margin: 20px 0;
     
                     input[type='checkbox'] {
+                        -moz-appearance:initial;
                         height: 20px;
                         width: 20px;
                         margin: 0 20px;
@@ -118,6 +119,7 @@
                     }
                     
                     input[type='checkbox']:after {
+                        -moz-appearance:initial;
                         width: 26px;
                         height: 26px;
                         border-radius: 15px;
@@ -132,6 +134,7 @@
                     }
 
                     input[type='checkbox']:checked:after {
+                        -moz-appearance:initial;
                         width: 26px;
                         height: 26px;
                         border-radius: 15px;
