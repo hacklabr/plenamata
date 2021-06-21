@@ -29,7 +29,7 @@ extract($params['attributes']);
                         <?= $tressPerDay ?>
                     </span>
                     <span>
-                        <?= __("árvores/ dia") ?>
+                        <?= __("árvores/ dia", "jaci") ?>
                     </span>
                 </div>
 
@@ -38,7 +38,7 @@ extract($params['attributes']);
                         <?= $hecPerDay ?>
                     </span>
                     <span>
-                        <?= __("hectares/ dia") ?>
+                        <?= __("hectares/ dia", "jaci") ?>
                     </span>
                 </div>
             </div>

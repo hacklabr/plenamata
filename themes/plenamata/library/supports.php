@@ -20,5 +20,5 @@ add_action( 'after_setup_theme', 'jeo_setup' );
 
 function jeo_setup() {
     // die(get_stylesheet_directory() . '/lang');
-	load_theme_textdomain( 'jaci', get_stylesheet_directory() . '/lang' );
+	load_theme_textdomain( 'jaci', get_stylesheet_directory() . '/languages' );
 }

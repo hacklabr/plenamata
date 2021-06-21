@@ -8,7 +8,7 @@ function footer_custom_options($wp_customize) {
 	$wp_customize->add_section(
 		$section,
 		array(
-			'title' => esc_html__('Footer', 'jeo'),
+			'title' => esc_html__('Footer', 'jaci'),
 			'section' => $section,
 		)
 	);
