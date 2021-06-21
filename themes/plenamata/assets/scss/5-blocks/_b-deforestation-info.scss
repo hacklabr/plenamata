@@ -38,11 +38,28 @@
             align-items: flex-end;
             font-size: 4vw;
             line-height: 0.9;
+            padding-bottom: 0;
+            padding-top: 0;
 
             @include mobile {
-                font-size: 10vw;
                 padding-bottom: 10px;
                 padding-top: 15px;
+            }
+
+            @media (min-width: 399px)  {
+                font-size: size(50);
+            }
+
+            @media (min-width: 599px)  {
+                font-size: size(40);
+            }
+
+            @media (min-width: 699px)  {
+                font-size: size(50);
+            }
+
+            @media (min-width: 1400px){
+                font-size: size(70);
             }
         }
 
