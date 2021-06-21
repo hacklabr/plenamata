@@ -46,6 +46,10 @@
         z-index: 99;
         padding: 30px !important;
 
+        @include mobile {
+            margin-top: -342px;
+        }
+
         .wp-block-cover__inner-container{
             p, h2, label{
                 color: #22271B;

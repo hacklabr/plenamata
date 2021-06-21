@@ -1,8 +1,5 @@
 <?php
 
-
-
-
 function theme_supports() {
     add_theme_support( 'align-wide' );
     add_theme_support( 'custom-logo' );
@@ -19,3 +16,9 @@ function theme_supports() {
     add_theme_support( 'widgets' );
 }
 add_action( 'after_setup_theme', 'theme_supports' );
+add_action( 'after_setup_theme', 'jeo_setup' );
+
+function jeo_setup() {
+    // die(get_stylesheet_directory() . '/lang');
+	load_theme_textdomain( 'jaci', get_stylesheet_directory() . '/lang' );
+}
