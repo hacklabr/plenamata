@@ -1,3 +1,5 @@
+@import "./../2-atoms/a-mixins";
+
 .home {
     figure.wp-block-image.is-style-rounded img {
         border-radius: 8px;
@@ -5,8 +7,28 @@
 
     #quem_somos,
     #who_we_are {
+        padding: 30px 60px;
         position: relative;
 	    z-index: 2;
+
+        @include mobile {
+            padding: 1em;
+        }
+    }
+
+    #o_que_fazemos,
+    #what_we_do {
+        @include mobile {
+            padding: 1em;
+        }
+    }
+
+    .away {
+        padding: 0 100px;
+
+        @include mobile {
+            padding: 1em;
+        }
     }
 
     .cover-negative {
@@ -17,10 +39,23 @@
             .wp-block-cover__inner-container {
                 padding: 180px 15px 0 15px;
 
-                // @include mobile { @todo: fix error "Undefined mixin" on compilation
-                @media screen and (min-width: 1025px) {
+                @include desktop {
                     max-width: 45%;
                 }
+            }
+        }
+    }
+
+    .reverse-on-mobile {
+        @include tablet {
+            flex-direction: column-reverse;
+        }
+    }
+
+    .wp-block-image {
+        img {
+            @include tablet {
+                height: auto;
             }
         }
     }
