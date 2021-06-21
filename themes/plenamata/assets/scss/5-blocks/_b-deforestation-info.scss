@@ -1,3 +1,6 @@
+@import "./../1-settings/s-variables";
+@import "./../2-atoms/a-mixins";
+
 .wp-block-jaci-deforestation-info {
     background-color: var(--c-darkness-05);
     border-radius: 8px;
@@ -12,19 +15,20 @@
             line-height: 1.9;
             max-width: 190px;
         }
+
         &.icon {
             align-items: center;
+            background-image: url($p_theme_assets + '/images/eye.svg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
             display: flex;
             height: 70px;
             margin-right: var(--s-small);
             width: 70px;
 
-            @media screen and (min-width: 992px) {
+            @include desktop {
                 margin-right: var(--s-large);
-            }
-
-            svg {
-                max-width: 100%;
             }
         }
 
@@ -32,7 +36,7 @@
             font-size: 70px;
             line-height: 0.9;
 
-            @media screen and (min-width: 992px) {
+            @include desktop {
                 font-size: 80px;
             }
         }
@@ -42,11 +46,11 @@
             align-items: flex-end;
             padding: 0 0 0 var(--s-small);
 
-            @media screen and (min-width: 992px) {
+            @include desktop {
                 padding: 0 0 5px var(--s-large);
             }
 
-            @media screen and (max-width: 599px) {
+            @include mobile {
                 display: inline;
             }
         }
@@ -57,12 +61,13 @@
     }
 
     .box-content {
+        display: flex;
+        justify-content: center;
         margin-bottom: var(--s-large);
         margin-top: var(--s-large);
 
-        @media screen and (min-width: 600px) {
-            display: flex;
-            justify-content: center;
+        @include mobile {
+            display: block;
         }
     }
 }
