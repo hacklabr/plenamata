@@ -21,36 +21,42 @@
             background-image: url($p_theme_assets + '/images/eye.svg');
             background-size: 100%;
             background-repeat: no-repeat;
-            background-position: center;
+            background-position: bottom;
             display: flex;
             height: 70px;
             margin-right: var(--s-small);
             width: 70px;
 
             @include desktop {
+                background-position: center;
                 margin-right: var(--s-large);
             }
         }
 
         &.count {
-            font-size: 70px;
+            display: flex;
+            align-items: flex-end;
+            font-size: 4vw;
             line-height: 0.9;
 
-            @include desktop {
-                font-size: 80px;
+            @include mobile {
+                font-size: 10vw;
+                padding-bottom: 10px;
+                padding-top: 15px;
             }
         }
 
         &.legend {
             display: flex;
             align-items: flex-end;
-            padding: 0 0 0 var(--s-small);
+            padding-left: var(--s-small);
 
             @include desktop {
-                padding: 0 0 5px var(--s-large);
+                padding-left: var(--s-large);
             }
 
             @include mobile {
+                padding-left: 0;
                 display: inline;
             }
         }
