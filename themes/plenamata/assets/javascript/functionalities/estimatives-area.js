@@ -1,8 +1,6 @@
-const estimativeBlocks = document.querySelectorAll('.estimatives-area');
+import numberWithDots from './../masks/number-masker';
 
-function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-}
+const estimativeBlocks = document.querySelectorAll('.estimatives-area');
 
 function calculateTreeEstimative(baseTrees, tressPerDay, baseDate ) {
     const startDate = new Date(baseDate);
@@ -21,13 +19,13 @@ estimativeBlocks.forEach(block => {
     // console.log(baseTress, tressPerDay, dataDate)
     const maskableItens = document.querySelectorAll('span[data-mask=true]');
     maskableItens.forEach(item => {
-        item.innerHTML = numberWithCommas(item.innerHTML);
+        item.innerHTML = numberWithDots(item.innerHTML);
     })
 
     // In the fucture we can use a 
     setInterval(function() {
         const estimative = calculateTreeEstimative(baseTress, tressPerDay, dataDate);
-        estimativeNumberEl.innerHTML = numberWithCommas(estimative);
+        estimativeNumberEl.innerHTML = numberWithDots(estimative);
     }, -1);
 
 

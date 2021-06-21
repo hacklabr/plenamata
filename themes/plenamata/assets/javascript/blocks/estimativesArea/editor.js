@@ -2,6 +2,7 @@ import { DateTimePicker, TextControl, __experimentalNumberControl as NumberContr
 import { RichText } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 import './dashboard.scss'
+import numberWithDots from './../../masks/number-masker';
 
 export default ({ attributes, setAttributes }) => {
     const {
@@ -26,10 +27,6 @@ export default ({ attributes, setAttributes }) => {
                 [attribute]: attributeValue,
             })
         }
-    }
-
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     }
 
     function calculateTreeEstimative(baseTrees, tressPerDay, baseDate ) {
@@ -76,8 +73,8 @@ export default ({ attributes, setAttributes }) => {
 
                 <div className="number">
                     <span>
-                        {/* { numberWithCommas(baseTrees? baseTrees : 0) } */}
-                        { numberWithCommas(calculateTreeEstimative(baseTrees? baseTrees : 0, tressPerDay, baseDate)) }
+                        {/* { numberWithDots(baseTrees? baseTrees : 0) } */}
+                        { numberWithDots(calculateTreeEstimative(baseTrees? baseTrees : 0, tressPerDay, baseDate)) }
                     </span>
                 </div>
 
