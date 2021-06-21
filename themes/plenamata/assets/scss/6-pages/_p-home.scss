@@ -19,7 +19,7 @@
     #monitor .wp-block-column:not(:first-child) {
         margin-left: 20px;
 
-        @include mobile {
+        @media (max-width: 599px) {
             margin-left: 0;
         }
     }

@@ -2,7 +2,7 @@
 
 .estimatives-area {
     background-color: var(--c-secondary-05);
-    padding: 16px 20px;
+    padding: 20px;
     border-radius: 8px;
     
     @include mobile {
@@ -26,7 +26,8 @@
     }
 
     .main-data {
-        margin-bottom: 40px;
+        margin-bottom: 20px;
+        margin-top: 40px;
 
         @include mobile {
             margin-bottom: 0;
@@ -40,31 +41,31 @@
 
         .number {
             display: flex;
-            align-items: flex-end;
+            align-items: center;
 
             @include mobile {
                 flex-direction: column;
                 align-items: initial;
             }
 
+            @include tablet {
+                display: block;
+            }
+
             span {
                 &#trees-estimative {
-                    font-size: size(80);
+                    font-size: 4vw;
                     color: var(--c-darkness-05);
                     margin-right: 20px;
-                    height: 88px;
-
-                    @include mobile {
-                        font-size: size(40);
-                        height: auto;
-                    }
+                    height: auto;
                 }
 
                 &:last-child {
                     font-size: size(14);
                     width: 88px;
 
-                    @include mobile {
+                    @include tablet {
+                        display: block;
                         width: auto;
                     }
                 }
