@@ -48,12 +48,14 @@
     .newsletter-container{
         position: relative;
         background-color: #fff087;
-        margin-top: -325px;
+        margin-top: -440px;
         z-index: 99;
-       
+        padding: 30px !important;
+
         .wp-block-cover__inner-container{
             p, h2, label{
                 color: #22271B;
+                font-weight: normal;
             }
             
             .eye{
@@ -61,6 +63,9 @@
                 top: 35px;
                 max-width: 260px;
                 @include mobile{
+                    display: none;
+                }
+                @include tablet{
                     display: none;
                 }
             }
