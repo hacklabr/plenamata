@@ -2,14 +2,18 @@ import numberWithDots from './../masks/number-masker';
 
 const estimativeBlocks = document.querySelectorAll('.estimatives-area');
 
-function calculateTreeEstimative(baseTrees, tressPerDay, baseDate ) {
+function calculateTreeEstimative(baseTrees, tressPerDay, baseDate, serverTime = serverTime.utc) {
     const startDate = new Date(baseDate);
-    const currentDate = new Date(serverTime.utc * 1000);
+    const currentDate = new Date(serverTime * 1000);
     const secondsBetween = Math.abs((startDate.getTime() - currentDate.getTime()) / 1000);;
     const treesDestroiedInAsec = parseInt(tressPerDay) / 86400;
 
     return Math.floor(parseInt(baseTrees) + treesDestroiedInAsec * secondsBetween)
 }
+
+const timeApiUrl = document.location.origin +
+                   "/wp-json/api/time/?client_time=" +
+                   Date.now();
 
 estimativeBlocks.forEach(block => {
     const estimativeNumberEl = block.querySelector('#trees-estimative');
@@ -24,9 +28,13 @@ estimativeBlocks.forEach(block => {
 
     // In the fucture we can use a endpoint to fetch server time and update de prevision
     setInterval(function() {
-        const estimative = calculateTreeEstimative(baseTress, tressPerDay, dataDate);
-        estimativeNumberEl.innerHTML = numberWithDots(estimative);
-    }, 10000000);
+        fetch(timeApiUrl)
+        .then(res => res.json())
+        .then(data => {
+                const estimative = calculateTreeEstimative(baseTress, tressPerDay, dataDate, data);
+                estimativeNumberEl.innerHTML = numberWithDots(estimative);
+            })
+    }, 1500);
 
 
 });
