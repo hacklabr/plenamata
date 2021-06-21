@@ -46,9 +46,6 @@ registerBlockType('jaci/deforestation-info', {
     },
 
     save: ({ attributes }) => {
-
-
-
         return (
             <div>
                 <span className="box-title">{attributes.boxTitle}</span>

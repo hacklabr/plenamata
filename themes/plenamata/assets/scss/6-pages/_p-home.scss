@@ -38,7 +38,14 @@
             }
         }
     }
-    
+
+    .flourish-iframe {
+        border: 0;
+        border-radius: 8px;
+        height: 259px;
+        width: 100%;
+    }
+
     .newsletter-container{
         position: relative;
         background-color: #fff087;
