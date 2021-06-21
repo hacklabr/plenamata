@@ -484,7 +484,7 @@ class Assets {
             },
             'jaci/deforestation-info' => function() {
                 wp_enqueue_style(
-                    '',
+                    'deforestation-info',
                     get_stylesheet_directory_uri() . '/dist/css/_b-deforestation-info.css',
                     [],
                     filemtime(get_stylesheet_directory() . '/dist/css/_b-deforestation-info.css'),
@@ -493,7 +493,7 @@ class Assets {
             },
             'jaci/estimatives-area' => function() {
                 wp_enqueue_style(
-                    '',
+                    'estimatives-area',
                     get_stylesheet_directory_uri() . '/dist/css/_b-estimatives-area.css',
                     [],
                     filemtime(get_stylesheet_directory() . '/dist/css/_b-estimatives-area.css'),
