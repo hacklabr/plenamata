@@ -490,6 +490,21 @@ class Assets {
                     filemtime(get_stylesheet_directory() . '/dist/css/_b-deforestation-info.css'),
                     'all'
                 );
+            },
+            'jaci/estimatives-area' => function() {
+                wp_enqueue_style(
+                    '',
+                    get_stylesheet_directory_uri() . '/dist/css/_b-estimatives-area.css',
+                    [],
+                    filemtime(get_stylesheet_directory() . '/dist/css/_b-estimatives-area.css'),
+                    'all'
+                );
+                wp_enqueue_script( 'estimatives-area-front-end', get_stylesheet_directory_uri() . '/dist/js/functionalities/estimatives-area.js', [], false, true );
+
+                wp_localize_script('estimatives-area-front-end', 'serverTime', [
+                    'utc' => time(),
+                ]);
+
             }
 		];
 

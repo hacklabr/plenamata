@@ -2,7 +2,7 @@
     "/js/blocks/deforestation-info.js": "/js/blocks/deforestation-info.js",
     "/js/blocks/estimatives-area.js": "/js/blocks/estimatives-area.js",
     "/js/blocks/featured-slider.js": "/js/blocks/featured-slider.js",
-    "/js/functionalities/featured-slider.js": "/js/functionalities/featured-slider.js",
+    "/js/functionalities/estimatives-area.js": "/js/functionalities/estimatives-area.js",
     "/css/critical.css": "/css/critical.css",
     "/css/_p-404.css": "/css/_p-404.css",
     "/css/_p-archive.css": "/css/_p-archive.css",
@@ -11,7 +11,9 @@
     "/css/_p-search.css": "/css/_p-search.css",
     "/css/_p-single.css": "/css/_p-single.css",
     "/css/_b-deforestation-info.css": "/css/_b-deforestation-info.css",
+    "/css/_b-estimatives-area.css": "/css/_b-estimatives-area.css",
     "/css/_b-featured-slider.css": "/css/_b-featured-slider.css",
+    "/js/functionalities/featured-slider.js": "/js/functionalities/featured-slider.js",
     "/js/functionalities/header.js": "/js/functionalities/header.js",
     "/js/functionalities/page.js": "/js/functionalities/page.js"
 }
