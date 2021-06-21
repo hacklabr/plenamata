@@ -16,6 +16,15 @@
 
         <div class="row">
             <div class="col-md-12 addicional-info">
+
+                <div class="footer-menu">
+                    <?= wp_nav_menu(['theme_location' => 'footer-menu', 'container' => 'nav', 'menu_id' => 'footer-menu', 'menu_class' => 'footer-menu', 'container_class' => 'footer-menu']) ?>
+                </div>
+
+                <div class="social-networks">
+                    <?php the_social_networks_menu() ?>
+                </div>
+
                 <?php 
                     $copyright_option = get_theme_mod( 'footer_copyright_text', '' );
                     $show_name_and_year = checked( 1, get_theme_mod('footer_show_year_and_name'), false );
@@ -32,14 +41,6 @@
                 <?php
                     endif;
                 ?>
-
-                <div class="social-networks">
-                    <?php the_social_networks_menu() ?>
-                </div>
-
-                <div class="footer-menu">
-                    <?= wp_nav_menu(['theme_location' => 'footer-menu', 'container' => 'nav', 'menu_id' => 'footer-menu', 'menu_class' => 'footer-menu', 'container_class' => 'footer-menu']) ?>
-                </div>
             </div>
         </div>
     </div>
