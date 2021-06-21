@@ -183,7 +183,7 @@ export default ({ attributes, setAttributes }) => {
                     tagName="span"
                     className="deforested-title"
                     value={finalInformation}
-                    onChange={updateAttribute('deforestedTitle')}
+                    onChange={updateAttribute('finalInformation')}
                     placeholder={__('Type the final information', 'jaci')}
                 />
             </div>
