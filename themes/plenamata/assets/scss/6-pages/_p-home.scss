@@ -48,12 +48,12 @@
     .newsletter-container{
         position: relative;
         background-color: #fff087;
-        margin-top: -228px;
+        margin-top: -325px;
         z-index: 99;
        
         .wp-block-cover__inner-container{
             p, h2, label{
-                color: #22271B;                ;
+                color: #22271B;
             }
             
             .eye{
@@ -76,16 +76,27 @@
                 max-width: 370px;
                 margin: 0 auto;
                
-                input{
+                input[type='email']{
                     background-color: transparent;
                     border: none;
                     border-bottom: solid 1px #272B36;
                     color: #272B36;
-                    padding-bottom: 12px;
+                    padding: 12px 0;
                     width: 100%;;
                 }
 
-                input:focus{
+                input[type='email']:-webkit-autofill,
+                input[type='email']:-webkit-autofill:hover, 
+                input[type='email']:-webkit-autofill:focus, 
+                input[type='email']:-webkit-autofill:active
+                {
+                -webkit-box-shadow: 0 0 0 30px #fff087 inset !important;
+                }
+
+                input[type='email']:active{
+                   background-color: transparent;
+                }
+                input[type='email']:focus{
                     outline: none;
                 }
                 
@@ -101,7 +112,11 @@
                         width: 20px;
                         margin: 0 20px;
                     }
-
+                    
+                    input:autofill{
+                        background-color:  transparent;
+                    }
+                    
                     input[type='checkbox']:after {
                         width: 26px;
                         height: 26px;
@@ -115,7 +130,7 @@
                         display: inline-block;
                         visibility: visible;
                     }
-                    
+
                     input[type='checkbox']:checked:after {
                         width: 26px;
                         height: 26px;
@@ -132,10 +147,15 @@
                     }
                 }
                 input[type='submit']{
+                    width: 100%;
                     color: #ffff;
                     background-color: #3D342D;
                     padding: 10px 0;
-                    border-radius: 7px;
+                    border: none;
+                    border-radius: 4px;
+                }
+                .mc4wp-success{
+                    text-align: center;
                 }
             }
             
