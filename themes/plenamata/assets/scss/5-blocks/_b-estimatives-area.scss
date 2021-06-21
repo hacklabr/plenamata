@@ -23,7 +23,11 @@
 
     .main-data {
         margin-bottom: 40px;
-        
+
+        @include mobile {
+            margin-bottom: 0;
+        }
+
         h4 {
             font-size: size(16);
             font-weight: normal;
