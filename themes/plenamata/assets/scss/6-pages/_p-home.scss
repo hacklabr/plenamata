@@ -5,6 +5,18 @@
         border-radius: 8px;
     }
 
+    .wp-block-columns {
+        @include tablet {
+            flex-flow: column;
+        }
+
+        .wp-block-column {
+            @include tablet {
+                margin-left: 0;
+            }
+        }
+    }
+
     #quem_somos,
     #who_we_are {
         padding: 30px 60px;
@@ -27,7 +39,7 @@
     .away {
         padding: 0 100px;
 
-        @include mobile {
+        @include tablet {
             padding: 1em;
         }
     }
