@@ -365,6 +365,11 @@ class Assets {
 				'global' => true,
 			],
 
+            'scroll-behavior'     => [
+                'file' => 'anchor-behavior.js',
+				'global' => true,
+			],
+
             'page'     => [
                 'file' => 'page.js',
                 'preload_callback' => function() {
