@@ -11,9 +11,7 @@ function calculateTreeEstimative(baseTrees, tressPerDay, baseDate, serverTime = 
     return Math.floor(parseInt(baseTrees) + treesDestroiedInAsec * secondsBetween)
 }
 
-const timeApiUrl = document.location.origin +
-                   "/wp-json/api/time/?client_time=" +
-                   Date.now();
+let initialTime = parseInt(estimativesArea.utc);
 
 estimativeBlocks.forEach(block => {
     const estimativeNumberEl = block.querySelector('#trees-estimative');
@@ -31,16 +29,14 @@ estimativeBlocks.forEach(block => {
     })
 
     setInterval(function() {
-        fetch(timeApiUrl)
-        .then(res => res.json())
-        .then(data => {
-                const estimative = calculateTreeEstimative(baseTress, tressPerDay, dataDate, data);
-                if (estimativesArea.getLangCode === 'pt-br') {
-                    estimativeNumberEl.innerHTML = numberMask(estimative);
-                } else {
-                    estimativeNumberEl.innerHTML = numberMask(estimative, ',');
-                }
-            })
-    }, 1500);
+        const estimative = calculateTreeEstimative(baseTress, tressPerDay, dataDate, initialTime);
+        if (estimativesArea.getLangCode === 'pt-br') {
+            estimativeNumberEl.innerHTML = numberMask(estimative);
+        } else {
+            estimativeNumberEl.innerHTML = numberMask(estimative, ',');
+        }
+
+        initialTime += 1
+    }, 1000);
 
 });
