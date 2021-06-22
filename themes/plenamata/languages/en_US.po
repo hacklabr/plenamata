@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2021-06-21T19:15:01+00:00\n"
-"PO-Revision-Date: 2021-06-22 16:58+0000\n"
+"PO-Revision-Date: 2021-06-22 17:27+0000\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: jaci\n"
 "Language: en_US\n"
@@ -63,7 +63,7 @@ msgstr ""
 
 #: library/blocks/estimatives-area/render-template.php:17
 msgid "estimativa em tempo real"
-msgstr "real time estimative"
+msgstr "real time estimate"
 
 #: assets/javascript/blocks/estimativesArea/editor.js:13
 msgid ""
