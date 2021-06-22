@@ -3,7 +3,7 @@ import { __experimentalNumberControl as NumberControl } from '@wordpress/compone
 import { TextControl } from '@wordpress/components';
 import { __ } from "@wordpress/i18n";
 import './dashboard.scss';
-import numberWithDots from './../../masks/number-masker';
+import numberMask from './../../masks/number-masker';
 
 registerBlockType('jaci/deforestation-info', {
     title: __('Deforestation Info', 'jaci'),
@@ -51,7 +51,7 @@ registerBlockType('jaci/deforestation-info', {
                 <span className="box-title">{attributes.boxTitle}</span>
                 <div className="box-content">
                     <span className="icon"></span>
-                    <span className="count">{numberWithDots(attributes.count ? attributes.count : 0)}</span>
+                    <span className="count" data-mask="true">{attributes.count}</span>
                     <span className="legend">{__('hectares', 'jaci')}</span>
                 </div>
                 <span className="data-source">{attributes.dataSource}</span>

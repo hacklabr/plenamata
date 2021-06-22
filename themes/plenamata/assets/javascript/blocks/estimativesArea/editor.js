@@ -2,7 +2,7 @@ import { DateTimePicker, TextControl, __experimentalNumberControl as NumberContr
 import { RichText } from "@wordpress/block-editor";
 import { __ } from "@wordpress/i18n";
 import './dashboard.scss'
-import numberWithDots from './../../masks/number-masker';
+import numberMask from './../../masks/number-masker';
 
 export default ({ attributes, setAttributes }) => {
     const {
@@ -19,7 +19,6 @@ export default ({ attributes, setAttributes }) => {
         baseDate } = attributes;
 
     const updateAttribute = (attribute) => {
-        
         return (attributeValue) => {
             setAttributes({
                 ...attributes,
@@ -64,8 +63,7 @@ export default ({ attributes, setAttributes }) => {
 
                 <div className="number">
                     <span>
-                        {/* { numberWithDots(baseTrees? baseTrees : 0) } */}
-                        { numberWithDots(calculateTreeEstimative(baseTrees? baseTrees : 0, tressPerDay, baseDate)) }
+                        { numberMask(calculateTreeEstimative(baseTrees? baseTrees : 0, tressPerDay, baseDate)) }
                     </span>
                 </div>
 

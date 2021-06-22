@@ -495,6 +495,13 @@ class Assets {
                     filemtime(get_stylesheet_directory() . '/dist/css/_b-deforestation-info.css'),
                     'all'
                 );
+
+                wp_enqueue_script( 'deforestation-info-front-end', get_stylesheet_directory_uri() . '/dist/js/functionalities/deforestation-info.js', [], false, true );
+
+                wp_localize_script('deforestation-info-front-end', 'deforestationInfo', [
+                    'getLangCode' => apply_filters( "wpml_current_language", NULL ),
+                ]);
+
             },
             'jaci/estimatives-area' => function() {
                 wp_enqueue_style(
@@ -506,8 +513,9 @@ class Assets {
                 );
                 wp_enqueue_script( 'estimatives-area-front-end', get_stylesheet_directory_uri() . '/dist/js/functionalities/estimatives-area.js', [], false, true );
 
-                wp_localize_script('estimatives-area-front-end', 'serverTime', [
+                wp_localize_script('estimatives-area-front-end', 'estimativesArea', [
                     'utc' => time(),
+                    'getLangCode' => apply_filters( "wpml_current_language", NULL ),
                 ]);
 
             }
