@@ -23,7 +23,7 @@
     .box-content {
         align-items: center;
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         padding-bottom: var(--s-small);
 
         @include desktop {
