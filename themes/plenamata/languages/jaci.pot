@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-06-21T19:15:01+00:00\n"
+"POT-Creation-Date: 2021-06-22T16:53:35+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: jaci\n"
@@ -50,23 +50,24 @@ msgstr ""
 msgid "Toggle menu visibility"
 msgstr ""
 
-#: library/blocks/estimatives-area/render-template.php:18
+#: library/blocks/estimatives-area/render-template.php:17
 msgid "estimativa em tempo real"
 msgstr ""
 
-#: library/blocks/estimatives-area/render-template.php:32
+#: library/blocks/estimatives-area/render-template.php:31
 msgid "árvores/ dia"
 msgstr ""
 
-#: library/blocks/estimatives-area/render-template.php:41
+#: library/blocks/estimatives-area/render-template.php:40
 msgid "hectares/ dia"
 msgstr ""
 
-#: library/blocks/estimatives-area/render-template.php:56
+#: library/blocks/estimatives-area/render-template.php:55
 msgid "alertas"
 msgstr ""
 
-#: library/blocks/estimatives-area/render-template.php:67
+#: library/blocks/estimatives-area/render-template.php:66
+#: assets/javascript/blocks/deforestationInfo/index.js:55
 msgid "hectares"
 msgstr ""
 
@@ -138,8 +139,68 @@ msgstr ""
 msgid "Type the source of data"
 msgstr ""
 
-#: assets/javascript/blocks/deforestationInfo/index.js:55
-msgid "hectares"
+#: assets/javascript/blocks/estimativesArea/editor.js:9
+msgid "Na Amazônia"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:10
+msgid "Árvores derrubadas em 2021"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:11
+msgid "Média de desmatamento em 2021"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:12
+msgid "Desmatados 2021"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:13
+msgid "Estimativas detectadas e reportadas. Velocidades médias. | Fonte: MapBiomas. | Última atualização: 08.06.2021"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:51
+msgid "Type the heading text"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:61
+msgid "Type the before number title"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:72
+msgid "Base trees"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:79
+msgid "Base date"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:99
+msgid "Type the average title"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:106
+msgid "Trees per day"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:116
+msgid "Hectares per day"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:130
+msgid "Type the desforested title"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:137
+msgid "alerts"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:152
+msgid "Hectares"
+msgstr ""
+
+#: assets/javascript/blocks/estimativesArea/editor.js:173
+msgid "Type the final information"
 msgstr ""
 
 #: assets/javascript/blocks/estimativesArea/index.js:7
