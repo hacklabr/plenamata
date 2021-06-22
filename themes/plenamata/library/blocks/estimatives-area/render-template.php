@@ -48,11 +48,11 @@ extract($params['attributes']);
 
                 <div class="area">
                     <span data-mask="true">
-                        <?= $warnings ?>
+                        <?= $alerts ?>
                     </span>
 
                     <span data-mask="true">
-                        <?= __("Alertas", "jaci") ?>
+                        <?= __("alertas", "jaci") ?>
                     </span>
                 
                 </div>

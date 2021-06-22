@@ -63,7 +63,7 @@ msgid "hectares/ dia"
 msgstr ""
 
 #: library/blocks/estimatives-area/render-template.php:56
-msgid "Alertas"
+msgid "alertas"
 msgstr ""
 
 #: library/blocks/estimatives-area/render-template.php:67

@@ -14,7 +14,7 @@ export default ({ attributes, setAttributes }) => {
         baseTrees,
         tressPerDay,
         hecPerDay,
-        warnings,
+        alerts,
         hectares,
         baseDate } = attributes;
 
@@ -136,9 +136,9 @@ export default ({ attributes, setAttributes }) => {
                         <div className="area">
                             <span>
                                 <NumberControl
-                                    label={__("Warnings", "jaci")}
-                                    value={ warnings }
-                                    onChange={ updateAttribute('warnings') }
+                                    label={__("alerts", "jaci")}
+                                    value={ alerts }
+                                    onChange={ updateAttribute('alerts') }
                                 />
                             </span>
 

@@ -56,7 +56,7 @@ function estimatives_area_block() {
             "hectares" => [
                 "type" => "string"
             ],
-            "warnings" => [
+            "alerts" => [
                 "type" => "string"
             ],
             "baseDate" => [
