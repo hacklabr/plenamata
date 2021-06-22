@@ -107,6 +107,7 @@
                 @include mobile {
                     display: none;
                 }
+
                 @include tablet {
                     display: none;
                 }
@@ -196,6 +197,7 @@
                         box-shadow: 0px 0px 0px 1px #000000;
                     }
                 }
+
                 input[type='submit']{
                     width: 100%;
                     color: #ffff;
@@ -204,11 +206,12 @@
                     border: none;
                     border-radius: 4px;
                 }
+
                 .mc4wp-success{
                     text-align: center;
                 }
             }
-            
+
         }
     }
 
@@ -230,14 +233,15 @@
         margin-top: -375px;
         padding-top: 300px;
 
-        .menu-item-855 a {
+        .menu-item-882 a {
             font-size: 1.1rem;
             font-weight: bold;
         }
+
         @media(max-width: 768px){
-            .menu-item-855 {
+            .menu-item-882 {
                 text-align: center;
-                line-height: 1.2;
+                line-height: 25px;
             }
         }
     }
@@ -247,8 +251,17 @@
         margin-bottom: 0 !important;
     }
 
+    .mb-100{
+        margin-bottom: 105px;
+
+        @media(min-width:800px) and (max-width: 1400px) and (max-height:800px){
+            margin-bottom: 433px;
+        }
+    }
+
+
     .fs-80 {
-        font-size: 80px
+        font-size: 80px;
     }
 
     .br-8 {
