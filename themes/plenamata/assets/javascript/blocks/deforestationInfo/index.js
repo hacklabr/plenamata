@@ -48,11 +48,13 @@ registerBlockType('jaci/deforestation-info', {
     save: ({ attributes }) => {
         return (
             <div>
-                <span className="box-title">{attributes.boxTitle}</span>
                 <div className="box-content">
+                    <span className="box-title">{attributes.boxTitle}</span>
                     <span className="icon"></span>
-                    <span className="count" data-mask="true">{attributes.count}</span>
-                    <span className="legend">{__('hectares', 'jaci')}</span>
+                    <div className="wrap">
+                        <span className="count" data-mask="true">{attributes.count}</span>
+                        <span className="legend">{__('hectares', 'jaci')}</span>
+                    </div>
                 </div>
                 <span className="data-source">{attributes.dataSource}</span>
             </div>

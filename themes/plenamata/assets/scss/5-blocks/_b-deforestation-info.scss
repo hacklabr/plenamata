@@ -9,92 +9,107 @@
 
     span {
         color: var(--c-gray);
+        margin-right: 15px;
 
-        &.box-title {
-            display: inline-block;
-            line-height: 1;
-        }
-
-        &.icon {
-            align-items: center;
-            background-image: url($p_theme_assets + '/images/eye.svg');
-            background-size: 100%;
-            background-repeat: no-repeat;
-            background-position: bottom;
-            display: flex;
-            height: 65px;
-            margin-right: var(--s-small);
-            width: 65px;
-
-            @include desktop {
-                background-position: center;
-                margin-right: var(--s-large);
-            }
-        }
-
-        &.count {
-            display: flex;
-            align-items: flex-end;
-            font-size: 4vw;
-            line-height: 0.9;
-            padding-bottom: 0;
-            padding-top: 0;
-
-            @include mobile {
-                padding-bottom: 10px;
-                padding-top: 15px;
-            }
-
-            @media (min-width: 399px)  {
-                font-size: size(50);
-            }
-
-            @media (min-width: 599px)  {
-                font-size: size(40);
-            }
-
-            @media (min-width: 699px)  {
-                font-size: size(50);
-            }
-
-            @media (min-width: 1400px){
-                font-size: size(70);
-            }
-        }
-
-        &.legend {
-            display: flex;
-            align-items: flex-end;
-            padding-left: var(--s-small);
-
-            @include desktop {
-                padding-left: var(--s-large);
-            }
-
-            @include mobile {
-                padding-left: 0;
-                display: inline;
-            }
+        @include desktop {
+            margin-right: initial;
         }
 
         &.data-source {
-            font-size: 14px;
+            font-size: 0.75rem;
         }
     }
 
     .box-content {
+        align-items: center;
         display: flex;
-        justify-content: center;
-        margin-bottom: var(--s-large);
-        margin-top: var(--s-small);
+        justify-content: start;
+        padding-bottom: var(--s-small);
 
         @include desktop {
+            align-items: flex-end;
+            justify-content: space-between;
             margin-bottom: var(--s-small);
-            margin-top: var(--s-small);
         }
 
-        @include mobile {
+        @media (max-width: 599px) {
             display: block;
+            margin-bottom: 0;
+            margin-top: 0;
+        }
+
+        .box-title {
+            align-self: center;
+            font-weight: bold;
+            line-height: 1.5;
+            padding-right: 15px;
+            width: 30%;
+        }
+
+        .icon {
+            align-items: center;
+            background-image: url($p_theme_assets + '/images/eye.svg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            height: 65px;
+            width: 65px;
+
+            @include desktop {
+                background-position: bottom;
+                margin-right: 5px;
+                margin-bottom: var(--s-small);
+            }
+
+            @media (max-width: 599px) {
+                margin: 0 auto;
+            }
+        }
+
+        .count {
+            display: flex;
+            align-items: flex-end;
+            font-size: size(50);
+            line-height: 0.9;
+            padding-bottom: 0;
+            padding-top: 0;
+
+            @include desktop {
+                padding-bottom: var(--s-small);
+            }
+
+            @media (max-width: 599px) {
+                display: inline-block;
+                margin: 0 auto;
+            }
+
+        }
+
+        .wrap {
+            display: flex;
+
+            @media (max-width: 599px) {
+                display: block;
+                text-align: center;
+                padding-top: 15px;
+                width: 100%;
+            }
+
+            .legend {
+                display: flex;
+                align-items: flex-end;
+                font-size: 0.75rem;
+                padding-left: 10px;
+
+                @include desktop {
+                    padding-bottom: var(--s-small);
+                }
+
+                @media (max-width: 599px) {
+                    display: inline;
+                }
+            }
         }
     }
 }
