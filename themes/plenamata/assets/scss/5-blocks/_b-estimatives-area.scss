@@ -4,22 +4,17 @@
     background-color: var(--c-secondary-05);
     padding: 20px;
     border-radius: 8px;
+    margin-bottom: 20px;
     
-    @include mobile {
-        margin-bottom: 20px;
+    @include desktop {
+        margin-bottom: 0;
     }
 
     .heading {
-        h4 {
-            font-size: size(16);
-            margin: 0px;
-            font-weight: normal;
-        }
-
         h3 {
             font-size: size(24);
             color: var(--c-secondary);
-            margin-top: 29px;
+            margin-top: 0;
             border-bottom: 1px solid var(--c-secondary);
             font-weight: normal;
         }

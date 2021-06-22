@@ -29,10 +29,10 @@
     }
 
     #monitor .wp-block-column:not(:first-child) {
-        margin-left: 20px;
+        margin-left: 0;
 
-        @media (max-width: 599px) {
-            margin-left: 0;
+        @include desktop {
+            margin-left: 20px;
         }
     }
 
@@ -59,30 +59,21 @@
         }
     }
 
+    .column-vertical-space-between {
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+    }
+
     .flourish-iframe {
         border: 0;
         border-radius: 8px;
-        height: 300px;
+        height: 100%;
+        min-height: 250px;
         width: 100%;
 
-        @media (min-width: 599px)  {
-            height: 252px;
-        }
-
-        @media (min-width: 699px)  {
-            height: 225px;
-        }
-
-        @media (min-width: 799px)  {
-            height: 310px;
-        }
-
-        @media (min-width: 1025px)  {
-            height: 225px;
-        }
-
-        @media (min-width: 1400px){
-            height: 259px;
+        @include desktop {
+            min-height: 200px;
         }
     }
 

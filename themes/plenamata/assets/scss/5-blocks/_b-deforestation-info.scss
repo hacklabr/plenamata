@@ -12,8 +12,7 @@
 
         &.box-title {
             display: inline-block;
-            line-height: 1.7;
-            max-width: 190px;
+            line-height: 1;
         }
 
         &.icon {
@@ -23,9 +22,9 @@
             background-repeat: no-repeat;
             background-position: bottom;
             display: flex;
-            height: 70px;
+            height: 65px;
             margin-right: var(--s-small);
-            width: 70px;
+            width: 65px;
 
             @include desktop {
                 background-position: center;
@@ -87,7 +86,12 @@
         display: flex;
         justify-content: center;
         margin-bottom: var(--s-large);
-        margin-top: var(--s-large);
+        margin-top: var(--s-small);
+
+        @include desktop {
+            margin-bottom: var(--s-small);
+            margin-top: var(--s-small);
+        }
 
         @include mobile {
             display: block;
