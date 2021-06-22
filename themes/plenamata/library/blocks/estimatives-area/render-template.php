@@ -6,7 +6,6 @@ extract($params['attributes']);
 
 <div class="estimatives-area">
     <div class="heading">
-        <h4><?= $boxTitle ?></h4>
         <h3> <?= $headingTitle ?> </h3>
     </div>
 

@@ -6,7 +6,6 @@ import numberWithDots from './../../masks/number-masker';
 
 export default ({ attributes, setAttributes }) => {
     const {
-        boxTitle = __("Desmatamento agora", "jaci"),
         headingTitle = __("Na Amazônia", "jaci"),
         preNumberTitle = __("Árvores derrubadas em 2021", "jaci"),
         averageTitle = __("Média de desmatamento em 2021", "jaci"),
@@ -45,14 +44,6 @@ export default ({ attributes, setAttributes }) => {
     return (
         <div className="estimatives-area">
             <div className="heading">
-                <RichText
-                    tagName="span"
-                    className="box-title"
-                    value={boxTitle}
-                    onChange={updateAttribute('boxTitle')}
-                    placeholder={__('Type the box title', 'jaci')}
-                />
-
                 <RichText
                     tagName="h3"
                     className="heading-title"
