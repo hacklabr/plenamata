@@ -29,7 +29,6 @@
         @include desktop {
             align-items: flex-end;
             justify-content: space-between;
-            margin-bottom: var(--s-small);
         }
 
         @media (max-width: 599px) {
