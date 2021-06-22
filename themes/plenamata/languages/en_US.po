@@ -63,7 +63,7 @@ msgstr "trees/ day"
 
 #: library/blocks/estimatives-area/render-template.php:41
 msgid "hectares/ dia"
-msgstr "hectare/ day"
+msgstr "hectares/ day"
 
 #: library/blocks/estimatives-area/render-template.php:56
 msgid "alertas"
@@ -142,7 +142,7 @@ msgid "Type the source of data"
 msgstr ""
 
 #: assets/javascript/blocks/deforestationInfo/index.js:55
-msgid "hectare"
+msgid "hectares"
 msgstr ""
 
 #: assets/javascript/blocks/estimativesArea/index.js:7

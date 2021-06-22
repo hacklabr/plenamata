@@ -143,7 +143,7 @@ export default ({ attributes, setAttributes }) => {
                             </span>
 
                             <span>
-                                {/* { __("Alertas", "jaci") } */}
+                                {/* { __("alertas", "jaci") } */}
                             </span>
                         
                         </div>

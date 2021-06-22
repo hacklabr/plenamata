@@ -52,7 +52,7 @@ registerBlockType('jaci/deforestation-info', {
                 <div className="box-content">
                     <span className="icon"></span>
                     <span className="count">{numberWithDots(attributes.count ? attributes.count : 0)}</span>
-                    <span className="legend">{__('hectare', 'jaci')}</span>
+                    <span className="legend">{__('hectares', 'jaci')}</span>
                 </div>
                 <span className="data-source">{attributes.dataSource}</span>
             </div>
