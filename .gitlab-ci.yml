@@ -11,9 +11,10 @@ build:
     - docker
   image: node:12
   script:
-    - cd /plugins/plenamata && npm install && npm run production
+    - npm --prefix plugins/plenamata/ install
+    - npm --prefix plugins/plenamata/ run build:production
     - apt update && apt install -y zip unzip
-    - cd /plugins && zip -r --exclude="*node_modules*" --exclude="*vendor*" /plenamata-plugin.zip plenamata/
+    - cd plugins && zip -r --exclude="*node_modules*" --exclude="*vendor*" packages/plenamata-plugin.zip plenamata/
   artifacts:
     paths:
       - /plenamata-plugin.zip
