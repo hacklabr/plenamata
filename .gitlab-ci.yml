@@ -6,6 +6,7 @@ stages:
 variables:
   KUBECONFIG: /etc/k8s-config
 
+
 build_composer:
   stage: build_composer
   only:
@@ -15,6 +16,11 @@ build_composer:
   image: composer:2.1.5
   script:
     - composer build --working-dir=./plugins/plenamata-plugin/
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - vendor/
+      - vendor_prefixed/
     
 build_assets:
   stage: build_assets
@@ -23,6 +29,12 @@ build_assets:
   tags:
     - docker
   image: node:12
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - vendor/
+      - vendor_prefixed/
+    
   script:
     - npm --prefix plugins/plenamata-plugin/ install
     - npm --prefix plugins/plenamata-plugin/ run build:production
@@ -38,9 +50,15 @@ build_assets:
 deploy:
   stage: deploy
   image: hacklab/kubectl:latest
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - vendor/
+      - vendor_prefixed/
   script:
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
-    - kubectl cp "plugins/plenamata-plugin/" plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):"/var/www/html/wp-content/plugins/"
+    - kubectl cp "plugins/plenamata-plugin" plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):"/var/www/html/wp-content/plugins/"
+    - kubectl exec -n plenamata-site-dev -it $(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1) -- sh -c "chown -R www-data: /var/www/html/wp-content/plugins/plenamata-plugin" 
   only:
     - /gitlab-ci/
   tags:
