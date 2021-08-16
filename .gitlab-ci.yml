@@ -8,7 +8,7 @@ build:
   only:
     - /gitlab-ci/
   tags:
-    - wordpress
+    - docker
   image: node:12
   script:
     - cd /plugins/plenamata && npm install && npm run production
