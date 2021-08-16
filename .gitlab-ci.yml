@@ -7,7 +7,7 @@ variables:
   KUBECONFIG: /etc/k8s-config
 
 build_composer:
-  stage: build
+  stage: build_composer
   only:
     - /gitlab-ci/
   tags:
@@ -17,7 +17,7 @@ build_composer:
     - composer install --working-dir=./plugins/plenamata/
     
 build_assets:
-  stage: build
+  stage: build_assets
   only:
     - /gitlab-ci/
   tags:
