@@ -14,7 +14,7 @@ build_composer:
     - docker
   image: composer:2.1.5
   script:
-    - composer install --working-dir=./plugins/plenamata/
+    - composer install --working-dir=./plugins/plenamata-plugin/
     
 build_assets:
   stage: build_assets
@@ -24,13 +24,13 @@ build_assets:
     - docker
   image: node:12
   script:
-    - npm --prefix plugins/plenamata/ install
-    - npm --prefix plugins/plenamata/ run build:production
+    - npm --prefix plugins/plenamata-plugin/ install
+    - npm --prefix plugins/plenamata-plugin/ run build:production
     - apt update && apt install -y zip unzip
-    - rm -rf plugins/plenamata/node_modules
+    - rm -rf plugins/plenamata-plugin/node_modules
   artifacts:
     paths:
-      - plugins/plenamata/*
+      - plugins/plenamata-plugin/*
     name: plenamata-plugin.zip
     expire_in: 1 week
 
@@ -40,7 +40,7 @@ deploy:
   image: hacklab/kubectl:latest
   script:
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
-    - kubectl cp "plugins/plenamata/" plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):"/var/www/html/wp-content/plugins/"
+    - kubectl cp "plugins/plenamata-plugin/" plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):"/var/www/html/wp-content/plugins/"
   only:
     - /gitlab-ci/
   tags:
