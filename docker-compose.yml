@@ -16,7 +16,7 @@ services:
       WORDPRESS_DEBUG: 'true'
     volumes:
       - ./wp-content:/var/www/html/wp-content
-      - ./plugins/plenamata:/var/www/html/wp-content/plugins/plenamata
+      - ./plugins/plenamata-plugin:/var/www/html/wp-content/plugins/plenamata-plugin
       - ./compose/local/wordpress/wp-config.d:/var/www/html/wp-config.d
       - ./compose/local/wordpress/htaccess:/var/www/html/.htaccess
       - ./compose/production/wordpress/php/extra.ini:/usr/local/etc/php/conf.d/extra.ini
@@ -26,7 +26,7 @@ services:
       context: .
       dockerfile: ./compose/local/watcher/Dockerfile
     volumes:
-      - ./plugins/plenamata:/app
+      - ./plugins/plenamata-plugin:/app
       
   mariadb:
     image: mariadb:10.4
