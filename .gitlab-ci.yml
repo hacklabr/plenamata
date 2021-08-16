@@ -17,11 +17,11 @@ build:
     - npm --prefix plugins/plenamata/ install
     - npm --prefix plugins/plenamata/ run build:production
     - apt update && apt install -y zip unzip
-    - cd plugins && zip -r --exclude="*node_modules*" --exclude="*vendor*" plenamata-plugin.zip plenamata/
+    - rm -rf plugins/plenamata/node_modules
   artifacts:
     paths:
-      - plugins/plenamata-plugin.zip
-      - plugins/plenamata
+      - plugins/plenamata/
+    name: plenamata-plugin.zip
     expire_in: 1 week
 
 
@@ -30,7 +30,7 @@ deploy:
   image: hacklab/kubectl:latest
   script:
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
-    - kubectl cp plugins/plenamata-plugin.zip plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):/var/www/html/plugins/plenamata/
+    - kubectl cp plugins/plenamata plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):/var/www/html/plugins/plenamata
   only:
     - /gitlab-ci/
   tags:
