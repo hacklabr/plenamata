@@ -1,12 +1,22 @@
 # Our stages
 stages:
-  - build
+  - build_composer
+  - build_assets
   - deploy
 variables:
   KUBECONFIG: /etc/k8s-config
 
-# Build WordPress plugin file
-build:
+build_composer:
+  stage: build
+  only:
+    - /gitlab-ci/
+  tags:
+    - docker
+  image: composer:2.1.5
+  script:
+    - composer install --working-dir=./plugins/plenamata/
+    
+build_assets:
   stage: build
   only:
     - /gitlab-ci/
