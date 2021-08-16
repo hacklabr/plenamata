@@ -19,8 +19,8 @@ build_composer:
   cache:
     key: $CI_COMMIT_REF_SLUG
     paths:
-      - vendor/
-      - vendor_prefixed/
+      - plugins/plenamata-plugin/vendor/
+      - plugins/plenamata-plugin/vendor_prefixed/
     
 build_assets:
   stage: build_assets
@@ -32,13 +32,12 @@ build_assets:
   cache:
     key: $CI_COMMIT_REF_SLUG
     paths:
-      - vendor/
-      - vendor_prefixed/
+      - plugins/plenamata-plugin/vendor/
+      - plugins/plenamata-plugin/vendor_prefixed/
     
   script:
     - npm --prefix plugins/plenamata-plugin/ install
     - npm --prefix plugins/plenamata-plugin/ run build:production
-    - apt update && apt install -y zip unzip
     - rm -rf plugins/plenamata-plugin/node_modules
   artifacts:
     paths:
@@ -53,8 +52,8 @@ deploy:
   cache:
     key: $CI_COMMIT_REF_SLUG
     paths:
-      - vendor/
-      - vendor_prefixed/
+      - plugins/plenamata-plugin/vendor/
+      - plugins/plenamata-plugin/vendor_prefixed/
   script:
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
     - kubectl cp "plugins/plenamata-plugin" plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):"/var/www/html/wp-content/plugins/"
