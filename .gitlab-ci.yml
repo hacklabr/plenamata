@@ -1,6 +1,9 @@
 # Our stages
 stages:
   - build
+  - deploy
+variables:
+  KUBECONFIG: /etc/k8s-config
 
 # Build WordPress plugin file
 build:
@@ -18,4 +21,17 @@ build:
   artifacts:
     paths:
       - plugins/plenamata-plugin.zip
+      - plugins/plenamata
     expire_in: 1 week
+
+
+deploy:
+  stage: deploy
+  image: hacklab/kubectl:latest
+  script:
+    - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
+    - kubectl cp plugins/plenamata-plugin.zip plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):/var/www/html/plugins/plenamata/
+  only:
+    - /gitlab-ci/
+  tags:
+    - docker
