@@ -34,6 +34,7 @@ build_assets:
     paths:
       - plugins/plenamata-plugin/vendor/
       - plugins/plenamata-plugin/vendor_prefixed/
+      - plugins/plenamata-plugin/assets/build
     
   script:
     - npm --prefix plugins/plenamata-plugin/ install
@@ -54,6 +55,7 @@ deploy:
     paths:
       - plugins/plenamata-plugin/vendor/
       - plugins/plenamata-plugin/vendor_prefixed/
+      - plugins/plenamata-plugin/assets/build
   script:
     - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
     - kubectl cp "plugins/plenamata-plugin" plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):"/var/www/html/wp-content/plugins/"

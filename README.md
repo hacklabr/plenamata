@@ -27,3 +27,12 @@ Adicionar as seguintes linhas ao arquivo compose/local/wordpress/php/extra.ini:
 ```upload_max_filesize = 40000M```
 
 ```post_max_size = 40000M```
+
+
+Temas do projeto:
+- newspack
+- jeo-theme
+
+Plugins
+- newspack
+- jeo-plugin
