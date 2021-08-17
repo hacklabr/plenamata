@@ -11,7 +11,7 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class( 'glossary' ) ?>>
-    <h1>Glossário</h1>
+    <h1><?php __( 'Glossário', 'plenamata' ) ?></h1>
     <div>
         <nav class="sections">
             <h2>
