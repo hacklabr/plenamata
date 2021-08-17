@@ -2,6 +2,7 @@
 stages:
   - build_composer
   - build_assets
+  - create_pack
   - deploy
 variables:
   KUBECONFIG: /etc/k8s-config
@@ -40,12 +41,35 @@ build_assets:
     - npm --prefix plugins/plenamata-plugin/ install
     - npm --prefix plugins/plenamata-plugin/ run build:production
     - rm -rf plugins/plenamata-plugin/node_modules
+    - cp -ra plugins/plenamata-plugin/ plenamata-plugin/  #talvez criar uma nova etapa prta isso
+
+
   artifacts:
     paths:
-      - plugins/plenamata-plugin/*
+      - plenamata-plugin/* 
     name: plenamata-plugin.zip
     expire_in: 1 week
 
+create_pack:
+  stage: create_pack
+  only:
+    - /master/
+  tags:
+    - docker
+  image: alpine:3.14
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - plugins/plenamata-plugin/vendor/
+      - plugins/plenamata-plugin/vendor_prefixed/
+      - plugins/plenamata-plugin/assets/build
+  script:
+    - cp -ra plugins/plenamata-plugin plenamata-plugin  
+  artifacts:
+    paths:
+      - plenamata-plugin/* 
+    name: plenamata-plugin.zip
+    expire_in: 1 week
 
 deploy:
   stage: deploy
