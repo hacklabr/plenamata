@@ -1,0 +1,4 @@
+#!/bin/bash
+#executar nma pasta do projeto para importar um dump
+#exemplo de uso: dcimportdump ~/dumps/dump.sql
+docker-compose exec -T  mariadb  bash -c 'mysql -u$MYSQL_USER -p$MYSQL_PASSWORD $MYSQL_DATABASE'   <  $1
