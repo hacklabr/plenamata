@@ -89,6 +89,7 @@ class Plugin {
 	 */
 	private function run_front(): void {
 		$this->injector->make( Front::class )->hooks();
+        $this->injector->make( Front::class )->filters();
 	}
 
 }

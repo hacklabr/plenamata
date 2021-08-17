@@ -32,6 +32,14 @@ class Front {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 	}
 
+    /**
+     * Register filters
+     */
+    public function filters(): void {
+        add_filter( 'archive_template', [ $this, 'archive_templates' ], 10, 1 );
+        add_action( 'single_template', [ $this, 'single_templates' ], 10, 1 );
+    }
+
 	/**
 	 * Enqueue styles for the front area.
 	 *
@@ -61,5 +69,25 @@ class Front {
 			true
 		);
 	}
+
+    public function archive_templates( string $template ): string {
+        global $post;
+
+        if ( is_post_type_archive( 'verbete' ) ) {
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/archive-verbete.php';
+        }
+
+        return $template;
+    }
+
+    public function single_templates( string $template ): string {
+        global $post;
+
+        if ( $post->post_type === 'verbete' ) {
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/single-verbete.php';
+        }
+
+        return $template;
+    }
 
 }
