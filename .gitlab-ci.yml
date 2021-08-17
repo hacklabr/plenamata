@@ -39,16 +39,8 @@ build_assets:
     
   script:
     - npm --prefix plugins/plenamata-plugin/ install
-    - npm --prefix plugins/plenamata-plugin/ run build:production
+    - npm --prefix plugins/plenamata-plugin/ run build
     - rm -rf plugins/plenamata-plugin/node_modules
-    - cp -ra plugins/plenamata-plugin/ plenamata-plugin/  #talvez criar uma nova etapa prta isso
-
-
-  artifacts:
-    paths:
-      - plenamata-plugin/* 
-    name: plenamata-plugin.zip
-    expire_in: 1 week
 
 create_pack:
   stage: create_pack
