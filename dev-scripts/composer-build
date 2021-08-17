@@ -1,1 +1,1 @@
-docker-compose exec wordpress  bash -c 'cd /var/www/html/wp-content/plugins/plenamata-plugin/ && composer build' 
+docker-compose exec wordpress  bash -c 'cd /var/www/html/wp-content/plugins/plenamata-plugin/ && composer build && chown -R www-data: ./' 
