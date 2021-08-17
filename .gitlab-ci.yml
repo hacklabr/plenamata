@@ -10,7 +10,7 @@ variables:
 build_composer:
   stage: build_composer
   only:
-    - /gitlab-ci/
+    - /master/
   tags:
     - docker
   image: composer:2.1.5
@@ -25,7 +25,7 @@ build_composer:
 build_assets:
   stage: build_assets
   only:
-    - /gitlab-ci/
+    - /master/
   tags:
     - docker
   image: node:12
@@ -59,6 +59,6 @@ deploy:
     - kubectl cp "plugins/plenamata-plugin" plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):"/var/www/html/wp-content/plugins/"
     - kubectl exec -n plenamata-site-dev -it $(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1) -- sh -c "chown -R www-data /var/www/html/wp-content/plugins/plenamata-plugin && chgrp -R www-data /var/www/html/wp-content/plugins/plenamata-plugin" 
   only:
-    - /gitlab-ci/
+    - /master/
   tags:
     - docker
