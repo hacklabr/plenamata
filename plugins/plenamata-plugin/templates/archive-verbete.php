@@ -8,7 +8,7 @@
             <?php echo __( 'Seções', 'plenamata' ) ?>
         </h2>
         <ul>
-            <?php foreach ( $sections as $section): ?>
+            <?php foreach ( $sections as $section ): ?>
                 <li>
                     <a href="#<?php echo $section->slug ?>">
                         <?php echo $section->name ?>
