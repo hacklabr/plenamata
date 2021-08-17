@@ -2,7 +2,6 @@ FROM hacklab/wp:5.8-php7.4
 
 LABEL mantainer "hacklab/ <contato@hacklab.com.br>"
 
-USER www-data
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Fix file permissions
 USER root
