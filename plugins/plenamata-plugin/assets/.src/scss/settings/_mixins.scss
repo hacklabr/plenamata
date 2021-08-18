@@ -1,0 +1,27 @@
+@function size($value, $unit: 'px') {
+    @if $unit == 'rem' {
+        @return $value;
+    }
+
+    @else if $unit == 'px' {
+        @return calc(#{ $value / 16px } * 1rem);
+    }
+}
+
+@mixin mobile {
+    @media screen and (max-width: 50rem) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media screen and (max-width: 64rem) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: 64rem) {
+        @content;
+    }
+}

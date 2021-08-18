@@ -11,8 +11,10 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class( 'glossary' ) ?>>
-    <h1><?php __( 'Glossário', 'plenamata' ) ?></h1>
-    <div>
+    <header class="glossary__header">
+        <h1><?php echo __( 'Glossário', 'plenamata' ) ?></h1>
+    </header>
+    <div class="glossary__body">
         <nav class="sections">
             <h2>
                 <?php echo __( 'Seções', 'plenamata' ) ?>

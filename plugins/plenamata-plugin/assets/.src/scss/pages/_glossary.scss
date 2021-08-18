@@ -1,3 +1,28 @@
 .glossary {
+    &__header {
+        background-color: #ffe6e6;
+        padding: size(80px) 0;
 
+        @include mobile {
+            padding: size(40px) 0;
+        }
+
+        h1 {
+            color: #ff7373;
+            font-size: size(40px);
+            font-weight: normal;
+            margin: 0;
+            text-align: center;
+            text-transform: uppercase;
+        }
+    }
+
+    &__body {
+        display: grid;
+        grid-gap: size(24px);
+        grid-template-columns: size(300px) size(700px) size(300px);
+        margin: size(64px) auto;
+        max-width: size(1348px);
+        width: 100%;
+    }
 }

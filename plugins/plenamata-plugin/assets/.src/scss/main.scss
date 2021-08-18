@@ -1,7 +1,6 @@
+// Settings
+@import './settings/mixins';
+@import './settings/variables';
+@import './settings/global';
+// Pages
 @import './pages/glossary';
-
-$bg: lightgray;
-
-body {
-	background-color: $bg;
-}
