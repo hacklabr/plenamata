@@ -15,7 +15,7 @@
         <h1><?php echo __( 'Glossário', 'plenamata' ) ?></h1>
     </header>
     <div class="glossary__body">
-        <nav class="sections">
+        <nav>
             <h2>
                 <?php echo __( 'Seções', 'plenamata' ) ?>
             </h2>
@@ -45,13 +45,28 @@
                 <?php echo __( $section->name, 'plenamata' ) ?>
             </h2>
 
-            <div class="entries">
+            <div class="glossary__entries">
             <?php foreach ( $entries as $entry ): ?>
-                <details>
+                <details class="glossary__entry">
                     <summary>
                         <?php echo $entry->post_title ?>
                     </summary>
-                    <div>
+                    <div class="glossary__entry-detail">
+                        <?php echo $entry->post_excerpt ?>
+                        <p>
+                            <a href="<? echo get_permalink( $entry->ID ) ?>">
+                                <?php echo __( 'Acessar verbete completo', 'plenamata' ) ?>
+                            </a>
+                        </p>
+                    </div>
+                </details>
+            <?php endforeach; ?>
+            <?php foreach ( $entries as $entry ): ?>
+                <details class="glossary__entry">
+                    <summary>
+                        <?php echo $entry->post_title ?>
+                    </summary>
+                    <div class="glossary__entry-detail">
                         <?php echo $entry->post_excerpt ?>
                         <p>
                             <a href="<? echo get_permalink( $entry->ID ) ?>">

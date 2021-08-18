@@ -1,6 +1,6 @@
 .glossary {
     &__header {
-        background-color: #ffe6e6;
+        background-color: $c_pink;
         padding: size(80) 0;
 
         @include mobile {
@@ -8,7 +8,7 @@
         }
 
         h1 {
-            color: #ff7373;
+            color: $c_red;
             font-size: size(40);
             font-weight: normal;
             margin: 0;
@@ -24,5 +24,96 @@
         margin: size(64) auto;
         max-width: size(1348);
         width: 100%;
+
+        @media screen and (max-width: size(1348)) {
+            grid-template-columns: size(300) size(700);
+        }
+
+        @media screen and (max-width: size(1024)) {
+            grid-template-columns: 1fr;
+            padding: 0 size(8);
+        }
+
+        nav {
+            h2 {
+                border-bottom: 1px solid $c_red;
+                color: $c_text;
+                font-size: size(18);
+                margin-bottom: size(24);
+                padding-bottom: size(24);
+                text-transform: uppercase;
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+
+                li {
+                    list-style: none;
+                    margin: size(8) 0;
+                    padding: size(8);
+
+                    a {
+                        color: $c_purple;
+                    }
+                }
+            }
+        }
+    }
+
+    &__entries {
+        border-collapse: collapse;
+    }
+
+    &__entry {
+        border-collapse: collapse;
+
+        summary {
+            align-items: center;
+            border: 1px solid $c_light;
+            display: flex;
+            font-size: size(18);
+            justify-content: space-between;
+            line-height: size(24);
+            list-style: none;
+            padding: size(8) size(16);
+
+            &:after {
+                align-items: center;
+                background-color: $c_purple;
+                border-radius: 50%;
+                color: white;
+                content: '-';
+                display: inline-flex;
+                font-weight: bold;
+                height: size(16);
+                justify-content: center;
+                line-height: 1;
+                width: size(16);
+            }
+
+            &::marker {
+                display: none;
+            }
+        }
+
+        &[open] {
+            summary {
+                &:after {
+                    content: '+';
+                }
+            }
+        }
+    }
+
+    &__entry-detail {
+        background-color: $c_lighter;
+        border: 1px solid $c_light;
+        padding: size(16);
+
+        a {
+            color: $c_purple;
+            text-decoration: underline !important;
+        }
     }
 }
