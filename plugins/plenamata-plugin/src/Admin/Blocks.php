@@ -27,29 +27,7 @@ class Blocks {
 	 * @since 0.1.0
 	 */
 	public function hooks(): void {
-        add_action( 'init', [ $this, 'register_blocks' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
-	}
-
-    /**
-	 * Register the JavaScript for the admin blocks.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $hook_suffix The current admin page.
-	 */
-    public function enqueue_scripts( string $hook_suffix ): void {
-		if ( false === strpos( $hook_suffix, Plugin::SLUG ) ) {
-			return;
-		}
-
-		wp_enqueue_script(
-			'plenamata-plugin-settings',
-			PLENAMATA_PLUGIN_URL . 'assets/build/js/admin/settings.js',
-			[ 'jquery' ],
-			Plugin::VERSION,
-			true
-		);
+		add_action( 'init', [ $this, 'register_blocks' ] );
 	}
 
     /**
@@ -60,6 +38,17 @@ class Blocks {
 	 * @param string $hook_suffix The current admin page.
 	 */
     public function register_blocks(): void {
+        wp_register_script(
+			'plenamata-plugin-blocks',
+			PLENAMATA_PLUGIN_URL . 'assets/build/js/admin/blocks.js',
+			[ 'wp-blocks', 'wp-i18n' ],
+			Plugin::VERSION,
+			false
+		);
 
+        register_block_type( 'plenamata/verbete-subsection', [
+            'api_version' => 2,
+            'editor_script' => 'plenamata-plugin-blocks',
+        ] );
     }
 }

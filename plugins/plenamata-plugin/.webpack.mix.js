@@ -23,6 +23,11 @@ mix
 	.extract();
 
 mix
+    .js( 'assets/.src/js/admin/blocks/index.js', 'js/admin/blocks.js' )
+    .react()
+    .extract();
+
+mix
 	.copyWatched( 'assets/.src/img/**/*.{jpg,jpeg,png,gif,svg}', 'assets/build/img', { base: 'assets/.src/img' } );
 
 mix
