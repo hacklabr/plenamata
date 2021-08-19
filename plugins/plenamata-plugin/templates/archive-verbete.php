@@ -61,21 +61,6 @@
                     </div>
                 </details>
             <?php endforeach; ?>
-            <?php foreach ( $entries as $entry ): ?>
-                <details class="glossary__entry">
-                    <summary>
-                        <?php echo $entry->post_title ?>
-                    </summary>
-                    <div class="glossary__entry-detail">
-                        <?php echo $entry->post_excerpt ?>
-                        <p>
-                            <a href="<? echo get_permalink( $entry->ID ) ?>">
-                                <?php echo __( 'Acessar verbete completo', 'plenamata' ) ?>
-                            </a>
-                        </p>
-                    </div>
-                </details>
-            <?php endforeach; ?>
             </div>
         <?php endif; ?>
         <?php endforeach; ?>
