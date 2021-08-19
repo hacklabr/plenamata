@@ -94,3 +94,8 @@ function run_plenamata_plugin() {
 }
 
 add_action( 'plugins_loaded', 'run_plenamata_plugin' );
+
+/**
+ * Users functions
+ */
+require_once PLENAMATA_PLUGIN_PATH . 'src/users-functions.php';
