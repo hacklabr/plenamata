@@ -3,6 +3,7 @@
     $archive_link = get_post_type_archive_link( 'verbete' );
     $featured_video = get_post_meta( get_the_ID(), 'featured_video', true );
     $sections = get_terms( [ 'taxonomy' => 'secao', 'hide_empty' => false ] );
+    $tags = get_the_tags(); ?>
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,6 +44,16 @@
             </div>
             <div class="glossary-entry__content">
                 <?php the_content() ?>
+                <?php if ( !empty( $tags ) ): ?>
+                    <h3 class="glossary-entry__subsection"><?php echo __( 'Tags:', 'plenamata' ) ?></h3>
+                    <ul class="glossary-entry__tags">
+                        <?php foreach ( $tags as $tag ): ?>
+                            <li class="glossary-entry__tag">
+                                <a href="<?php echo get_term_link( $tag ) ?>"><?php echo $tag->name ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
             </div>
         </main>
     </div>
