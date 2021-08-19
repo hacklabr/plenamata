@@ -41,6 +41,9 @@
                     <?php the_post_thumbnail( 'large' ) ?>
                 <?php endif; ?>
             </div>
+            <div class="glossary-entry__content">
+                <?php the_content() ?>
+            </div>
         </main>
     </div>
 </body>
