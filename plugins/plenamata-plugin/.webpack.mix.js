@@ -24,8 +24,7 @@ mix
 
 mix
     .js( 'assets/.src/js/admin/blocks/index.js', 'js/admin/blocks.js' )
-    .react()
-    .extract();
+    .react();
 
 mix
 	.copyWatched( 'assets/.src/img/**/*.{jpg,jpeg,png,gif,svg}', 'assets/build/img', { base: 'assets/.src/img' } );
