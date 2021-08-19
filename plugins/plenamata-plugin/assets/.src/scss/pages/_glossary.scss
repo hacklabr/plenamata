@@ -116,3 +116,30 @@
         }
     }
 }
+
+.glossary-entry {
+    h2 {
+        font-size: size(40);
+        margin: 0 0 size(32);
+        text-align: center;
+    }
+
+    p {
+        font-style: italic;
+        font-weight: bold;
+        margin: size(32) 0;
+        text-align: center;
+    }
+
+    &__excerpt {
+        border-bottom: 1px solid $c_red;
+        padding-bottom: size(32);
+        margin-bottom: size(32);
+
+        img,
+        video {
+            display: block;
+            max-width: 100%;
+        }
+    }
+}
