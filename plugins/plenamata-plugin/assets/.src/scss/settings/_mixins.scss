@@ -1,3 +1,7 @@
+@function asset-url($path) {
+    @return url('/wp-content/plugins/plenamata-plugin/assets/build/#{$path}');
+}
+
 @function size($value, $unit: 'px') {
     @if $unit == 'rem' {
         @return $value * 1rem;

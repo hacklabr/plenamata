@@ -82,7 +82,7 @@
                 align-items: center;
                 border-radius: 50%;
                 content: '';
-                background-image: url('/wp-content/plugins/plenamata-plugin/assets/build/img/minus-circle-icon.svg');
+                background-image: asset-url('img/minus-circle-icon.svg');
                 display: inline-flex;
                 font-weight: bold;
                 height: size(16);
@@ -99,7 +99,7 @@
         &[open] {
             summary {
                 &:after {
-                    background-image: url('/wp-content/plugins/plenamata-plugin/assets/build/img/plus-circle-icon.svg');
+                    background-image: asset-url('img/plus-circle-icon.svg');
                 }
             }
         }
@@ -124,13 +124,6 @@
         text-align: center;
     }
 
-    p {
-        font-style: italic;
-        font-weight: bold;
-        margin: size(32) 0;
-        text-align: center;
-    }
-
     &__excerpt {
         border-bottom: 1px solid $c_red;
         padding-bottom: size(32);
@@ -140,6 +133,13 @@
         video {
             display: block;
             max-width: 100%;
+        }
+
+        p {
+            font-style: italic;
+            font-weight: bold;
+            margin: size(32) 0;
+            text-align: center;
         }
     }
 }
