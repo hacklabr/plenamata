@@ -17,6 +17,7 @@
 					"for",
 					"each",
 					"while",
+                    "use",
 					"mixin",
 					"include",
 					"content",
