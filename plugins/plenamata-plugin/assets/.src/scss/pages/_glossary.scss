@@ -80,10 +80,9 @@
 
             &:after {
                 align-items: center;
-                background-color: $c_purple;
                 border-radius: 50%;
-                color: white;
-                content: '-';
+                content: '';
+                background-image: url('/wp-content/plugins/plenamata-plugin/assets/src/img/minus-circle-icon.svg');
                 display: inline-flex;
                 font-weight: bold;
                 height: size(16);
@@ -100,7 +99,7 @@
         &[open] {
             summary {
                 &:after {
-                    content: '+';
+                    background-image: url('/wp-content/plugins/plenamata-plugin/assets/src/img/plus-circle-icon.svg');
                 }
             }
         }
