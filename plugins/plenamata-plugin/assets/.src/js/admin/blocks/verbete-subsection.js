@@ -13,17 +13,24 @@ registerBlockType('plenamata/verbete-subsection', {
 		},
 	},
     edit({ attributes, setAttributes }) {
+        const { content } = attributes
+
         return (
-            <div>
-                { 'Hello World (from the editor).' }
-            </div>
+            <h3 className="glossary-entry__subsection">
+                <PlainText
+                    value={ content }
+                    onChange={ (content) => setAttributes({ content }) }
+                />
+            </h3>
         );
     },
     save({ attributes }) {
+        const { content } = attributes
+
         return (
-            <div>
-                { 'Hello World (from the frontend)' }
-            </div>
+            <h3 className="glossary-entry__subsection">
+                { content }
+            </h3>
         );
     },
 });
