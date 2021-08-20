@@ -1,4 +1,4 @@
-import { PlainText } from '@wordpress/block-editor';
+import { PlainText, useBlockProps } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 
@@ -14,9 +14,10 @@ registerBlockType('plenamata/verbete-subsection', {
 	},
     edit({ attributes, setAttributes }) {
         const { content } = attributes;
+        const blockProps = useBlockProps({ className: 'glossary-entry__subsection' });
 
         return (
-            <h3 className="glossary-entry__subsection">
+            <h3 { ...blockProps }>
                 <PlainText
                     value={ content }
                     onChange={ (content) => setAttributes({ content }) }
@@ -26,9 +27,10 @@ registerBlockType('plenamata/verbete-subsection', {
     },
     save({ attributes }) {
         const { content } = attributes;
+        const blockProps = useBlockProps.save({ className: 'glossary-entry__subsection' });
 
         return (
-            <h3 className="glossary-entry__subsection">
+            <h3 { ...blockProps }>
                 { content }
             </h3>
         );
