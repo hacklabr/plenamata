@@ -37,7 +37,8 @@ class Front {
      */
     public function filters(): void {
         add_filter( 'archive_template', [ $this, 'archive_templates' ], 10, 1 );
-        add_action( 'single_template', [ $this, 'single_templates' ], 10, 1 );
+        add_filter( 'page_template', [ $this, 'page_templates' ], 10, 1 );
+        add_filter( 'single_template', [ $this, 'single_templates' ], 10, 1 );
     }
 
 	/**
@@ -71,10 +72,16 @@ class Front {
 	}
 
     public function archive_templates( string $template ): string {
-        global $post;
-
         if ( is_post_type_archive( 'verbete' ) ) {
             $template = PLENAMATA_PLUGIN_PATH . 'templates/archive-verbete.php';
+        }
+
+        return $template;
+    }
+
+    public function page_templates ( string $template ): string {
+        if ( get_page_template_slug() === 'template-dashboard.php' ) {
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/template-dashboard.php';
         }
 
         return $template;

@@ -30,6 +30,16 @@ class Blocks {
 		add_action( 'init', [ $this, 'register_blocks' ] );
 	}
 
+    public function filters(): void {
+        add_filter( 'theme_page_templates', [ $this, 'custom_page_templates' ], 10, 1 );
+    }
+
+    public function custom_page_templates( array $templates ): array {
+        $templates['template-dashboard.php'] = __( 'Dashboard', 'plenamata' );
+
+        return $templates;
+    }
+
     /**
 	 * Register the JavaScript for the admin blocks.
 	 *
