@@ -124,6 +124,12 @@
         text-align: center;
     }
 
+    a {
+        color: $c_purple;
+        font-weight: bold;
+        text-decoration: underline !important;
+    }
+
     &__excerpt {
         border-bottom: 1px solid $c_red;
         padding-bottom: size(32);
