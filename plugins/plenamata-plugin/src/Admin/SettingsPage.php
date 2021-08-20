@@ -31,6 +31,7 @@ class SettingsPage {
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
+        add_action( 'admin_menu', [ $this, 'rename_menu_entries' ] );
 	}
 
 	/**
@@ -92,6 +93,11 @@ class SettingsPage {
 			]
 		);
 	}
+
+    public function rename_menu_entries(): void {
+        global $menu;
+        $menu[ 5 ][ 0 ] = __( 'Artigos', 'plenamata' );
+    }
 
 	/**
 	 * Plugin page callback.
