@@ -48,7 +48,7 @@ plugins/your-awesome-plugin/        # → Root of your plugin.
 │   ├── build/                      # → Assets build directory.
 │   └── src/                        # → Assets source directory.
 ├── node_modules/                   # → JS packages (never edit).
-├── src/                            # → PHP directory. 
+├── src/                            # → PHP directory.
 ├── templates/                      # → Templates for plugin views.
 ├── vendor/                         # → Composer packages (never edit).
 ├── vendor_prefixes/                # → Prefixed composer packages for non-conflict mode (never edit).
@@ -60,14 +60,14 @@ plugins/your-awesome-plugin/        # → Root of your plugin.
 ├── .phpcs.xml                      # → Custom PHP Coding Standards.
 ├── .scoper.inc.php                 # → Config for the PHP Scoper.
 ├── .stylelintrc                    # → Config for the style linter.
-├── .webpack.mix.js                 # → Laravel Mix configuration file.
 ├── CHANGELOG.md                    # → Changelog file for GH.
 ├── composer.json                   # → Composer dependencies and scripts.
 ├── composer.lock                   # → Composer lock file (never edit).
 ├── LICENSE                         # → License file.
 ├── package.json                    # → JS dependencies and scripts.
 ├── package-lock.json               # → Package lock file (never edit).
-├── plenamata-plugin.php                 # → Bootstrap plugin file.
+├── plenamata-plugin.php            # → Bootstrap plugin file.
+├── webpack.mix.js                  # → Laravel Mix configuration file.
 ├── README.md                       # → Readme MD for GitHub repository.
 ├── readme.txt                      # → Readme TXT for the wp.org repository.
 └── uninstall.php                   # → Uninstall file.
@@ -75,7 +75,7 @@ plugins/your-awesome-plugin/        # → Root of your plugin.
 
 ## Autoload
 
-We use PSR-4 and composer autoload for PSR-4. You can find it in `composer.json` in directive `autoload`. 
+We use PSR-4 and composer autoload for PSR-4. You can find it in `composer.json` in directive `autoload`.
 
 ## Coding Standards
 
@@ -97,13 +97,13 @@ composer cs
 or
 ```
 npm run cs:php
-``` 
+```
 
 PHPCS checked before each commit, before the push, and in GH Actions.
 
 ### JS Coding Standard (JSCS)
 
-We use a default WordPress JSCS, but you can modify it in the `.eslintrc` file. 
+We use a default WordPress JSCS, but you can modify it in the `.eslintrc` file.
 
 You can check JSCS using a CLI:
 
@@ -127,9 +127,9 @@ All assets are located in `assets/src/*`.
 
 All builds are located in `assets/build/*`.
 
-CSS preprocessor is SCSS. 
+CSS preprocessor is SCSS.
 
-We use [Laravel Mix](https://laravel-mix.com/) for the assets build. You can modify it in `.webpack.mix.js` file.
+We use [Laravel Mix](https://laravel-mix.com/) for the assets build. You can modify it in `webpack.mix.js` file.
 
 For run Laravel mix you can use the next commands depend on situation:
 ```
@@ -141,7 +141,7 @@ npm run start
 ## GitHub
 
 ### GH Actions
-All steps for GH Actions you can find in `.github/workflows/plenamata-plugin.yml` file. Also, for wake up a webserver, we need to add `.github/workflows/plenamata-plugin.conf` 
+All steps for GH Actions you can find in `.github/workflows/plenamata-plugin.yml` file. Also, for wake up a webserver, we need to add `.github/workflows/plenamata-plugin.conf`
 
 ### GH Hooks
 
@@ -199,7 +199,7 @@ composer unit
 - Each test method must have prefix `test_`
 - Additional files for autoloading in tests running you can add to `.codeception/_support/*` folder.
 
-Also, unit tests will be checked on a push to repository action and inside the GH Actions pipeline. 
+Also, unit tests will be checked on a push to repository action and inside the GH Actions pipeline.
 
 ### PHP acceptance tests
 
@@ -212,10 +212,10 @@ Before running, you need to (It needs to make just one time. I hope you can do i
 4. Export database to `dump.sql`
 5. Move a `dump.sql` file to the `.codeception/_data/` folder.
 6. Copy a file `.codeception/_config/params.example.php` to `.codeception/_config/params.local.php`.
-7. Update your connection information to the testing site connection in `.codeception/_config/params.local.php` file. 
+7. Update your connection information to the testing site connection in `.codeception/_config/params.local.php` file.
 8. Update your `wp-config.php` file:
 ```php
-if ( 
+if (
     isset( $_SERVER['HTTP_X_TESTING'] )
     || ( isset( $_SERVER['HTTP_USER_AGENT'] ) && $_SERVER['HTTP_USER_AGENT'] === 'wp-browser' )
     || getenv( 'WPBROWSER_HOST_REQUEST' )

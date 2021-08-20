@@ -38,18 +38,10 @@ class Blocks {
 	 * @param string $hook_suffix The current admin page.
 	 */
     public function register_blocks(): void {
-		wp_register_script(
-			'plenamata-plugin-admin-vendors',
-			PLENAMATA_PLUGIN_URL . 'assets/build/js/admin/vendor.js',
-			[ 'wp-blocks', 'wp-i18n' ],
-			Plugin::VERSION,
-			false
-		);
-
         wp_register_script(
-			'plenamata-plugin-blocks',
+            'plenamata-plugin-blocks',
 			PLENAMATA_PLUGIN_URL . 'assets/build/js/admin/blocks.js',
-			[ 'plenamata-plugin-admin-vendors' ],
+            [ 'wp-blocks', 'wp-i18n' ],
 			Plugin::VERSION,
 			false
 		);

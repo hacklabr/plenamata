@@ -3,7 +3,7 @@
     $archive_link = get_post_type_archive_link( 'verbete' );
     $featured_video = get_post_meta( get_the_ID(), 'featured_video', true );
     $sections = get_terms( [ 'taxonomy' => 'secao', 'hide_empty' => false ] );
-    $tags = get_the_tags(); ?>
+    $tags = get_the_tags();
 ?>
 <!DOCTYPE html>
 <html>
