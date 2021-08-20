@@ -6,7 +6,7 @@
  * Description:         The plugin adds information about the games to the site posts.
  * Version:             0.1.0
  * Requires at least:   4.9
- * Requires PHP:        5.5
+ * Requires PHP:        5.6
  * Author:              hacklab/
  * Author URI:          hacklab.com.br
  * License:             MIT
