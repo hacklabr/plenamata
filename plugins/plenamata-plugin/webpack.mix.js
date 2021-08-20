@@ -4,34 +4,34 @@ const defaultConfig = require( './node_modules/@wordpress/scripts/config/webpack
 
 require( 'laravel-mix-copy-watched' );
 
-const root_dir = './assets';
-const assets_dir = root_dir + '/.src';
-const dist_dir = root_dir + '/build';
+const rootDir = './assets';
+const assetsDir = rootDir + '/.src';
+const distDir = rootDir + '/build';
 
 mix
-	.setPublicPath(dist_dir);
+	.setPublicPath(distDir);
 
 mix
-	.sass( assets_dir + '/scss/admin/settings.scss', 'css/admin' )
-	.sass( assets_dir + '/scss/main.scss', 'css' );
+	.sass( assetsDir + '/scss/admin/settings.scss', 'css/admin' )
+	.sass( assetsDir + '/scss/main.scss', 'css' );
 
 mix
-	.js( assets_dir + '/js/admin/settings/app.js', 'js/admin/settings.js' )
-	.js( assets_dir + '/js/front/main/app.js', 'js' )
+	.js( assetsDir + '/js/admin/settings/app.js', 'js/admin/settings.js' )
+	.js( assetsDir + '/js/front/main/app.js', 'js' )
 
 mix
-    .react( assets_dir + '/js/admin/blocks/index.js', 'js/admin/blocks.js' );
+    .react( assetsDir + '/js/admin/blocks/index.js', 'js/admin/blocks.js' );
 
 mix
-	.copyWatched( assets_dir + '/img/**/*.{jpg,jpeg,png,gif,svg}', dist_dir + '/img', { base: assets_dir + '/img' } );
+	.copyWatched( assetsDir + '/img/**/*.{jpg,jpeg,png,gif,svg}', distDir + '/img', { base: assetsDir + '/img' } );
 
 mix.webpackConfig({
 	...defaultConfig,
 	entry: { },
     output: {
-        chunkFilename: dist_dir + '/[name].js',
-        path: path.resolve( __dirname, dist_dir + '/' ),
-        publicPath: dist_dir,
+        chunkFilename: distDir + '/[name].js',
+        path: path.resolve( __dirname, distDir + '/' ),
+        publicPath: distDir,
         filename: '[name].js',
     },
     module: {},
