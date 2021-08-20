@@ -13,6 +13,7 @@ mix
 
 mix
 	.sass( assetsDir + '/scss/admin/settings.scss', 'css/admin' )
+	.sass( assetsDir + '/scss/admin/blocks.scss', 'css/admin' )
 	.sass( assetsDir + '/scss/main.scss', 'css' );
 
 mix

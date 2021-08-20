@@ -1,0 +1,23 @@
+.glossary-entry__subsection {
+    align-items: center;
+    border-top: 1px solid $c_light !important;
+    color: $c_red !important;
+    display: flex;
+    font-size: size(16) !important;
+    margin: size(32) auto size(16) !important;
+    padding-top: size(32) !important;
+
+    &-hint {
+        background-color: #eee;
+        border-radius: size(4);
+        color: #555;
+        display: inline-block;
+        font-size: size(12);
+        margin-right: size(10);
+        padding: size(4);
+    }
+
+    .block-editor-plain-text {
+        flex: 1;
+    }
+}

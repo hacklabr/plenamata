@@ -46,9 +46,17 @@ class Blocks {
 			false
 		);
 
+        wp_register_style(
+            'plenamata-plugin-blocks',
+            PLENAMATA_PLUGIN_URL . 'assets/build/css/admin/blocks.css',
+            [],
+            Plugin::VERSION,
+        );
+
         register_block_type( 'plenamata/verbete-subsection', [
             'api_version' => 2,
             'editor_script' => 'plenamata-plugin-blocks',
+            'editor_style' => 'plenamata-plugin-blocks',
         ] );
     }
 }
