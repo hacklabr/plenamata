@@ -4,8 +4,16 @@
 	"repository": "hacklab.com.br",
 	"author": "hacklab/ <hacklab.com.br>",
 	"license": "MIT",
-	"dependencies": {},
+	"dependencies": {
+		"@wordpress/block-editor": "^7.0.0",
+		"@wordpress/blocks": "^11.0.0",
+		"@wordpress/components": "^15.0.0",
+		"@wordpress/element": "^4.0.0",
+		"@wordpress/i18n": "^4.2.1",
+		"react": "^17.0.2"
+	},
 	"devDependencies": {
+		"@babel/preset-react": "^7.14.5",
 		"@wordpress/babel-preset-default": "^6.1.0",
 		"@wordpress/browserslist-config": "^4.0.0",
 		"@wordpress/dependency-extraction-webpack-plugin": "^3.1.3",

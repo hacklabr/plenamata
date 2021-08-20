@@ -82,7 +82,7 @@
                 align-items: center;
                 border-radius: 50%;
                 content: '';
-                background-image: url('/wp-content/plugins/plenamata-plugin/assets/build/img/minus-circle-icon.svg');
+                background-image: asset-url('img/minus-circle-icon.svg');
                 display: inline-flex;
                 font-weight: bold;
                 height: size(16);
@@ -99,7 +99,7 @@
         &[open] {
             summary {
                 &:after {
-                    background-image: url('/wp-content/plugins/plenamata-plugin/assets/build/img/plus-circle-icon.svg');
+                    background-image: asset-url('img/plus-circle-icon.svg');
                 }
             }
         }
@@ -113,6 +113,65 @@
         a {
             color: $c_purple;
             text-decoration: underline !important;
+        }
+    }
+}
+
+.glossary-entry {
+    h2 {
+        font-size: size(40);
+        margin: 0 0 size(32);
+        text-align: center;
+    }
+
+    &__excerpt {
+        border-bottom: 1px solid $c_red;
+        padding-bottom: size(32);
+        margin-bottom: size(32);
+
+        img,
+        video {
+            display: block;
+            max-width: 100%;
+        }
+
+        p {
+            font-style: italic;
+            font-weight: bold;
+            margin: size(32) 0;
+            text-align: center;
+        }
+    }
+
+    &__subsection {
+        border-top: 1px solid $c_light;
+        color: $c_red;
+        font-size: size(16);
+        margin: size(32) 0 size(16);
+        padding-top: size(32);
+    }
+
+    &__tags {
+        display: block;
+        margin: 0;
+        padding: 0;
+
+        li {
+            display: inline-block;
+            list-style: none;
+            margin: 0 size(10) size(10) 0;
+            padding: size(4) size(16);
+        }
+    }
+
+    &__tag {
+        background-color: $c_lighter;
+        border-radius: size(8);
+        color: $c_purple;
+        font-weight: bold;
+
+        a {
+            color: inherit;
         }
     }
 }

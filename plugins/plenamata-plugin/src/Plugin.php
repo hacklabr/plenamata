@@ -13,6 +13,7 @@ namespace PlenamataPlugin;
 
 use Exception;
 use PlenamataPlugin\Front\Front;
+use PlenamataPlugin\Admin\Blocks;
 use PlenamataPlugin\Admin\SettingsPage;
 use PlenamataPlugin\Vendor\Auryn\Injector;
 use PlenamataPlugin\Vendor\Auryn\InjectionException;
@@ -77,6 +78,7 @@ class Plugin {
 	 * @throws InjectionException If a cyclic gets detected when provisioning.
 	 */
 	private function run_admin(): void {
+        $this->injector->make( Blocks::class )->hooks();
 		$this->injector->make( SettingsPage::class )->hooks();
 	}
 
