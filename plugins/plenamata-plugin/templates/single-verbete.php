@@ -35,12 +35,12 @@
         <main>
             <h2><?php the_title() ?></h2>
             <div class="glossary-entry__excerpt">
-                <p><?php the_excerpt() ?></p>
                 <?php if ( !empty( $featured_video ) ): ?>
                     <video autoplay muted loop playsinline src="<?php echo $featured_video['guid'] ?>"></video>
                 <?php else: ?>
                     <?php the_post_thumbnail( 'large' ) ?>
                 <?php endif; ?>
+                <p><?php the_excerpt() ?></p>
             </div>
             <div class="glossary-entry__content">
                 <?php the_content() ?>

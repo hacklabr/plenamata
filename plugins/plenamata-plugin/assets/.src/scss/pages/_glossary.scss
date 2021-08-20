@@ -144,8 +144,12 @@
         p {
             font-style: italic;
             font-weight: bold;
-            margin: size(32) 0;
+            margin: size(32) 0 0;
             text-align: center;
+
+            &:empty {
+                display: none;
+            }
         }
     }
 
