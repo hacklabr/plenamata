@@ -2,6 +2,8 @@ import { PlainText, useBlockProps } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
 import { __ } from '@wordpress/i18n';
 
+console.log(1);
+
 registerBlockType('plenamata/verbete-subsection', {
     apiVersion: 2,
     title: __('Subseção do verbete', 'plenamata'),
