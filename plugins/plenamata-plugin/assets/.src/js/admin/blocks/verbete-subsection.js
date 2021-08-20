@@ -13,7 +13,7 @@ registerBlockType('plenamata/verbete-subsection', {
 		},
 	},
     edit({ attributes, setAttributes }) {
-        const { content } = attributes
+        const { content } = attributes;
 
         return (
             <h3 className="glossary-entry__subsection">
@@ -25,7 +25,7 @@ registerBlockType('plenamata/verbete-subsection', {
         );
     },
     save({ attributes }) {
-        const { content } = attributes
+        const { content } = attributes;
 
         return (
             <h3 className="glossary-entry__subsection">
