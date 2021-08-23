@@ -1,8 +1,6 @@
 import Vue from 'vue'
 
-function request (url) {
-    return window.fetch(url).then(req => req.json())
-}
+import api from '../../utils/api'
 
 const states = {
     AC: { uf: 'AC', name: 'Acre' },
@@ -28,9 +26,9 @@ export default Vue.extend({
             return states
         },
     },
-    mounted () {
-        request('http://plenamata.solved.eco.br/api/deter/estados?data1=2020-10-02&data2=2020-10-30').then(data => {
+    created () {
+        api.get('deter/estados?data1=2020-10-02&data2=2020-10-30').then((data) => {
             console.log(data)
         })
-    }
+    },
 })
