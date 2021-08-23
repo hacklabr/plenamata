@@ -1,3 +1,5 @@
+import { Dashboard } from './dashboard'
+
 /**
  * Class Main.
  *
@@ -10,6 +12,9 @@ export class Main {
 	 * @since 1.0.0
 	 */
 	constructor() {
+        if (document.body.classList.contains('page-template-template-dashboard')) {
+            this.dashboard = new Dashboard();
+        }
 		// eslint-disable-next-line no-console
 		console.log('Main was started');
 	}

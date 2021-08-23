@@ -23,8 +23,9 @@
                     <form>
                         <div>
                             <label for="estados"><?php echo __( 'Estado', 'plenamata' ) ?></label>
-                            <select>
+                            <select v-model="state">
                                 <option value=""><?php echo __( 'Todos os estados', 'plenamata' ) ?></option>
+                                <option v-for="state of states" :key="state.uf" :value="state.uf">{{ state.name }}</option>
                             </select>
                         </div>
                     </form>
