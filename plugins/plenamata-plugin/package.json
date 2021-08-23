@@ -16,6 +16,7 @@
         "@wordpress/components": "^9.9.0",
         "@wordpress/i18n": "^4.2.1",
         "@wordpress/icons": "^5.0.0",
+        "luxon": "^2.0.2",
         "vue": "^2.6.11"
     },
     "devDependencies": {

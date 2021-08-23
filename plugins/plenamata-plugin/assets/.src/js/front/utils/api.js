@@ -1,19 +1,16 @@
+const cache = {}
+
 function request (method, urlFragment) {
     const url = urlFragment.startsWith('http') ? urlFragment : `http://plenamata.solved.eco.br/api/${urlFragment}`
-    return new Promise((resolve, reject) => {
-        try {
-            window.fetch(url, { method }).then((req) => {
-                if (req.ok) {
-                    resolve(req.json())
-                } else {
-                    reject(req.json())
-                }
-            })
 
-        } catch (err) {
-            console.error(err)
-            reject(undefined)
-        }
+    const cacheKey = `${method} ${url}`
+    if (cache[cacheKey]) {
+        Promise.resolve(cache[cacheKey])
+    }
+
+    return window.fetch(url, { method }).then((req) => req.json()).then((json) => {
+        cache[cacheKey] = json
+        return json
     })
 }
 
