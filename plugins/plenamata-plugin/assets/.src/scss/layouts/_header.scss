@@ -1,0 +1,24 @@
+header.site-header {
+    width: 100%;
+    z-index: 10;
+    top:0;
+    position: relative;
+    &.is-sticky {
+        position:fixed;
+        background:$c_text;
+    }
+}
+@include desktop {
+    header.site-header {
+        .middle-header-contain .site-branding {
+            flex-basis:0;
+        }
+    }
+}
+@include mobile {
+    header.site-header{ 
+        .middle-header-contain {
+            display: block;
+        }
+    }
+}

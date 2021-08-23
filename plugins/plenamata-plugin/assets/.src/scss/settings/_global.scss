@@ -1,5 +1,6 @@
 :root {
     font-size: 16px;
+
 }
 
 html,
@@ -13,4 +14,7 @@ body {
     margin: auto;
     max-width: size(700);
     width: 100%;
+}
+#page {
+    overflow: inherit;
 }

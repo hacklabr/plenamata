@@ -28,8 +28,8 @@ class Front {
 	 * @since 0.1.0
 	 */
 	public function hooks(): void {
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ], 50 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ], 50 );
 	}
 
     /**
@@ -64,7 +64,7 @@ class Front {
 	public function enqueue_scripts(): void {
 		wp_enqueue_script(
 			'plenamata-plugin',
-			PLENAMATA_PLUGIN_URL . 'assets/build/js/main.js',
+			PLENAMATA_PLUGIN_URL . 'assets/build/js/app.js',
 			[],
 			Plugin::VERSION,
 			true
