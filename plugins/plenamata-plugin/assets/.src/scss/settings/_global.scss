@@ -18,3 +18,12 @@ body {
 #page {
     overflow: inherit;
 }
+@include desktop {
+
+    .page-template .site-content {
+        margin-top:-45px;
+    }
+    body.admin-bar .page-template .site-content {
+        margin-top:-65px;
+    }
+}

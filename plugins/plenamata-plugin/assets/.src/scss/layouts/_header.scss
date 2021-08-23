@@ -2,11 +2,14 @@ header.site-header {
     width: 100%;
     z-index: 10;
     top:0;
-    position: relative;
+    position: absolute;
     &.is-sticky {
         position:fixed;
         background:$c_text;
     }
+}
+body.admin-bar header.site-header {
+    top:32px;
 }
 @include desktop {
     header.site-header {
