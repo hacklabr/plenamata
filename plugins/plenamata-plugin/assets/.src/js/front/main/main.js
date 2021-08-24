@@ -34,6 +34,7 @@ export class Main {
             if ( current_visibility != prev_status ) {
 
                 sticky_element.classList.toggle( 'is-sticky');
+                document.body.classList.toggle( 'is-sticky' );
                 prev_status = current_visibility;
             }
         });

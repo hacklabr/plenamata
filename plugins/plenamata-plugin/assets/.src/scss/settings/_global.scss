@@ -1,6 +1,7 @@
 :root {
     font-size: 16px;
 
+    --search-icon-color:$c_menu_text;
 }
 
 html,
@@ -15,9 +16,6 @@ body {
     max-width: size(700);
     width: 100%;
 }
-#page {
-    overflow: inherit;
-}
 @include desktop {
 
     .page-template .site-content {
@@ -26,4 +24,13 @@ body {
     body.admin-bar .page-template .site-content {
         margin-top:-65px;
     }
+}
+@include mobile {
+    .page-template .site-content {
+        margin-top:-15px;
+    }
+    body.admin-bar.page-template .site-content {
+        margin-top:-25px;
+    }
+
 }
