@@ -74,10 +74,14 @@ class Front {
             wp_enqueue_script(
                 'plenamata-dashboard',
                 PLENAMATA_PLUGIN_URL . 'assets/build/js/dashboard.js',
-                [ 'plenamata-plugin' ],
+                [ 'plenamata-plugin', 'wp-i18n' ],
                 Plugin::VERSION,
                 true
             );
+
+            wp_localize_script( 'plenamata-dashboard', 'PlenamataDashboard', [
+                'pluginUrl' => PLENAMATA_PLUGIN_URL,
+            ] );
         }
 	}
 
