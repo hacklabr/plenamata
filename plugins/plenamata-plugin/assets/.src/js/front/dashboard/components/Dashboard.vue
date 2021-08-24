@@ -119,12 +119,11 @@
                 return this.trees / this.minutes
             },
         },
-        created () {
+        async created () {
             const { now, startOfYear } = this.date
 
-            api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`).then((data) => {
-                this.data.deterStates = data
-            })
+            const data = await api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`)
+            this.data.deterStates = data
         },
     }
 </script>

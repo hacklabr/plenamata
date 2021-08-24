@@ -29,13 +29,16 @@ mix
 
 mix.webpackConfig({
 	...defaultConfig,
+    devtool: 'inline-source-map',
 	entry: { },
+    module: {},
     output: {
         chunkFilename: distDir + '/[name].js',
+        filename: '[name].js',
         path: path.resolve( __dirname, distDir + '/' ),
         publicPath: distDir,
-        filename: '[name].js',
     },
-    module: {},
-	devtool: "inline-source-map"
+    resolve: {
+        alias: { 'vue$': 'vue/dist/vue.runtime.js' },
+    },
 });
