@@ -29,7 +29,7 @@
                 </fieldset>
 
                 <div v-if="view === 'data'">
-                    <FelledTreesThisYear/>
+                    <FelledTreesThisYear :trees="trees" :treesPerMinute="treesPerMinute" :year="date.year"/>
                 </div>
             </div>
         </main>
@@ -37,7 +37,10 @@
 </template>
 
 <script>
+    import { DateTime, Interval } from 'luxon'
+
     import FelledTreesThisYear from './FelledTreesThisYear.vue'
+    import api from '../../utils/api'
 
     export default {
         name: 'Dashboard',
@@ -45,12 +48,24 @@
             FelledTreesThisYear,
         },
         data () {
+            const now = DateTime.now()
+            const startOfYear = now.startOf('year')
+
             return {
+                date: {
+                    now,
+                    startOfYear,
+                    year: now.year,
+                },
                 state: '',
+                thisYear: null,
                 view: 'data',
             }
         },
         computed: {
+            minutes () {
+                return Interval.fromDateTimes(this.date.startOfYear, this.date.now).length('minutes')
+            },
             states () {
                 return {
                     AC: { uf: 'AC', name: 'Acre' },
@@ -63,6 +78,26 @@
                     RR: { uf: 'RR', name: 'Roraima' },
                 }
             },
+            trees () {
+                if (!this.thisYear) {
+                    return 0
+                }
+                if (this.state) {
+                    const state = this.thisYear.find(state => state.uf === this.state)
+                    return Number(state.num_arvores)
+                } else {
+                    return this.thisYear.reduce((acc, state) => acc + Number(state.num_arvores), 0)
+                }
+            },
+            treesPerMinute () {
+                return this.trees / this.minutes
+            },
+        },
+        async created () {
+            const { now, startOfYear } = this.date
+
+            const data = await api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`)
+            this.thisYear = data
         },
     }
 </script>
