@@ -1,7 +1,14 @@
 .single-post{
    
     #primary{
-      
+        .entry-header, .post-thumbnail{
+            margin-bottom: 30px;
+        }
+
+        .entry-subhead .entry-meta .author-partner .author-avatar{
+            display: none;
+        }
+
         .breadcrumb{
             margin-bottom: 48px;
 
@@ -16,6 +23,11 @@
                 color: var(--secondary);
                 background-color: rgb(82, 48, 150, 0.1);
             }
+        }
+
+        h3{
+            border-bottom: solid 1px #FF7373;
+            padding-bottom: 40px;
         }
 
         .toggable-comments-area{
