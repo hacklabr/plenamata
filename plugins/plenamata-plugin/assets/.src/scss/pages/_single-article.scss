@@ -1,0 +1,25 @@
+.single-post{
+   
+    #primary{
+      
+        .breadcrumb{
+            margin-bottom: 48px;
+
+            a{
+                color: var(--secondary);
+                font-weight: bold;
+            }
+        }
+      
+        .tags-links{
+            a{
+                color: var(--secondary);
+                background-color: rgb(82, 48, 150, 0.1);
+            }
+        }
+
+        .toggable-comments-area{
+            background-color: var(--secondary) !important;
+        }
+    }
+}
