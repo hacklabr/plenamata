@@ -29,8 +29,9 @@
                 </fieldset>
 
                 <div v-if="view === 'data'">
-                    <FelledTreesThisYear :trees="trees" :treesPerMinute="treesPerMinute" :year="date.year"/>
+                    <FelledTreesThisYear :minutes="minutes" :trees="trees" :year="date.year"/>
                     <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :year="date.year"/>
+                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :year="date.year"/>
                 </div>
             </div>
         </main>
@@ -40,6 +41,7 @@
 <script>
     import { DateTime, Interval } from 'luxon'
 
+    import DeforestationSpeedThisYear from './DeforestationSpeedThisYear.vue'
     import FelledTreesThisYear from './FelledTreesThisYear.vue'
     import TotalDeforestationThisYear from './TotalDeforestationThisYear.vue'
     import api from '../../utils/api'
@@ -47,6 +49,7 @@
     export default {
         name: 'Dashboard',
         components: {
+            DeforestationSpeedThisYear,
             FelledTreesThisYear,
             TotalDeforestationThisYear,
         },
@@ -77,6 +80,9 @@
                     return this.thisYear.reduce((acc, state) => acc + Number(state.areamunkm), 0)
                 }
             },
+            days () {
+                return Interval.fromDateTimes(this.date.startOfYear, this.date.now).length('days')
+            },
             minutes () {
                 return Interval.fromDateTimes(this.date.startOfYear, this.date.now).length('minutes')
             },
@@ -102,9 +108,6 @@
                 } else {
                     return this.thisYear.reduce((acc, state) => acc + Number(state.num_arvores), 0)
                 }
-            },
-            treesPerMinute () {
-                return this.trees / this.minutes
             },
         },
         async created () {

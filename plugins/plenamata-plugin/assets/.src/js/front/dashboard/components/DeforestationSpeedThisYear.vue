@@ -1,12 +1,20 @@
 <template>
     <DashboardPanel type="measure">
         <template #title>
-            {{ sprintf(__('Estimativa de árvores derrubadas em %s', 'plenamata'), year) }}
+            {{ sprintf(__('Velocidade do desmatamento em %s', 'plenamata'), year) }}
         </template>
         <template #measure>
-            <DashboardMeasure icon="tree-icon.svg" :number="trees">
+            <DashboardMeasure icon="tree-icon.svg" :number="trees / days">
                 <template #unit>
-                    {{ __( 'árvores', 'plenamata' ) }}
+                    {{ __( 'árvores por dia', 'plenamata' ) }}
+                </template>
+            </DashboardMeasure>
+            <DashboardMeasure icon="area-icon.svg" :number="area / days">
+                <template #unit>
+                    <select v-model="unit">
+                        <option value="ha">{{ __('hectare por dia', 'plenamata') }}</option>
+                        <option value="km2">{{ __('km² por dia', 'plenamata') }}</option>
+                    </select>
                 </template>
             </DashboardMeasure>
         </template>
@@ -25,15 +33,31 @@
     import { roundNumber } from '../../utils/filters'
 
     export default {
-        name: 'FelledTreesThisYear',
+        name: 'DeforestationSpeedThisYear',
         components: {
             DashboardMeasure,
             DashboardPanel,
         },
         props: {
+            areaKm2: { type: Number, required: true },
+            days: { type: Number, required: true },
             minutes: { type: Number, required: true },
             trees: { type: Number, required: true },
             year: { type: Number, required: true },
+        },
+        data () {
+            return {
+                unit: 'ha',
+            }
+        },
+        computed: {
+            area () {
+                if (this.unit === 'ha') {
+                    return this.areaKm2 * 100
+                } else {
+                    return this.areaKm2
+                }
+            },
         },
         methods: {
             roundNumber,
