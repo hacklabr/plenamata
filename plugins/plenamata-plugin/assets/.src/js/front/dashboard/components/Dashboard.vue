@@ -30,8 +30,9 @@
 
                 <div v-if="view === 'data'">
                     <FelledTreesThisYear :minutes="minutes" :trees="trees" :year="date.year"/>
-                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :year="date.year"/>
-                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :year="date.year"/>
+                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit="unit" :year="date.year" @unit="unit = $event"/>
+                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit="unit" :year="date.year" @unit="unit = $event"/>
+                    <DeforestedAreaLastWeek :now="date.now" :unit="unit" @unit="unit = $event"/>
                 </div>
             </div>
         </main>
@@ -42,6 +43,7 @@
     import { DateTime, Interval } from 'luxon'
 
     import DeforestationSpeedThisYear from './DeforestationSpeedThisYear.vue'
+    import DeforestedAreaLastWeek from './DeforestedAreaLastWeek.vue'
     import FelledTreesThisYear from './FelledTreesThisYear.vue'
     import TotalDeforestationThisYear from './TotalDeforestationThisYear.vue'
     import api from '../../utils/api'
@@ -50,6 +52,7 @@
         name: 'Dashboard',
         components: {
             DeforestationSpeedThisYear,
+            DeforestedAreaLastWeek,
             FelledTreesThisYear,
             TotalDeforestationThisYear,
         },
@@ -65,6 +68,7 @@
                 },
                 state: '',
                 thisYear: null,
+                unit: 'ha',
                 view: 'data',
             }
         },

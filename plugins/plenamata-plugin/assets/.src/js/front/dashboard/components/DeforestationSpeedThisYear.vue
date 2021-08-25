@@ -11,7 +11,7 @@
             </DashboardMeasure>
             <DashboardMeasure icon="area-icon.svg" :number="area / days">
                 <template #unit>
-                    <select v-model="unit">
+                    <select v-model="unitModel">
                         <option value="ha">{{ __('hectares por dia', 'plenamata') }}</option>
                         <option value="km2">{{ __('km² por dia', 'plenamata') }}</option>
                     </select>
@@ -42,13 +42,9 @@
             areaKm2: { type: Number, required: true },
             days: { type: Number, required: true },
             minutes: { type: Number, required: true },
+            unit: { type: String, default: 'ha' },
             trees: { type: Number, required: true },
             year: { type: Number, required: true },
-        },
-        data () {
-            return {
-                unit: 'ha',
-            }
         },
         computed: {
             area () {
@@ -56,6 +52,14 @@
                     return this.areaKm2 * 100
                 } else {
                     return this.areaKm2
+                }
+            },
+            unitModel: {
+                get () {
+                    return this.unit
+                },
+                set (value) {
+                    this.$emit('unit', value)
                 }
             },
         },

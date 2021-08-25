@@ -1,14 +1,10 @@
 <template>
     <DashboardPanel type="measure">
         <template #title>
-            {{ sprintf(__('Total de desmatamento em %s no território selecionado', 'plenamata'), year) }}
+            {{ __('Área desmatada na última semana', 'plenamata') }}
         </template>
         <template #measure>
-            <p>
-                {{ sprintf(__('Área total de desmatamento em %s (com base na semana anterior)', 'plenamata'), year) }}
-                <span v-if="state">{{ __('no Estado', 'plenamata') }}</span>
-            </p>
-            <DashboardMeasure :number="area">
+            <DashboardMeasure icon="area-icon.svg" :number="area">
                 <template #unit>
                     <select v-model="unitModel">
                         <option value="ha">{{ __('hectares', 'plenamata') }}</option>
@@ -18,12 +14,7 @@
             </DashboardMeasure>
         </template>
         <template #meaning>
-            <template v-if="increase > 0">
-                {{ sprintf(__('aumento de %s%% em relação ao ano passado', 'plenamata'), roundNumber(increase)) }}
-            </template>
-            <template v-else>
-                {{ sprintf(__('diminuição de %s%% em relação ao ano passado', 'plenamata'), roundNumber(-increase)) }}
-            </template>
+            {{ sprintf(__('estimativa média de %s árvores por minuto', 'plenamata'), roundNumber(trees / 10080)) }}
         </template>
         <template #footer>
             {{ __('Fonte: INPE/DETER', 'plenamata') }} • Última atualização: 19.07.2021 com alertas detectados até 09.07.2021
@@ -46,15 +37,12 @@
             DashboardPanel,
         },
         props: {
-            areaKm2: { type: Number, required: true },
             now: { type: DateTime, required: true },
-            state: { type: String, default: '' },
             unit: { type: String, default: 'ha' },
-            year: { type: Number, required: true },
         },
         data () {
             return {
-                lastYear: null,
+                lastWeek: null,
             }
         },
         computed: {
@@ -65,21 +53,26 @@
                     return this.areaKm2
                 }
             },
-            increase () {
-                if (this.areaKm2 && this.previousAreaKm2) {
-                    return 100 * ((this.areaKm2 / this.previousAreaKm2) - 1)
-                }
-                return 0
-            },
-            previousAreaKm2 () {
-                if (!this.lastYear) {
+            areaKm2 () {
+                if (!this.lastWeek) {
                     return 0
                 }
                 if (this.state) {
-                    const state = this.lastYear.find(state => state.uf === this.state)
+                    const state = this.lastWeek.find(state => state.uf === this.state)
                     return Number(state.areamunkm)
                 } else {
-                    return this.lastYear.reduce((acc, state) => acc + Number(state.areamunkm), 0)
+                    return this.lastWeek.reduce((acc, state) => acc + Number(state.areamunkm), 0)
+                }
+            },
+            trees () {
+                if (!this.lastWeek) {
+                    return 0
+                }
+                if (this.state) {
+                    const state = this.lastWeek.find(state => state.uf === this.state)
+                    return Number(state.num_arvores)
+                } else {
+                    return this.lastWeek.reduce((acc, state) => acc + Number(state.num_arvores), 0)
                 }
             },
             unitModel: {
@@ -92,11 +85,12 @@
             },
         },
         async created () {
-            const lastYear = this.now.minus({ years: 1 })
-            const startOfYear = lastYear.startOf('year')
+            const previousWeek = this.now.minus({ weeks: 1 })
+            const startOfWeek = previousWeek.startOf('week')
+            const endOfWeek = previousWeek.endOf('week')
 
-            const data = await api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${lastYear.toISODate()}`)
-            this.lastYear = data
+            const data = await api.get(`deter/estados?data1=${startOfWeek.toISODate()}&data2=${endOfWeek.toISODate()}`)
+            this.lastWeek = data
         },
         methods: {
             roundNumber,
