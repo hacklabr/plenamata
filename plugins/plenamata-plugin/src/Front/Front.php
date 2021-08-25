@@ -68,7 +68,7 @@ class Front {
 	public function enqueue_scripts(): void {
 		wp_enqueue_script(
 			'plenamata-plugin',
-			PLENAMATA_PLUGIN_URL . 'assets/build/js/app.js',
+			PLENAMATA_PLUGIN_URL . 'assets/build/js/main.js',
 			[],
 			Plugin::VERSION,
 			true

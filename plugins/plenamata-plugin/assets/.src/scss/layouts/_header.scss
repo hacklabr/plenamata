@@ -78,11 +78,17 @@ body.mobile-menu-opened {
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 17 17' fill='none'%3E%3Cpath d='M16.0849 0.999988L1 16.0849' stroke='white' stroke-width='1.6769' stroke-miterlimit='10'/%3E%3Cpath d='M16.0849 16.0849L1 1' stroke='white' stroke-width='1.6769' stroke-miterlimit='10'/%3E%3C/svg%3E");
     }
 }
+body:not(.mobile-menu-opened) {
+    .mobile-sidebar#mobile-sidebar-fallback {
+        left:-100vw;
+    }
+}
 .mobile-sidebar#mobile-sidebar-fallback{
     padding-top:0;
     width:100vw;
     background-color:$c_text;
     top:100px;
+    
     nav.main-navigation ul li a {
         color:$c_menu_text !important;
         font-family: 'Archivo';
