@@ -38,6 +38,7 @@
         },
         props: {
             now: { type: DateTime, required: true },
+            state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
         },
         data () {

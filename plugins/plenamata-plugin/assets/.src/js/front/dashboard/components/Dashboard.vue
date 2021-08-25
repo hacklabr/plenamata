@@ -32,7 +32,7 @@
                     <FelledTreesThisYear :minutes="minutes" :trees="trees" :year="date.year"/>
                     <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit="unit" :year="date.year" @unit="unit = $event"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit="unit" :year="date.year" @unit="unit = $event"/>
-                    <DeforestedAreaLastWeek :now="date.now" :unit="unit" @unit="unit = $event"/>
+                    <DeforestedAreaLastWeek :now="date.now" :state="state" :unit="unit" @unit="unit = $event"/>
                 </div>
             </div>
         </main>
