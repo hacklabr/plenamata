@@ -29,30 +29,24 @@
                 </fieldset>
 
                 <div v-if="view === 'data'">
-                    <section class="dashboard-panel" >
-                        <main>
-                            <h2>
-                                {{ sprintf(__('Estimativa de árvores derrubadas em %s', 'plenamata'), 2021) }}
-                            </h2>
-                            <div class="dashboard-panel__measure">
-                                <span class="dashboard-panel__icon" aria-hidden="true">
-                                    <img :src="pluginUrl + 'assets/build/img/tree-icon.svg'">
-                                </span>
-                                <span class="dashboard-panel__number">
-                                    {{ trees | humanNumber }}
-                                </span>
-                                <span class="dashboard-panel__unit">
+                    <DashboardPanel>
+                        <template #title>
+                            {{ sprintf(__('Estimativa de árvores derrubadas em %s', 'plenamata'), 2021) }}
+                        </template>
+                        <template #measure>
+                            <DashboardMeasure icon="tree-icon.svg" :number="trees">
+                                <template #unit>
                                     {{ __( 'árvores', 'plenamata' ) }}
-                                </span>
-                            </div>
-                            <div class="dashboard-panel__meaning">
-                                {{ __('estimativa média de', 'plenamata') }} {{ treesPerMinute | roundNumber }} {{ __('árvores por minuto', 'plenamata') }}
-                            </div>
-                        </main>
-                        <footer>
+                                </template>
+                            </DashboardMeasure>
+                        </template>
+                        <template #meaning>
+                            {{ __('estimativa média de', 'plenamata') }} {{ roundNumber(treesPerMinute) }} {{ __('árvores por minuto', 'plenamata') }}
+                        </template>
+                        <template #footer>
                             Fonte: INPE/DETER • Última atualização: 19.07.2021 com alertas detectados até 09.07.2021
-                        </footer>
-                    </section>
+                        </template>
+                    </DashboardPanel>
                 </div>
             </div>
         </main>
@@ -62,14 +56,16 @@
 <script>
     import { DateTime, Interval } from 'luxon'
 
+    import DashboardMeasure from './DashboardMeasure.vue'
+    import DashboardPanel from './DashboardPanel.vue'
     import api from '../../utils/api'
-    import { humanNumber, roundNumber } from '../../utils/filters'
+    import { roundNumber } from '../../utils/filters'
 
     export default {
         name: 'Dashboard',
-        filters: {
-            humanNumber,
-            roundNumber,
+        components: {
+            DashboardMeasure,
+            DashboardPanel,
         },
         data () {
             const now = DateTime.now()
@@ -124,6 +120,9 @@
 
             const data = await api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`)
             this.data.deterStates = data
+        },
+        methods: {
+            roundNumber,
         },
     }
 </script>
