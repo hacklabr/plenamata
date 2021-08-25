@@ -16,6 +16,9 @@ body {
     max-width: size(700);
     width: 100%;
 }
+.mobile-only {
+    display:none;
+}
 @include desktop {
 
     .page-template .site-content {
@@ -23,6 +26,9 @@ body {
     }
     body.admin-bar .page-template .site-content {
         margin-top:-65px;
+    }
+    .mobile-only {
+        display:none;
     }
 }
 @include mobile {
@@ -32,5 +38,7 @@ body {
     body.admin-bar.page-template .site-content {
         margin-top:-25px;
     }
-
+    .mobile-only {
+        display:inherit;
+    }
 }
