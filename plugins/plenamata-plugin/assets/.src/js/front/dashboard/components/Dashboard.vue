@@ -30,6 +30,7 @@
 
                 <div v-if="view === 'data'">
                     <FelledTreesThisYear :trees="trees" :treesPerMinute="treesPerMinute" :year="date.year"/>
+                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :year="date.year"/>
                 </div>
             </div>
         </main>
@@ -40,12 +41,14 @@
     import { DateTime, Interval } from 'luxon'
 
     import FelledTreesThisYear from './FelledTreesThisYear.vue'
+    import TotalDeforestationThisYear from './TotalDeforestationThisYear.vue'
     import api from '../../utils/api'
 
     export default {
         name: 'Dashboard',
         components: {
             FelledTreesThisYear,
+            TotalDeforestationThisYear,
         },
         data () {
             const now = DateTime.now()
@@ -63,6 +66,17 @@
             }
         },
         computed: {
+            areaKm2 () {
+                if (!this.thisYear) {
+                    return 0
+                }
+                if (this.state) {
+                    const state = this.thisYear.find(state => state.uf === this.state)
+                    return Number(state.areamunkm)
+                } else {
+                    return this.thisYear.reduce((acc, state) => acc + Number(state.areamunkm), 0)
+                }
+            },
             minutes () {
                 return Interval.fromDateTimes(this.date.startOfYear, this.date.now).length('minutes')
             },

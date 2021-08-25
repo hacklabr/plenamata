@@ -3,13 +3,13 @@
         <span class="dashboard-panel__icon" aria-hidden="true" v-if="icon">
             <img :src="iconUrl">
         </span>
-        <span class="dashboard-panel__number">{{ humanNumber(number) }}</span>
+        <span class="dashboard-panel__number">{{ roundNumber(number) }}</span>
         <span class="dashboard-panel__unit"><slot name="unit"/></span>
     </div>
 </template>
 
 <script>
-    import { humanNumber } from '../../utils/filters'
+    import { roundNumber } from '../../utils/filters'
 
     export default {
         name: 'DashboardMeasure',
@@ -26,7 +26,7 @@
             },
         },
         methods: {
-            humanNumber,
+            roundNumber,
         }
     }
 </script>

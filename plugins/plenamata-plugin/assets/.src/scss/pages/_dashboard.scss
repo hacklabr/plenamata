@@ -64,6 +64,10 @@
         text-transform: uppercase;
     }
 
+    p {
+        text-align: center;
+    }
+
     &__measure {
         align-items: baseline;
         display: flex;
@@ -80,7 +84,13 @@
     &__number {
         font-size: size(60);
         padding: 0 size(16);
+    }
 
+    &__unit {
+        select {
+            background: transparent;
+            border: none;
+        }
     }
 
     &__meaning {

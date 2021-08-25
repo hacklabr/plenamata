@@ -11,7 +11,7 @@
             </DashboardMeasure>
         </template>
         <template #meaning>
-            {{ __('estimativa média de', 'plenamata') }} {{ roundNumber(treesPerMinute) }} {{ __('árvores por minuto', 'plenamata') }}
+            {{ sprintf(__('estimativa média de %s árvores por minuto', 'plenamata'), roundNumber(treesPerMinute)) }}
         </template>
         <template #footer>
             {{ __('Fonte: INPE/DETER', 'plenamata') }} • Última atualização: 19.07.2021 com alertas detectados até 09.07.2021
