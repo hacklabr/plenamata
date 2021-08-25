@@ -1,5 +1,7 @@
 :root {
     font-size: 16px;
+
+    --search-icon-color:$c_menu_text;
 }
 
 html,
@@ -13,4 +15,30 @@ body {
     margin: auto;
     max-width: size(700);
     width: 100%;
+}
+.mobile-only {
+    display:none;
+}
+@include desktop {
+
+    .page-template .site-content {
+        margin-top:-45px;
+    }
+    body.admin-bar .page-template .site-content {
+        margin-top:-65px;
+    }
+    .mobile-only {
+        display:none;
+    }
+}
+@include mobile {
+    .page-template .site-content {
+        margin-top:-15px;
+    }
+    body.admin-bar.page-template .site-content {
+        margin-top:-25px;
+    }
+    .mobile-only {
+        display:inherit;
+    }
 }

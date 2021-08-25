@@ -1,0 +1,161 @@
+header.site-header {
+    transition:200ms ease all;
+    @include desktop {
+        width: 100%;
+        z-index: 10;
+        top:0;
+        position: absolute;
+        &.is-sticky {
+            position:fixed;
+            background:$c_text;
+        }
+    }
+    @include mobile {
+        width: 100%;
+        z-index: 10;
+        top:0;
+        position: absolute;
+        &.is-sticky {
+            position:fixed;
+            background:$c_text;
+
+        }
+
+    }
+    .mobile-menu-toggle {
+        color:rgba(0,0,0,0);
+        svg {
+            display:none;
+        }
+        display: inline-block;
+        width:32px;
+        height:32px;
+        transition:300ms ease all;
+        background-repeat: no-repeat;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32' fill='none'%3E%3Cpath d='M26.6666 18.6667L5.33325 18.6667' stroke='white' stroke-width='1.6769' stroke-miterlimit='10'/%3E%3Cpath d='M26.6666 13.3333L5.33325 13.3333' stroke='white' stroke-width='1.6769' stroke-miterlimit='10'/%3E%3C/svg%3E");
+    }
+    .middle-header-contain {
+        border-bottom:none !important;
+    }
+    .search-toggle span {
+        color:$c_menu_text;
+    }
+    #site-navigation {
+        nav.main-navigation {
+            > ul > li {
+                margin-right:25px;
+            }
+            > ul > li.wpml {
+                margin-left:30px;
+                margin-right:0;
+            }
+            > ul > li:last-of-type {
+                margin-left: 0;
+            }
+            a {
+                font-family: 'Archivo';
+                font-style: normal;
+                font-weight: normal;
+                font-size: 14px;
+                line-height: 24px;
+                /* identical to box height, or 171% */
+        
+                text-align: center;
+                letter-spacing: 0.02em;
+                color:$c_menu_text;
+                &:hover {
+                    color:$c_menu_hover;
+                }
+            }
+        }
+    }
+}
+body.mobile-menu-opened {
+    header.site-header {
+        background:$c_text;
+    }
+    .mobile-menu-toggle {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='17' height='17' viewBox='0 0 17 17' fill='none'%3E%3Cpath d='M16.0849 0.999988L1 16.0849' stroke='white' stroke-width='1.6769' stroke-miterlimit='10'/%3E%3Cpath d='M16.0849 16.0849L1 1' stroke='white' stroke-width='1.6769' stroke-miterlimit='10'/%3E%3C/svg%3E");
+    }
+}
+body:not(.mobile-menu-opened) {
+    .mobile-sidebar#mobile-sidebar-fallback {
+        left:-100vw;
+    }
+}
+.mobile-sidebar#mobile-sidebar-fallback{
+    padding-top:0;
+    width:100vw;
+    background-color:$c_text;
+    top:100px;
+    
+    nav.main-navigation ul li a {
+        color:$c_menu_text !important;
+        font-family: 'Archivo';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 24px;
+        line-height: 200%;
+        margin-left:25px;
+
+    }
+    nav.main-navigation ul li.wpml {
+        width:10%;
+        display: inline-block;
+    }
+    .mobile-menu-toggle {
+        display: none;
+    }
+    .social-menus {
+        display:none;
+    }
+}
+body.is-sticky .mobile-sidebar#mobile-sidebar-fallback {
+    transition:200ms ease all;
+    top:70px;
+}
+.mobile-search-form {
+    width:50%;
+    margin-left:20px;
+    .search-form {
+        border-bottom:1px solid $c_menu_text;
+
+        input {
+            width:90%;
+            background:none;
+            border:none;
+            font-family: 'Archivo';
+            font-style: normal;
+            font-weight: normal;
+            font-size: 24px;
+            line-height: 26px;
+            color:$c_menu_text;
+            &::placeholder {
+                color:$c_menu_text;
+            }
+        }
+    }
+}
+body.admin-bar header.site-header {
+    top:32px;
+    @include mobile {
+        top:43px;
+        &.is-sticky {
+            top:0;
+        }
+    }
+}
+@include desktop {
+    header.site-header {
+        .middle-header-contain .site-branding {
+            flex-basis:0;
+        }
+    }
+}
+@include mobile {
+    header.site-header{ 
+        .middle-header-contain {
+            display: block;
+        }
+    }
+}

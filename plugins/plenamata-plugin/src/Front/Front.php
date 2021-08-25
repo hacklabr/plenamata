@@ -12,6 +12,7 @@
 namespace PlenamataPlugin\Front;
 
 use PlenamataPlugin\Plugin;
+use stdClass;
 
 /**
  * Class Front
@@ -28,8 +29,8 @@ class Front {
 	 * @since 0.1.0
 	 */
 	public function hooks(): void {
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ] );
-		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ], 50 );
+		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ], 50 );
 	}
 
     /**
@@ -39,6 +40,9 @@ class Front {
         add_filter( 'archive_template', [ $this, 'archive_templates' ], 10, 1 );
         add_filter( 'page_template', [ $this, 'page_templates' ], 10, 1 );
         add_filter( 'single_template', [ $this, 'single_templates' ], 10, 1 );
+
+        // add template file for search after mobile menu
+        add_filter( 'wp_nav_menu', [ $this, 'search_mobile'], 50, 2 );
     }
 
 	/**
@@ -69,6 +73,20 @@ class Front {
 			Plugin::VERSION,
 			true
 		);
+
+        if ( get_page_template_slug() === 'template-dashboard.php' ) {
+            wp_enqueue_script(
+                'plenamata-dashboard',
+                PLENAMATA_PLUGIN_URL . 'assets/build/js/dashboard.js',
+                [ 'plenamata-plugin', 'wp-i18n' ],
+                Plugin::VERSION,
+                true
+            );
+
+            wp_localize_script( 'plenamata-dashboard', 'PlenamataDashboard', [
+                'pluginUrl' => PLENAMATA_PLUGIN_URL,
+            ] );
+        }
 	}
 
     public function archive_templates( string $template ): string {
@@ -99,4 +117,13 @@ class Front {
         return $template;
     }
 
+    /**
+     *  
+     */
+    public function search_mobile( string $nav_menu_html, object $args ): string {
+        if ( 'primary-menu' != $args->theme_location ) {
+            return $nav_menu_html;
+        }
+        return $nav_menu_html . '<div class="mobile-search-form mobile-only">' . get_search_form( [ 'echo' => false]  ) . '</div>';
+    }
 }
