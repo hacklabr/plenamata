@@ -73,6 +73,20 @@ class Front {
 			Plugin::VERSION,
 			true
 		);
+
+        if ( get_page_template_slug() === 'template-dashboard.php' ) {
+            wp_enqueue_script(
+                'plenamata-dashboard',
+                PLENAMATA_PLUGIN_URL . 'assets/build/js/dashboard.js',
+                [ 'plenamata-plugin', 'wp-i18n' ],
+                Plugin::VERSION,
+                true
+            );
+
+            wp_localize_script( 'plenamata-dashboard', 'PlenamataDashboard', [
+                'pluginUrl' => PLENAMATA_PLUGIN_URL,
+            ] );
+        }
 	}
 
     public function archive_templates( string $template ): string {

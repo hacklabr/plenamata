@@ -1,0 +1,109 @@
+.dashboard {
+    &__header {
+        background-color: $c_purple;
+        color: white;
+        padding: size(30);
+
+        h1 {
+            color: white;
+            font-size: size(18);
+            text-transform: uppercase;
+        }
+
+        form {
+            label {
+                display: block;
+            }
+        }
+    }
+
+    main {
+        background-color: white;
+        color: $c_text;
+    }
+
+    &__tabs {
+        border: none;
+        display: flex;
+        margin: size(32) auto;
+        width: auto;
+
+        label {
+            border-bottom: 1px solid $c_light;
+            flex: 1;
+            font-weight: bold;
+            padding: size(10);
+            text-align: center;
+            text-transform: uppercase;
+
+            &.active {
+                border-bottom: 5px solid $c_purple;
+            }
+        }
+
+        input {
+            display: none;
+        }
+    }
+}
+
+.dashboard-panel {
+    border: 1px solid $c_light;
+    border-radius: size(4);
+    margin: size(40) 0;
+
+    main {
+        border-radius: size(4) size(4) 0 0;
+        padding: size(16) size(16) size(32);
+    }
+
+    h2 {
+        color: $c_purple !important;
+        font-size: size(16);
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    &__measure {
+        align-items: baseline;
+        display: flex;
+        justify-content: center;
+        line-height: 1;
+        margin: size(40) size(16);
+        text-align: center;
+    }
+
+    &__icon {
+        align-self: center;
+    }
+
+    &__number {
+        font-size: size(60);
+        padding: 0 size(16);
+    }
+
+    &__unit {
+        select {
+            background: transparent;
+            border: none;
+        }
+    }
+
+    &__meaning {
+        background-color: $c_purple;
+        border-radius: size(8);
+        color: white;
+        padding: size(4) size(16);
+        text-align: center;
+    }
+
+    footer {
+        background-color: $c_lighter;
+        border-radius: 0 0 size(4) size(4);
+        padding: size(4) size(16);
+    }
+}
