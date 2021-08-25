@@ -12,11 +12,11 @@ get_header('single');
 the_post(); ?>
 	
 	<section id="primary" class="content-area <?php echo esc_attr(newspack_get_category_tag_classes(get_the_ID())) . ' ' . newspack_featured_image_position(); ?>">
-	
-		<div class="breadcrumb">
+
+	<div class="breadcrumb">
 			<a href="<?= site_url(); ?>">Home</a> /
-			<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Artigos", "plenamata") ?></a> /
-			<a href="<?= get_category_link(get_the_category()[0]->id); ?>"><?= get_the_category()[0]->name ?></a> /
+			<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Articles", "plenamata") ?></a> /
+			<a href="<?= get_category_link(get_the_category()[0]->cat_ID); ?>"><?= get_the_category()[0]->name ?></a> /
 		</div>
 
 		<main id="main" class="site-main">
@@ -39,12 +39,52 @@ the_post(); ?>
                         </h1>
                     </div>
 				</header>
-
+				
 				
 			<?php endif; ?>
-
-			<div class="main-content">
-				<?php if ($isImageBehind) : ?>
+			
+				<div class="main-content">
+					<?php // Place smaller featured images inside of 'content' area.
+					if ('small' === newspack_featured_image_position()) : ?>
+						<div class="featured-image-small">
+							<div class="featured-image-small__credit-wrapper">
+								<?php newspack_post_thumbnail(); ?>
+	
+								<?php if(class_exists('Newspack_Image_Credits') && (!empty(Newspack_Image_Credits::get_media_credit(get_post_thumbnail_id())['credit']) || !empty(get_post(get_post_thumbnail_id())->post_content))): ?>
+									<div class="image-info">
+										<div class="image-info-container">
+											<div class="wrapper">
+												<div class="image-meta">
+													<?php
+													if (class_exists('Newspack_Image_Credits')) {
+														$image_meta = Newspack_Image_Credits::get_media_credit(get_post_thumbnail_id()); ?>
+														<?= (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])) ? '<a href="' . $image_meta['credit_url'] . '">' : null ?>
+														<span class="credit">
+															<?= $image_meta['credit'] ?>
+	
+															<?= isset($image_meta['organization']) && !empty($image_meta['organization']) ? ' / ' . $image_meta['organization'] : null ?>
+														</span>
+														<?= (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])) ? '</a>' : null ?>
+	
+													<?php
+													}
+													?>
+												</div>
+	
+											</div>
+										</div>
+										<i class="fas fa-camera"></i>
+									</div>
+								<?php endif; ?>
+							</div>
+							<p class="description">
+								<?php
+								//var_dump(get_post(get_post_thumbnail_id()));
+								?>
+								<?= get_post(get_post_thumbnail_id())->post_content ?>
+							</p>
+						</div><!-- .featured-image-small -->
+					<?php endif; ?>
 					<div class="entry-subhead">
 						<div class="entry-meta">
 								<div class="author-partner">
@@ -66,68 +106,19 @@ the_post(); ?>
 						}
 						?>
 					</div>
-				<?php endif; ?>
-
 
 				<?php
 				if (is_active_sidebar('article-1')) {
 					dynamic_sidebar('article-1');
 				}
 
-				// Place smaller featured images inside of 'content' area.
-				if ('small' === newspack_featured_image_position()) : ?>
-					<div class="featured-image-small">
-						<div class="featured-image-small__credit-wrapper">
-							<?php newspack_post_thumbnail(); ?>
-
-							<?php if(class_exists('Newspack_Image_Credits') && (!empty(Newspack_Image_Credits::get_media_credit(get_post_thumbnail_id())['credit']) || !empty(get_post(get_post_thumbnail_id())->post_content))): ?>
-								<div class="image-info">
-									<div class="image-info-container">
-										<div class="wrapper">
-											<div class="image-meta">
-												<?php
-												if (class_exists('Newspack_Image_Credits')) {
-													$image_meta = Newspack_Image_Credits::get_media_credit(get_post_thumbnail_id()); ?>
-													<?= (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])) ? '<a href="' . $image_meta['credit_url'] . '">' : null ?>
-													<span class="credit">
-														<?= $image_meta['credit'] ?>
-
-														<?= isset($image_meta['organization']) && !empty($image_meta['organization']) ? ' / ' . $image_meta['organization'] : null ?>
-													</span>
-													<?= (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])) ? '</a>' : null ?>
-
-												<?php
-												}
-												?>
-											</div>
-
-										</div>
-									</div>
-									<i class="fas fa-camera"></i>
-								</div>
-							<?php endif; ?>
-						</div>
-						<p class="description">
-							<?php
-							//var_dump(get_post(get_post_thumbnail_id()));
-							?>
-							<?= get_post(get_post_thumbnail_id())->post_content ?>
-						</p>
-					</div><!-- .featured-image-small -->
-				<?php endif;
 
 				get_template_part('template-parts/content/content', 'single');
 				?>
 
-
-
 			</div><!-- .main-content -->
 
-
-
 		</main><!-- #main -->
-
-		
 		
 		<div class="after-post-content-widget-area">
 			<?php if ( is_single() ):
@@ -153,8 +144,6 @@ the_post(); ?>
 			}
 		?>
 	</section><!-- #primary -->
-
-
 
 <?php
 get_footer();
