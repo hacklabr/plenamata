@@ -1,7 +1,7 @@
 <template>
     <DashboardPanel type="measure">
         <template #title>
-            {{ sprintf(__('Estimativa de árvores derrubadas em %s', 'plenamata'), 2021) }}
+            {{ sprintf(__('Estimativa de árvores derrubadas em %s', 'plenamata'), date.year) }}
         </template>
         <template #measure>
             <DashboardMeasure icon="tree-icon.svg" :number="trees">
