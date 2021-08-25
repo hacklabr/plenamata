@@ -73,7 +73,7 @@
         display: flex;
         justify-content: center;
         line-height: 1;
-        margin: size(40) size(16);
+        margin: size(32) size(16);
         text-align: center;
     }
 
@@ -84,6 +84,10 @@
     &__number {
         font-size: size(60);
         padding: 0 size(16);
+
+        @include mobile {
+            font-size: size(40);
+        }
     }
 
     &__unit {
