@@ -31,6 +31,9 @@ class Front {
 	public function hooks(): void {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ], 50 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ], 50 );
+
+        //replace theme footer.php
+        add_action( 'get_footer', [ $this, 'get_footer' ], 10, 2 );
 	}
 
     /**
@@ -164,5 +167,19 @@ class Front {
             return $nav_menu_html;
         }
         return $nav_menu_html . '<div class="mobile-search-form mobile-only">' . get_search_form( [ 'echo' => false]  ) . '</div>';
+    }
+
+    /**
+     * Replace Footer
+     */
+    public function get_footer( $name ) : void {
+        if ( $name && ! empty( $name ) && file_exists( PLENAMATA_PLUGIN_PATH . "templates/footer-{$name}.php") ) {
+            load_template( PLENAMATA_PLUGIN_PATH . "templates/footer-{$name}.php", true, array() );
+            exit;
+        }
+        if ( file_exists( PLENAMATA_PLUGIN_PATH . "templates/footer.php" ) ) {
+            load_template( PLENAMATA_PLUGIN_PATH . 'templates/footer.php', true, array() );
+            exit;
+        }
     }
 }
