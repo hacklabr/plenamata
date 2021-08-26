@@ -19,6 +19,11 @@ body {
 .mobile-only {
     display:none;
 }
+
+.team-members {
+    background-color: #F5F1EE;
+}
+
 @include desktop {
 
     .page-template .site-content {
