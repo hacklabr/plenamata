@@ -70,6 +70,7 @@
                     startOfYear,
                     year: now.year,
                 },
+                news: [],
                 state: '',
                 thisYear: null,
                 unit: 'ha',
@@ -118,6 +119,12 @@
                 }
             },
         },
+        watch: {
+            state: {
+                handler: 'fetchNews',
+                immediate: true,
+            },
+        },
         async created () {
             const { now, startOfYear } = this.date
 
@@ -127,6 +134,12 @@
         mounted () {
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
-        }
+        },
+        methods: {
+            async fetchNews (state = '') {
+                const news = await api.get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?state=${state}`)
+                this.news = news
+            },
+        },
     }
 </script>
