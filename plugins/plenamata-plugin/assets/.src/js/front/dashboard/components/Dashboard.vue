@@ -37,8 +37,8 @@
             </div>
         </main>
 
-        <div class="dashboard__map">
-            <slot name="map"/>
+        <div class="dashboard__map" v-once>
+            <div ref="map"/>
         </div>
     </div>
 </template>
@@ -124,5 +124,9 @@
             const data = await api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`)
             this.thisYear = data
         },
+        mounted () {
+            const mapEl = document.querySelector('.jeomap')
+            this.$refs.map.appendChild(mapEl)
+        }
     }
 </script>

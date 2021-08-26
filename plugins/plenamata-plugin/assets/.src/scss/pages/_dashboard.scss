@@ -1,3 +1,13 @@
+.page-template-template-dashboard {
+    .jeomap {
+        min-height: 90vh;
+
+        @include mobile {
+            min-height: 90vw;
+        }
+    }
+}
+
 .dashboard {
     display: grid;
     grid-template-columns: 1fr 1fr;

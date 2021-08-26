@@ -75,10 +75,12 @@ class Front {
 		);
 
         if ( get_page_template_slug() === 'template-dashboard.php' ) {
+            $this->register_jeo_assets();
+
             wp_enqueue_script(
                 'plenamata-dashboard',
                 PLENAMATA_PLUGIN_URL . 'assets/build/js/dashboard.js',
-                [ 'jeo-map-blocks', 'plenamata-plugin', 'wp-i18n' ],
+                [ 'jeo-layer', 'jeo-legend', 'jeo-map', 'layer-type-mapbox', 'plenamata-plugin', 'wp-i18n' ],
                 Plugin::VERSION,
                 true
             );
@@ -88,6 +90,33 @@ class Front {
             ] );
         }
 	}
+
+    /**
+     * Register JEO scripts.
+     */
+    public function register_jeo_assets(): void {
+        wp_enqueue_style( 'mapboxgl', 'https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css', '1.4.1' );
+        wp_register_script( 'mapboxgl-loader', JEO_BASEURL . '/js/build/mapboxglLoader.js', JEO_VERSION );
+
+        wp_register_script( 'jeo-map', JEO_BASEURL . '/js/build/jeoMap.js', [ 'mapboxgl-loader', 'jquery', 'wp-element' ], JEO_VERSION, true );
+        wp_localize_script( 'jeo-map', 'jeoMapVars', [
+            'jsonUrl' => rest_url( 'wp/v2/' ),
+            'string_read_more' => __( 'Read more', 'jeo' ),
+            'jeoUrl' => JEO_BASEURL,
+            'nonce' => wp_create_nonce( 'wp_rest' ),
+            'templates' => [
+                'moreInfo' => file_get_contents( jeo_get_template( 'map-more-info.ejs' ) ),
+                'popup' => file_get_contents( jeo_get_template( 'generic-popup.ejs' ) ),
+                'postPopup' => file_get_contents( jeo_get_template( 'post-popup.ejs' ) )
+            ]
+        ] );
+
+
+        wp_register_script( 'jeo-layer', JEO_BASEURL . '/js/build/JeoLayer.js', [ 'mapboxgl-loader' ], JEO_VERSION );
+        wp_register_script( 'layer-type-mapbox', JEO_BASEURL . '/includes/layer-types/mapbox.js', [ 'jeo-layer' ], JEO_VERSION );
+
+		wp_register_script( 'jeo-legend', JEO_BASEURL . '/js/build/JeoLegend.js', [ 'mapboxgl-loader' ], JEO_VERSION );
+    }
 
     public function archive_templates( string $template ): string {
         if ( is_post_type_archive( 'verbete' ) ) {

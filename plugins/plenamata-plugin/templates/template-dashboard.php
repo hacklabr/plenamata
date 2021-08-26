@@ -17,13 +17,8 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class() ?>>
-    <div class="vue-dashboard-app">
-        <plenamata-dashboard>
-            <template #map>
-                <div class="jeomap map_id_<?= $map_id ?>" v-once></div>
-            </template>
-        </plenamata-dashboard>
-    </div>
+    <div class="vue-dashboard-app"></div>
+    <div class="jeomap map_id_<?= $map_id ?>"></div>
     <?php wp_footer(); ?>
 </body>
 </html>
