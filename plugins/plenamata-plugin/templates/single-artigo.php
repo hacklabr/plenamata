@@ -22,7 +22,7 @@ the_post(); ?>
 		<main id="main" class="site-main">
 			<?php
 			$isImageBehind = false;
-
+		
 			if (in_array(newspack_featured_image_position(), array('behind'))) {
 				$isImageBehind = true;
 			}
@@ -88,7 +88,7 @@ the_post(); ?>
 					<div class="entry-subhead">
 						<div class="entry-meta">
 								<div class="author-partner">
-									<?php if (get_post_meta(get_the_ID(), 'authors-listing', true) && empty( $terms )) : ?>
+									<?php if (get_post_meta(get_the_ID(), 'authors-listing', true)) : ?>
 										<?php newspack_posted_by(); ?>
 									<?php endif; ?>
 									<!-- publishers -->
