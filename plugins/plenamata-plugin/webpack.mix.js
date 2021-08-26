@@ -19,6 +19,7 @@ mix
 mix
 	.js( assetsDir + '/js/admin/settings/app.js', 'js/admin/settings.js' )
 	.js( assetsDir + '/js/front/main/app.js', 'js/main.js' )
+    .js( assetsDir + '/js/front/dashboard/dashboard.js', 'js/dashboard.js' )
 
 mix
     .react( assetsDir + '/js/admin/blocks/index.js', 'js/admin/blocks.js' );
@@ -28,13 +29,16 @@ mix
 
 mix.webpackConfig({
 	...defaultConfig,
+    devtool: 'inline-source-map',
 	entry: { },
+    module: {},
     output: {
         chunkFilename: distDir + '/[name].js',
+        filename: '[name].js',
         path: path.resolve( __dirname, distDir + '/' ),
         publicPath: distDir,
-        filename: '[name].js',
     },
-    module: {},
-	devtool: "inline-source-map"
+    resolve: {
+        alias: { 'vue$': 'vue/dist/vue.runtime.js' },
+    },
 });

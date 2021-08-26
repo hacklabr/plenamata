@@ -1,0 +1,60 @@
+.single-post{
+   #content{
+        margin-top: 1rem;
+        margin-bottom: 40px;
+       
+        .opinion-header{
+           background-color: #F5F1EE;
+           padding: 64px 500px;
+           margin-bottom: 40px;
+
+           .container{
+               width: 1200px;
+            }
+        }
+        
+        .breadcrumb{
+            margin-bottom: 48px;
+            margin-top: 16px;
+            
+            a{
+                color: var(--secondary);
+                font-weight: bold;
+                text-transform: capitalize;
+            }
+        }
+
+       #primary{
+   
+           .entry-header, .post-thumbnail{
+               margin-bottom: 30px;
+           }
+   
+           .entry-subhead .entry-meta .author-partner .author-avatar{
+               display: none;
+           }
+   
+         
+           .tags-links{
+               a{
+                   color: var(--secondary);
+                   background-color: rgb(82, 48, 150, 0.1);
+               }
+           }
+   
+           h3{
+               border-bottom: solid 1px #FF7373;
+               padding-bottom: 40px;
+           }
+           
+           .author-bio .author-bio-text .author-bio-header .accent-header{
+               color: var(--secondary);
+               text-transform: capitalize;
+           }
+           
+           .toggable-comments-area{
+               background-color: var(--secondary) !important;
+           }
+       }
+   }
+}
