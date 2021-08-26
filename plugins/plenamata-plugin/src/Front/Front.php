@@ -107,11 +107,13 @@ class Front {
 
     public function single_templates( string $template ): string {
         global $post;
-
-        if ( $post->post_type === 'verbete' ) {
-            $template = PLENAMATA_PLUGIN_PATH . 'templates/single-verbete.php';
-        }
-
+        
+		if ( $post->post_type === 'verbete' ) {
+			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-verbete.php';
+        }else if( $post->post_type === 'post'){
+			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-artigo.php';
+		}
+	
         return $template;
     }
 
