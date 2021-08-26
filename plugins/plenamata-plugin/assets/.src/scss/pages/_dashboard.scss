@@ -79,6 +79,12 @@
             grid-column: 1;
             grid-row: 2;
         }
+
+        @include tablet-up {
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
     }
 }
 
