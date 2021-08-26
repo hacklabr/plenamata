@@ -2,8 +2,12 @@
 @import './settings/mixins';
 @import './settings/variables';
 @import './settings/global';
+@import './settings/typography';
+
 // Layouts
 @import './layouts/header';
+
 // Pages
 @import './pages/dashboard';
 @import './pages/glossary';
+@import './pages/single-article';
