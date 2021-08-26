@@ -20,6 +20,12 @@
     }
 }
 
+@mixin tablet-up {
+    @media screen and (min-width: size(801)) {
+        @content;
+    }
+}
+
 @mixin tablet {
     @media screen and (max-width: size(1023)) {
         @content;

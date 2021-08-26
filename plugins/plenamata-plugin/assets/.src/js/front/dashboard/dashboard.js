@@ -8,8 +8,6 @@ export class Dashboard {
     constructor() {
         Vue.use(I18n)
 
-        Vue.component('plenamata-dashboard', DashboardApp)
-
         document.querySelectorAll('.vue-dashboard-app').forEach((el) => {
             new Vue({
                 el,
