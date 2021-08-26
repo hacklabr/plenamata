@@ -1,9 +1,9 @@
 .page-template-template-dashboard {
     .jeomap {
-        min-height: 90vh;
+        min-height: 100vh;
 
         @include mobile {
-            min-height: 90vw;
+            min-height: 100vw;
         }
     }
 }
@@ -11,6 +11,10 @@
 .dashboard {
     display: grid;
     grid-template-columns: 1fr 1fr;
+
+    @include mobile {
+        grid-template-columns: 1fr;
+    }
 
     &__header {
         background-color: $c_purple;
