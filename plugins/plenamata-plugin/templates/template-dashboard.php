@@ -5,8 +5,8 @@
  * @package PlenamataPlugin
  * @since 0.1.0
  */
-
-    $year = date('Y');
+    $maps = get_posts(['post_type' => 'map', 'post_status' => 'publish']);
+    $map_id = empty($maps) ? 0 : $maps[0]->ID;
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +17,13 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class() ?>>
-    <div class="vue-dashboard-app"></div>
+    <div class="vue-dashboard-app">
+        <plenamata-dashboard>
+            <template #map>
+                <div class="jeomap map_id_<?= $map_id ?>" v-once></div>
+            </template>
+        </plenamata-dashboard>
+    </div>
     <?php wp_footer(); ?>
 </body>
 </html>

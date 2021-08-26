@@ -36,6 +36,10 @@
                 </div>
             </div>
         </main>
+
+        <div class="dashboard__map">
+            <slot name="map"/>
+        </div>
     </div>
 </template>
 

@@ -11,10 +11,7 @@ export class Dashboard {
         Vue.component('plenamata-dashboard', DashboardApp)
 
         document.querySelectorAll('.vue-dashboard-app').forEach((el) => {
-            new Vue({
-                el,
-                render: (h) => h(DashboardApp),
-            })
+            new Vue({ el })
         })
     }
 }

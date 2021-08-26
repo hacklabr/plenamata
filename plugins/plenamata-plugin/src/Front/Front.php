@@ -78,7 +78,7 @@ class Front {
             wp_enqueue_script(
                 'plenamata-dashboard',
                 PLENAMATA_PLUGIN_URL . 'assets/build/js/dashboard.js',
-                [ 'plenamata-plugin', 'wp-i18n' ],
+                [ 'jeo-map-blocks', 'plenamata-plugin', 'wp-i18n' ],
                 Plugin::VERSION,
                 true
             );
@@ -107,18 +107,18 @@ class Front {
 
     public function single_templates( string $template ): string {
         global $post;
-        
+
 		if ( $post->post_type === 'verbete' ) {
 			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-verbete.php';
         }else if( $post->post_type === 'post'){
 			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-artigo.php';
 		}
-	
+
         return $template;
     }
 
     /**
-     *  
+     *
      */
     public function search_mobile( string $nav_menu_html, object $args ): string {
         if ( 'primary-menu' != $args->theme_location ) {

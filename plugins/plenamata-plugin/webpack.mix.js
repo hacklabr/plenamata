@@ -38,7 +38,4 @@ mix.webpackConfig({
         path: path.resolve( __dirname, distDir + '/' ),
         publicPath: distDir,
     },
-    resolve: {
-        alias: { 'vue$': 'vue/dist/vue.runtime.js' },
-    },
 });
