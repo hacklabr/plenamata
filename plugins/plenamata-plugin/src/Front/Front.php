@@ -38,11 +38,21 @@ class Front {
      */
     public function filters(): void {
         add_filter( 'archive_template', [ $this, 'archive_templates' ], 10, 1 );
+        add_filter( 'document_title_parts', [ $this, 'custom_titles' ], 10, 1 );
         add_filter( 'page_template', [ $this, 'page_templates' ], 10, 1 );
         add_filter( 'single_template', [ $this, 'single_templates' ], 10, 1 );
 
         // add template file for search after mobile menu
         add_filter( 'wp_nav_menu', [ $this, 'search_mobile'], 50, 2 );
+
+    }
+
+    public function custom_titles( array $parts ): array {
+        if ( is_post_type_archive( 'verbete' ) ) {
+            $parts['title'] = __( 'Glossary', 'plenamata' );
+        }
+
+        return $parts;
     }
 
 	/**
