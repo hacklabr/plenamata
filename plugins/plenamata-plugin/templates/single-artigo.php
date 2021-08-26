@@ -11,14 +11,33 @@
 get_header('single');
 the_post(); ?>
 	
+	<?php 
+	$is_opinion = get_the_category()[0]->slug == "opiniao" ? true : false;
+	if($is_opinion): ?>
+			<div class="opinion-header">
+				<div class="container">
+					<div class="breadcrumb">
+						<a href="<?= site_url(); ?>">Home</a> /
+						<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Articles", "plenamata") ?></a> /
+						<a href="<?= get_category_link(get_the_category()[0]->cat_ID); ?>"><?= get_the_category()[0]->name ?></a> /
+					</div>
+					<h1 class="entry-title">
+						<?php echo wp_kses_post(get_the_title()); ?>
+					</h1>	
+				</div>
+			</div>
+	<?php endif; ?>
+
 	<section id="primary" class="content-area <?php echo esc_attr(newspack_get_category_tag_classes(get_the_ID())) . ' ' . newspack_featured_image_position(); ?>">
-
-	<div class="breadcrumb">
-			<a href="<?= site_url(); ?>">Home</a> /
-			<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Articles", "plenamata") ?></a> /
-			<a href="<?= get_category_link(get_the_category()[0]->cat_ID); ?>"><?= get_the_category()[0]->name ?></a> /
-		</div>
-
+		
+		<?php if(!$is_opinion): ?>
+			<div class="breadcrumb">
+				<a href="<?= site_url(); ?>">Home</a> /
+				<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Articles", "plenamata") ?></a> /
+				<a href="<?= get_category_link(get_the_category()[0]->cat_ID); ?>"><?= get_the_category()[0]->name ?></a> /
+			</div>
+		<?php endif; ?>
+		
 		<main id="main" class="site-main">
 			<?php
 			$isImageBehind = false;
@@ -32,14 +51,16 @@ the_post(); ?>
 				get_template_part('template-parts/post/large-featured-image');
 			else :
 			?>
-				<header class="entry-header">
-                    <div class="wrapper-entry-title">
-                        <h1 class="entry-title">
-                            <?php echo wp_kses_post(get_the_title()); ?>
-                        </h1>
-                    </div>
-				</header>
-				
+
+				<?php if(!$is_opinion): ?>
+					<header class="entry-header">
+						<div class="wrapper-entry-title">
+							<h1 class="entry-title">
+								<?php echo wp_kses_post(get_the_title()); ?>
+							</h1>
+						</div>
+					</header>
+				<?php endif; ?>
 				
 			<?php endif; ?>
 			
@@ -88,9 +109,7 @@ the_post(); ?>
 					<div class="entry-subhead">
 						<div class="entry-meta">
 								<div class="author-partner">
-									<?php if (get_post_meta(get_the_ID(), 'authors-listing', true)) : ?>
 										<?php newspack_posted_by(); ?>
-									<?php endif; ?>
 									<!-- publishers -->
 									<?php 
 										show_publishers($post->ID);
