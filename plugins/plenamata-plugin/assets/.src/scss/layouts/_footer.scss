@@ -11,6 +11,7 @@ footer#colophon.site-footer {
             height:50px;
             @include mobile {
                 height: inherit;
+                width:100%;
             }
         }
         .wp-block-columns :first-child figure.wp-block-image {
@@ -35,6 +36,9 @@ footer#colophon.site-footer {
             display:grid;
             grid-template-columns: 1fr 1fr;
             gap:20px;
+            @include mobile {
+                display: block;
+            }
             li a {
                 font-family: 'Archivo';
                 font-style: normal;
@@ -44,10 +48,17 @@ footer#colophon.site-footer {
                 color:$c_menu_text;
             }
         }
-        .wp-block-social-links li.wp-social-link svg {
-            color:$c_menu_text;
-            width:32px;
-            height:32px;
+        .wp-block-social-links { 
+            @include mobile {
+                display: flex;
+                width:100%;
+                justify-content: center;
+            }
+            li.wp-social-link svg {
+                color:$c_menu_text;
+                width:32px;
+                height:32px;
+            }
         }
         .wp-block-social-links li.wp-social-link {
             background:transparent !important;
