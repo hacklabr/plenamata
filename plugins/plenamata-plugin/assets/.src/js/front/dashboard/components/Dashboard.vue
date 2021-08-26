@@ -2,12 +2,12 @@
     <div class="dashboard">
         <header class="dashboard__header">
             <div class="container">
-                <h1>{{ __('Painel de dados', 'plenamata') }}</h1>
+                <h1>{{ __('Data panel', 'plenamata') }}</h1>
                 <form>
                     <div>
-                        <label for="estados">{{ __('Estado', 'plenamata') }}</label>
+                        <label for="estados">{{ __('States', 'plenamata') }}</label>
                         <select v-model="state">
-                            <option value="">{{ __('Todos os estados', 'plenamata') }}</option>
+                            <option value="">{{ __('All states', 'plenamata') }}</option>
                             <option v-for="state of states" :key="state.uf" :value="state.uf">{{ state.name }}</option>
                         </select>
                     </div>
@@ -20,11 +20,11 @@
                 <fieldset class="dashboard__tabs">
                     <label class="dashboard__tab" :class="{ active: view === 'data' }">
                         <input type="radio" name="dashboard-tabs" value="data" v-model="view">
-                        {{ __('Dados', 'plenamata') }}
+                        {{ __('Data', 'plenamata') }}
                     </label>
                     <label class="dashboard__tab" :class="{ active: view === 'news' }">
                         <input type="radio" name="dashboard-tabs" value="news" v-model="view">
-                        {{ __('Notícias', 'plenamata') }}
+                        {{ __('News', 'plenamata') }}
                     </label>
                 </fieldset>
 

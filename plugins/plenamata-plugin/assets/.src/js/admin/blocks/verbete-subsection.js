@@ -1,11 +1,11 @@
 import { PlainText, useBlockProps } from '@wordpress/block-editor';
 import { registerBlockType } from '@wordpress/blocks';
-import { __ } from '@wordpress/i18n';
+import { __, _x } from '@wordpress/i18n';
 import { archiveTitle } from '@wordpress/icons';
 
 registerBlockType('plenamata/verbete-subsection', {
     apiVersion: 2,
-    title: __('Subseção do verbete', 'plenamata'),
+    title: __('Verbete subsection', 'plenamata'),
     icon: archiveTitle,
     category: 'text',
     attributes: {
@@ -20,7 +20,7 @@ registerBlockType('plenamata/verbete-subsection', {
         return (
             <h3 { ...blockProps }>
                 <span className="glossary-entry__subsection-hint">
-                    { __('Nome da subseção:', 'plenamata') }
+                    { _x('Title:', 'section', 'plenamata') }
                 </span>
                 <PlainText
                     value={ content }
