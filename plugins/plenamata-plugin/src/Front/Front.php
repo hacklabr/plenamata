@@ -102,6 +102,19 @@ class Front {
                 'pluginUrl' => PLENAMATA_PLUGIN_URL,
             ] );
         }
+
+        wp_enqueue_script(
+            'estimatives-area-front-end',
+            PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
+            [],
+            false,
+            true
+        );
+
+        wp_localize_script('estimatives-area-front-end', 'estimativesArea', [
+            'utc' => time(),
+            'getLangCode' => apply_filters( "wpml_current_language", NULL ),
+        ]);
 	}
 
     /**
