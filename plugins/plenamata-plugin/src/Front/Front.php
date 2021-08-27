@@ -90,8 +90,12 @@ class Front {
 	}
 
     public function archive_templates( string $template ): string {
+        global $wp_query;
+
         if ( is_post_type_archive( 'verbete' ) ) {
             $template = PLENAMATA_PLUGIN_PATH . 'templates/archive-verbete.php';
+        }else if( is_author() ){
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/archive.php';
         }
 
         return $template;
