@@ -43,9 +43,14 @@
                 <p><?php the_excerpt() ?></p>
             </div>
             <div class="glossary-entry__content">
+                
                 <?php the_content() ?>
+
                 <?php if ( !empty( $tags ) ): ?>
-                    <h3 class="glossary-entry__subsection"><?php echo __( 'Tags:', 'plenamata' ) ?></h3>
+                    <div class="glossary-entry__subsection">
+                        <h3> <?php echo __( 'Tags:', 'plenamata' ) ?> </h3>
+                    </div>
+                    
                     <ul class="glossary-entry__tags">
                         <?php foreach ( $tags as $tag ): ?>
                             <li class="glossary-entry__tag">
@@ -53,6 +58,7 @@
                             </li>
                         <?php endforeach; ?>
                     </ul>
+
                 <?php endif; ?>
             </div>
         </main>
