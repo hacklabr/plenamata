@@ -50,6 +50,10 @@
             }
           
             .post {
+                @include mobile {
+                    flex-direction: column !important;
+                }
+
                 .post-thumbnail {
                    flex-basis: 60%;
 
@@ -116,6 +120,10 @@
                 .entry-content {
                     max-height: 85px;
                     overflow: hidden;
+                    
+                    @include mobile{
+                        display: none;
+                    }
                 }
 
             }
@@ -167,6 +175,7 @@
     position: relative;
     padding: 0;
     border-radius: 5px;
+    margin: 0 auto;
     
     img{
         position: absolute;
