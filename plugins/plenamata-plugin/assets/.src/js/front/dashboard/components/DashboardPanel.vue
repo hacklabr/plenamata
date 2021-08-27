@@ -6,6 +6,10 @@
                 <slot name="measure"/>
                 <div class="dashboard-panel__meaning"><slot name="meaning"/></div>
             </template>
+            <template v-else-if="type === 'chart'">
+                <div class="dashboard-panel__filters"><slot name="filters"/></div>
+                <slot name="chart"/>
+            </template>
         </main>
         <footer><slot name="footer"/></footer>
     </section>

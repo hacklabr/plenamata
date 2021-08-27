@@ -12,7 +12,6 @@
 namespace PlenamataPlugin\Front;
 
 use PlenamataPlugin\Plugin;
-use stdClass;
 
 /**
  * Class Front
@@ -105,6 +104,7 @@ class Front {
 
             wp_localize_script( 'plenamata-dashboard', 'PlenamataDashboard', [
                 'pluginUrl' => PLENAMATA_PLUGIN_URL,
+                'restUrl' => get_rest_url(),
             ] );
         }
 	}
@@ -112,7 +112,7 @@ class Front {
     /**
      * Register JEO scripts.
      */
-    public function register_jeo_assets(): void {
+    private function register_jeo_assets(): void {
         wp_enqueue_style( 'mapboxgl', 'https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css', '1.4.1' );
         wp_register_script( 'mapboxgl-loader', JEO_BASEURL . '/js/build/mapboxglLoader.js', JEO_VERSION );
 
