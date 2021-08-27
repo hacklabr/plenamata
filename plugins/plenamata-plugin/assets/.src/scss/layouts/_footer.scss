@@ -25,12 +25,12 @@ footer#colophon.site-footer {
             color:$c_menu_text;
             font-family: Archivo;
             font-style: normal;
-            font-weight: normal;
+            font-weight: normal !important;
             font-size: 16px;
             line-height: 17px;
             border-bottom:1px solid $c_footer_line;
         }
-        div.menu-footer-links-container ul {
+        .widget.widget_nav_menu > div ul {
             width: 100%;
             clear:both;
             display:grid;
