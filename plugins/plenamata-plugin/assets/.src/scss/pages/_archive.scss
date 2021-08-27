@@ -1,4 +1,4 @@
-.archive.author {
+.archive, .author {
 
     // cabeçalho do autor
     .page-header.author {
@@ -33,12 +33,12 @@
         }
     }
 
-    #primary.content-area{
+    #primary.content-area {
 
-        #main.site-main {
+        #main {
             width: 70%;
 
-            @include mobile{
+            @include mobile {
                 width: 100%;
             }
           
@@ -46,15 +46,15 @@
                 .post-thumbnail {
                    flex-basis: 60%;
 
-                   @include mobile{
+                   @include mobile {
                         flex-basis: 100%;
                         max-width: 100%;
                         width: 100%;
                    }
                 }
 
-                .post-container-author-page{
-                    @include mobile{
+                .post-container-author-page {
+                    @include mobile {
                         flex-direction: column;
                     }
                 }
@@ -109,6 +109,19 @@
                     overflow: hidden;
                 }
 
+            }
+            
+            .pagination{
+                border-width: 1px;
+            }
+
+            nav[role=navigation].navigation.pagination .nav-links>*{
+                color: var(--secondary) !important;
+            }
+
+            nav[role=navigation].navigation.pagination .nav-links>.current {
+                background-color: #F5F1EE !important;
+                border-radius: 50% !important;
             }
         }
     }
