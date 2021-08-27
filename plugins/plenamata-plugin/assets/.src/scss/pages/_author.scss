@@ -107,12 +107,6 @@
                 .entry-content {
                     max-height: 85px;
                     overflow: hidden;
-
-                    p{
-                        @include mobile{
-                            display: block;
-                        }
-                    }
                 }
 
             }
