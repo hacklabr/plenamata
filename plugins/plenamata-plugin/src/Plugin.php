@@ -38,7 +38,7 @@ class Plugin {
 	 *
 	 * @since 0.1.0
 	 */
-	const VERSION = '0.1.2';
+	const VERSION = '0.1.5';
 	/**
 	 * Dependency Injection Container.
 	 *
@@ -91,6 +91,7 @@ class Plugin {
 	 * @throws InjectionException If a cyclic gets detected when provisioning.
 	 */
 	private function run_front(): void {
+		$this->injector->make( Blocks::class )->hooks();
         $this->injector->make( Blocks::class )->filters();
 		$this->injector->make( Front::class )->hooks();
         $this->injector->make( Front::class )->filters();

@@ -114,6 +114,10 @@ body.is-sticky .mobile-sidebar#mobile-sidebar-fallback {
     transition:200ms ease all;
     top:70px;
 }
+body:not(.home) header.site-header{
+    position:fixed;
+    background:$c_text;
+}
 .mobile-search-form {
     width:50%;
     margin-left:20px;

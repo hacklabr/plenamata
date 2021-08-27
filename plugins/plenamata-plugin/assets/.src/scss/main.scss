@@ -4,8 +4,12 @@
 @import './settings/global';
 @import './settings/typography';
 
+// Blocks
+@import './blocks/estimatives-area';
+
 // Layouts
 @import './layouts/header';
+@import './layouts/footer';
 
 // Pages
 @import './pages/dashboard';
