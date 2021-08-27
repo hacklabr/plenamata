@@ -1,7 +1,7 @@
 <template>
     <div class="dashboard-panel__measure">
         <span class="dashboard-panel__icon" aria-hidden="true" v-if="icon">
-            <img :src="iconUrl">
+            <img :src="`${$dashboard.pluginUrl}assets/build/img/${icon}`">
         </span>
         <span class="dashboard-panel__number">{{ roundNumber(number) }}</span>
         <span class="dashboard-panel__unit"><slot name="unit"/></span>
@@ -16,14 +16,6 @@
         props: {
             icon: { type: String, default: '' },
             number: { type: Number, required: true },
-        },
-        computed: {
-            iconUrl () {
-                if (!this.icon) {
-                    return ''
-                }
-                return `${window.PlenamataDashboard.pluginUrl}assets/build/img/${this.icon}`
-            },
         },
         methods: {
             roundNumber,

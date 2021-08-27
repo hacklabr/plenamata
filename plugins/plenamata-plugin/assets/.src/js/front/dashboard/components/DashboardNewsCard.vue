@@ -7,7 +7,7 @@
             <h2><a :href="post.link">{{ post.title.rendered }}</a></h2>
             <div>
                 <span class="dashboard-news__date">{{ longDate(post.date) }}</span>
-                <span class="dashboard-news__source" v-if="externalSource"><img :src="externalSourceIcon" alt=""> {{ externalSource }}</span>
+                <span class="dashboard-news__source" v-if="externalSource"><img :src="`${$dashboard.pluginUrl}assets/build/img/external-source-icon.svg`" alt=""> {{ externalSource }}</span>
             </div>
         </div>
     </article>
@@ -35,9 +35,6 @@
                     return __( 'External link', 'plenamata' )
                 }
                 return false
-            },
-            externalSourceIcon () {
-                return `${window.PlenamataDashboard.pluginUrl}assets/build/img/external-source-icon.svg`
             },
         },
         methods: {

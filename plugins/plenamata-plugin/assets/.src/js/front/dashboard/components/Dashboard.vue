@@ -5,8 +5,8 @@
                 <h1>{{ __('Data panel', 'plenamata') }}</h1>
                 <form>
                     <div>
-                        <label for="estados">{{ __('States', 'plenamata') }}</label>
-                        <select v-model="state">
+                        <label for="select-estados">{{ __('States', 'plenamata') }}</label>
+                        <select id="select-estados" v-model="state">
                             <option value="">{{ __('All states', 'plenamata') }}</option>
                             <option v-for="state of states" :key="state.uf" :value="state.uf">{{ state.name }}</option>
                         </select>
@@ -20,12 +20,12 @@
                 <fieldset class="dashboard__tabs">
                     <label class="dashboard__tab" :class="{ active: view === 'data' }">
                         <input type="radio" name="dashboard-tabs" value="data" v-model="view">
-                        <img :src="iconUrl('dashboard-chart-icon.svg')" alt="">
+                        <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-chart-icon.svg`" alt="">
                         {{ __('Data', 'plenamata') }}
                     </label>
                     <label class="dashboard__tab" :class="{ active: view === 'news' }">
                         <input type="radio" name="dashboard-tabs" value="news" v-model="view">
-                        <img :src="iconUrl('dashboard-newspaper-icon.svg')" alt="">
+                        <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-newspaper-icon.svg`" alt="">
                         {{ __('News', 'plenamata') }}
                     </label>
                 </fieldset>
@@ -35,6 +35,10 @@
                     <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit.sync="unit" :year="date.year"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="date.year"/>
                     <DeforestedAreaLastWeek :now="date.now" :state="state" :unit.sync="unit"/>
+                    <WeeklyDeforestationEvolution :now="date.now" :source.sync="source" :state="state" :unit.sync="unit" :year.sync="year"/>
+                    <MonthlyDeforestationEvolution :source.sync="source" :state="state" :unit.sync="unit"/>
+                    <YearlyDeforestationEvolutionDeter :state="state" :unit.sync="unit"/>
+                    <YearlyDeforestationEvolutionProdes :state="state" :unit.sync="unit"/>
                 </div>
 
                 <div class="dashboard__news" v-else-if="view === 'news'">
@@ -56,7 +60,11 @@
     import DeforestationSpeedThisYear from './DeforestationSpeedThisYear.vue'
     import DeforestedAreaLastWeek from './DeforestedAreaLastWeek.vue'
     import FelledTreesThisYear from './FelledTreesThisYear.vue'
+    import MonthlyDeforestationEvolution from './MonthlyDeforestationEvolution.vue'
     import TotalDeforestationThisYear from './TotalDeforestationThisYear.vue'
+    import WeeklyDeforestationEvolution from './WeeklyDeforestationEvolution.vue'
+    import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
+    import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
     import api from '../../utils/api'
 
     export default {
@@ -66,7 +74,11 @@
             DeforestationSpeedThisYear,
             DeforestedAreaLastWeek,
             FelledTreesThisYear,
+            MonthlyDeforestationEvolution,
             TotalDeforestationThisYear,
+            WeeklyDeforestationEvolution,
+            YearlyDeforestationEvolutionDeter,
+            YearlyDeforestationEvolutionProdes,
         },
         data () {
             const now = DateTime.now()
@@ -80,10 +92,10 @@
                     year,
                 },
                 news: [],
+                source: 'prodes',
                 state: '',
                 thisYear: null,
                 unit: 'ha',
-                window: 'prode',
                 view: 'data',
                 year,
             }
@@ -148,11 +160,8 @@
         },
         methods: {
             async fetchNews (state = '') {
-                const news = await api.get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
+                const news = await api.get(`${this.$dashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
                 this.news = news
-            },
-            iconUrl (icon) {
-                return `${window.PlenamataDashboard.pluginUrl}assets/build/img/${icon}`
             },
         },
     }

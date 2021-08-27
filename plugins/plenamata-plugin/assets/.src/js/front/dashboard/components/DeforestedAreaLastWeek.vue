@@ -6,7 +6,7 @@
         <template #measure>
             <DashboardMeasure icon="area-icon.svg" :number="area">
                 <template #unit>
-                    <select v-model="unitModel">
+                    <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
                         <option value="ha">{{ __('hectares', 'plenamata') }}</option>
                         <option value="km2">{{ __('km²', 'plenamata') }}</option>
                     </select>

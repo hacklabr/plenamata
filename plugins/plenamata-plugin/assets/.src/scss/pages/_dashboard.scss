@@ -163,6 +163,19 @@
         text-align: center;
     }
 
+    &__filters {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        select {
+            background: transparent;
+            border: none;
+            margin: size(16);
+        }
+    }
+
     footer {
         background-color: $c_lighter;
         border-radius: 0 0 size(4) size(4);
