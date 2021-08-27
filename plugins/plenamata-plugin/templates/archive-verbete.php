@@ -1,17 +1,7 @@
 <?php
     $sections = get_terms( [ 'taxonomy' => 'secao', 'hide_empty' => false ] );
+    get_header();
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php wp_head(); ?>
-</head>
-<body <?php body_class( 'glossary' ) ?>>
-
-    <?php get_header(); ?>
 
     <header class="glossary__header">
         <h1><?php echo __( 'Glossário', 'plenamata' ) ?></h1>
@@ -79,5 +69,3 @@
         </main>
     </div>
     <?php get_footer();?>
-</body>
-</html>

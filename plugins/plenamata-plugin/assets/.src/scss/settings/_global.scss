@@ -23,7 +23,11 @@ body {
 .team-members {
     background-color: #F5F1EE;
 }
-
+body:not(.home){
+    section#primary {
+        margin-top:80px;
+    }
+}
 @include desktop {
 
     .page-template .site-content {

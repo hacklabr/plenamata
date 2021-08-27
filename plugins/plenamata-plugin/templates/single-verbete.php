@@ -1,21 +1,7 @@
 <?php
-    $active_section = get_post_meta( get_the_ID(), 'section', true );
-    $archive_link = get_post_type_archive_link( 'verbete' );
-    $featured_video = get_post_meta( get_the_ID(), 'featured_video', true );
-    $sections = get_terms( [ 'taxonomy' => 'secao', 'hide_empty' => false ] );
-    $tags = get_the_tags();
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <?php wp_head(); ?>
-</head>
-<body <?php body_class( 'glossary glossary-entry' ) ?>>
 
-    <?php get_header(); ?>
+get_header(); 
+?>
 
     <header class="glossary__header">
         <h1><?= __( 'Glossary', 'plenamata' ) ?></h1>
