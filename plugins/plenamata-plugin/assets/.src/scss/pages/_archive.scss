@@ -220,4 +220,23 @@
 }
 
 
+.authors-list-sidebar{
+    margin-top: 48px;
+    .post{
+        border: none !important;
+        a{
+            display: flex;
+            font-weight: bold;
+            flex-direction: row;
+            color: var(--secondary);
+
+            img{
+                margin-right: 8px;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+
 

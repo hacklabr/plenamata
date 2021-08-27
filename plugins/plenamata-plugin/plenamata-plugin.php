@@ -99,3 +99,4 @@ add_action( 'plugins_loaded', 'run_plenamata_plugin' );
  * Users functions
  */
 require_once PLENAMATA_PLUGIN_PATH . 'src/users-functions.php';
+require_once PLENAMATA_PLUGIN_PATH . 'inc/authors_list_widget.php';
