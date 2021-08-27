@@ -3,7 +3,7 @@
     border-radius: 8px;
     color: #FFF087;
     margin-bottom: 20px;
-    padding: 20px 32px;
+    padding: 20px;
     --dark: #221D18;
 
     .box-content {
@@ -23,7 +23,7 @@
                 line-height: 1.9;
                 font-weight: bold;
                 font-size: 18px;
-                max-width: 150px;
+                max-width: 145px;
             }
 
             &.icon {
@@ -33,9 +33,9 @@
                 background-repeat: no-repeat;
                 background-position: center;
                 display: flex;
-                height: 70px;
+                height: 60px;
                 margin-right: var(--s-small);
-                width: 70px;
+                width: 60px;
 
                 @include desktop {
                     margin-right: var(--s-large);
@@ -45,10 +45,6 @@
             &.count {
                 font-size: 70px;
                 line-height: 0.9;
-
-                @include desktop {
-                    font-size: 80px;
-                }
             }
 
             &.legend {
@@ -57,7 +53,7 @@
                 padding: 0 0 0 10px;
 
                 @include desktop {
-                    padding: 0 0 5px 20px;
+                    padding: 0 0 5px 10px;
                 }
     
                 @include mobile {
