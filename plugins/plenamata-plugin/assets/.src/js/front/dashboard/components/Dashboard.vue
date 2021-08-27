@@ -2,11 +2,11 @@
     <div class="dashboard">
         <header class="dashboard__header">
             <div class="container">
-                <h1>{{ __('Data panel', 'plenamata') }}</h1>
+                <h1>{{ __('Dashboard', 'plenamata') }}</h1>
                 <form>
                     <div>
-                        <label for="estados">{{ __('States', 'plenamata') }}</label>
-                        <select v-model="state">
+                        <label for="select-estados">{{ __('States', 'plenamata') }}</label>
+                        <select id="select-estados" v-model="state">
                             <option value="">{{ __('All states', 'plenamata') }}</option>
                             <option v-for="state of states" :key="state.uf" :value="state.uf">{{ state.name }}</option>
                         </select>
@@ -20,19 +20,30 @@
                 <fieldset class="dashboard__tabs">
                     <label class="dashboard__tab" :class="{ active: view === 'data' }">
                         <input type="radio" name="dashboard-tabs" value="data" v-model="view">
+                        <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-chart-icon.svg`" alt="">
                         {{ __('Data', 'plenamata') }}
                     </label>
                     <label class="dashboard__tab" :class="{ active: view === 'news' }">
                         <input type="radio" name="dashboard-tabs" value="news" v-model="view">
+                        <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-newspaper-icon.svg`" alt="">
                         {{ __('News', 'plenamata') }}
                     </label>
                 </fieldset>
 
-                <div v-if="view === 'data'">
+                <div class="dashboard__panels" v-if="view === 'data'">
                     <FelledTreesThisYear :minutes="minutes" :trees="trees" :year="date.year"/>
-                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit="unit" :year="date.year" @unit="unit = $event"/>
-                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit="unit" :year="date.year" @unit="unit = $event"/>
-                    <DeforestedAreaLastWeek :now="date.now" :state="state" :unit="unit" @unit="unit = $event"/>
+                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit.sync="unit" :year="date.year"/>
+                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="date.year"/>
+                    <DeforestedAreaLastWeek :now="date.now" :state="state" :unit.sync="unit"/>
+                    <WeeklyDeforestationEvolution :now="date.now" :source.sync="source" :state="state" :unit.sync="unit" :year.sync="year"/>
+                    <MonthlyDeforestationEvolution :source.sync="source" :state="state" :unit.sync="unit"/>
+                    <YearlyDeforestationEvolutionDeter :state="state" :unit.sync="unit"/>
+                    <YearlyDeforestationEvolutionProdes :state="state" :unit.sync="unit"/>
+                </div>
+
+                <div class="dashboard__news" v-else-if="view === 'news'">
+                    <DashboardNewsCard v-for="post of news" :key="post.id" :post="post"/>
+                    <p v-if="news.length === 0">{{ __('No news to be shown.', 'plenamata') }}</p>
                 </div>
             </div>
         </main>
@@ -46,34 +57,48 @@
 <script>
     import { DateTime, Interval } from 'luxon'
 
+    import DashboardNewsCard from './DashboardNewsCard.vue'
     import DeforestationSpeedThisYear from './DeforestationSpeedThisYear.vue'
     import DeforestedAreaLastWeek from './DeforestedAreaLastWeek.vue'
     import FelledTreesThisYear from './FelledTreesThisYear.vue'
+    import MonthlyDeforestationEvolution from './MonthlyDeforestationEvolution.vue'
     import TotalDeforestationThisYear from './TotalDeforestationThisYear.vue'
+    import WeeklyDeforestationEvolution from './WeeklyDeforestationEvolution.vue'
+    import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
+    import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
     import api from '../../utils/api'
 
     export default {
         name: 'Dashboard',
         components: {
+            DashboardNewsCard,
             DeforestationSpeedThisYear,
             DeforestedAreaLastWeek,
             FelledTreesThisYear,
+            MonthlyDeforestationEvolution,
             TotalDeforestationThisYear,
+            WeeklyDeforestationEvolution,
+            YearlyDeforestationEvolutionDeter,
+            YearlyDeforestationEvolutionProdes,
         },
         data () {
             const now = DateTime.now()
             const startOfYear = now.startOf('year')
+            const year = now.year
 
             return {
                 date: {
                     now,
                     startOfYear,
-                    year: now.year,
+                    year,
                 },
+                news: [],
+                source: 'prodes',
                 state: '',
                 thisYear: null,
                 unit: 'ha',
                 view: 'data',
+                year,
             }
         },
         computed: {
@@ -118,6 +143,12 @@
                 }
             },
         },
+        watch: {
+            state: {
+                handler: 'fetchNews',
+                immediate: true,
+            },
+        },
         async created () {
             const { now, startOfYear } = this.date
 
@@ -127,6 +158,12 @@
         mounted () {
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
-        }
+        },
+        methods: {
+            async fetchNews (state = '') {
+                const news = await api.get(`${this.$dashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
+                this.news = news
+            },
+        },
     }
 </script>

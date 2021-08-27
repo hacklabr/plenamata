@@ -11,7 +11,7 @@
             </DashboardMeasure>
             <DashboardMeasure icon="area-icon.svg" :number="area / days">
                 <template #unit>
-                    <select v-model="unitModel">
+                    <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
                         <option value="ha">{{ __('hectares por dia', 'plenamata') }}</option>
                         <option value="km2">{{ __('km² por dia', 'plenamata') }}</option>
                     </select>
@@ -31,6 +31,7 @@
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
     import { roundNumber } from '../../utils/filters'
+    import { vModel } from '../../utils/vue'
 
     export default {
         name: 'DeforestationSpeedThisYear',
@@ -54,14 +55,7 @@
                     return this.areaKm2
                 }
             },
-            unitModel: {
-                get () {
-                    return this.unit
-                },
-                set (value) {
-                    this.$emit('unit', value)
-                }
-            },
+            unitModel: vModel('unit'),
         },
         methods: {
             roundNumber,

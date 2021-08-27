@@ -12,6 +12,7 @@
 namespace PlenamataPlugin;
 
 use Exception;
+use PlenamataPlugin\Common\RestApi;
 use PlenamataPlugin\Front\Front;
 use PlenamataPlugin\Admin\Blocks;
 use PlenamataPlugin\Admin\SettingsPage;
@@ -81,6 +82,8 @@ class Plugin {
         $this->injector->make( Blocks::class )->hooks();
         $this->injector->make( Blocks::class )->filters();
 		$this->injector->make( SettingsPage::class )->hooks();
+        $this->injector->make( RestApi::class )->hooks();
+        $this->injector->make( RestApi::class )->filters();
 	}
 
 	/**
@@ -95,6 +98,8 @@ class Plugin {
         $this->injector->make( Blocks::class )->filters();
 		$this->injector->make( Front::class )->hooks();
         $this->injector->make( Front::class )->filters();
+        $this->injector->make( RestApi::class )->hooks();
+        $this->injector->make( RestApi::class )->filters();
 	}
 
 }

@@ -1,16 +1,20 @@
 const cache = {}
 
-async function request (method, urlFragment) {
+async function request (method, urlFragment, cacheable = true) {
     const url = urlFragment.startsWith('http') ? urlFragment : `http://plenamata.solved.eco.br/api/${urlFragment}`
 
     const cacheKey = `${method} ${url}`
-    if (cache[cacheKey]) {
+    if (cacheable && cache[cacheKey]) {
         Promise.resolve(cache[cacheKey])
     }
 
     try {
         const req = await window.fetch(url, { method })
-        return req.json()
+        const data = await req.json()
+        if (cacheable) {
+            cache[cacheKey] = data
+        }
+        return data
     } catch (err) {
         console.error(err)
         Promise.reject(undefined)
@@ -18,7 +22,7 @@ async function request (method, urlFragment) {
 }
 
 export default {
-    get (url) {
-        return request('GET', url)
+    get (url, cacheable = true) {
+        return request('GET', url, cacheable)
     }
 }

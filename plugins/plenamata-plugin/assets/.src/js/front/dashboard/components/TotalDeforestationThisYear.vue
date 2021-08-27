@@ -10,7 +10,7 @@
             </p>
             <DashboardMeasure :number="area">
                 <template #unit>
-                    <select v-model="unitModel">
+                    <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
                         <option value="ha">{{ __('hectares', 'plenamata') }}</option>
                         <option value="km2">{{ __('km²', 'plenamata') }}</option>
                     </select>
@@ -38,6 +38,7 @@
     import DashboardPanel from './DashboardPanel.vue'
     import api from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
+    import { vModel } from '../../utils/vue'
 
     export default {
         name: 'TotalDeforestationThisYear',
@@ -82,14 +83,7 @@
                     return this.lastYear.reduce((acc, state) => acc + Number(state.areamunkm), 0)
                 }
             },
-            unitModel: {
-                get () {
-                    return this.unit
-                },
-                set (value) {
-                    this.$emit('unit', value)
-                }
-            },
+            unitModel: vModel('unit'),
         },
         async created () {
             const lastYear = this.now.minus({ years: 1 })
