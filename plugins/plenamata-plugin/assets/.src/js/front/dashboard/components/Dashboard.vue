@@ -43,6 +43,7 @@
 
                 <div class="dashboard__news" v-else-if="view === 'news'">
                     <DashboardNewsCard v-for="post of news" :key="post.id" :post="post"/>
+                    <p v-if="news.length === 0">{{ __('No news to be shown.', 'plenamata') }}</p>
                 </div>
             </div>
         </main>
