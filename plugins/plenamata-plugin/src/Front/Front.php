@@ -45,6 +45,7 @@ class Front {
      */
     public function filters(): void {
         add_filter( 'archive_template', [ $this, 'archive_templates' ], 10, 1 );
+        add_filter( 'body_class', [ $this, 'body_class' ], 10, 1);
         add_filter( 'document_title_parts', [ $this, 'custom_titles' ], 10, 1 );
         add_filter( 'page_template', [ $this, 'page_templates' ], 10, 1 );
         add_filter( 'single_template', [ $this, 'single_templates' ], 10, 1 );
@@ -60,6 +61,21 @@ class Front {
         }
 
         return $parts;
+    }
+
+    /**
+     * Change body classes.
+     */
+    public function body_class( array $classes ): array {
+        global $post;
+
+        if ( is_post_type_archive( 'verbete' ) ) {
+            return array_merge( $classes, [ 'glossary' ] );
+        } else if ( is_singular( 'verbete' ) ) {
+            return array_merge( $classes, [ 'glossary', 'glossary-entry' ] );
+        }
+
+        return $classes;
     }
 
 	/**
