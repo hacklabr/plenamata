@@ -122,79 +122,82 @@ class Blocks {
 
         extract( $attributes );
 
-    ?>
-        <div class="estimatives-area">
-            <div class="heading">
-                <h3> <?= $headingTitle ?? '' ?> </h3>
-            </div>
+        ob_start(); ?>
 
-            <div class="main-data">
-                <h4><?= $preNumberTitle ?? '' ?></h4>
-
-                <div class="number">
-                    <span id="trees-estimative" data-base-trees="<?= $baseTrees ?? '' ?>" data-trees-per-day="<?= $tressPerDay ?? '' ?>" data-date="<?= $baseDate ?? '' ?>">loading...</span>
-                    <span><?= __("estimativa em tempo real", "jeo") ?></span>
+            <div class="estimatives-area">
+                <div class="heading">
+                    <h3> <?= $headingTitle ?? '' ?> </h3>
                 </div>
-            </div>
 
-            <div class="base-data">
-                <div>
-                    <h4><?= $averageTitle ?? '' ?></h4>
-                    <div class="data">
-                        <div class="area">
-                            <span data-mask="true">
-                                <?= $tressPerDay ?? '' ?>
-                            </span>
-                            <span>
-                                <?= __("árvores/ dia", "jeo") ?>
-                            </span>
-                        </div>
+                <div class="main-data">
+                    <h4><?= $preNumberTitle ?? '' ?></h4>
 
-                        <div class="area">
-                            <span data-mask="true">
-                                <?= $hecPerDay ?? '' ?>
-                            </span>
-                            <span>
-                                <?= __("hectares/ dia", "jeo") ?>
-                            </span>
-                        </div>
+                    <div class="number">
+                        <span id="trees-estimative" data-base-trees="<?= $baseTrees ?? '' ?>" data-trees-per-day="<?= $tressPerDay ?? '' ?>" data-date="<?= $baseDate ?? '' ?>">loading...</span>
+                        <span><?= __("estimativa em tempo real", "jeo") ?></span>
                     </div>
                 </div>
-                <div>
-                    <div class="data">
-                        <h4><?= $deforestedTitle ?? '' ?></h4>
 
-                        <div class="area">
-                            <span data-mask="true">
-                                <?= $warnings ?? '' ?>
-                            </span>
+                <div class="base-data">
+                    <div>
+                        <div class="data">
+                            <h4><?= $averageTitle ?? '' ?></h4>
+                            <div class="area">
+                                <span data-mask="true">
+                                    <?= $tressPerDay ?? '' ?>
+                                </span>
+                                <span>
+                                    <?= __("árvores/ dia", "jeo") ?>
+                                </span>
+                            </div>
 
-                            <span data-mask="true">
-                                <?= __("alertas", "jeo") ?>
-                            </span>
-                        
-                        </div>
-
-                        <div class="area">
-                            <span data-mask="true">
-                                <?= $hectares ?? '' ?>
-                            </span>
-
-                            <span>
-                                <?= __("hectares", "jeo") ?>
-                            </span>
+                            <div class="area">
+                                <span data-mask="true">
+                                    <?= $hecPerDay ?? '' ?>
+                                </span>
+                                <span>
+                                    <?= __("hectares/ dia", "jeo") ?>
+                                </span>
+                            </div>
                         </div>
                     </div>
+                    <div>
+                        <div class="data">
+                            <h4><?= $deforestedTitle ?? '' ?></h4>
 
+                            <div class="area">
+                                <span data-mask="true">
+                                    <?= $warnings ?? '' ?>
+                                </span>
+                                <span data-mask="true">
+                                    <?= __("alertas", "jeo") ?>
+                                </span>
+                            
+                            </div>
+
+                            <div class="area">
+                                <span data-mask="true">
+                                    <?= $hectares ?? '' ?>
+                                </span>
+
+                                <span>
+                                    <?= __("hectares", "jeo") ?>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="final-info">
+                    <?= $finalInformation ?? '' ?>
                 </div>
             </div>
 
-            <div class="final-info">
-                <?= $finalInformation ?? '' ?>
-            </div>
-        </div>
+        <?php
+        $output = ob_get_clean();
 
-    <?php
+        return $output;
 
     }
 }
