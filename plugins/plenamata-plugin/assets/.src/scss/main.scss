@@ -4,6 +4,9 @@
 @import './settings/global';
 @import './settings/typography';
 
+// Blocks
+@import './blocks/estimatives-area';
+
 // Layouts
 @import './layouts/header';
 @import './layouts/footer';
@@ -12,6 +15,7 @@
 // Pages
 @import './pages/dashboard';
 @import './pages/glossary';
+@import './pages/single-glossary';
 @import './pages/single-article';
 @import './pages/contact';
-@import './pages/author';
+@import './pages/archive';

@@ -107,6 +107,19 @@ class Front {
                 'restUrl' => get_rest_url(),
             ] );
         }
+
+        wp_enqueue_script(
+            'estimatives-area-front-end',
+            PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
+            [],
+            false,
+            true
+        );
+
+        wp_localize_script('estimatives-area-front-end', 'estimativesArea', [
+            'utc' => time(),
+            'getLangCode' => apply_filters( "wpml_current_language", NULL ),
+        ]);
 	}
 
     /**
@@ -137,8 +150,12 @@ class Front {
     }
 
     public function archive_templates( string $template ): string {
+        global $wp_query;
+
         if ( is_post_type_archive( 'verbete' ) ) {
             $template = PLENAMATA_PLUGIN_PATH . 'templates/archive-verbete.php';
+        }else if( is_author() ){
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/archive.php';
         }
 
         return $template;

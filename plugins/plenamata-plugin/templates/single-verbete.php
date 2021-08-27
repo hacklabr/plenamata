@@ -14,6 +14,9 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class( 'glossary glossary-entry' ) ?>>
+
+    <?php get_header(); ?>
+
     <header class="glossary__header">
         <h1><?= __( 'Glossary', 'plenamata' ) ?></h1>
     </header>
@@ -43,9 +46,14 @@
                 <p><?php the_excerpt() ?></p>
             </div>
             <div class="glossary-entry__content">
+                
                 <?php the_content() ?>
+
                 <?php if ( !empty( $tags ) ): ?>
-                    <h3 class="glossary-entry__subsection"><?= __( 'Tags:', 'plenamata' ) ?></h3>
+                    <div class="glossary-entry__subsection">
+                        <h3> <?php echo __( 'Tags:', 'plenamata' ) ?> </h3>
+                    </div>
+
                     <ul class="glossary-entry__tags">
                         <?php foreach ( $tags as $tag ): ?>
                             <li class="glossary-entry__tag">
@@ -53,10 +61,11 @@
                             </li>
                         <?php endforeach; ?>
                     </ul>
+
                 <?php endif; ?>
             </div>
-        </main>
+        </main
     </div>
-    <?php wp_footer(); ?>
+    <?php get_footer(); ?>
 </body>
 </html>
