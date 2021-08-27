@@ -11,6 +11,9 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class( 'glossary' ) ?>>
+
+    <?php get_header(); ?>
+
     <header class="glossary__header">
         <h1><?php echo __( 'Glossário', 'plenamata' ) ?></h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi ut scelerisque id bibendum enim, iaculis proin congue. At fringilla nulla lectus scelerisque faucibus neque phasellus.</p>
@@ -76,6 +79,6 @@
         <?php endforeach; ?>
         </main>
     </div>
-    <?php wp_footer(); ?>
+    <?php get_footer();?>
 </body>
 </html>
