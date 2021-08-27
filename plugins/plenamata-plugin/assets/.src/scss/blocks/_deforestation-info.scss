@@ -1,0 +1,79 @@
+.deforestation-info {
+    background-color: #221D18;
+    border-radius: 8px;
+    color: #FFF087;
+    margin-bottom: 20px;
+    padding: 20px 32px;
+    --dark: #221D18;
+
+    .box-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @include mobile {
+            display: block;
+        }
+
+        span {
+            color: var(--c-gray);
+
+            &.box-title {
+                display: inline-block;
+                line-height: 1.9;
+                font-weight: bold;
+                font-size: 18px;
+                max-width: 150px;
+            }
+
+            &.icon {
+                align-items: center;
+                background-image: asset-url('img/eye.svg');
+                background-size: 100%;
+                background-repeat: no-repeat;
+                background-position: center;
+                display: flex;
+                height: 70px;
+                margin-right: var(--s-small);
+                width: 70px;
+
+                @include desktop {
+                    margin-right: var(--s-large);
+                }
+            }
+
+            &.count {
+                font-size: 70px;
+                line-height: 0.9;
+
+                @include desktop {
+                    font-size: 80px;
+                }
+            }
+
+            &.legend {
+                display: flex;
+                align-items: flex-end;
+                padding: 0 0 0 10px;
+
+                @include desktop {
+                    padding: 0 0 5px 20px;
+                }
+    
+                @include mobile {
+                    display: inline;
+                }
+            }
+        }
+        .wrap {
+            display: flex;
+        }
+    }
+
+    .data-source {
+        color: white;
+        display: block;
+        font-size: 12px;
+        padding-top: 20px;
+    }
+}
