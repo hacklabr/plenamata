@@ -29,6 +29,7 @@
     import DashboardPanel from './DashboardPanel.vue'
     import api from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
+    import { vModel } from '../../utils/vue'
 
     export default {
         name: 'TotalDeforestationThisYear',
@@ -76,14 +77,7 @@
                     return this.lastWeek.reduce((acc, state) => acc + Number(state.num_arvores), 0)
                 }
             },
-            unitModel: {
-                get () {
-                    return this.unit
-                },
-                set (value) {
-                    this.$emit('unit', value)
-                }
-            },
+            unitModel: vModel('unit'),
         },
         async created () {
             const previousWeek = this.now.minus({ weeks: 1 })

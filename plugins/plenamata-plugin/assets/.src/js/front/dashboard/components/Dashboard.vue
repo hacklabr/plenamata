@@ -32,9 +32,9 @@
 
                 <div class="dashboard__panels" v-if="view === 'data'">
                     <FelledTreesThisYear :minutes="minutes" :trees="trees" :year="date.year"/>
-                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit="unit" :year="date.year" @unit="unit = $event"/>
-                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit="unit" :year="date.year" @unit="unit = $event"/>
-                    <DeforestedAreaLastWeek :now="date.now" :state="state" :unit="unit" @unit="unit = $event"/>
+                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit.sync="unit" :year="date.year"/>
+                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="date.year"/>
+                    <DeforestedAreaLastWeek :now="date.now" :state="state" :unit.sync="unit"/>
                 </div>
 
                 <div class="dashboard__news" v-else-if="view === 'news'">

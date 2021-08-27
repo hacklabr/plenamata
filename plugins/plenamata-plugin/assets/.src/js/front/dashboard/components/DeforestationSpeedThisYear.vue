@@ -31,6 +31,7 @@
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
     import { roundNumber } from '../../utils/filters'
+    import { vModel } from '../../utils/vue'
 
     export default {
         name: 'DeforestationSpeedThisYear',
@@ -54,14 +55,7 @@
                     return this.areaKm2
                 }
             },
-            unitModel: {
-                get () {
-                    return this.unit
-                },
-                set (value) {
-                    this.$emit('unit', value)
-                }
-            },
+            unitModel: vModel('unit'),
         },
         methods: {
             roundNumber,
