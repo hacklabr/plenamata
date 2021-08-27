@@ -42,7 +42,6 @@ class Front {
         add_filter( 'archive_template', [ $this, 'archive_templates' ], 10, 1 );
         add_filter( 'document_title_parts', [ $this, 'custom_titles' ], 10, 1 );
         add_filter( 'page_template', [ $this, 'page_templates' ], 10, 1 );
-        add_filter( 'rest_post_query', [ $this, 'rest_filter_posts_by_state' ], 10, 2 );
         add_filter( 'single_template', [ $this, 'single_templates' ], 10, 1 );
 
         // add template file for search after mobile menu
@@ -104,37 +103,6 @@ class Front {
             ] );
         }
 	}
-
-    /**
-     * Support filter posts API requests by state.
-     *
-     * It's used, for instance, in dashboard.
-     */
-    public function rest_filter_posts_by_state( array $query, \WP_REST_Request $request ): array {
-        $state = $request->get_param( 'state' );
-
-        if ( !$request->has_param( 'type' ) && !empty( $state ) ) {
-            $states = [
-                'AC' => 'Acre',
-                'AM' => 'Amazonas',
-                'AP' => 'Amapá',
-                'MA' => 'Maranhão',
-                'MT' => 'Mato Grosso',
-                'PA' => 'Pará',
-                'RO' => 'Rondônia',
-                'RR' => 'Roraima',
-                'TO' => 'Tocantins',
-            ];
-
-            $query[ 'meta_query' ] ??= [];
-            $query[ 'meta_query' ][] = [
-                'key' => '_geocode_region_level_2_s',
-                'value' => in_array( $state, $states ) ? $states[ $state ] : $state,
-            ];
-        }
-
-        return $query;
-    }
 
     /**
      * Register JEO scripts.
