@@ -27,11 +27,33 @@ class RestApi {
 	 * @since 0.1.0
 	 */
 	public function hooks(): void {
+        add_action( 'rest_api_init', [ $this, 'add_fields_to_response' ], 50 );
         add_action( 'rest_api_init', [ $this, 'register_post_metas' ], 50 );
 	}
 
     public function filters(): void {
         add_filter( 'rest_post_query', [ $this, 'filter_posts_by_state' ], 10, 2 );
+    }
+
+    /**
+     * Add custom fields to REST API response.
+     */
+    public function add_fields_to_response(): void {
+        register_rest_field( 'post', 'plenamata_thumbnail', [
+            'get_callback' => [ $this, 'add_thumbnail_to_response' ],
+            'update_callback' => null,
+            'schema' => null,
+        ] );
+    }
+
+    /**
+     * Add thumbnail to REST API response.
+     *
+     * @param array $object The pre-serialized post object
+     * @return string The thumbnail URL
+     */
+    public function add_thumbnail_to_response( array $object ): string {
+        return get_the_post_thumbnail_url( $object[ 'id' ], 'thumbnail' );
     }
 
     /**

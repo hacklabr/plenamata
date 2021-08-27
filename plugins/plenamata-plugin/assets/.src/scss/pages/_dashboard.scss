@@ -11,9 +11,11 @@
 .dashboard {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
 
     @include mobile {
         grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
     }
 
     &__header {
@@ -54,9 +56,12 @@
         width: auto;
 
         label {
+            align-items: center;
             border-bottom: 1px solid $c_light;
+            display: flex;
             flex: 1;
             font-weight: bold;
+            justify-content: center;
             padding: size(10);
             text-align: center;
             text-transform: uppercase;
@@ -64,11 +69,23 @@
             &.active {
                 border-bottom: 5px solid $c_purple;
             }
+
+            img {
+                margin-right: 1ch;
+            }
         }
 
         input {
             display: none;
         }
+    }
+
+    &__panels {
+        padding: 0 size(8);
+    }
+
+    &__news {
+        padding: 0 size(16);
     }
 
     &__map {
@@ -150,5 +167,47 @@
         background-color: $c_lighter;
         border-radius: 0 0 size(4) size(4);
         padding: size(4) size(16);
+    }
+}
+
+.dashboard-news {
+    display: flex;
+    margin-bottom: size(32);
+
+    h2 {
+        font-size: size(18);
+        margin: 0 0 size(8);
+
+        a {
+            color: $c_text;
+        }
+    }
+
+    &__image {
+        margin-right: size(8);
+        width: 25%;
+
+        @include mobile {
+            width: 40%;
+        }
+    }
+
+    & > :nth-child(2) > div {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__date, &__source {
+        color: size(14);
+    }
+
+    &__date {
+        margin-right: size(16);
+        opacity: 0.5;
+    }
+
+    &__source {
+        color: $c_purple;
+        font-weight: bold;
     }
 }
