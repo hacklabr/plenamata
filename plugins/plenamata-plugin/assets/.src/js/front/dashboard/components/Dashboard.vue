@@ -71,18 +71,21 @@
         data () {
             const now = DateTime.now()
             const startOfYear = now.startOf('year')
+            const year = now.year
 
             return {
                 date: {
                     now,
                     startOfYear,
-                    year: now.year,
+                    year,
                 },
                 news: [],
                 state: '',
                 thisYear: null,
                 unit: 'ha',
+                window: 'prode',
                 view: 'data',
+                year,
             }
         },
         computed: {
@@ -145,7 +148,7 @@
         },
         methods: {
             async fetchNews (state = '') {
-                const news = await api.get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}`)
+                const news = await api.get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
                 this.news = news
             },
             iconUrl (icon) {
