@@ -5,6 +5,10 @@
         @include mobile {
             min-height: 100vw;
         }
+
+        @include tablet-up {
+            max-width: 50vw;
+        }
     }
 }
 
