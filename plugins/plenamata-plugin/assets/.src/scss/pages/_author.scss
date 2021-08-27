@@ -3,10 +3,28 @@
     // cabeçalho do autor
     .page-header.author {
         background-color: #F5F1EE;
-        
+        flex-direction: column;
+
+        @include mobile{
+            margin-top: 40px;
+        }
+
+        .breadcrumb{
+            max-width: 90%;
+            width: 1200px;
+            margin: 32px auto;
+            font-weight: bold;
+            text-transform: capitalize;
+
+            a{
+                color: var(--secondary);
+            }
+        }
         .author-main-content {
             align-items: center;
-            .page-title { display: none!important; }
+            .page-title { 
+                display: none !important; 
+            }
         }
 
         img {
@@ -15,25 +33,29 @@
         }
     }
 
-    #primary.content-area {
-        margin: auto;
-        max-width: 90%!important;
-        width: 1280px!important;
+    #primary.content-area{
 
         #main.site-main {
-            width: 75%;
-            max-width: 952px;
-            margin-right: 30px;
-            
+            width: 70%;
+
+            @include mobile{
+                width: 100%;
+            }
+          
             .post {
                 .post-thumbnail {
-                    width: 406px;
-                    max-width: 406px;
-                    margin-right: 30px;
+                   flex-basis: 60%;
 
-                    .post-thumbnail-inner{
-                        width: 406px;
-                        height: 100%;
+                   @include mobile{
+                        flex-basis: 100%;
+                        max-width: 100%;
+                        width: 100%;
+                   }
+                }
+
+                .post-container-author-page{
+                    @include mobile{
+                        flex-direction: column;
                     }
                 }
             }
@@ -42,12 +64,13 @@
 
                 .cat-links {
                     margin-bottom: 16px!important;
+                    a:nth-of-type(1), .custom-separator{
+                        display: none;
+                    }
+                   
                     a{
-                        font-family: Archivo;
                         font-style: normal;
                         font-weight: bold;
-                        font-size: 14px;
-                        line-height: 15px;
                         text-transform: uppercase;
                         color: #FF7373;
                     }
@@ -55,25 +78,26 @@
 
                 .entry-header {
                     .entry-title {
-                        font-family: Archivo;
-                        font-style: normal;
-                        font-weight: bold;
-                        font-size: 22px;
-                        line-height: 24px;
+                        font-weight: bold !important;
                         color: #221D18;
+                        text-transform: initial;
+                        max-height: 45px;
+                        overflow: hidden;
                         margin: 0;
+
+                        @include mobile{
+                            font-size: 1.4em !important;
+                        }
                     }
                 }
 
                 .entry-meta {
                     margin: 0;
                     padding: 8px 0;
+                    
                     .entry-data {
-                        font-family: Archivo;
                         font-style: normal;
                         font-weight: normal;
-                        font-size: 14px;
-                        line-height: 15px;
                         color: #0A0A0A;
                         mix-blend-mode: normal;
                         opacity: 0.5;
@@ -81,74 +105,21 @@
                 }
 
                 .entry-content {
-                    p {
-                        font-family: Roboto;
-                        font-style: normal;
-                        font-weight: normal;
-                        font-size: 16px;
-                        line-height: 24px;
-                        color: #221D18; 
+                    max-height: 85px;
+                    overflow: hidden;
+
+                    p{
+                        @include mobile{
+                            display: block;
+                        }
                     }
                 }
 
             }
         }
-
-        .author-page-sidebar {
-            width: calc(25% - 30px);
-            max-width: 298px;
-            h4 {
-                font-family: Archivo;
-                font-style: normal;
-                font-weight: bold;
-                font-size: 22px;
-                line-height: 24px;
-                color: #221D18;
-                margin: 0;
-                margin-bottom: 24px;
-            }
-
-        }
     }
 }
 
-@include mobile {
-    #primary.content-area {
-        .about-the-author-section.top-author {
-            display: block;
-            margin-bottom: 8px;
-        }
 
-        #main.site-main {
-            width: 100%!important;
-            margin-right: 0!important;
-            .post {
-                margin-top: 32px!important;
-                .post-thumbnail {
-                    width: 100%!important;
-                    max-width: 100%!important;
-                    margin-right: 0!important;
 
-                    .post-thumbnail-inner{
-                        width: 100%!important;
-                        height: 100%!important;
-                    }
-                }
-                .post-container-author-page {
-                    flex-direction: column;
-                }
-            }
-            .entry-container {
-                .cat-links {
-                    margin-bottom: 8px!important;
-                }
-            }
-        }
-        .author-page-sidebar {
-            .about-the-author-section {
-                display: none;
-            }
-        }
-    }
-}
 
