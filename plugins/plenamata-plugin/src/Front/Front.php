@@ -34,6 +34,11 @@ class Front {
 
         //replace theme footer.php
         add_action( 'get_footer', [ $this, 'get_footer' ], 10, 2 );
+
+        //
+        add_action( 'before_header', [ $this, 'replace_header'], 10 );
+        add_action( 'after_header', [ $this, 'replace_header_close'], 10 );
+
 	}
 
     /**
@@ -181,5 +186,18 @@ class Front {
             load_template( PLENAMATA_PLUGIN_PATH . 'templates/footer.php', true, array() );
             exit;
         }
+    }
+
+    public function replace_header() : void {
+        ob_start();
+    }
+    public function replace_header_close() : void {
+        ob_end_clean();
+        if ( is_singular() && ! is_home() && ! is_front_page() ) {
+            require PLENAMATA_PLUGIN_PATH . 'templates/header-single.php';
+        } else {
+            require PLENAMATA_PLUGIN_PATH . 'templates/header.php';
+        }
+
     }
 }

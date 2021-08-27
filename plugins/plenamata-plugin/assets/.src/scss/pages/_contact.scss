@@ -1,4 +1,4 @@
-body.page-template #primary {
+body.page-template:not(.home) #primary {
     margin-top: 80px;
 
     #main.site-main {
