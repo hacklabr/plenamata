@@ -7,6 +7,11 @@
     --dark: #221D18;
     color: var(--dark);
 
+    @include mobile {
+        margin-bottom: 30px !important;
+        padding: 10px 15px 15px;
+    }
+
     .heading {
         margin-bottom: 32px;
 
@@ -15,12 +20,14 @@
             font-size: 24px;
             font-weight: 600 !important;
             padding-bottom: 10px;
+
+            @include mobile {
+                font-size: 20px;
+            }
         }
 
         .heading-title {
             color: var(--accent-color);
-            
-            
             margin-bottom: 0;
             margin-top: 10px;
         }
@@ -32,10 +39,14 @@
             display: flex;
             margin-bottom: 40px;
 
+            @include mobile {
+                display: block
+            }
+
             span {
                 &:first-child {
                     color: var(--dark);
-                    font-size: 80px;
+                    font-size: 68px;
                     display: inline-block;
                     margin-right: 15px;
                     max-width: 100%;
@@ -43,16 +54,30 @@
                     overflow: hidden;
                     white-space: nowrap;
                     line-height: 62px;
+                    letter-spacing: -2px;
+
+                    @include tablet {
+                        font-size: 44px;
+                    }
+
+                    @include mobile {
+                        display: block;
+                        line-height: 50px;
+                    }
                 }
 
                 &:last-child {
-                    max-width: 140px;
+                    max-width: 125px;
                 }
             }
         }
 
         h4 {
             font-size: 18px;
+
+            @include mobile {
+                font-size: 16px;
+            }
         }
 
         .base-trees {
@@ -72,16 +97,40 @@
         column-gap: 20px;
         margin-bottom: 30px;
 
+        @media screen and (max-width: 385px) {
+            display: block;
+        }
+
         .data {
             > h4 {
                 font-size: 18px;
             }
+
             .area {
+                @include tablet {
+                    margin-bottom: 15px;
+                }
+
                 span {
+
+                    @include tablet {
+                        line-height: 1;
+                    }
+
+                    @include mobile {
+                        font-size: 12px;
+                    }
+
                     &:first-child {
                         color: var(--second-accent-color);
                         font-size: 32px;
                         line-height: 1.3;
+
+                        @include tablet {
+                            display: block;
+                            font-size: 26px;
+                            line-height: 1;
+                        }
                     }
                 }
             }
@@ -90,6 +139,6 @@
     }
 
     .final-info {
-        font-size: 14px;
+        font-size: 12px;
     }
 }
