@@ -15,10 +15,11 @@ export class Main {
         // sticky menu
         this.sticky_menu();
 
+        // remove dark mode
+        this.remove_dark_mode();
 	}
     sticky_menu() {
         function isScrolledIntoView() {
-            console.log( document.documentElement.scrollTop );
             if ( document.documentElement.scrollTop > 50 ) {
                 return true;
             } else {
@@ -39,5 +40,12 @@ export class Main {
             }
         });
           
+    }
+    remove_dark_mode() {
+        setTimeout( () => {
+            document.body.classList.remove( 'dark-theme' );
+        }, 
+        5000
+        )  
     }
 }
