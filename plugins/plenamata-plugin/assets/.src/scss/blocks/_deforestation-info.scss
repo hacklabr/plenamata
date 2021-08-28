@@ -3,7 +3,7 @@
     border-radius: 8px;
     color: #FFF087;
     margin-bottom: 20px;
-    padding: 20px 32px;
+    padding: 20px;
     --dark: #221D18;
 
     .box-content {
@@ -11,7 +11,7 @@
         align-items: center;
         justify-content: space-between;
 
-        @include mobile {
+        @include tablet {
             display: block;
         }
 
@@ -22,8 +22,20 @@
                 display: inline-block;
                 line-height: 1.9;
                 font-weight: bold;
-                font-size: 18px;
-                max-width: 150px;
+                max-width: 145px;
+
+                @include tablet {
+                    font-size: 16px;
+                    max-width: 100%;
+                }
+
+                @include desktop {
+                    font-size: 18px;
+                }
+
+                @media screen and (min-width: 1024px) and (max-width: 1280px) {
+                    font-size: 14px;
+                }
             }
 
             &.icon {
@@ -33,9 +45,9 @@
                 background-repeat: no-repeat;
                 background-position: center;
                 display: flex;
-                height: 70px;
+                height: 60px;
                 margin-right: var(--s-small);
-                width: 70px;
+                width: 60px;
 
                 @include desktop {
                     margin-right: var(--s-large);
@@ -46,8 +58,12 @@
                 font-size: 70px;
                 line-height: 0.9;
 
-                @include desktop {
-                    font-size: 80px;
+                @include tablet {
+                    font-size: 44px;
+                }
+
+                @media screen and (min-width: 1024px) and (max-width: 1280px) {
+                    font-size: 38px;
                 }
             }
 
@@ -57,7 +73,7 @@
                 padding: 0 0 0 10px;
 
                 @include desktop {
-                    padding: 0 0 5px 20px;
+                    padding: 0 0 5px 10px;
                 }
     
                 @include mobile {
@@ -67,6 +83,13 @@
         }
         .wrap {
             display: flex;
+
+            @include desktop {
+            }
+
+            @include mobile {
+                align-items: flex-end;
+            }
         }
     }
 

@@ -28,8 +28,13 @@ body:not(.home){
         margin-top:80px;
     }
 }
-@include desktop {
 
+.flourish-iframe {
+    border: 0;
+    width: 100%;
+}
+
+@include desktop {
     .page-template .site-content {
         margin-top:-45px;
     }
