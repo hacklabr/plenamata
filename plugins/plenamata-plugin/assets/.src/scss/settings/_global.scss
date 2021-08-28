@@ -24,8 +24,12 @@ body {
     background-color: #F5F1EE;
 }
 
-@include desktop {
+.flourish-iframe {
+    border: 0;
+    width: 100%;
+}
 
+@include desktop {
     .page-template .site-content {
         margin-top:-45px;
     }
