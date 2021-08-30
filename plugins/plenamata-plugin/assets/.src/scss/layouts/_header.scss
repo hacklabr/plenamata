@@ -148,7 +148,24 @@ body:not(.home) header.site-header{
     
     .search-text{
         margin-top: 0 !important;
+        text-align: center;
+        font-weight: normal !important;
+        text-transform: inherit !important;
+        color: rgba(255, 255, 255, 0.5) !important;
+        font-size: 24px !important;
     }
+
+    form.search-form .search-input-wrapper{
+
+        input{
+           border-color: rgba(255, 255, 255, 0.5) !important;
+           color: rgba(255, 255, 255, 0.5) !important;
+        }
+
+        .search-submit{
+            background-color: var(--secondary)  !important;
+        }
+    } 
 }
 
 body.admin-bar header.site-header {
