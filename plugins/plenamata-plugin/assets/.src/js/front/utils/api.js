@@ -1,7 +1,7 @@
 const cache = {}
 
 async function request (method, urlFragment, cacheable = true) {
-    const url = urlFragment.startsWith('http') ? urlFragment : `http://plenamata.solved.eco.br/api/${urlFragment}`
+    const url = urlFragment.startsWith('http') ? urlFragment : `https://plenamata.solved.eco.br/api/${urlFragment}`
 
     const cacheKey = `${method} ${url}`
     if (cacheable && cache[cacheKey]) {
