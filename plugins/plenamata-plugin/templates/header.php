@@ -22,14 +22,6 @@
 		</button>
 
 		<header id="masthead" class="site-header hide-header-search" [class]="searchVisible ? 'show-header-search site-header ' : 'hide-header-search site-header'">
-			<div id="header-search" class="tablet-down-search" [aria-expanded]="searchVisible ? 'true' : 'false'" aria-expanded="false">
-				<div class="wrapper">
-					<div class="content-limiter">
-						<span class="search-text"><?= __('What are you looking for?', 'jeo'); ?></span>
-						<?php get_search_form(); ?>
-					</div>
-				</div>
-			</div><!-- #header-search -->
 
 			<?php if (true === $header_sub_simplified && !is_front_page()) : ?>
 				<div class="top-header-contain desktop-only">
@@ -318,7 +310,6 @@
 										<span class="search-icon"><?php echo wp_kses(newspack_get_icon_svg('search', 28), newspack_sanitize_svgs()); ?></span>
 										<span class="close-icon"><?php echo wp_kses(newspack_get_icon_svg('close', 28), newspack_sanitize_svgs()); ?></span>
 									</button>
-									<?php //get_template_part( 'template-parts/header/header', 'search' ); 
 									?>
 								<?php endif;
 								?>

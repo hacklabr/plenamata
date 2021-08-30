@@ -159,6 +159,7 @@ registerBlockType('plenamata/estimatives-area', {
                     </div>
                     <div>
                         <RichText
+                            { ...blockProps }
                             tagName="span"
                             className="deforested-title"
                             value={attributes.deforestedTitle}
