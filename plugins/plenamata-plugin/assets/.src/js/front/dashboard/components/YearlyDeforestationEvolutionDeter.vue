@@ -50,7 +50,7 @@
                 data: [],
             }
         },
-computed: {
+        computed: {
             areas () {
                 if (this.unit === 'ha') {
                     return this.areasKm2.map((areaKm2) => areaKm2 * 100)
@@ -70,18 +70,6 @@ computed: {
                             backgroundColor: '#FF7373',
                         },
                     ],
-                }
-            },
-            chartOptions () {
-                return {
-                    scales: {
-                        x: {
-                            min: 0,
-                        },
-                        y: {
-                            beginAtZero: true,
-                        },
-                    },
                 }
             },
             unitModel: vModel('unit'),

@@ -70,15 +70,6 @@
                     ],
                 }
             },
-            chartOptions () {
-                return {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                        },
-                    },
-                }
-            },
             unitModel: vModel('unit'),
             years () {
                 return this.data.map(datum => datum.year)
