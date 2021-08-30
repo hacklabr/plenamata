@@ -34,6 +34,62 @@ body:not(.home){
     width: 100%;
 }
 
+// Blocks
+
+.l-h-22px {
+	line-height: 22px;
+}
+
+.title-deforestation {
+	font-size: 32px;
+	line-height: 1;
+	font-weight: 400 !important;
+	padding-left: 16px;
+}
+
+.title-latest-articles {
+	grid-template-columns: 55px auto !important;
+}
+
+.title-latest-articles .wp-block-media-text__content {
+	padding-left: 30px;
+}
+
+.title-latest-articles .wp-block-media-text__content h2 {
+	font-size: 32px;
+	font-weight: 400 !important;
+}
+
+.b-t-l-8 {
+	border-top-left-radius: 8px;
+	overflow: hidden;
+}
+
+.b-t-r-8 {
+	border-top-right-radius: 8px;
+	overflow: hidden;
+}
+
+.text-align-center {
+	text-align: center;
+}
+
+.no-padding {
+	padding: 0;
+}
+
+.title-main-newsletter {
+		font-size: 24px;
+	font-weight: 400 !important;
+	line-height: 32px;
+}
+
+.title-second-newsletter {
+	font-size: 32px;
+	font-weight: 400 !important;
+	line-height: 40px;
+}
+
 @include desktop {
     .page-template .site-content {
         margin-top:-45px;
