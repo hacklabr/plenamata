@@ -70,7 +70,7 @@ export class Main {
         setTimeout( () => {
             document.body.classList.remove( 'dark-theme' );
         }, 
-        5000
+        1000
         )  
     }
 }
