@@ -5,7 +5,7 @@
 
     <header class="glossary__header">
         <h1><?php echo __( 'Glossário', 'plenamata' ) ?></h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mi ut scelerisque id bibendum enim, iaculis proin congue. At fringilla nulla lectus scelerisque faucibus neque phasellus.</p>
+        <?php echo '<p>'. esc_html__('Termos técnicos, políticas públicas e iniciativas para chegar ao desmatamento zero e conservar a floresta explicados com um simples clique, via consulta rápida ou completa.', 'plenamata').'</p>'?>
 
         <div class="glossary__search">
             <input class="search-input" type="text" placeholder="Busque por um termo" name="search" />
@@ -19,7 +19,7 @@
     <div class="glossary__body">
         <nav>
             <h2>
-                <?= __( 'Sections', 'plenamata' ) ?>
+                <?= esc_html__( 'Seções', 'plenamata' ) ?>
             </h2>
             <ul>
                 <?php foreach ( $sections as $section ): ?>
@@ -37,6 +37,8 @@
         <?php
             $entries = get_posts( [
                 'post_type' => 'verbete',
+                'order' => 'ASC',
+                'numberposts' => -1,
                 'meta_query' => [
                     [ 'key' => 'section', 'value' => $section->term_id ],
                 ],
