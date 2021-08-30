@@ -1,7 +1,7 @@
 .estimatives-area {
     background-color: white;
     border-radius: 8px;
-    padding: 20px 32px 32px;
+    padding: 20px 28px 28px;
     --accent-color: #FF7373;
     --second-accent-color: #523096;
     --dark: #221D18;
@@ -13,12 +13,12 @@
     }
 
     .heading {
-        margin-bottom: 32px;
+        margin-bottom: 28px;
 
         h3 {
             border-bottom: 2px solid var(--accent-color);
             font-size: 24px;
-            font-weight: 600 !important;
+            font-weight: 500 !important;
             padding-bottom: 10px;
 
             @include mobile {
@@ -74,6 +74,7 @@
 
         h4 {
             font-size: 18px;
+            font-weight: 400 !important;
 
             @include mobile {
                 font-size: 16px;
