@@ -20,7 +20,7 @@
 
             &.box-title {
                 display: inline-block;
-                line-height: 1.9;
+                line-height: 1.6;
                 font-weight: bold;
                 max-width: 145px;
 
@@ -55,7 +55,9 @@
             }
 
             &.count {
+                font-family: 'Roboto';
                 font-size: 70px;
+                letter-spacing: -3px;
                 line-height: 0.9;
 
                 @include tablet {

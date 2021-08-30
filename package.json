@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@wordpress/i18n": "^4.2.1"
+  }
+}

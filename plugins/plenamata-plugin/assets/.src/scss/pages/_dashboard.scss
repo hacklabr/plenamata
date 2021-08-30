@@ -1,4 +1,11 @@
 .page-template-template-dashboard {
+    // needed to work div map with position:sticky;
+    #page {
+        overflow: inherit !important;
+    }
+    .site-content {
+        margin-top:65px;
+    }
     .jeomap {
         min-height: 100vh;
 
