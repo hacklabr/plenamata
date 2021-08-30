@@ -91,6 +91,7 @@ registerBlockType('plenamata/estimatives-area', {
 
                 <div className="main-data">
                     <RichText
+                        { ...blockProps }
                         tagName="span"
                         className="pre-number-title"
                         value={attributes.preNumberTitle}
@@ -203,6 +204,7 @@ registerBlockType('plenamata/estimatives-area', {
 
                 <div className="final-info">
                     <RichText
+                        { ...blockProps }
                         tagName="span"
                         className="deforested-title"
                         value={attributes.finalInformation}
