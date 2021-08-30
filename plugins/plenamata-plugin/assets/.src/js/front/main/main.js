@@ -47,16 +47,20 @@ export class Main {
 
     hide_menu_items_on_search() {
        
-        let main_menu = document.getElementById("site-navigation");
-        let search_btn = document.getElementsByClassName("search-toggle")[0];
-        let search_icon = document.getElementsByClassName("search-icon")[0];
-        
-        search_btn.addEventListener("click", function(){
+        let main_menu = document.getElementById('site-navigation');
+        let search_btn = document.getElementsByClassName('search-toggle')[0];
+        let search_icon = document.getElementsByClassName('search-icon')[0];
+        let masthead = document.getElementById('masthead');
+
+        search_btn.addEventListener('click', function(){
             
-            let is_search_icon_active = window.getComputedStyle(search_icon).getPropertyValue("display");
-          
-            main_menu.style.display = (is_search_icon_active != "none") ? "none" : "block";
-       
+            let is_search_icon_active = window.getComputedStyle(search_icon).getPropertyValue('display');
+            
+            main_menu.style.display = (is_search_icon_active == 'none') ? 'block' : 'none';
+            
+            masthead.classList.toggle('bg-primary');
+            document.getElementsByTagName("BODY")[0].classList.toggle('freeze');
+
         }, false);
 
     }
