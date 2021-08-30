@@ -140,6 +140,17 @@ body:not(.home) header.site-header{
         }
     }
 }
+
+#header-search{
+    height: calc(100vh - 30px);
+    display: flex;
+    top: 100% !important;
+    
+    .search-text{
+        margin-top: 0 !important;
+    }
+}
+
 body.admin-bar header.site-header {
     top:32px;
     @include mobile {
