@@ -1,5 +1,5 @@
 <?php
-
+$sections = get_terms( [ 'taxonomy' => 'secao', 'hide_empty' => false ] );
 get_header(); 
 ?>
 
