@@ -10,7 +10,7 @@
             </select>
         </template>
         <template #chart>
-            <BarChart :chartData="chartData" :height="200"/>
+            <BarChart :chartData="chartData" :height="300"/>
         </template>
         <template #footer>
             {{ __('Fonte: PRODES', 'plenamata') }}
@@ -68,15 +68,6 @@
                             backgroundColor: '#FF7373',
                         },
                     ],
-                }
-            },
-            chartOptions () {
-                return {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                        },
-                    },
                 }
             },
             unitModel: vModel('unit'),

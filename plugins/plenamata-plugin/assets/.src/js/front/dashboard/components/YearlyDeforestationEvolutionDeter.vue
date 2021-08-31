@@ -10,7 +10,7 @@
             </select>
         </template>
         <template #chart>
-            <BarChart :chartData="chartData" :height="200"/>
+            <BarChart :chartData="chartData" :height="300"/>
         </template>
         <template #footer>
             {{ __('Fonte: INPE/DETER', 'plenamata') }} • {{ __('Última atualização: 28.06.2021 com dados detectados até 18.06.2021.', 'plenamata') }}
@@ -50,7 +50,7 @@
                 data: [],
             }
         },
-computed: {
+        computed: {
             areas () {
                 if (this.unit === 'ha') {
                     return this.areasKm2.map((areaKm2) => areaKm2 * 100)
@@ -70,18 +70,6 @@ computed: {
                             backgroundColor: '#FF7373',
                         },
                     ],
-                }
-            },
-            chartOptions () {
-                return {
-                    scales: {
-                        x: {
-                            min: 0,
-                        },
-                        y: {
-                            beginAtZero: true,
-                        },
-                    },
                 }
             },
             unitModel: vModel('unit'),

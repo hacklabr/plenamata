@@ -145,7 +145,10 @@
         },
         watch: {
             state: {
-                handler: 'fetchNews',
+                async handler () {
+                    await this.fetchNews(this.state)
+                    this.centerMap(this.state)
+                },
                 immediate: true,
             },
         },
@@ -160,6 +163,15 @@
             this.$refs.map.appendChild(mapEl)
         },
         methods: {
+            centerMap (state = '') {
+                if (state) {
+                    /* One state */
+                    const stateData = this.states[state]
+                    console.log(stateData)
+                } else {
+                    /* All Brasil */
+                }
+            },
             async fetchNews (state = '') {
                 const news = await api.get(`${this.$dashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
                 this.news = news
