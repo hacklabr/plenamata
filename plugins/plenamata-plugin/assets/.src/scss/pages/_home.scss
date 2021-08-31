@@ -1,0 +1,14 @@
+body.home {
+    .entry-content {
+        .wp-block-cover {
+
+            // In the home, remove spacing between the first two blocks (cover)
+            &:nth-child(1) {
+                margin-bottom: 0;
+            }
+            &:nth-child(2) {
+                margin-top: 0;
+            }
+        }
+    }
+}
