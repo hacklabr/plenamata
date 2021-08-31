@@ -49,7 +49,7 @@
             $("#filtro-glossario").keyup(function(){
             var texto = $(this).val();
             
-                $(".glossary__entry").each(function(){
+                $("summary").each(function(){
                     var resultado = $(this).text().toUpperCase().indexOf(' '+texto.toUpperCase());
                     
                     if(resultado < 0) {
