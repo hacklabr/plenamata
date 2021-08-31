@@ -18,6 +18,8 @@
         "@wordpress/i18n": "^4.2.1",
         "@wordpress/icons": "^5.0.0",
         "chart.js": "^3.5.1",
+        "chartjs-plugin-zoom": "^1.1.1",
+        "color": "^3.2.1",
         "luxon": "^2.0.2",
         "vue": "^2.6.11",
         "vue-chart-3": "^0.5.7"

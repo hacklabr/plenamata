@@ -22,7 +22,7 @@
             {{ sprintf(__('estimativa média de %s árvores por minuto', 'plenamata'), roundNumber(trees / minutes)) }}
         </template>
         <template #footer>
-            {{ sprintf(__('Fonte: MapBiomas com base na média desmatamento diário detectado pelo Deter em %s', 'plenamata'), year) }}
+            {{ __('Fonte: MapBioma com base nos dados do DETER', 'plenamata') }}
         </template>
     </DashboardPanel>
 </template>

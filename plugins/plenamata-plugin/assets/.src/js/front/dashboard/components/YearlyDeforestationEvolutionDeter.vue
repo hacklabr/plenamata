@@ -1,7 +1,7 @@
 <template>
     <DashboardPanel type="chart">
         <template #title>
-            {{ __('Evolução anual do desmatamento', 'plenamata') }}
+            {{ __('Evolução anual do desmatamento - DETER', 'plenamata') }}
         </template>
         <template #filters>
             <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
@@ -10,7 +10,7 @@
             </select>
         </template>
         <template #chart>
-            <BarChart :chartData="chartData" :height="300"/>
+            <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
         </template>
         <template #footer>
             {{ __('Fonte: INPE/DETER', 'plenamata') }} • {{ __('Última atualização: 28.06.2021 com dados detectados até 18.06.2021.', 'plenamata') }}
@@ -70,6 +70,15 @@
                             backgroundColor: '#FF7373',
                         },
                     ],
+                }
+            },
+            chartOptions () {
+                return {
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                    },
                 }
             },
             unitModel: vModel('unit'),
