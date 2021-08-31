@@ -93,7 +93,7 @@
                     year,
                 },
                 news: [],
-                source: 'prodes',
+                source: 'deter',
                 state: '',
                 thisYear: null,
                 unit: 'ha',
