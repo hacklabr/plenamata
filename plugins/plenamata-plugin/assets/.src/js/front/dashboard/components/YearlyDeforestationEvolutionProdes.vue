@@ -1,7 +1,7 @@
 <template>
     <DashboardPanel type="chart">
         <template #title>
-            {{ __('Evolução anual do desmatamento consolidado', 'plenamata') }}
+            {{ __('Evolução anual do desmatamento consolidado - PRODES', 'plenamata') }}
         </template>
         <template #filters>
             <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
@@ -10,7 +10,7 @@
             </select>
         </template>
         <template #chart>
-            <BarChart :chartData="chartData" :height="200"/>
+            <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
         </template>
         <template #footer>
             {{ __('Fonte: PRODES', 'plenamata') }}
@@ -19,7 +19,6 @@
 </template>
 
 <script>
-    import { DateTime } from 'luxon'
     import { BarChart } from 'vue-chart-3'
 
     import DashboardPanel from './DashboardPanel.vue'
@@ -35,16 +34,10 @@
         props: {
             state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
+            year: { type: Number, required: true },
         },
         data () {
-            const end = DateTime.now().year
-            const start = end - 5
-
             return {
-                date: {
-                    start,
-                    end,
-                },
                 data: [],
             }
         },
@@ -72,9 +65,9 @@
             },
             chartOptions () {
                 return {
-                    scales: {
-                        y: {
-                            beginAtZero: true,
+                    plugins: {
+                        legend: {
+                            display: false,
                         },
                     },
                 }
@@ -92,11 +85,9 @@
         },
         methods: {
             async fetchData () {
-                const { start, end } = this.date
-
                 const filters = this.state ? `estados?estado=${this.state}&` : 'basica?'
 
-                const data = await api.get(`prodes/${filters}ano1=${start}&ano2=${end}&group_by=ano`)
+                const data = await api.get(`prodes/${filters}ano1=2008&ano2=${this.year}&group_by=ano`)
                 this.data = data
             },
         },

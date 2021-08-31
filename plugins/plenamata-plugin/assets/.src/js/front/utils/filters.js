@@ -1,6 +1,8 @@
-const longDateLocale = new Intl.DateTimeFormat('en', { dateStyle: 'long' })
-const numberLocale = new Intl.NumberFormat('en')
-const shortDateLocale = new Intl.DateTimeFormat('en', { dateStyle: 'short' })
+const locale = window.PlenamataDashboard.language || 'en'
+
+const longDateLocale = new Intl.DateTimeFormat(locale, { dateStyle: 'long' })
+const numberLocale = new Intl.NumberFormat(locale)
+const shortDateLocale = new Intl.DateTimeFormat(locale, { dateStyle: 'short' })
 
 export function longDate (dateStr) {
     const date = new Date(dateStr)

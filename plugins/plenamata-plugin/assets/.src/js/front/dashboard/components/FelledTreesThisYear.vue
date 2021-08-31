@@ -14,7 +14,7 @@
             {{ sprintf(__('estimativa média de %s árvores por minuto', 'plenamata'), roundNumber(trees / minutes)) }}
         </template>
         <template #footer>
-            {{ __('Fonte: INPE/DETER', 'plenamata') }} • Última atualização: 19.07.2021 com alertas detectados até 09.07.2021
+            {{ sprintf(__('Fonte: MapBiomas com base na média desmatamento diário detectado pelo DETER em %s', 'plenamata'), year) }}
         </template>
     </DashboardPanel>
 </template>

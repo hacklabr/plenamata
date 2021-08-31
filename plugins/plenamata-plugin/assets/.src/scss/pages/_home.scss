@@ -1,0 +1,40 @@
+body.home {
+    .entry-content {
+        .wp-block-cover {
+
+            // In the home, remove spacing between the first two blocks (cover)
+            &:nth-child(1) {
+                margin-bottom: 0;
+            }
+            &:nth-child(2) {
+                margin-top: 0;
+            }
+        }
+    }
+
+    // Newspack block articles
+    .wp-block-newspack-blocks-homepage-articles {
+
+        // Reorder items of the wrapper
+        .entry-wrapper {
+            display: flex;
+            flex-direction: column;
+
+            .cat-links {
+                order: 1;
+            }
+
+            .entry-title {
+                order: 2;
+            }
+
+            > p {
+                order: 4;
+            }
+
+            .entry-meta {
+                order: 3;
+            }
+        }
+    }
+}
