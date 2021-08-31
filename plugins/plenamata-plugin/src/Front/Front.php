@@ -119,6 +119,7 @@ class Front {
             );
 
             wp_localize_script( 'plenamata-dashboard', 'PlenamataDashboard', [
+                'language' => \ICL_LANGUAGE_CODE,
                 'pluginUrl' => PLENAMATA_PLUGIN_URL,
                 'restUrl' => get_rest_url(),
             ] );
