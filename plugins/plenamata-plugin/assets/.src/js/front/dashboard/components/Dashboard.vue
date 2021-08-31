@@ -38,7 +38,7 @@
                     <WeeklyDeforestationEvolution :now="date.now" :source.sync="source" :state="state" :unit.sync="unit" :year.sync="year"/>
                     <MonthlyDeforestationEvolution :source.sync="source" :state="state" :unit.sync="unit"/>
                     <YearlyDeforestationEvolutionDeter :state="state" :unit.sync="unit"/>
-                    <YearlyDeforestationEvolutionProdes :state="state" :unit.sync="unit"/>
+                    <YearlyDeforestationEvolutionProdes :state="state" :unit.sync="unit" :year="date.year"/>
                 </div>
 
                 <div class="dashboard__news" v-else-if="view === 'news'">
