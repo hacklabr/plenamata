@@ -1,5 +1,7 @@
 <?php
 $sections = get_terms( [ 'taxonomy' => 'secao', 'hide_empty' => false ] );
+$tags     = get_the_tags( get_the_ID() );
+
 get_header(); 
 ?>
 
@@ -7,20 +9,39 @@ get_header();
         <h1><?= __( 'Glossary', 'plenamata' ) ?></h1>
     </header>
     <div class="glossary__body">
-        <nav>
-            <h2>
-                <?= __( 'Sections', 'plenamata' ) ?>
-            </h2>
-            <ul>
-                <?php foreach ( $sections as $section ): ?>
-                    <li class="<?= ($section->term_id == $active_section['term_id'] ?  'active' : '') ?>">
-                        <a href="<?= $archive_link ?>#<?= $section->slug ?>">
-                            <?= $section->name ?>
-                        </a>
-                    </li>
-                <?php endforeach; ?>
-            </ul>
-        </nav>
+
+        <div class="glossary__entry">
+            <details>
+                <summary>
+                    <h2><?= __( 'Sections', 'plenamata' ) ?></h2>
+                </summary>
+
+                <ul>
+                    <?php foreach ( $sections as $section ): ?>
+                        <li class="<?= ($section->term_id == $active_section['term_id'] ?  'active' : '') ?>">
+                            <a href="<?= $archive_link ?>#<?= $section->slug ?>">
+                                <?= $section->name ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </details>
+
+            <aside>
+                <h2><?= __( 'Sections', 'plenamata' ) ?></h2>
+
+                <ul>
+                    <?php foreach ( $sections as $section ): ?>
+                        <li class="<?= ($section->term_id == $active_section['term_id'] ?  'active' : '') ?>">
+                            <a href="<?= $archive_link ?>#<?= $section->slug ?>">
+                                <?= $section->name ?>
+                            </a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </aside>
+        </div>
+
         <main>
             <h2><?php the_title() ?></h2>
             <div class="glossary-entry__excerpt">

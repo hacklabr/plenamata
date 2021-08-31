@@ -1,4 +1,11 @@
 .glossary {
+
+    .site-content {
+        @include mobile {
+            margin-top: size(69);
+        }
+    }
+
     &__header {
         background-color: $c_pink;
         padding: size(80) 0;
