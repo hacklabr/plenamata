@@ -1,4 +1,10 @@
-.glossary-entry{
+.glossary-entry {
+
+    .site-content {
+        @include mobile {
+            margin-top: size(69);
+        }
+    }
 
     .glossary {
         
@@ -10,34 +16,8 @@
             justify-content: start;
             padding-left: size(30);
 
-            nav {
-                h2 {
-                    font-size: size(18);
-                    margin: size(6) 0 size(32);
-                    text-align: left;
-                }
-
-                ul {
-                    margin: 0;
-                    padding: 0;
-    
-                    li {
-                        list-style: none;
-                        margin: size(8) 0;
-                        padding: size(8);
-                        a {
-                            font-style: normal;
-                            font-weight: normal;
-                            font-size: size(18);
-                            line-height: size(20);
-                            color: var(--secondary);
-                            text-decoration: none!important;
-                        }
-                    }
-                    li:hover, .active {
-                        background: #F5F1EE;
-                    }
-                }
+            @include mobile {
+                display: block;
             }
 
             main {
@@ -46,6 +26,64 @@
                     text-align: center;
                     font-size: size(40);
                     line-height: size(43.5);
+
+                    @include mobile {
+                        border-top: 1px solid #ff7373;
+                        margin: size(25) 0 size(32) 0;
+                        padding-top: size(40);
+                    }
+                }
+            }
+        }
+
+        &__entry {
+
+            details {
+                @include tablet-up {
+                    display: none;
+                }
+            }
+
+            aside {
+                @include mobile {
+                    display: none;
+                }
+            }
+
+            summary {
+                border: 0;
+                padding: size(25) 0 0 0;
+            }
+
+            h2 {
+                font-size: size(18);
+                text-transform: uppercase;
+
+                @include mobile {
+                    font-size: size(16);
+                }
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+
+                li {
+                    list-style: none;
+                    margin: size(8) 0;
+                    padding: size(8) size(8) size(8) 0;
+
+                    a {
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: size(18);
+                        line-height: size(20);
+                        color: var(--secondary);
+                        text-decoration: none!important;
+                    }
+                }
+                li:hover, .active {
+                    background: #F5F1EE;
                 }
             }
         }
@@ -64,8 +102,10 @@
         }
 
         p {
+            font-size: size(16) !important;
             font-style: italic;
             font-weight: bold;
+            line-height: size(28);
             margin: size(32) 0 0;
             text-align: center;
 
@@ -85,13 +125,23 @@
             line-height: size(17);
             text-decoration-line: underline!important;
             color: var(--secondary);
+
+            @include mobile {
+                word-break: break-word;
+            }
+        }
+
+        p {
+            font-size: size(16) !important;
+            line-height: size(28);
         }
     }
         
     &__subsection {
         border-top: 1px solid $c_light;
         color: $c_red;
-        margin: size(32) 0 size(24);        
+        margin: size(32) 0 size(24);
+
         h3 {
             font-size: size(16);
             line-height: size(28);
@@ -121,6 +171,7 @@
 
         a {
             color: inherit;
+            text-decoration: none !important;
         }
     }
 
