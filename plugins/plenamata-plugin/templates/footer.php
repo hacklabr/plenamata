@@ -41,5 +41,30 @@
 
 <?php wp_footer(); ?>
 
+<?php if ( is_post_type_archive( 'verbete' ) ) : ?>
+
+<script>
+        $(function(){ 
+
+            $("#filtro-glossario").keyup(function(){
+            var texto = $(this).val();
+            
+                $("summary").each(function(){
+                    var resultado = $(this).text().toUpperCase().indexOf(' '+texto.toUpperCase());
+                    
+                    if(resultado < 0) {
+                        $(this).fadeOut();
+                    }else {
+                        $(this).fadeIn();
+                    }
+                }); 
+
+            });
+
+        });
+</script>
+
+<?php endif; ?>
+
 </body>
 </html>

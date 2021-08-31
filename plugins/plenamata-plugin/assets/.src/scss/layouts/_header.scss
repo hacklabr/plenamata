@@ -203,3 +203,60 @@ body.admin-bar header.site-header {
 .freeze{
     overflow-y: hidden;
 }
+
+.bottom-header-contain{
+    top: 0 !important;
+    background-color: var(--primary) !important;
+    color: #FFFF !important;
+    height: 68px !important;
+    
+    @include desktop{
+        .subpage-toggle-contain.desktop{
+            display: block;
+            .mobile-menu-toggle{
+                display: block;
+            }
+        }
+
+        .subpage-toggle-contain.mobile{
+            display: none !important;
+            .mobile-menu-toggle{
+                display: none;
+            }
+        }
+    }
+
+    @include mobile{
+        .subpage-toggle-contain.desktop{
+            display: none !important;
+            .mobile-menu-toggle{
+                display: none;
+            }
+        }
+
+        .subpage-toggle-contain.mobile{
+            display: block !important;
+            .mobile-menu-toggle{
+                display: block;
+            }
+        }
+    }
+
+
+    .wrapper{
+        justify-content: space-between !important;
+    }
+    
+    p{
+        color: #FFFF !important;
+        font-family: 'Archivo' !important;
+    }
+
+    .page--share div{
+        background-color: #FFFF !important;
+        
+        a i{
+            color: var(--primary) !important;
+        }
+    }
+}

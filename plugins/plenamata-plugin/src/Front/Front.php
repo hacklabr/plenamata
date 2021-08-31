@@ -84,6 +84,8 @@ class Front {
 	 * @since 0.1.0
 	 */
 	public function enqueue_styles(): void {
+        wp_enqueue_style('jeo-theme-fontawesome', "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css", array(), '5.12.0', 'all');
+
 		wp_enqueue_style(
 			'plenamata-plugin',
 			PLENAMATA_PLUGIN_URL . 'assets/build/css/main.css',
@@ -143,6 +145,7 @@ class Front {
      */
     private function register_jeo_assets(): void {
         wp_enqueue_style( 'mapboxgl', 'https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css', '1.4.1' );
+       
         wp_register_script( 'mapboxgl-loader', JEO_BASEURL . '/js/build/mapboxglLoader.js', JEO_VERSION );
 
         wp_register_script( 'jeo-map', JEO_BASEURL . '/js/build/jeoMap.js', [ 'mapboxgl-loader', 'jquery', 'wp-element' ], JEO_VERSION, true );
@@ -226,7 +229,7 @@ class Front {
     }
     public function replace_header_close() : void {
         ob_end_clean();
-        if ( is_singular() && ! is_home() && ! is_front_page() ) {
+        if ( is_single() && ! is_home() && ! is_front_page() ) {
             require PLENAMATA_PLUGIN_PATH . 'templates/header-single.php';
         } else {
             require PLENAMATA_PLUGIN_PATH . 'templates/header.php';
