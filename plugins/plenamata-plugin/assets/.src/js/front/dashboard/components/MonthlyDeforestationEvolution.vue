@@ -82,7 +82,7 @@
                     datasets: this.datasets.map((dataset) => {
                         return {
                             label: dataset.label,
-                            data: dataset.data.map((datum) => Number(datum.areamunkm) / factor),
+                            data: dataset.data.map((datum) => Number(datum.areamunkm) * factor),
                             backgroundColor: dataset.backgroundColor,
                         }
                     }),
