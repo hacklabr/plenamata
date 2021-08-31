@@ -196,31 +196,76 @@
             text-align: center;
         }
         
-        .form-control{
-            display: flex;
-            p{
-                margin: 0;
-                color: var(--primary);
-                margin: -10px 0 0 20px;
+        p{
+            label{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+
+                display: block;
+                position: relative;
+                padding-left: 35px;
+                margin-bottom: 12px;
+                cursor: pointer;
+                font-size: 22px;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+
+                input:checked ~ .checkmark {
+                    background-color: #ffee87;
+                }
+                
+                .checkmark:after {
+                    content: "";
+                    position: absolute;
+                    display: none;
+                }
+                
+                input:checked ~ .checkmark:after {
+                    display: block;
+                }
+
+                .checkmark{
+                    background-color: #ffee87;
+                    width: 24px;
+                    height: 24px;
+                    border: solid 1px var(--primary);
+                    display: block;
+                    border-radius: 4px;
+                    left: 0;
+                    position: absolute;
+                    top: 40%;
+                }
+                
+                .checkmark:after {
+                    left: 5px;
+                    top: 4px;
+                    width: 12px;
+                    height: 12px;
+                    background-color: var(--primary);
+                    border-radius: 4px;
+                }
+
+                input{
+
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                    height: 0;
+                    width: 0;
+
+
+                    margin-right: 20px;
+                }
+
             }
         }
 
         input[type="submit"]{
             width: 100%;
         }
-
-        input[type="checkbox"]::after {
-            content: '';
-            background-color: #ffee87;
-            border: solid 1px #000;
-            width: 25px;
-            height: 25px;
-            display: block;
-            border: solid 1px var(--primary);
-            border-radius: 6px;
-            margin: -3px;
-        }
-        
     }
 }
 
