@@ -151,7 +151,7 @@
             unitModel: vModel('unit'),
         },
         watch: {
-            state: {
+            filterKey: {
                 handler: 'fetchData',
                 immediate: true,
             },
