@@ -87,12 +87,21 @@ $urlTweetShare = urldecode(get_the_title() . ' ' . get_the_permalink() . $twitte
 		</button>
 
 		<header id="masthead" class="site-header hide-header-search" [class]="searchVisible ? 'show-header-search site-header ' : 'hide-header-search site-header'">
+		
+			<div id="header-search" class="tablet-down-search" [aria-expanded]="searchVisible ? 'true' : 'false'" aria-expanded="false">
+				<div class="wrapper">
+					<div class="content-limiter">
+						<span class="search-text"><?= __('What are you looking for?', 'jeo'); ?></span>
+						<?php get_search_form(); ?>
+					</div>
+				</div>
+			</div><!-- #header-search -->
 
 				<div class="bottom-header-contain post-header">
 					<div class="wrapper">
 						<div class="left">
-							<div class="subpage-toggle-contain">
-								<button class="subpage-toggle" on="tap:subpage-sidebar.toggle">
+							<div class="subpage-toggle-contain desktop">
+								<button class="mobile-menu-toggle" on="tap:subpage-sidebar.toggle">
 									<?php echo wp_kses(newspack_get_icon_svg('menu', 20), newspack_sanitize_svgs()); ?>
 									<span class="screen-reader-text"><?php esc_html_e('Menu', 'newspack'); ?></span>
 								</button>
@@ -104,6 +113,12 @@ $urlTweetShare = urldecode(get_the_title() . ' ' . get_the_permalink() . $twitte
 
 						<p class="title"> <?php echo esc_html(wp_kses_post(get_the_title())); ?></p>
 						<?php get_template_part( 'template-parts/content/content', 'social-networks' ); ?>
+						<div class="subpage-toggle-contain mobile">
+								<button class="mobile-menu-toggle" on="tap:subpage-sidebar.toggle">
+									<?php echo wp_kses(newspack_get_icon_svg('menu', 20), newspack_sanitize_svgs()); ?>
+									<span class="screen-reader-text"><?php esc_html_e('Menu', 'newspack'); ?></span>
+								</button>
+							</div>
 					</div><!-- .wrapper -->
 				</div><!-- .bottom-header-contain -->
 		</header><!-- #masthead -->
@@ -113,3 +128,5 @@ $urlTweetShare = urldecode(get_the_title() . ' ' . get_the_permalink() . $twitte
 			yoast_breadcrumb('<div class="site-breadcrumb desktop-only"><div class="wrapper">', '</div></div>');
 		}
 		?>
+
+

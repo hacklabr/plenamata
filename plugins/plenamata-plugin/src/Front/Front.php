@@ -229,7 +229,7 @@ class Front {
     }
     public function replace_header_close() : void {
         ob_end_clean();
-        if ( is_singular() && ! is_home() && ! is_front_page() ) {
+        if ( is_single() && ! is_home() && ! is_front_page() ) {
             require PLENAMATA_PLUGIN_PATH . 'templates/header-single.php';
         } else {
             require PLENAMATA_PLUGIN_PATH . 'templates/header.php';
