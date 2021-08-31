@@ -1,7 +1,7 @@
 <template>
     <DashboardPanel type="chart">
         <template #title>
-            {{ __('Evolução anual do desmatamento consolidado', 'plenamata') }}
+            {{ __('Evolução anual do desmatamento consolidado - PRODES', 'plenamata') }}
         </template>
         <template #filters>
             <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
