@@ -121,14 +121,14 @@
             },
             states () {
                 return {
-                    AC: { uf: 'AC', name: 'Acre' },
-                    AM: { uf: 'AM', name: 'Amazonas' },
-                    AP: { uf: 'AP', name: 'Amapá' },
-                    MA: { uf: 'MA', name: 'Maranhão' },
-                    MT: { uf: 'MT', name: 'Mato Grosso' },
-                    PA: { uf: 'PA', name: 'Pará' },
-                    RO: { uf: 'RO', name: 'Rondônia' },
-                    RR: { uf: 'RR', name: 'Roraima' },
+                    AC: { uf: 'AC', name: 'Acre', lat: -8.77, long: -70.55 },
+                    AM: { uf: 'AM', name: 'Amazonas', lat: -3.07, long: -61.66 },
+                    AP: { uf: 'AP', name: 'Amapá', lat: 1.41, long: -51.77 },
+                    MA: { uf: 'MA', name: 'Maranhão', lat: -2.55, long: -44.30 },
+                    MT: { uf: 'MT', name: 'Mato Grosso', lat: -12.64, long: -55.42 },
+                    PA: { uf: 'PA', name: 'Pará', lat: -5.53, long: -52.29 },
+                    RO: { uf: 'RO', name: 'Rondônia', lat: -11.22, long: -62.80 },
+                    RR: { uf: 'RR', name: 'Roraima', lat: 1.89, long: -61.22 },
                 }
             },
             trees () {
@@ -164,10 +164,13 @@
         },
         methods: {
             centerMap (state = '') {
+                const mapEluuid = this.$refs.map.lastChild.dataset['uui_id']
+                const JeoMap = window.jeomaps[ mapEluuid ]
                 if (state) {
                     /* One state */
                     const stateData = this.states[state]
-                    console.log(stateData)
+                    JeoMap.map.flyTo({center: [stateData.long, stateData.lat], zoom: JeoMap.getArg( 'initial_zoom' ) });
+
                 } else {
                     /* All Brasil */
                 }
