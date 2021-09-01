@@ -9,12 +9,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-09-01T15:09:08+00:00\n"
+"POT-Creation-Date: 2021-09-01T18:40:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: plenamata\n"
 
 #. Plugin Name of the plugin
+#: src/Admin/SettingsPage.php:87
 msgid "Plenamata Plugin"
 msgstr ""
 
@@ -30,9 +31,53 @@ msgstr ""
 msgid "hacklab.com.br"
 msgstr ""
 
+#: inc/authors_list_widget.php:15
+msgid "Authors List"
+msgstr ""
+
+#: inc/authors_list_widget.php:71
+msgid "show"
+msgstr ""
+
+#: inc/authors_list_widget.php:75
+msgid "Title:"
+msgstr ""
+
+#: plenamata-plugin.php:40
+msgid "The minimum version of PHP is <strong>7.2.5</strong>. Please update the PHP on your server and try again."
+msgstr ""
+
 #: src/Admin/Blocks.php:38
 #: assets/build/js/dashboard.js:39501
 msgid "Dashboard"
+msgstr ""
+
+#: src/Admin/Blocks.php:154
+msgid "estimativa em tempo real"
+msgstr ""
+
+#: src/Admin/Blocks.php:167
+msgid "árvores/ dia"
+msgstr ""
+
+#: src/Admin/Blocks.php:176
+msgid "hectares/ dia"
+msgstr ""
+
+#: src/Admin/Blocks.php:190
+msgid "alertas"
+msgstr ""
+
+#: src/Admin/Blocks.php:201
+#: assets/.src/js/admin/blocks/deforestation-info.js:55
+#: assets/build/js/admin/blocks.js:172
+#: assets/build/js/dashboard.js:40206
+#: assets/build/js/dashboard.js:40654
+msgid "hectares"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:86
+msgid "Plenamata Plugin Settings"
 msgstr ""
 
 #: src/Admin/SettingsPage.php:99
@@ -46,6 +91,10 @@ msgstr ""
 #: templates/parts/header/mobile-sidebar.php:186
 #: templates/single-verbete.php:9
 msgid "Glossary"
+msgstr ""
+
+#: src/Front/Front.php:155
+msgid "Read more"
 msgstr ""
 
 #: templates/archive-verbete.php:7
@@ -64,6 +113,10 @@ msgstr ""
 msgid "Acessar verbete completo"
 msgstr ""
 
+#: templates/archive.php:87
+msgid "ABOUT THE AUTHOR"
+msgstr ""
+
 #: templates/footer.php:24
 msgid "COPYRIGHT © %s PlenaMata"
 msgstr ""
@@ -76,8 +129,52 @@ msgstr ""
 msgid "Natura & Co - Compromisso com a Vida 2030"
 msgstr ""
 
+#: templates/header-single.php:94
+msgid "What are you looking for?"
+msgstr ""
+
+#: templates/header.php:32
+#: templates/header.php:113
+#: templates/header.php:157
+msgid "Menu"
+msgstr ""
+
+#: templates/header.php:97
+#: templates/header.php:263
+#: templates/parts/header/mobile-sidebar.php:32
+msgid "Discovery"
+msgstr ""
+
+#: templates/header.php:307
+msgid "Close Search"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:47
+msgid "MORE"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:69
+msgid "Language"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:79
+msgid "Dark mode"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:95
+msgid "Type size"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:124
+msgid "Follow us"
+msgstr ""
+
 #: templates/parts/header/mobile-sidebar.php:155
 msgid "Monitor"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:197
+msgid "Share"
 msgstr ""
 
 #: templates/single-verbete.php:16
@@ -89,6 +186,46 @@ msgstr ""
 msgid "Tags:"
 msgstr ""
 
+#: assets/.src/js/admin/blocks/deforestation-info.js:8
+#: assets/build/js/admin/blocks.js:110
+msgid "Deforestation Info"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:14
+#: assets/build/js/admin/blocks.js:117
+msgid "Desmatados na Amazônia nos últimos 07 dias."
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:23
+#: assets/build/js/admin/blocks.js:125
+msgid "Title"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:26
+#: assets/build/js/admin/blocks.js:132
+msgid "Type the box title"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:29
+#: assets/build/js/admin/blocks.js:134
+msgid "Count"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:34
+#: assets/build/js/admin/blocks.js:143
+msgid "Type the count"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:37
+#: assets/build/js/admin/blocks.js:145
+msgid "Source"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:40
+#: assets/build/js/admin/blocks.js:152
+msgid "Type the source of data"
+msgstr ""
+
 #: assets/.src/js/admin/blocks/verbete-subsection.js:8
 #: assets/build/js/admin/blocks.js:471
 msgid "Verbete subsection"
@@ -98,6 +235,74 @@ msgstr ""
 #: assets/build/js/admin/blocks.js:488
 msgctxt "section"
 msgid "Title:"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:273
+msgid "Estimatives Area"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:279
+msgid "Dados de Desmatamento na Amazônia Brasileira"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:283
+msgid "Árvores derrubadas em 2021"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:287
+msgid "Média de desmatamento em 2021"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:291
+msgid "Desmatados 2021"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:295
+msgid "Estimativas detectadas e reportadas. Velocidades médias. | Fonte: MapBiomas. | Última atualização: 08.06.2021"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:349
+msgid "Type the heading text"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:357
+msgid "Type the before number title"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:362
+msgid "Base trees"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:367
+msgid "Base date"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:379
+msgid "Type the average title"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:385
+msgid "Trees per day"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:391
+msgid "Hectares per day"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:399
+msgid "Type the desforested title"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:405
+msgid "Warnings"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:411
+msgid "Hectares"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:421
+msgid "Type the final information"
 msgstr ""
 
 #: assets/build/js/dashboard.js:3872
@@ -222,11 +427,6 @@ msgstr ""
 
 #: assets/build/js/dashboard.js:40158
 msgid "Área desmatada na última semana"
-msgstr ""
-
-#: assets/build/js/dashboard.js:40206
-#: assets/build/js/dashboard.js:40654
-msgid "hectares"
 msgstr ""
 
 #: assets/build/js/dashboard.js:40210
