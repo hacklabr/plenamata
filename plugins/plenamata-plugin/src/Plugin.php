@@ -12,6 +12,7 @@
 namespace PlenamataPlugin;
 
 use Exception;
+use PlenamataPlugin\Common\Translations;
 use PlenamataPlugin\Common\RestApi;
 use PlenamataPlugin\Front\Front;
 use PlenamataPlugin\Admin\Blocks;
@@ -79,6 +80,7 @@ class Plugin {
 	 * @throws InjectionException If a cyclic gets detected when provisioning.
 	 */
 	private function run_admin(): void {
+		$this->injector->make( Translations::class )->hooks();
         $this->injector->make( Blocks::class )->hooks();
         $this->injector->make( Blocks::class )->filters();
 		$this->injector->make( SettingsPage::class )->hooks();
@@ -94,6 +96,7 @@ class Plugin {
 	 * @throws InjectionException If a cyclic gets detected when provisioning.
 	 */
 	private function run_front(): void {
+		$this->injector->make( Translations::class )->hooks();
 		$this->injector->make( Blocks::class )->hooks();
         $this->injector->make( Blocks::class )->filters();
 		$this->injector->make( Front::class )->hooks();
