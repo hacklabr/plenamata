@@ -10,7 +10,8 @@
  * Author:              hacklab/
  * Author URI:          hacklab.com.br
  * License:             MIT
- * Text Domain:         plenamata-plugin
+ * Text Domain:         plenamata
+ * Domain Path:         /languages
  *
  * @package     PlenamataPlugin
  */
