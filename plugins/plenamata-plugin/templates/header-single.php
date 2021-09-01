@@ -91,7 +91,7 @@ $urlTweetShare = urldecode(get_the_title() . ' ' . get_the_permalink() . $twitte
 			<div id="header-search" class="tablet-down-search" [aria-expanded]="searchVisible ? 'true' : 'false'" aria-expanded="false">
 				<div class="wrapper">
 					<div class="content-limiter">
-						<span class="search-text"><?= __('What are you looking for?', 'jeo'); ?></span>
+						<span class="search-text"><?= __('What are you looking for?', 'plenamata'); ?></span>
 						<?php get_search_form(); ?>
 					</div>
 				</div>

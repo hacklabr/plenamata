@@ -12,7 +12,7 @@ class authors_list_widget extends WP_Widget {
      */
     function __construct() {
         // Instantiate the parent object.
-        parent::__construct( false, __( 'Authors List', 'textdomain' ) );
+        parent::__construct( false, __( 'Authors List', 'plenamata' ) );
     }
  
     /**
@@ -65,14 +65,14 @@ class authors_list_widget extends WP_Widget {
      * @return string The HTML markup for the form.
      */
     function form( $instance ) {
-        $title = !empty($instance['title']) ? $instance['title'] : esc_html__('', 'jeo');
+        $title = !empty($instance['title']) ? $instance['title'] : esc_html__('', 'plenamata');
 		$min_posts = !empty($instance['min_posts']) ? $instance['min_posts'] : 1;
 		$max_posts = !empty($instance['max_posts']) ? $instance['max_posts'] : 3;
-		$featured_image = !empty($instance['featured_image']) ? $instance['featured_image'] : esc_html__('show', 'jeo');
+		$featured_image = !empty($instance['featured_image']) ? $instance['featured_image'] : esc_html__('show', 'plenamata');
 
 	?>
 		<p>
-			<label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_attr_e('Title:', 'jeo'); ?></label>
+			<label for="<?php echo esc_attr($this->get_field_id('title')); ?>"><?php esc_attr_e('Title:', 'plenamata'); ?></label>
 			<input class="widefat" id="<?php echo esc_attr($this->get_field_id('title')); ?>" name="<?php echo esc_attr($this->get_field_name('title')); ?>" type="text" value="<?php echo esc_attr($title); ?>">
 		</p>
 	<?php

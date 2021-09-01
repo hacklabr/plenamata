@@ -37,7 +37,7 @@ if ( version_compare( phpversion(), '7.2.5', '<' ) ) {
 			<p>
 				<?php
 				echo wp_kses(
-					__( 'The minimum version of PHP is <strong>7.2.5</strong>. Please update the PHP on your server and try again.', 'plenamata_plugin' ),
+					__( 'The minimum version of PHP is <strong>7.2.5</strong>. Please update the PHP on your server and try again.', 'plenamata' ),
 					[
 						'strong' => [],
 					]

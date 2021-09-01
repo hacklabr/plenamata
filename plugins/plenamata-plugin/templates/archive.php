@@ -84,7 +84,7 @@ get_header();
     			<div>
 					<?php if ( strlen(trim(get_the_author_meta('description'))) > 0 ) : ?>
 						<div class="about-the-author-section">
-							<h4><?php _e('ABOUT THE AUTHOR', 'jeo') ?></h4>
+							<h4><?php _e('ABOUT THE AUTHOR', 'plenamata') ?></h4>
 							<p><?php echo get_the_author_meta('description'); ?></p>
 						</div>
 					<?php endif; ?>

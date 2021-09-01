@@ -29,7 +29,7 @@ if (newspack_is_amp()) : ?>
 			<div class="discovery-menu">
 				<div class="discovery-title">
 					<a href="<?= $button_url ?>" class="discovery-link">
-						<?= __('Discovery', 'jeo') ?>
+						<?= __('Discovery', 'plenamata') ?>
 					</a>
 				</div>
 			</div>
@@ -44,7 +44,7 @@ if (newspack_is_amp()) : ?>
 				<?php
 				$more_name = esc_html(wp_get_nav_menu_name('more-menu'));
 				if (strlen($more_name) <= 0) {
-					$more_name = __('MORE', 'jeo');
+					$more_name = __('MORE', 'plenamata');
 				}
 				?>
 				<span class="more-name"><?= $more_name ?></span>
@@ -66,7 +66,7 @@ if (newspack_is_amp()) : ?>
 				<?php if ($nav) : ?>
 					<div class="item">
 						<div class="item--title language-title">
-							<?= __("Language", "jeo") ?>
+							<?= __("Language", "plenamata") ?>
 						</div>
 						<div class="item--content language-item-content">
 							<?php echo $nav; ?>
@@ -76,7 +76,7 @@ if (newspack_is_amp()) : ?>
 
 				<div class="item">
 					<div class="item--title">
-						<?= __("Dark mode", "jeo") ?>
+						<?= __("Dark mode", "plenamata") ?>
 					</div>
 
 					<div class="item--content padded">
@@ -92,7 +92,7 @@ if (newspack_is_amp()) : ?>
 
 				<div class="item">
 					<div class="item--title">
-						<?= __("Type size", "jeo") ?>
+						<?= __("Type size", "plenamata") ?>
 					</div>
 
 					<div class="item--content padded">
@@ -121,7 +121,7 @@ if (newspack_is_amp()) : ?>
 		
 		<div class="social-menus">
 			<div class="social-menus--title">
-				<?= __("Follow us", "jeo") ?>
+				<?= __("Follow us", "plenamata") ?>
 			</div>
 			<?php
 			newspack_social_menu_header();
@@ -194,7 +194,7 @@ if (newspack_is_amp()) : ?>
 					<path d="M13.5 0C12.7839 0 12.0972 0.284464 11.5908 0.790812C11.0845 1.29716 10.8 1.98392 10.8 2.7C10.8006 2.86934 10.817 3.03824 10.8492 3.20449L4.44551 6.93984C3.95776 6.52666 3.33923 6.29993 2.7 6.3C1.98392 6.3 1.29716 6.58446 0.790812 7.09081C0.284464 7.59716 0 8.28392 0 9C0 9.71608 0.284464 10.4028 0.790812 10.9092C1.29716 11.4155 1.98392 11.7 2.7 11.7C3.33825 11.6987 3.95541 11.4714 4.44199 11.0584L10.8492 14.7955C10.817 14.9618 10.8006 15.1307 10.8 15.3C10.8 16.0161 11.0845 16.7028 11.5908 17.2092C12.0972 17.7155 12.7839 18 13.5 18C14.2161 18 14.9028 17.7155 15.4092 17.2092C15.9155 16.7028 16.2 16.0161 16.2 15.3C16.2 14.5839 15.9155 13.8972 15.4092 13.3908C14.9028 12.8845 14.2161 12.6 13.5 12.6C12.8611 12.6008 12.2433 12.8282 11.7563 13.2416L5.35078 9.50449C5.38297 9.33824 5.39945 9.16934 5.4 9C5.39945 8.83066 5.38297 8.66176 5.35078 8.49551L11.7545 4.76016C12.2422 5.17334 12.8608 5.40007 13.5 5.4C14.2161 5.4 14.9028 5.11554 15.4092 4.60919C15.9155 4.10284 16.2 3.41608 16.2 2.7C16.2 1.98392 15.9155 1.29716 15.4092 0.790812C14.9028 0.284464 14.2161 0 13.5 0Z" fill="#FF7373"/>
 				</svg>
 				<div class="item--title">
-					<?= __("Share", "jeo") ?>
+					<?= __("Share", "plenamata") ?>
 				</div>
 			</button>
 		</div>
