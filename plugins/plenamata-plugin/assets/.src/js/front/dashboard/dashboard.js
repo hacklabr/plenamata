@@ -1,4 +1,4 @@
-import { Chart, BarController, BarElement, CategoryScale, Legend, LinearScale } from 'chart.js'
+import { Chart, BarController, BarElement, CategoryScale, Legend, LinearScale, Tooltip } from 'chart.js'
 import ZoomPlugin from 'chartjs-plugin-zoom'
 import Vue from 'vue'
 
@@ -9,7 +9,7 @@ import I18n from './plugins/i18n'
 export class Dashboard {
 
     constructor() {
-        Chart.register(BarController, BarElement, CategoryScale, Legend, LinearScale, ZoomPlugin)
+        Chart.register(BarController, BarElement, CategoryScale, Legend, LinearScale, Tooltip, ZoomPlugin)
 
         Vue.use(Globals)
         Vue.use(I18n)
