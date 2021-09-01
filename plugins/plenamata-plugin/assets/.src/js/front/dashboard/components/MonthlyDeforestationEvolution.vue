@@ -89,6 +89,7 @@
                 }
             },
             chartOptions () {
+                const months = this.months.length - 1
                 return {
                     plugins: {
                         legend: {
@@ -99,6 +100,12 @@
                                 enabled: true,
                                 mode: 'x',
                             },
+                        },
+                    },
+                    scales: {
+                        x: {
+                            min: Math.max(0, months - 2),
+                            max: months,
                         },
                     },
                 }
@@ -121,6 +128,7 @@
                             }) || {}
                         }),
                         backgroundColor: color.lighten(0.4 - (0.08 * i)).string(),
+                        barThickness: 50,
                     }
 
                     datasets.push(dataset)
