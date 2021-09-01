@@ -94,6 +94,12 @@
                         legend: {
                             position: 'bottom',
                         },
+                        zoom: {
+                            pan: {
+                                enabled: true,
+                                mode: 'x',
+                            },
+                        },
                     },
                 }
             },
