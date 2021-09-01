@@ -40,7 +40,7 @@ class Plugin {
 	 *
 	 * @since 0.1.0
 	 */
-	const VERSION = '0.2.9';
+	const VERSION = '0.3.0';
 	/**
 	 * Dependency Injection Container.
 	 *
