@@ -112,7 +112,7 @@
 
                             return this.data.find((datum) => {
                                 return datum.month === month && datum.year === year
-                            })
+                            }) || {}
                         }),
                         backgroundColor: color.alpha(i * 0.2).string(),
                     }
