@@ -114,7 +114,7 @@
                                 return datum.month === month && datum.year === year
                             }) || {}
                         }),
-                        backgroundColor: color.alpha(i * 0.2).string(),
+                        backgroundColor: color.lighten(0.5 - (0.1 * i)).string(),
                     }
 
                     datasets.push(dataset)
