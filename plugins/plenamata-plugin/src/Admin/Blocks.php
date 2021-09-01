@@ -151,7 +151,7 @@ class Blocks {
 
                     <div class="number">
                         <span id="trees-estimative" data-base-trees="<?= $baseTrees ?? '' ?>" data-trees-per-day="<?= $tressPerDay ?? '' ?>" data-date="<?= $baseDate ?? '' ?>">loading...</span>
-                        <span><?= __("estimativa em tempo real", "jeo") ?></span>
+                        <span><?= __("estimativa em tempo real", "plenamata") ?></span>
                     </div>
                 </div>
 
@@ -164,7 +164,7 @@ class Blocks {
                                     <?= $tressPerDay ?? '' ?>
                                 </span>
                                 <span>
-                                    <?= __("árvores/ dia", "jeo") ?>
+                                    <?= __("árvores/ dia", "plenamata") ?>
                                 </span>
                             </div>
 
@@ -173,7 +173,7 @@ class Blocks {
                                     <?= $hecPerDay ?? '' ?>
                                 </span>
                                 <span>
-                                    <?= __("hectares/ dia", "jeo") ?>
+                                    <?= __("hectares/ dia", "plenamata") ?>
                                 </span>
                             </div>
                         </div>
@@ -187,7 +187,7 @@ class Blocks {
                                     <?= $warnings ?? '' ?>
                                 </span>
                                 <span data-mask="true">
-                                    <?= __("alertas", "jeo") ?>
+                                    <?= __("alertas", "plenamata") ?>
                                 </span>
                             
                             </div>
@@ -198,7 +198,7 @@ class Blocks {
                                 </span>
 
                                 <span>
-                                    <?= __("hectares", "jeo") ?>
+                                    <?= __("hectares", "plenamata") ?>
                                 </span>
                             </div>
                         </div>

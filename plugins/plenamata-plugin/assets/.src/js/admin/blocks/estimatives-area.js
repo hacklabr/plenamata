@@ -4,29 +4,29 @@ import { __ } from "@wordpress/i18n";
 import { registerBlockType } from '@wordpress/blocks';
 
 registerBlockType('plenamata/estimatives-area', {
-    title: __('Estimatives Area', 'jeo'),
+    title: __('Estimatives Area', 'plenamata'),
     icon: 'visibility',
     category: 'common',
     attributes: {
         headingTitle: {
             type: 'string',
-            default: __("Dados de Desmatamento na Amazônia Brasileira", "jeo"),
+            default: __("Dados de Desmatamento na Amazônia Brasileira", "plenamata"),
         },
         preNumberTitle: {
             type: 'string',
-            default: __("Árvores derrubadas em 2021", "jeo"),
+            default: __("Árvores derrubadas em 2021", "plenamata"),
         },
         averageTitle: {
             type: 'string',
-            default: __("Média de desmatamento em 2021", "jeo"),
+            default: __("Média de desmatamento em 2021", "plenamata"),
         },
         deforestedTitle: {
             type: 'string',
-            default: __("Desmatados 2021", "jeo"),
+            default: __("Desmatados 2021", "plenamata"),
         },
         finalInformation: {
             type: 'string',
-            default: __("Estimativas detectadas e reportadas. Velocidades médias. | Fonte: MapBiomas. | Última atualização: 08.06.2021", "jeo"),
+            default: __("Estimativas detectadas e reportadas. Velocidades médias. | Fonte: MapBiomas. | Última atualização: 08.06.2021", "plenamata"),
         },
         baseTrees: {
             type: 'string',
@@ -85,7 +85,7 @@ registerBlockType('plenamata/estimatives-area', {
                         className="heading-title"
                         value={attributes.headingTitle}
                         onChange={updateAttribute('headingTitle')}
-                        placeholder={__('Type the heading text', 'jeo')}
+                        placeholder={__('Type the heading text', 'plenamata')}
                     />
                 </div>
 
@@ -96,7 +96,7 @@ registerBlockType('plenamata/estimatives-area', {
                         className="pre-number-title"
                         value={attributes.preNumberTitle}
                         onChange={updateAttribute('preNumberTitle')}
-                        placeholder={__('Type the before number title', 'jeo')}
+                        placeholder={__('Type the before number title', 'plenamata')}
                     />
 
                     <div className="number">
@@ -108,14 +108,14 @@ registerBlockType('plenamata/estimatives-area', {
 
                     <NumberControl
                         className="base-trees"
-                        label={__("Base trees", "jeo")}
+                        label={__("Base trees", "plenamata")}
                         value={ attributes.baseTrees }
                         isShiftStepEnabled={ true }
                         shiftStep={ 1 }
                         onChange={ updateAttribute('baseTrees') }
                     />
 
-                    { __("Base date", "jeo") }
+                    { __("Base date", "plenamata") }
 
                     <DateTimePicker
                         className="base-date"
@@ -133,14 +133,14 @@ registerBlockType('plenamata/estimatives-area', {
                             className="average-title"
                             value={attributes.averageTitle}
                             onChange={updateAttribute('averageTitle')}
-                            placeholder={__('Type the average title', 'jeo')}
+                            placeholder={__('Type the average title', 'plenamata')}
                         />
 
                         <div className="data">
                             <div className="area">
                                 <span>
                                     <NumberControl
-                                        label={__("Trees per day", "jeo")}
+                                        label={__("Trees per day", "plenamata")}
                                         value={ attributes.tressPerDay }
                                         onChange={ updateAttribute('tressPerDay') }
                                     />
@@ -150,7 +150,7 @@ registerBlockType('plenamata/estimatives-area', {
                             <div className="area">
                                 <span>
                                     <NumberControl
-                                        label={__("Hectares per day", "jeo")}
+                                        label={__("Hectares per day", "plenamata")}
                                         value={ attributes.hecPerDay }
                                         onChange={ updateAttribute('hecPerDay') }
                                     />
@@ -165,21 +165,21 @@ registerBlockType('plenamata/estimatives-area', {
                             className="deforested-title"
                             value={attributes.deforestedTitle}
                             onChange={updateAttribute('deforestedTitle')}
-                            placeholder={__('Type the desforested title', 'jeo')}
+                            placeholder={__('Type the desforested title', 'plenamata')}
                         />
 
                         <div className="data">
                             <div className="area">
                                 <span>
                                     <NumberControl
-                                        label={__("Warnings", "jeo")}
+                                        label={__("Warnings", "plenamata")}
                                         value={ attributes.warnings }
                                         onChange={ updateAttribute('warnings') }
                                     />
                                 </span>
 
                                 <span>
-                                    {/* { __("Alertas", "jeo") } */}
+                                    {/* { __("Alertas", "plenamata") } */}
                                 </span>
                             
                             </div>
@@ -187,14 +187,14 @@ registerBlockType('plenamata/estimatives-area', {
                             <div className="area">
                                 <span>
                                     <NumberControl
-                                        label={__("Hectares", "jeo")}
+                                        label={__("Hectares", "plenamata")}
                                         value={ attributes.hectares }
                                         onChange={ updateAttribute('hectares') }
                                     />
                                 </span>
 
                                 <span>
-                                    {/* { __("hectares", "jeo") } */}
+                                    {/* { __("hectares", "plenamata") } */}
                                 </span>
                             </div>
                         </div>
@@ -209,7 +209,7 @@ registerBlockType('plenamata/estimatives-area', {
                         className="deforested-title"
                         value={attributes.finalInformation}
                         onChange={updateAttribute('finalInformation')}
-                        placeholder={__('Type the final information', 'jeo')}
+                        placeholder={__('Type the final information', 'plenamata')}
                     />
                 </div>
             </div>

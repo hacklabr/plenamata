@@ -46,27 +46,29 @@
             ] );
         ?>
         <?php if ( !empty( $entries ) ): ?>
-            <h2 id="<?= $section->slug ?>">
-                <?= __( $section->name, 'plenamata' ) ?>
-            </h2>
+            <section id="section_<?= $section->slug ?>">
+                <h2 id="<?= $section->slug ?>">
+                    <?= __( $section->name, 'plenamata' ) ?>
+                </h2>
 
-            <div class="glossary__entries">
-            <?php foreach ( $entries as $entry ): ?>
-                <details class="glossary__entry">
-                    <summary>
-                        <?= $entry->post_title ?>
-                    </summary>
-                    <div class="glossary__entry-detail">
-                        <?= $entry->post_excerpt ?>
-                        <p>
-                            <a href="<?= get_permalink( $entry->ID ) ?>">
-                                <?= __( 'Acessar verbete completo', 'plenamata' ) ?>
-                            </a>
-                        </p>
-                    </div>
-                </details>
-            <?php endforeach; ?>
-            </div>
+                <div class="glossary__entries">
+                <?php foreach ( $entries as $entry ): ?>
+                    <details class="glossary__entry">
+                        <summary>
+                            <?= $entry->post_title ?>
+                        </summary>
+                        <div class="glossary__entry-detail">
+                            <?= $entry->post_excerpt ?>
+                            <p>
+                                <a href="<?= get_permalink( $entry->ID ) ?>">
+                                    <?= __( 'Acessar verbete completo', 'plenamata' ) ?>
+                                </a>
+                            </p>
+                        </div>
+                    </details>
+                <?php endforeach; ?>
+                </div>
+            </section>
         <?php endif; ?>
         <?php endforeach; ?>
         </main>

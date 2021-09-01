@@ -44,24 +44,74 @@
 <?php if ( is_post_type_archive( 'verbete' ) ) : ?>
 
 <script>
-        $(function(){ 
+        /*$(function mostrar(){
+            var allSections = [];
+            var ids = $('main').find(document.getElementsByTagName('h2'));//pegando todas as tags input
+            
+            for (var i = 0; i< ids.length; i++) {
+                allSections.push(ids[i].id);//adicinando o id no array, conforme a posição
 
+                //let contItens = $('#'+ids[i].id).css("background-color", "red");
+                let contItens = $('#'+ids[i].id).siblings('.glossary__entries').children().length;
+                console.log(contItens);
+            }
+                    
+            console.log(allSections);//exibindo
+        });*/
+
+        $(function(){            
+
+            
             $("#filtro-glossario").keyup(function(){
-            var texto = $(this).val();
+                let texto = $(this).val(); 
+
+
+                let itensHidden = [];
+                let totalItens = [];
+                let ids = $('main').find('h2');//pegando todas as tags h2 filho de main  
+                
+                
             
                 $("summary").each(function(){
-                    var resultado = $(this).text().toUpperCase().indexOf(' '+texto.toUpperCase());
+                    resultado = $(this).text().toUpperCase().indexOf(' '+texto.toUpperCase());
                     
                     if(resultado < 0) {
-                        $(this).fadeOut();
+                        $(this).fadeOut().parent().addClass("hide-verbete");
+                        
                     }else {
-                        $(this).fadeIn();
+                        $(this).fadeIn().parent().removeClass("hide-verbete");
                     }
-                }); 
+
+                    for (let i = 0; i< ids.length; i++) {
+    
+                        totalItens[i] = $('#'+ids[i].id).siblings('.glossary__entries').children().length;
+                        itensHidden[i] = $('#'+ids[i].id).siblings('.glossary__entries').find('.hide-verbete').length;
+                        
+                        if(itensHidden[i] == totalItens[i]){
+                            $('#'+ids[i].id).fadeOut();
+                        }
+                        else{
+                            $('#'+ids[i].id).fadeIn();
+                        }
+                        
+                    }                   
+                    
+                });
+                
+                console.log('total '+totalItens);
+                console.log('hidden '+itensHidden);
+
+
+
+
+                
+
 
             });
 
         });
+
+
 </script>
 
 <?php endif; ?>
