@@ -114,7 +114,7 @@
                                 return datum.month === month && datum.year === year
                             }) || {}
                         }),
-                        backgroundColor: color.lighten(0.5 - (0.1 * i)).string(),
+                        backgroundColor: color.lighten(0.4 - (0.08 * i)).string(),
                     }
 
                     datasets.push(dataset)
@@ -143,9 +143,9 @@
                 if (this.source === 'deter') {
                     return this.date.start
                 } else if (this.date.start.month < 8) {
-                    return this.date.start.minus({ months: 5 })
+                    return this.date.end.minus({ years: 5 }).set({ month: 8 })
                 } else {
-                    return this.date.start.plus({ months: 8 })
+                    return this.date.end.minus({ years: 4 }).set({ month: 8 })
                 }
             },
             unitModel: vModel('unit'),
