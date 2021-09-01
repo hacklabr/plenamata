@@ -80,12 +80,39 @@
                 }
             },
             chartOptions () {
+               const weeks = this.areasKm2.length
+
                 return {
                     plugins: {
                         legend: {
                             display: false,
                         },
+                        /*
+                        zoom: {
+                            limits: {
+                                x: {
+                                    min: 1,
+                                    max: weeks,
+                                    minRange: 10,
+                                    maxRange: 10,
+                                },
+                            },
+                            pan: {
+                                enabled: true,
+                                mode: 'x',
+                            },
+                        },
+                        */
                     },
+                    /*
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            min: Math.max(0, weeks - 10),
+                            max: weeks,
+                        },
+                    },
+                    */
                 }
             },
             colors () {

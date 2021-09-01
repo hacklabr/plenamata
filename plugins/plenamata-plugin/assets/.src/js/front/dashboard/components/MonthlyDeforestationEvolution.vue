@@ -90,6 +90,7 @@
             },
             chartOptions () {
                 const months = this.months.length - 1
+
                 return {
                     plugins: {
                         legend: {
