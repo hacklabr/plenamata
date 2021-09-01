@@ -9,7 +9,6 @@
  *
  * @package Newspack
  */
-
 global $post;
 $featured_img_url = get_the_post_thumbnail_url(get_the_ID(), 'full');
 $post_title = wp_kses_post(get_the_title());
