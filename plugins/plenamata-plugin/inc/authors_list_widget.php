@@ -32,9 +32,9 @@ class authors_list_widget extends WP_Widget {
             </div>
             <div class="posts">
                 <?php foreach ($users as $user): ?>
-                    <?php if($user->roles[0] == "colunista"): ?>         
+                    <?php if($user->roles[0] == "colunista"): ?>
                     <div class="post">   
-                        <a href="<?= site_url(); ?>/author/<?= $user->display_name; ?>">
+                        <a href="<?= esc_url( get_author_posts_url( $user->ID ) ); ?>">
                             <?= get_avatar($user->ID); ?>
                             <?=  $user->display_name;?>
                         </a>
