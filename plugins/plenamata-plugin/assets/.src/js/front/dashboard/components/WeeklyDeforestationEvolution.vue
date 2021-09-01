@@ -90,7 +90,7 @@
             },
             colors () {
                 const color = Color('#FF7373')
-                return [color.alpha(0.5).string(), '#FF7373']
+                return [color.lighten(0.2).string(), '#FF7373']
             },
             dateInterval () {
                 if (this.source === 'deter') {
