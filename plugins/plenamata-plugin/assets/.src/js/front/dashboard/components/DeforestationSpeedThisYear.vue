@@ -1,12 +1,12 @@
 <template>
     <DashboardPanel type="measure">
         <template #title>
-            {{ sprintf(__('Velocidade do desmatamento em %s', 'plenamata'), year) }}
+            {{ sprintf(__('Deforestation rate in %s', 'plenamata'), year) }}
         </template>
         <template #measure>
             <DashboardMeasure icon="tree-icon.svg" :number="trees / days">
                 <template #unit>
-                    {{ __( 'árvores por dia', 'plenamata' ) }}
+                    {{ __( 'trees per day', 'plenamata' ) }}
                 </template>
             </DashboardMeasure>
             <DashboardMeasure icon="area-icon.svg" :number="area / days">
@@ -19,10 +19,10 @@
             </DashboardMeasure>
         </template>
         <template #meaning>
-            {{ sprintf(__('estimativa média de %s árvores por minuto', 'plenamata'), roundNumber(trees / minutes)) }}
+            {{ sprintf(__('estimated average of %s trees per minute', 'plenamata'), roundNumber(trees / minutes)) }}
         </template>
         <template #footer>
-            {{ __('Fonte: MapBioma com base nos dados do DETER', 'plenamata') }}
+            {{ __('Source: MapBiomas based on DETER/INPE data.', 'plenamata') }}
         </template>
     </DashboardPanel>
 </template>

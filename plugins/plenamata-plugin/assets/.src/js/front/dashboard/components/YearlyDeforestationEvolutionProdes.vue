@@ -1,19 +1,19 @@
 <template>
     <DashboardPanel type="chart">
         <template #title>
-            {{ __('Evolução anual do desmatamento consolidado - PRODES', 'plenamata') }}
+            {{ __('Yearly consolidated deforestation rate (PRODES)', 'plenamata') }}
         </template>
         <template #filters>
             <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
-                <option value="ha">{{ __('Hectares desmatados', 'plenamata') }}</option>
-                <option value="km2">{{ __('Km² desmatados', 'plenamata') }}</option>
+                <option value="ha">{{ __('hectares', 'plenamata') }}</option>
+                <option value="km2">{{ __('km²', 'plenamata') }}</option>
             </select>
         </template>
         <template #chart>
             <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
         </template>
         <template #footer>
-            {{ __('Fonte: PRODES', 'plenamata') }}
+            {{ __('Source: PRODES/INPE.', 'plenamata') }}
         </template>
     </DashboardPanel>
 </template>

@@ -1,12 +1,12 @@
 <template>
     <DashboardPanel type="measure">
         <template #title>
-            {{ sprintf(__('Total de desmatamento em %s no território selecionado', 'plenamata'), year) }}
+            {{ sprintf(__('Total deforestation in %s in the selected territory', 'plenamata'), year) }}
         </template>
         <template #measure>
             <p>
-                {{ sprintf(__('Área total de desmatamento em %s (com base na semana anterior)', 'plenamata'), year) }}
-                <span v-if="state">{{ __('no Estado', 'plenamata') }}</span>
+                {{ sprintf(__('Total deforested area in %s (until last week)', 'plenamata'), year) }}
+                <span v-if="state">{{ __('on state', 'plenamata') }}</span>
             </p>
             <DashboardMeasure :number="area">
                 <template #unit>
@@ -19,14 +19,14 @@
         </template>
         <template #meaning>
             <template v-if="increase > 0">
-                {{ sprintf(__('aumento de %s%% em relação ao ano passado', 'plenamata'), roundNumber(increase)) }}
+                {{ sprintf(__('%s%% increase compared to last year', 'plenamata'), roundNumber(increase)) }}
             </template>
             <template v-else>
-                {{ sprintf(__('diminuição de %s%% em relação ao ano passado', 'plenamata'), roundNumber(-increase)) }}
+                {{ sprintf(__('%s%% decrease compared to last year', 'plenamata'), roundNumber(-increase)) }}
             </template>
         </template>
         <template #footer>
-            {{ __('Fonte: INPE/DETER', 'plenamata') }} • Última atualização: 19.07.2021 com alertas detectados até 09.07.2021
+            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), '08.27.2021', '08.20.2021') }}
         </template>
     </DashboardPanel>
 </template>

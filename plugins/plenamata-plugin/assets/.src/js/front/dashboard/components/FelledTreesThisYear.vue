@@ -1,20 +1,20 @@
 <template>
     <DashboardPanel type="measure">
         <template #title>
-            {{ sprintf(__('Estimativa de árvores derrubadas em %s', 'plenamata'), year) }}
+            {{ sprintf(__('Estimated number of trees cut down in %s', 'plenamata'), year) }}
         </template>
         <template #measure>
             <DashboardMeasure icon="tree-icon.svg" :number="trees">
                 <template #unit>
-                    {{ __( 'árvores', 'plenamata' ) }}
+                    {{ __( 'trees', 'plenamata' ) }}
                 </template>
             </DashboardMeasure>
         </template>
         <template #meaning>
-            {{ sprintf(__('estimativa média de %s árvores por minuto', 'plenamata'), roundNumber(trees / minutes)) }}
+            {{ sprintf(__('estimated average of %s trees per minute', 'plenamata'), roundNumber(trees / minutes)) }}
         </template>
         <template #footer>
-            {{ sprintf(__('Fonte: MapBiomas com base na média desmatamento diário detectado pelo DETER em %s', 'plenamata'), year) }}
+            {{ sprintf(__('Source: MapBiomas based on average daily deforestation detected by DETER in %s.', 'plenamata'), year) }}
         </template>
     </DashboardPanel>
 </template>

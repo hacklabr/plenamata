@@ -1,21 +1,20 @@
 <template>
     <DashboardPanel type="chart">
         <template #title>
-            {{ __('Evolução anual do desmatamento - DETER', 'plenamata') }}
+            {{ __('Yearly deforestation alerts (DETER)', 'plenamata') }}
         </template>
         <template #filters>
             <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
-                <option value="ha">{{ __('Hectares desmatados', 'plenamata') }}</option>
-                <option value="km2">{{ __('Km² desmatados', 'plenamata') }}</option>
+                <option value="ha">{{ __('hectares', 'plenamata') }}</option>
+                <option value="km2">{{ __('km²', 'plenamata') }}</option>
             </select>
         </template>
         <template #chart>
             <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
         </template>
         <template #footer>
-            {{ __('Fonte: INPE/DETER', 'plenamata') }} • {{ __('Última atualização: 28.06.2021 com dados detectados até 18.06.2021.', 'plenamata') }}
-            {{ __('Os dados anuais refletem o desmatamento de cada ano até junho.', 'plenamata') }}
-            {{ __('Os dados mensais e semanais são de 2021.', 'plenamata') }}
+            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), '08.27.2021', '08.20.2021') }}
+            {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), _x('July', 'month', 'plenamata')) }}
         </template>
     </DashboardPanel>
 </template>

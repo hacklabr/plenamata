@@ -1,7 +1,7 @@
 <template>
     <DashboardPanel type="measure">
         <template #title>
-            {{ __('Área desmatada na última semana', 'plenamata') }}
+            {{ __('Area deforested last week', 'plenamata') }}
         </template>
         <template #measure>
             <DashboardMeasure icon="area-icon.svg" :number="area">
@@ -14,10 +14,10 @@
             </DashboardMeasure>
         </template>
         <template #meaning>
-            {{ sprintf(__('estimativa média de %s árvores por minuto', 'plenamata'), roundNumber(trees / 10080)) }}
+            {{ sprintf(__('estimated average of %s trees per minute', 'plenamata'), roundNumber(trees / 10080)) }}
         </template>
         <template #footer>
-            {{ __('Fonte: INPE/DETER', 'plenamata') }} • Última atualização: 19.07.2021 com alertas detectados até 09.07.2021
+            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), '08.27.2021', '08.20.2021') }}
         </template>
     </DashboardPanel>
 </template>
