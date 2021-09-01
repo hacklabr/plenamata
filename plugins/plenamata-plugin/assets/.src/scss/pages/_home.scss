@@ -15,24 +15,43 @@ body.home {
     // Newspack block articles
     .wp-block-newspack-blocks-homepage-articles {
 
-        // Reorder items of the wrapper
+        // Thumbnail of the each article
+        .post-thumbnail {
+            max-width: 400px;
+        }
+
+        // Wrapper of the each article
         .entry-wrapper {
             display: flex;
             flex-direction: column;
 
             .cat-links {
+                font-family: 'Archivo';
+                margin-bottom: size(16);
                 order: 1;
             }
 
             .entry-title {
                 order: 2;
+
+                a {
+                    font-family: 'Archivo';
+                    font-size: size(22);
+                    line-height: size(24);
+                }
             }
 
             > p {
+                font-size: size(16);
+                line-height: size(24);
                 order: 4;
             }
 
             .entry-meta {
+                color: #0A0A0A;
+                font-size: 14px;
+                line-height: size(16);
+                opacity: .5;
                 order: 3;
             }
         }
