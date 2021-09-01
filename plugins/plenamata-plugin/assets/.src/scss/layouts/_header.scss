@@ -8,6 +8,7 @@ header.site-header {
         &.is-sticky {
             position:fixed;
             background:$c_text;
+
         }
     }
     @include mobile {
@@ -45,13 +46,6 @@ header.site-header {
             > ul > li {
                 margin-right:25px;
             }
-            > ul > li.wpml {
-                margin-left:30px;
-                margin-right:0;
-            }
-            > ul > li:last-of-type {
-                margin-left: 0;
-            }
             a {
                 font-family: 'Archivo';
                 font-style: normal;
@@ -66,6 +60,16 @@ header.site-header {
                 &:hover {
                     color:$c_menu_hover;
                 }
+            }
+            > ul > li.wpml-ls-menu-item {
+                margin-left:30px;
+                margin-right:0;
+                &.wpml-ls-current-language a {
+                    color:$c_menu_hover;
+                }
+            }
+            > ul > li.wpml-ls-last-item {
+                margin-left: 0;
             }
         }
     }
@@ -88,20 +92,41 @@ body:not(.mobile-menu-opened) {
     width:100vw;
     background-color:$c_text;
     top:100px;
-    
-    nav.main-navigation ul li a {
+    nav.main-navigation ul li:hover {
+        background: none !important;
+    }
+    nav.main-navigation ul li a,
+    nav.main-navigation ul li a * {
         color:$c_menu_text !important;
         font-family: 'Archivo';
         font-style: normal;
         font-weight: normal;
-        font-size: 24px;
-        line-height: 200%;
+        font-size: 21px;
         margin-left:25px;
-
+        padding-top:5px;
+        padding-bottom:5px;
+        background: none !important;
+        @include mobile {
+            padding-top:0;
+            font-size:21px;
+        }
+        &:hover {
+            color:$c_menu_hover !important;
+        }
     }
-    nav.main-navigation ul li.wpml {
+    nav.main-navigation ul li.wpml-ls-menu-item {
+        margin-top:30px;
         width:10%;
-        display: inline-block;
+        display:inline-block;
+        a {
+            margin-left:0 !important;
+        }
+        &.wpml-ls-current-language * {
+            color:$c_menu_hover !important;
+            &:hover {
+                color:$c_menu_hover;
+            }    
+        }
     }
     .mobile-menu-toggle {
         display: none;
@@ -109,10 +134,24 @@ body:not(.mobile-menu-opened) {
     .social-menus {
         display:none;
     }
+    .more-menu {
+        display:none;
+    }
+    .mobile-search-form.mobile-only {
+        display:block !important;
+        position: absolute;
+        bottom: 30px;
+        @include mobile {
+            bottom:110px;
+        }
+    }
 }
 body.is-sticky .mobile-sidebar#mobile-sidebar-fallback {
     transition:200ms ease all;
     top:70px;
+    @include mobile {
+        top:67px;
+    }
 }
 body:not(.home) header.site-header{
     position:fixed;
@@ -259,4 +298,63 @@ body.admin-bar header.site-header {
             color: var(--primary) !important;
         }
     }
+}
+// header single posts
+body.single-post {
+    &.is-sticky .middle-header-contain {
+        margin-top:-100px;
+        transition:400ms ease all;
+    }
+    header.site-header .bottom-header-contain {
+        transition:400ms ease all;
+        margin-top:-100px;
+        opacity:0;
+    }
+    header.site-header.is-sticky .bottom-header-contain {
+        margin-top:0;
+        opacity:1;
+    }
+    &.admin-bar {
+
+        header.site-header.is-sticky .bottom-header-contain {
+            margin-top:0;
+            @include desktop {
+                margin-top:32px;
+            }
+        }
+    }
+    header.site-header {
+        .bottom-header-contain {
+            p.title {
+                font-family: 'Archivo';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 24px;
+                /* identical to box height, or 171% */
+                
+                text-align: center;
+                letter-spacing: 0.02em;
+
+            }
+        }
+        &.is-sticky {
+            .middle-header-contain img {
+                opacity:0;
+            }
+        }
+    }
+    #mobile-sidebar-fallback {
+        overflow:hidden;
+        width:90vw;
+        @include desktop {
+            width:33vw;
+        }
+    }
+    &.is-sticky #mobile-sidebar-fallback {
+        @include desktop {
+            top:100px;
+        }
+    }
+
 }

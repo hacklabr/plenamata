@@ -57,7 +57,6 @@
 					</div><!-- .wrapper -->
 				</div><!-- .top-header-contain -->
 				<div class="middle-header-contain">
-                    <?php die( 'to aqui');?>
 					<div class="wrapper">
 						<?php if (newspack_has_menus() || (true === $show_slideout_sidebar && is_active_sidebar('header-1'))) : ?>
 							<div class="subpage-toggle-contain">

@@ -143,7 +143,7 @@ if (newspack_is_amp()) : ?>
 		<div class="item">
             <?php 
                 $link = '#';
-                if ( $page = get_page_by_title( 'Monitor', OBJECT, 'page' ) ) {
+                if ( $page = get_page_by_title( 'Dashboard', OBJECT, 'page' ) ) {
                     $link = get_permalink( $page->ID );
                 }
             ?>
