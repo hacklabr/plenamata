@@ -83,8 +83,8 @@ class SettingsPage {
 	 */
 	public function add_menu(): void {
 		add_menu_page(
-			esc_html__( 'Plenamata Plugin Settings', 'plenamata-plugin' ),
-			esc_html__( 'Plenamata Plugin', 'plenamata-plugin' ),
+			esc_html__( 'Plenamata Plugin Settings', 'plenamata' ),
+			esc_html__( 'Plenamata Plugin', 'plenamata' ),
 			'manage_options',
 			Plugin::SLUG,
 			[
