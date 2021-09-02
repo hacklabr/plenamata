@@ -151,7 +151,7 @@ class Blocks {
 
                     <div class="number">
                         <span id="trees-estimative" data-base-trees="<?= $baseTrees ?? '' ?>" data-trees-per-day="<?= $tressPerDay ?? '' ?>" data-date="<?= $baseDate ?? '' ?>">loading...</span>
-                        <span><?= __("estimativa em tempo real", "plenamata") ?></span>
+                        <span><?= __("real-time estimate", "plenamata") ?></span>
                     </div>
                 </div>
 
@@ -164,7 +164,7 @@ class Blocks {
                                     <?= $tressPerDay ?? '' ?>
                                 </span>
                                 <span>
-                                    <?= __("árvores/ dia", "plenamata") ?>
+                                    <?= __("trees/ day", "plenamata") ?>
                                 </span>
                             </div>
 
@@ -173,7 +173,7 @@ class Blocks {
                                     <?= $hecPerDay ?? '' ?>
                                 </span>
                                 <span>
-                                    <?= __("hectares/ dia", "plenamata") ?>
+                                    <?= __("hectares/ day", "plenamata") ?>
                                 </span>
                             </div>
                         </div>
@@ -187,7 +187,7 @@ class Blocks {
                                     <?= $warnings ?? '' ?>
                                 </span>
                                 <span data-mask="true">
-                                    <?= __("alertas", "plenamata") ?>
+                                    <?= __("alerts", "plenamata") ?>
                                 </span>
                             
                             </div>

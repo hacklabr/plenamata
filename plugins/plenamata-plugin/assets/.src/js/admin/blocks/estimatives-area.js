@@ -179,7 +179,7 @@ registerBlockType('plenamata/estimatives-area', {
                                 </span>
 
                                 <span>
-                                    {/* { __("Alertas", "plenamata") } */}
+                                    {/* { __("Alerts", "plenamata") } */}
                                 </span>
                             
                             </div>
