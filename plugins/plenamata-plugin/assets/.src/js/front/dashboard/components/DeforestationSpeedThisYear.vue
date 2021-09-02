@@ -12,8 +12,8 @@
             <DashboardMeasure icon="area-icon.svg" :number="area / days">
                 <template #unit>
                     <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
-                        <option value="ha">{{ __('hectares por dia', 'plenamata') }}</option>
-                        <option value="km2">{{ __('km² por dia', 'plenamata') }}</option>
+                        <option value="ha">{{ __('hectares per day', 'plenamata') }}</option>
+                        <option value="km2">{{ __('km² per day', 'plenamata') }}</option>
                     </select>
                 </template>
             </DashboardMeasure>
