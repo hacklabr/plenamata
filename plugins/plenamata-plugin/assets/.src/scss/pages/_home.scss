@@ -146,6 +146,21 @@ body.home {
                 padding: size(15) 0;
             }
 
+            .wp-block-column {
+                @include mobile {
+                    margin-left: 0;
+                    margin-right: 0;
+                }
+            }
+
+            .wp-block-image {
+                @include tablet {
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+
             .wp-block-buttons {
                 @include mobile {
                     margin-bottom: 0;
@@ -241,44 +256,128 @@ body.home {
         }
     }
 
-    // Sidebar
-    .home-sidebar { // .wp-block-column
-        .wp-block-cover {
-            &:nth-child(even) {
-                @include small {
+    // Columns with sidebar
+    .home-columns-with-sidebar {
+        @include mobile {
+            display: block;
+        }
+
+        // Sidebar
+        .home-sidebar { // .wp-block-column
+            .wp-block-cover {
+                &:nth-child(even) {
                     margin-bottom: size(30);
                     min-height: auto;
                     padding: size(15) !important;
-                }
 
-                p {
-                    @include small {
+                    p {
                         margin-bottom: size(10);
                         margin-top: 0;
-                    }
 
-                    &:last-child {
-                        @include small {
+                        &:last-child {
                             margin-bottom: 0;
                         }
                     }
                 }
-            }
 
-            .wp-block-latest-posts__list {
-                .wp-block-latest-posts__featured-image {
-                    @include small {
-                        margin-bottom: size(10);
-                    }
+                .wp-block-latest-posts__list {
+                    .wp-block-latest-posts__featured-image {
+                        @include mobile {
+                            margin-bottom: size(10);
+                        }
 
-                    .wp-block-latest-posts__post-author {
-                        @include small {
-                            margin-top: size(10);
+                        img {
+                            @include mobile {
+                                max-width: 100%;
+                                width: 100%;
+                            }
                         }
                     }
 
+                    .wp-block-latest-posts__post-author {
+                        @include mobile {
+                            margin-top: size(10);
+                        }
+                    }
                 }
             }
         }
+    }
+
+    
+
+    // Newsletter
+    .home-newsletter-container {
+        border-radius: 8px;
+        margin-bottom: -150px !important;
+        overflow: hidden;
+
+        .wp-block-spacer {
+            @include small {
+                height: 0 !important;
+            }
+        }
+
+        .wp-block-columns {
+            @include small {
+                position: relative;
+            }
+
+            .wp-block-column {
+                @include small {
+                    margin-bottom: 0;
+                    position: relative;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    z-index: 2;
+                }
+    
+                &:first-child {
+                    @include small {
+                        display: none;
+                    }
+                }
+                &:last-child {
+                    @include small {
+                        position: absolute;
+                        top: -100px;
+                        right: -15px;
+                        z-index: 0;
+                        width: 200px;
+                    }
+                }
+
+                form {
+                    @include small {
+                        margin-top: size(15);
+                    }
+
+                    input[type='submit'] {
+                        @include small {
+                            position: relative;
+                            left: auto;
+                            width: 100%;
+                        }
+                    }
+                }
+
+                h3 {
+                    @include small {
+                        margin-top: 0;
+                    }
+                }
+
+                p {
+                    @include small {
+                        position: relative;
+                        z-index: 2;
+                    }
+                }
+            }
+        }
+    }
+
+    .entry-footer {
+        margin-top: 150px;
     }
 }
