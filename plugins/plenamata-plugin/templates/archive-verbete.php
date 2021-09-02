@@ -8,7 +8,7 @@
         <?php echo '<p>'. __('Termos técnicos, políticas públicas e iniciativas para chegar ao desmatamento zero e conservar a floresta explicados com um simples clique, via consulta rápida ou completa.', 'plenamata').'</p>'?>
 
         <div class="glossary__search">
-            <input id="filtro-glossario" class="search-input" type="text" placeholder="Busque por um termo" name="search" />
+            <input id="filtro-glossario" class="search-input" type="text" placeholder="<?php echo __( 'Search for a term', 'plenamata' ) ?>" name="search" />
             
 
             <svg class="search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
