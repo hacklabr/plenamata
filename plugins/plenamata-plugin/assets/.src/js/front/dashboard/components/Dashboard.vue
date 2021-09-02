@@ -92,10 +92,12 @@
                     startOfYear,
                     year,
                 },
+                lastMonth: [],
                 news: [],
                 source: 'deter',
                 state: '',
-                thisYear: null,
+                trees: 0,
+                thisYear: [],
                 unit: 'ha',
                 view: 'data',
                 year,
@@ -131,36 +133,52 @@
                     RR: { uf: 'RR', name: 'Roraima', lat: 1.89, long: -61.22, zoom: 6 },
                 }
             },
-            trees () {
-                if (!this.thisYear) {
-                    return 0
-                }
+            treesDelta () {
+                let trees = 0
                 if (this.state) {
-                    const state = this.thisYear.find(state => state.uf === this.state)
-                    return Number(state.num_arvores)
+                    const state = this.lastMonth.find(state => state.uf === this.state)
+                    trees = Number(state.num_arvores)
                 } else {
-                    return this.thisYear.reduce((acc, state) => acc + Number(state.num_arvores), 0)
+                    trees = this.lastMonth.reduce((acc, state) => acc + Number(state.num_arvores), 0)
                 }
+                return trees / 2592000
             },
         },
         watch: {
             state: {
                 async handler () {
                     await this.fetchNews(this.state)
+                    this.updateTrees()
                     this.centerMap(this.state)
                 },
                 immediate: true,
+            },
+            thisYear () {
+                this.updateTrees()
             },
         },
         async created () {
             const { now, startOfYear } = this.date
 
-            const data = await api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`)
-            this.thisYear = data
+            const monthAgo = now.minus({ months: 1 })
+            const twoMonthsAgo = now.minus({ months: 2 })
+
+            const [thisYear, lastMonth] = await Promise.all([
+                api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`),
+                api.get(`deter/estados?data1=${twoMonthsAgo.toISODate()}&data2=${monthAgo.toISODate()}`),
+            ])
+            this.thisYear = thisYear
+            this.lastMonth = lastMonth
         },
         mounted () {
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
+
+            setInterval(() => {
+                if (this.trees) {
+                    this.trees += this.treesDelta
+                }
+            }, 1000)
         },
         methods: {
             centerMap (state = '') {
@@ -181,6 +199,16 @@
             async fetchNews (state = '') {
                 const news = await api.get(`${this.$dashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
                 this.news = news
+            },
+            updateTrees () {
+                if (!this.thisYear) {
+                    this.trees = 0
+                } else if (this.state) {
+                    const state = this.thisYear.find(state => state.uf === this.state)
+                    this.trees = Number(state.num_arvores)
+                } else {
+                    this.trees = this.thisYear.reduce((acc, state) => acc + Number(state.num_arvores), 0)
+                }
             },
         },
     }
