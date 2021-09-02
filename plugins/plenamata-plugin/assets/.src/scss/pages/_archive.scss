@@ -178,9 +178,12 @@
 
 .newsletter-sidebar{
     background-color: #fff087;
+    /*
     max-width: 300px;
-    overflow: hidden;
     min-height: 400px!important;
+    */
+    overflow: hidden;
+    height: auto;
     position: relative;
     padding: 0;
     border-radius: 5px;

@@ -92,3 +92,20 @@
         }
     }
 }
+
+.mc4wp-alert{
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    &.mc4wp-success{
+        background-color: #ffcc00;
+    }
+    &.mc4wp-error{
+        background-color: #FF7373;
+    }
+    p{
+        color: #000;
+        font-size: 12px!important;
+        line-height: 20px;
+    }
+}

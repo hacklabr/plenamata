@@ -92,10 +92,12 @@
                     startOfYear,
                     year,
                 },
+                lastMonth: [],
                 news: [],
                 source: 'deter',
                 state: '',
-                thisYear: null,
+                trees: 0,
+                thisYear: [],
                 unit: 'ha',
                 view: 'data',
                 year,
@@ -121,63 +123,92 @@
             },
             states () {
                 return {
-                    AC: { uf: 'AC', name: 'Acre', lat: -8.77, long: -70.55 },
-                    AM: { uf: 'AM', name: 'Amazonas', lat: -3.07, long: -61.66 },
-                    AP: { uf: 'AP', name: 'Amapá', lat: 1.41, long: -51.77 },
-                    MA: { uf: 'MA', name: 'Maranhão', lat: -2.55, long: -44.30 },
-                    MT: { uf: 'MT', name: 'Mato Grosso', lat: -12.64, long: -55.42 },
-                    PA: { uf: 'PA', name: 'Pará', lat: -5.53, long: -52.29 },
-                    RO: { uf: 'RO', name: 'Rondônia', lat: -11.22, long: -62.80 },
-                    RR: { uf: 'RR', name: 'Roraima', lat: 1.89, long: -61.22 },
+                    AC: { uf: 'AC', name: 'Acre', lat: -8.77, long: -70.55, zoom: 6 },
+                    AM: { uf: 'AM', name: 'Amazonas', lat: -3.07, long: -61.66, zoom: 5 },
+                    AP: { uf: 'AP', name: 'Amapá', lat: 1.41, long: -51.77, zoom: 6 },
+                    MA: { uf: 'MA', name: 'Maranhão', lat: -2.55, long: -44.30, zoom: 5 },
+                    MT: { uf: 'MT', name: 'Mato Grosso', lat: -12.64, long: -55.42, zoom: 5 },
+                    PA: { uf: 'PA', name: 'Pará', lat: -5.53, long: -52.29, zoom: 5 },
+                    RO: { uf: 'RO', name: 'Rondônia', lat: -11.22, long: -62.80, zoom: 6 },
+                    RR: { uf: 'RR', name: 'Roraima', lat: 1.89, long: -61.22, zoom: 6 },
                 }
             },
-            trees () {
-                if (!this.thisYear) {
-                    return 0
-                }
+            treesDelta () {
+                let trees = 0
                 if (this.state) {
-                    const state = this.thisYear.find(state => state.uf === this.state)
-                    return Number(state.num_arvores)
+                    const state = this.lastMonth.find(state => state.uf === this.state)
+                    trees = Number(state.num_arvores)
                 } else {
-                    return this.thisYear.reduce((acc, state) => acc + Number(state.num_arvores), 0)
+                    trees = this.lastMonth.reduce((acc, state) => acc + Number(state.num_arvores), 0)
                 }
+                return trees / 2592000
             },
         },
         watch: {
             state: {
                 async handler () {
                     await this.fetchNews(this.state)
+                    this.updateTrees()
                     this.centerMap(this.state)
                 },
                 immediate: true,
+            },
+            thisYear () {
+                this.updateTrees()
             },
         },
         async created () {
             const { now, startOfYear } = this.date
 
-            const data = await api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`)
-            this.thisYear = data
+            const monthAgo = now.minus({ months: 1 })
+            const twoMonthsAgo = now.minus({ months: 2 })
+
+            const [thisYear, lastMonth] = await Promise.all([
+                api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`),
+                api.get(`deter/estados?data1=${twoMonthsAgo.toISODate()}&data2=${monthAgo.toISODate()}`),
+            ])
+            this.thisYear = thisYear
+            this.lastMonth = lastMonth
         },
         mounted () {
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
+
+            setInterval(() => {
+                if (this.trees) {
+                    this.trees += this.treesDelta
+                }
+            }, 1000)
         },
         methods: {
             centerMap (state = '') {
-                const mapEluuid = this.$refs.map.lastChild.dataset['uui_id']
-                const JeoMap = window.jeomaps[ mapEluuid ]
-                if (state) {
-                    /* One state */
-                    const stateData = this.states[state]
-                    JeoMap.map.flyTo({center: [stateData.long, stateData.lat], zoom: JeoMap.getArg( 'initial_zoom' ) });
-
-                } else {
-                    /* All Brasil */
+                const mapEl = this.$refs.map.lastChild
+                if (mapEl) {
+                    const uuid = mapEl.dataset['uui_id']
+                    const JeoMap = window.jeomaps[uuid]
+                    if (state) {
+                        /* One state */
+                        const stateData = this.states[state]
+                        JeoMap.map.flyTo({ center: [stateData.long, stateData.lat], zoom: stateData.zoom || JeoMap.getArg('initial_zoom') })
+                    } else {
+                        /* All Brasil */
+                        JeoMap.map.flyTo({ center: [JeoMap.getArg('center_lon'), JeoMap.getArg('center_lat')], zoom: JeoMap.getArg('initial_zoom') })
+                    }
                 }
             },
             async fetchNews (state = '') {
                 const news = await api.get(`${this.$dashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
                 this.news = news
+            },
+            updateTrees () {
+                if (!this.thisYear) {
+                    this.trees = 0
+                } else if (this.state) {
+                    const state = this.thisYear.find(state => state.uf === this.state)
+                    this.trees = Number(state.num_arvores)
+                } else {
+                    this.trees = this.thisYear.reduce((acc, state) => acc + Number(state.num_arvores), 0)
+                }
             },
         },
     }
