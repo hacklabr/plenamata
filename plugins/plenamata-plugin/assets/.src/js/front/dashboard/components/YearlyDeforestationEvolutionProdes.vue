@@ -69,7 +69,23 @@
                         legend: {
                             display: false,
                         },
+                        zoom: {
+                            pan: {
+                                enabled: true,
+                                mode: 'x',
+                            },
+                        },
                     },
+                    scales: {
+                        x: {
+                            min: this.areas.length - 5,
+                            max: this.areas.length,
+                        },
+                        y: {
+                            min: 0,
+                            suggestedMax: Math.max(...this.areas),
+                        },
+                    }
                 }
             },
             unitModel: vModel('unit'),
