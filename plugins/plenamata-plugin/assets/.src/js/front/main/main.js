@@ -17,9 +17,6 @@ export class Main {
         
         //hide main menu ul when modal search is active
         this.hide_menu_items_on_search();
-
-        // remove dark mode
-        this.remove_dark_mode();
 	}
     sticky_menu() {
         function isScrolledIntoView() {
@@ -65,12 +62,4 @@ export class Main {
 
     }
 
-
-    remove_dark_mode() {
-        setTimeout( () => {
-            document.body.classList.remove( 'dark-theme' );
-        }, 
-        1000
-        )  
-    }
 }

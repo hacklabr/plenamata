@@ -64,6 +64,13 @@
 
                 return sortedData.map((datum) => Number(datum.areamunkm))
             },
+            areas () {
+                if (this.unit === 'ha') {
+                    return this.areasKm2.map((areaKm2) => areaKm2 * 100)
+                } else {
+                    return this.areasKm2
+                }
+            },
             chartData () {
                 const factor = this.unit === 'ha' ? 100 : 1
 
@@ -71,7 +78,7 @@
                     labels: this.areasKm2.map((item, i) => String(i + 1)),
                     datasets: [
                         {
-                            data: this.areasKm2.map((areaKm2) => areaKm2 * factor),
+                            data: this.areas,
                             backgroundColor: this.colors,
                         },
                     ],
@@ -101,6 +108,8 @@
                         },
                         y: {
                             type: 'linear',
+                            min: 0,
+                            suggestedMax: Math.max(...this.areas),
                         },
                     },
                 }
