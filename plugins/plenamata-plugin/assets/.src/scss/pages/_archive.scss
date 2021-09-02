@@ -53,6 +53,13 @@
                 @include mobile {
                     flex-direction: column !important;
                 }
+                &.has-post-thumbnail{                    
+                    &:not(:first-child){
+                        .post-thumbnail {
+                            max-width: 45%!important;
+                        }
+                    }
+                }
 
                 .post-thumbnail {
                    flex-basis: 60%;
@@ -97,6 +104,7 @@
                         max-height: 60px;
                         overflow: hidden;
                         margin: 0;
+                        font-size: 1.4em !important;
 
                         @include mobile{
                             font-size: 1.4em !important;
