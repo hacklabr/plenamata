@@ -15,15 +15,20 @@ body.home {
         }
 
         // Button See all articles
-        .button-see-all-articles a {
+        .button-see-all-articles {
             border-top: 1px solid $c_text;
-            font-family: 'Archivo';
-            font-size: size(14) !important;
-            font-weight: 700;
-            line-height: size(16);
             padding-bottom: 15px;
             padding-top: 8px;
             text-align: center;
+            position: relative;
+            z-index: 2;
+
+            a {
+                font-family: 'Archivo';
+                font-size: size(14) !important;
+                font-weight: 700;
+                line-height: size(16);
+            }
         }
     }
 
