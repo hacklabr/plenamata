@@ -1,0 +1,22 @@
+.blog, .archive{
+    section.custom-archive{
+        &#primary{
+            margin-top: 40px;
+        }
+        header{
+            h1.page-title,  .page-description{
+                font-family: Archivo;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 48px;
+                line-height: 64px;
+                margin-bottom:0px;
+                /* identical to box height, or 133% */
+                text-align: center;
+                text-transform: uppercase;
+                color: #221D18;
+            }
+        }
+    }
+
+}
