@@ -25,10 +25,23 @@ class Translations {
 	 * @since 0.1.0
 	 */
 	public function hooks(): void {
-        add_action( 'init', [ $this, 'load_textdomain' ], 50 );
+		add_action( 'init', [ $this, 'load_textdomain' ] );
+		add_action( 'init', [ $this, 'script_translations' ], 999 );
 	}
 
-    public function load_textdomain() {
-        load_plugin_textdomain( 'plenamata', false, PLENAMATA_PLUGIN_PATH . '/languages' ); 
+	public function load_textdomain() {
+		load_plugin_textdomain(
+			'plenamata',
+			false,
+			'plenamata-plugin/languages'
+		);
     }
+
+	public function script_translations() {
+		wp_set_script_translations(
+			'plenamata-plugin-blocks',
+			'plenamata',
+			PLENAMATA_PLUGIN_PATH . 'languages'
+		);
+	}
 }
