@@ -17,13 +17,18 @@ body.home {
         // Button See all articles
         .button-see-all-articles {
             border-top: 1px solid $c_text;
-            font-family: 'Archivo';
-            font-size: size(14);
-            font-weight: 700;
-            line-height: size(16);
             padding-bottom: 15px;
             padding-top: 8px;
             text-align: center;
+            position: relative;
+            z-index: 2;
+
+            a {
+                font-family: 'Archivo';
+                font-size: size(14) !important;
+                font-weight: 700;
+                line-height: size(16);
+            }
         }
     }
 
@@ -98,48 +103,281 @@ body.home {
         }
     }
 
-    // Newspack block articles
-    .wp-block-newspack-blocks-homepage-articles {
+    // Deforestation blocks
+    .home-deforestation-blocks {
+        .title-deforestation {
+            font-size: size(32);
+            line-height: 1;
+            font-weight: 400 !important;
+            padding-left: size(16);
 
-        // Thumbnail of the each article
-        .post-thumbnail {
-            max-width: 400px;
+            @include small {
+                font-size: size(24);
+                line-height: size(34);
+                padding-left: 0;
+            }
         }
 
-        // Wrapper of the each article
-        .entry-wrapper {
-            display: flex;
-            flex-direction: column;
+        .wp-block-columns {
+            .wp-block-column {
+                @include small {
+                    margin-bottom: 0;
+                }
+            }
+        }
 
-            .cat-links {
-                font-family: 'Archivo';
-                margin-bottom: size(16);
-                order: 1;
+        .wrap-iframe {
+            @include small {
+                margin-bottom: size(15);
+                margin-top: size(15);
+            }
+        }
+
+        p:empty {
+            display: none;
+        }
+    }
+
+    // Special seciton
+    .wp-block-columns {
+        &.col-especial {
+            @include mobile {
+                flex-flow: column-reverse;
+                padding: size(15) 0;
             }
 
-            .entry-title {
-                order: 2;
-
-                a {
-                    font-family: 'Archivo';
-                    font-size: size(22);
-                    line-height: size(24);
+            .wp-block-column {
+                @include mobile {
+                    margin-left: 0;
+                    margin-right: 0;
                 }
             }
 
-            > p {
-                font-size: size(16);
-                line-height: size(24);
-                order: 4;
+            .wp-block-image {
+                @include tablet {
+                    img {
+                        width: 100%;
+                    }
+                }
             }
 
-            .entry-meta {
-                color: #0A0A0A;
-                font-size: 14px;
-                line-height: size(16);
-                opacity: .5;
-                order: 3;
+            .wp-block-buttons {
+                @include mobile {
+                    margin-bottom: 0;
+                }
+            }
+
+            h3 {
+                @include mobile {
+                    font-size: size(24) !important;
+                    margin-bottom: size(15);
+                    margin-top: size(15);
+                }
+            }
+
+            h6 {
+                @include mobile {
+                    font-size: size(14);
+                    font-weight: normal !important;
+                    margin-bottom: size(15);
+                    margin-top: size(15);
+                    opacity: .5;
+                }
+            }
+
+            p {
+                @include mobile {
+                    font-size: size(14) !important;
+                    line-height: size(24);
+                    margin-bottom: size(15);
+                    margin-top: size(15);
+                }
             }
         }
+    }
+
+    // Newspack block articles
+    .wp-block-newspack-blocks-homepage-articles {
+        article {
+            // Thumbnail of the each article
+            .post-thumbnail {
+                max-width: 400px;
+            }
+
+            // Wrapper of the each article
+            .entry-wrapper {
+                display: flex;
+                flex-direction: column;
+
+                .cat-links {
+                    font-family: 'Archivo';
+                    margin-bottom: size(16);
+                    order: 1;
+
+                    @include small {
+                        display: none;
+                    }
+                }
+
+                .entry-title {
+                    order: 2;
+
+                    a {
+                        font-family: 'Archivo';
+                        font-size: size(22);
+                        line-height: size(24);
+
+                        @include small {
+                            font-size: size(16);
+                            font-weight: 700;
+                            line-height: size(20);
+                        }
+                    }
+                }
+
+                > p {
+                    font-size: size(16);
+                    line-height: size(24);
+                    order: 4;
+
+                    @include small {
+                        display: none;
+                    }
+                }
+
+                .entry-meta {
+                    color: #0A0A0A;
+                    font-size: 14px;
+                    line-height: size(16);
+                    opacity: .5;
+                    order: 3;
+                }
+            }
+        }
+    }
+
+    // Columns with sidebar
+    .home-columns-with-sidebar {
+        @include mobile {
+            display: block;
+        }
+
+        // Sidebar
+        .home-sidebar { // .wp-block-column
+            .wp-block-cover {
+                &:nth-child(even) {
+                    margin-bottom: size(30);
+                    min-height: auto;
+                    padding: size(15) !important;
+
+                    p {
+                        margin-bottom: size(10);
+                        margin-top: 0;
+
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+
+                .wp-block-latest-posts__list {
+                    .wp-block-latest-posts__featured-image {
+                        @include mobile {
+                            margin-bottom: size(10);
+                        }
+
+                        img {
+                            @include mobile {
+                                max-width: 100%;
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    .wp-block-latest-posts__post-author {
+                        @include mobile {
+                            margin-top: size(10);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    
+
+    // Newsletter
+    .home-newsletter-container {
+        border-radius: 8px;
+        margin-bottom: -150px !important;
+        overflow: hidden;
+
+        .wp-block-spacer {
+            @include small {
+                height: 0 !important;
+            }
+        }
+
+        .wp-block-columns {
+            @include small {
+                position: relative;
+            }
+
+            .wp-block-column {
+                @include small {
+                    margin-bottom: 0;
+                    position: relative;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    z-index: 2;
+                }
+    
+                &:first-child {
+                    @include small {
+                        display: none;
+                    }
+                }
+                &:last-child {
+                    @include small {
+                        position: absolute;
+                        top: -100px;
+                        right: -15px;
+                        z-index: 0;
+                        width: 200px;
+                    }
+                }
+
+                form {
+                    @include small {
+                        margin-top: size(15);
+                    }
+
+                    input[type='submit'] {
+                        @include small {
+                            position: relative;
+                            left: auto;
+                            width: 100%;
+                        }
+                    }
+                }
+
+                h3 {
+                    @include small {
+                        margin-top: 0;
+                    }
+                }
+
+                p {
+                    @include small {
+                        position: relative;
+                        z-index: 2;
+                    }
+                }
+            }
+        }
+    }
+
+    .entry-footer {
+        margin-top: 150px;
     }
 }
