@@ -109,7 +109,7 @@ the_post(); ?>
 					<div class="entry-subhead">
 						<div class="entry-meta">
 								<div class="author-partner">
-										<?php newspack_posted_by(); ?>
+										<?php plenamata_newspack_posted_by(); ?>
 									<!-- publishers -->
 									<?php 
 										show_publishers($post->ID);
