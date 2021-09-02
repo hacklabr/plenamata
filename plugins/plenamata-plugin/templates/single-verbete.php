@@ -3,6 +3,7 @@ $sections = get_terms( [ 'taxonomy' => 'secao', 'hide_empty' => false ] );
 $tags     = get_the_tags( get_the_ID() );
 $archive_link = get_post_type_archive_link('verbete');
 get_header(); 
+$active_section = get_post_meta($post->ID)['section'][0] ?? '';
 ?>
 
     <header class="glossary__header">
@@ -18,7 +19,7 @@ get_header();
 
                 <ul>
                     <?php foreach ( $sections as $section ): ?>
-                        <li class="<?= ($section->term_id == $active_section['term_id'] ?  'active' : '') ?>">
+                        <li class="<?= ($section->term_id == $active_section ?  'active' : '') ?>">
                             <a href="<?= $archive_link ?>#<?= $section->slug ?>">
                                 <?= $section->name ?>
                             </a>
@@ -32,7 +33,7 @@ get_header();
 
                 <ul>
                     <?php foreach ( $sections as $section ): ?>
-                        <li class="<?= ($section->term_id == $active_section['term_id'] ?  'active' : '') ?>">
+                        <li class="<?= ($section->term_id == $active_section ?  'active' : '') ?>">
                             <a href="<?= $archive_link ?>#<?= $section->slug ?>">
                                 <?= $section->name ?>
                             </a>
