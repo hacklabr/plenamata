@@ -281,6 +281,12 @@ body.home {
                 }
 
                 .wp-block-latest-posts__list {
+                    li {
+                        a:visited {
+                            color: #221d18 !important;
+                        }
+                    }
+
                     .wp-block-latest-posts__featured-image {
                         @include mobile {
                             margin-bottom: size(10);
