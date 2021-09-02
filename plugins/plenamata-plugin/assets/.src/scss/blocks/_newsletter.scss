@@ -1,5 +1,17 @@
 .newsletter-sidebar{
+    img{
+        position: absolute;
+        top: -110px;
+        left: 66px;
+        max-width: 238px;   
+    }
     .mc4wp-form{
+        background-image: asset-url('img/fundo-newsletter.png');
+        background-repeat: no-repeat;
+        background-position-x: 4px;
+        background-color:#FFF087;
+        border-radius: 8px;
+
         h3{
             font-family: 'Archivo';
             font-style: normal;
@@ -11,8 +23,10 @@
             margin-top:0px;
             margin-bottom:34px;
         }
+
         input[type='email']{font-size: 1rem;}
-        fieldset{border:none;}
+
+        
         label{
             font-family: Archivo;
             font-style: normal;
@@ -22,11 +36,7 @@
             letter-spacing: 0.02em;
             color: #272B36;
         }
-        background-image: asset-url('img/fundo-newsletter.png');
-        background-repeat: no-repeat;
-        background-position-x: 4px;
-        background-color:#FFF087;
-        border-radius: 8px;
+                
 
         .container_news {
             display: block;
@@ -80,5 +90,22 @@
             }
             
         }
+    }
+}
+
+.mc4wp-alert{
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-align: center;
+    &.mc4wp-success{
+        background-color: #ffcc00;
+    }
+    &.mc4wp-error{
+        background-color: #FF7373;
+    }
+    p{
+        color: #000;
+        font-size: 12px!important;
+        line-height: 20px;
     }
 }
