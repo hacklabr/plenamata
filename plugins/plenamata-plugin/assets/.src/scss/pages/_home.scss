@@ -98,6 +98,22 @@ body.home {
         }
     }
 
+    // Deforestation blocks
+    .home-deforestation-blocks {
+        .title-deforestation {
+            font-size: size(32);
+            line-height: 1;
+            font-weight: 400 !important;
+            padding-left: size(16);
+
+            @include small {
+                font-size: size(24);
+                line-height: size(34);
+                padding-left: 0;
+            }
+        }
+    }
+
     // Newspack block articles
     .wp-block-newspack-blocks-homepage-articles {
 
