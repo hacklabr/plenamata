@@ -2,6 +2,9 @@ body.home {
     .entry-content {
         .wp-block-cover {
 
+            margin-bottom: 0;
+            margin-top: 0;
+
             // In the home, remove spacing between the first two blocks (cover)
             &:nth-child(1) {
                 margin-bottom: 0;
@@ -21,6 +24,77 @@ body.home {
             padding-bottom: 15px;
             padding-top: 8px;
             text-align: center;
+        }
+    }
+
+    .home-intro-cards {
+        @include small {
+            padding-left: 45px;
+        }
+
+        .wp-block-columns:first-child {
+            @include small {
+                margin-top: -80px;
+            }
+
+            .wp-block-column {
+                @include small {
+                    margin-top: 0 !important;
+                    padding-left: 40px;
+                    position: relative;
+                }
+
+                h4 {
+                    @include small {
+                        font-size: 20px !important;
+                        margin-bottom: 15px;
+                        margin-top: 5px;
+                        text-align: left !important;
+                    }
+                }
+
+                p {
+                    @include small {
+                        font-size: 14px !important;
+                        margin-bottom: 15px;
+                        margin-top: 15px;
+                        text-align: left !important;
+                    }
+                }
+
+                .wp-block-image {
+                    &.icon-block-header {
+                        margin-top: -40px !important;
+
+                        @include small {
+                            left: -20px;
+                            position: absolute;
+                            top: 50px;
+                        }
+
+                        figure {
+                            img {
+                                @include small {
+                                    max-width: 44px;
+                                }
+                            }
+                        }
+                    }
+
+                    &:not(.icon-block-header) {
+                        @include small {
+                            display: none;
+                        }
+                    }
+                }
+
+                .wp-block-buttons {
+                    @include small {
+                        justify-content: flex-start !important;
+                        margin-top: 15px !important;
+                    }
+                }
+            }
         }
     }
 
