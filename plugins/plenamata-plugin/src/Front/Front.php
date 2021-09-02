@@ -53,6 +53,9 @@ class Front {
         // add template file for search after mobile menu
         add_filter( 'wp_nav_menu', [ $this, 'search_mobile'], 50, 2 );
 
+        // change excer_length
+        add_filter( 'excerpt_length', [ $this, 'excerpt_length' ], 50 );
+
     }
 
     public function custom_titles( array $parts ): array {
@@ -237,4 +240,14 @@ class Front {
         }
 
     }
+
+    /**
+     * Filter the except length to 20 words.
+     * 
+     *  @param int $length Excerpt length.
+     *  @return int (Maybe) modified excerpt length.
+     */
+    public function excerpt_length( $length ) {
+        return 22;
+    }    
 }
