@@ -116,7 +116,8 @@ body.home {
         .wp-block-columns {
             .wp-block-column {
                 @include small {
-                margin-bottom: 0;
+                    margin-bottom: 0;
+                }
             }
         }
 
@@ -131,6 +132,51 @@ body.home {
             display: none;
         }
     }
+
+    // Special seciton
+
+    .wp-block-columns {
+        &.col-especial {
+            @include mobile {
+                flex-flow: column-reverse;
+                padding: size(15) 0;
+            }
+
+            .wp-block-buttons {
+                @include mobile {
+                    margin-bottom: 0;
+                }
+            }
+
+            h3 {
+                @include mobile {
+                    font-size: size(24) !important;
+                    margin-bottom: size(15);
+                    margin-top: size(15);
+                }
+            }
+
+            h6 {
+                @include mobile {
+                    font-size: size(14);
+                    font-weight: normal !important;
+                    margin-bottom: size(15);
+                    margin-top: size(15);
+                    opacity: .5;
+                }
+            }
+
+            p {
+                @include mobile {
+                    font-size: size(14) !important;
+                    line-height: size(24);
+                    margin-bottom: size(15);
+                    margin-top: size(15);
+                }
+            }
+        }
+    }
+    
 
     // Newspack block articles
     .wp-block-newspack-blocks-homepage-articles {
