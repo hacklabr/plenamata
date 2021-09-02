@@ -1,0 +1,186 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Plenamata Plugin 0.2.6\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plenamata-plugin\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-09-02T12:13:14+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Language: en\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Domain: plenamata\n"
+
+#. Plugin Name of the plugin
+#: src/Admin/SettingsPage.php:87
+msgid "Plenamata Plugin"
+msgstr ""
+
+#. Description of the plugin
+msgid "The plugin adds information about the games to the site posts."
+msgstr ""
+
+#. Author of the plugin
+msgid "hacklab/"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "hacklab.com.br"
+msgstr ""
+
+#: inc/authors_list_widget.php:15
+msgid "Authors List"
+msgstr ""
+
+#: inc/authors_list_widget.php:71
+msgid "show"
+msgstr ""
+
+#: inc/authors_list_widget.php:75
+msgid "Title:"
+msgstr ""
+
+#: plenamata-plugin.php:40
+msgid "The minimum version of PHP is <strong>7.2.5</strong>. Please update the PHP on your server and try again."
+msgstr ""
+
+#: src/Admin/Blocks.php:38
+#: assets/build/js/dashboard.js:39501
+msgid "Dashboard"
+msgstr ""
+
+#: src/Admin/Blocks.php:154
+msgid "estimativa em tempo real"
+msgstr ""
+
+#: src/Admin/Blocks.php:167
+msgid "árvores/ dia"
+msgstr ""
+
+#: src/Admin/Blocks.php:176
+msgid "hectares/ dia"
+msgstr ""
+
+#: src/Admin/Blocks.php:190
+msgid "alertas"
+msgstr ""
+
+#: src/Admin/Blocks.php:201
+#: assets/.src/js/admin/blocks/deforestation-info.js:55
+#: assets/build/js/admin/blocks.js:172
+#: assets/build/js/dashboard.js:40206
+#: assets/build/js/dashboard.js:40654
+msgid "hectares"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:86
+msgid "Plenamata Plugin Settings"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:99
+#: templates/parts/header/mobile-sidebar.php:169
+#: templates/single-artigo.php:21
+#: templates/single-artigo.php:36
+msgid "Articles"
+msgstr ""
+
+#: src/Front/Front.php:60
+#: templates/parts/header/mobile-sidebar.php:186
+#: templates/single-verbete.php:9
+msgid "Glossary"
+msgstr ""
+
+#: src/Front/Front.php:155
+msgid "Read more"
+msgstr ""
+
+#: templates/archive-verbete.php:7
+msgid "Glossário"
+msgstr ""
+
+#: templates/archive-verbete.php:8
+msgid "Termos técnicos, políticas públicas e iniciativas para chegar ao desmatamento zero e conservar a floresta explicados com um simples clique, via consulta rápida ou completa."
+msgstr ""
+
+#: templates/archive-verbete.php:23
+msgid "Seções"
+msgstr ""
+
+#: templates/archive-verbete.php:63
+msgid "Acessar verbete completo"
+msgstr ""
+
+#: templates/archive.php:87
+msgid "ABOUT THE AUTHOR"
+msgstr ""
+
+#: templates/footer.php:24
+msgid "COPYRIGHT © %s PlenaMata"
+msgstr ""
+
+#: templates/footer.php:28
+msgid "Política de Privacidade"
+msgstr ""
+
+#: templates/footer.php:33
+msgid "Natura & Co - Compromisso com a Vida 2030"
+msgstr ""
+
+#: templates/header-single.php:94
+msgid "What are you looking for?"
+msgstr ""
+
+#: templates/header.php:32
+#: templates/header.php:113
+#: templates/header.php:157
+msgid "Menu"
+msgstr ""
+
+#: templates/header.php:97
+#: templates/header.php:263
+#: templates/parts/header/mobile-sidebar.php:32
+msgid "Discovery"
+msgstr ""
+
+#: templates/header.php:307
+msgid "Close Search"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:47
+msgid "MORE"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:69
+msgid "Language"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:79
+msgid "Dark mode"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:95
+msgid "Type size"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:124
+msgid "Follow us"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:155
+msgid "Monitor"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:197
+msgid "Share"
+msgstr ""
+
+#: templates/single-verbete.php:16
+#: templates/single-verbete.php:31
+msgid "Sections"
+msgstr "asds"
+
+#: templates/single-verbete.php:61
+msgid "Tags:"
+msgstr ""
