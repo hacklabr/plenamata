@@ -1,0 +1,49 @@
+.blog{
+    section.custom-archive{
+        &#primary{
+            margin-top: 40px;
+        }
+        header{
+            h1.page-title.page-description{
+                font-family: Archivo;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 48px;
+                line-height: 64px;
+                margin-bottom:0px;
+                /* identical to box height, or 133% */
+                text-align: center;
+                text-transform: uppercase;
+                color: #221D18;
+            }
+        }
+    }
+    aside{
+        .mc4wp-form{
+            h3{
+                font-family: Archivo;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 22px;
+                line-height: 24px;
+                text-align: center;
+                color: #221D18;
+                margin-top:0px;
+                margin-bottom:34px;
+            }
+            label{
+                font-family: Archivo;
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 16px;
+                letter-spacing: 0.02em;
+                color: #272B36;
+            }
+            background-image: asset-url('img/fundo-newsletter.png');
+            background-repeat: no-repeat;
+            background-position-x: 4px;
+            background-color:#FFF087;
+        }
+    }
+}
