@@ -4,7 +4,7 @@
 ?>
 
     <header class="glossary__header">
-        <h1><?php echo __( 'Glossário', 'plenamata' ) ?></h1>
+        <h1><?php echo __( 'Glossary', 'plenamata' ) ?></h1>
         <?php echo '<p>'. __('Termos técnicos, políticas públicas e iniciativas para chegar ao desmatamento zero e conservar a floresta explicados com um simples clique, via consulta rápida ou completa.', 'plenamata').'</p>'?>
 
         <div class="glossary__search">
@@ -20,7 +20,7 @@
     <div class="glossary__body">
         <nav>
             <h2>
-                <?= __( 'Seções', 'plenamata' ) ?>
+                <?= __( 'Sections', 'plenamata' ) ?>
             </h2>
             <ul>
                 <?php foreach ( $sections as $section ): ?>

@@ -25,7 +25,7 @@
                 </div>
                 <div class="each-item">
                     <a href="#">
-                        <?php _e( 'Política de Privacidade', 'plenamata' );?>
+                        <?php _e( 'Privacy Policy', 'plenamata' );?>
                     </a>
                 </div>
                 <div class="each-item">

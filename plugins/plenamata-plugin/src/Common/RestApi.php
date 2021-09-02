@@ -53,7 +53,13 @@ class RestApi {
      * @return string The thumbnail URL
      */
     public function add_thumbnail_to_response( array $object ): string {
-        return get_the_post_thumbnail_url( $object[ 'id' ], 'thumbnail' );
+        $image_sizes = wp_get_additional_image_sizes();
+
+        if ( !empty( $image_sizes[ 'newspack-article-block-landscape-small' ] ) ) {
+            return get_the_post_thumbnail_url( $object[ 'id' ], 'newspack-article-block-landscape-small' );
+        } else {
+            return get_the_post_thumbnail_url( $object[ 'id' ], 'thumbnail' );
+        }
     }
 
     /**
