@@ -106,6 +106,11 @@
                             min: Math.max(0, months - 2),
                             max: months,
                         },
+                        y: {
+                            type: 'linear',
+                            min: 0,
+                            suggestedMax: this.maxValue,
+                        },
                     },
                 }
             },
@@ -137,6 +142,11 @@
             },
             filterKey () {
                 return `${this.state}|${this.source}`
+            },
+            maxValue () {
+                return Math.max(...this.chartData.datasets.map((dataset) => {
+                    return Math.max(...dataset.data.filter(Boolean))
+                }))
             },
             months () {
                 if (this.data.length === 0) {
