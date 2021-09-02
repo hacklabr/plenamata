@@ -8,7 +8,7 @@
  * @package Newspack
  */
 
-get_header('single');
+get_header( 'single' );
 the_post(); ?>
 	
 	<?php 

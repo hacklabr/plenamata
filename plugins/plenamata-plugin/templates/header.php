@@ -29,7 +29,7 @@
 						<?php if (true === $show_slideout_sidebar && is_active_sidebar('header-1')) : ?>
 							<button class="desktop-menu-toggle" on="tap:desktop-sidebar.toggle">
 								<?php echo wp_kses(newspack_get_icon_svg('menu', 20), newspack_sanitize_svgs()); ?>
-								<?php echo esc_html(get_theme_mod('slideout_label', esc_html__('Menu', 'jeo'))); ?>
+								<?php echo esc_html(get_theme_mod('slideout_label', esc_html__('Menu', 'plenamata'))); ?>
 							</button>
 						<?php endif; ?>
 
@@ -57,7 +57,6 @@
 					</div><!-- .wrapper -->
 				</div><!-- .top-header-contain -->
 				<div class="middle-header-contain">
-                    <?php die( 'to aqui');?>
 					<div class="wrapper">
 						<?php if (newspack_has_menus() || (true === $show_slideout_sidebar && is_active_sidebar('header-1'))) : ?>
 							<div class="subpage-toggle-contain">
@@ -94,7 +93,7 @@
 						if (!empty($button_url)) : ?>
 							<a href="<?= $button_url ?>" class="featured-button <?= get_theme_mod('discovery_button_style', 'solid') ?>">
 								<i class="far fa-map"></i>
-								<?php echo __( 'Discovery', 'jeo' ); ?></p>
+								<?php echo __( 'Discovery', 'plenamata' ); ?></p>
 							</a>
 						<?php endif; ?>
 					</div><!-- .wrapper -->
@@ -110,7 +109,7 @@
 							<?php if (true === $show_slideout_sidebar && is_active_sidebar('header-1')) : ?>
 								<button class="desktop-menu-toggle" on="tap:desktop-sidebar.toggle">
 									<?php echo wp_kses(newspack_get_icon_svg('menu', 20), newspack_sanitize_svgs()); ?>
-									<?php echo esc_html(get_theme_mod('slideout_label', esc_html__('Menu', 'jeo'))); ?>
+									<?php echo esc_html(get_theme_mod('slideout_label', esc_html__('Menu', 'plenamata'))); ?>
 								</button>
 							<?php endif; ?>
 
@@ -154,7 +153,7 @@
 						<?php if (true === $header_simplified && true === $show_slideout_sidebar && is_active_sidebar('header-1')) : ?>
                             <button class="desktop-menu-toggle" on="tap:desktop-sidebar.toggle">
 								<?php echo wp_kses(newspack_get_icon_svg('menu', 20), newspack_sanitize_svgs()); ?>
-								<span><?php echo esc_html(get_theme_mod('slideout_label', esc_html__('Menu', 'jeo'))); ?></span>
+								<span><?php echo esc_html(get_theme_mod('slideout_label', esc_html__('Menu', 'plenamata'))); ?></span>
 							</button>
 						<?php endif; ?>
 
@@ -260,7 +259,7 @@
 							if (!empty($button_url)) : ?>
 								<a href="<?= $button_url ?>" class="featured-button <?= get_theme_mod('discovery_button_style', 'solid') ?>">
 									<i class="far fa-map"></i>
-									<?php echo __( 'Discovery', 'jeo' ); ?></p>
+									<?php echo __( 'Discovery', 'plenamata' ); ?></p>
 								</a>
 							<?php endif; ?>
 						</div><!-- .wrapper -->
@@ -304,7 +303,7 @@
 								// Header is simplified. In mobile has search icon always
 								if (true === $header_simplified || true === $header_center_logo  || false === $header_center_logo) : ?>
 									<button class="search-toggle" on="tap:AMP.setState( { searchVisible: !searchVisible } ), search-form-1.focus" aria-controls="search-menu" [aria-expanded]="searchVisible ? 'true' : 'false'" aria-expanded="false">
-										<span class="screen-reader-text" [text]="searchVisible ? '<?php esc_html_e('Close Search', 'jeo'); ?>' : '<?php esc_html_e('Open Search', 'newspack'); ?>'">
+										<span class="screen-reader-text" [text]="searchVisible ? '<?php esc_html_e('Close Search', 'plenamata'); ?>' : '<?php esc_html_e('Open Search', 'newspack'); ?>'">
 											<?php esc_html_e('Open Search', 'newspack'); ?>
 										</span>
 										<span class="search-icon"><?php echo wp_kses(newspack_get_icon_svg('search', 28), newspack_sanitize_svgs()); ?></span>

@@ -4,13 +4,14 @@
  *
  * Plugin Name:         Plenamata Plugin
  * Description:         The plugin adds information about the games to the site posts.
- * Version:             0.2.3
+ * Version:             0.3.0
  * Requires at least:   4.9
  * Requires PHP:        5.6
  * Author:              hacklab/
  * Author URI:          hacklab.com.br
  * License:             MIT
- * Text Domain:         plenamata-plugin
+ * Text Domain:         plenamata
+ * Domain Path:         /languages
  *
  * @package     PlenamataPlugin
  */
@@ -36,7 +37,7 @@ if ( version_compare( phpversion(), '7.2.5', '<' ) ) {
 			<p>
 				<?php
 				echo wp_kses(
-					__( 'The minimum version of PHP is <strong>7.2.5</strong>. Please update the PHP on your server and try again.', 'plenamata_plugin' ),
+					__( 'The minimum version of PHP is <strong>7.2.5</strong>. Please update the PHP on your server and try again.', 'plenamata' ),
 					[
 						'strong' => [],
 					]

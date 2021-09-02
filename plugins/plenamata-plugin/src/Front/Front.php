@@ -152,7 +152,7 @@ class Front {
         wp_register_script( 'jeo-map', JEO_BASEURL . '/js/build/jeoMap.js', [ 'mapboxgl-loader', 'jquery', 'wp-element' ], JEO_VERSION, true );
         wp_localize_script( 'jeo-map', 'jeoMapVars', [
             'jsonUrl' => rest_url( 'wp/v2/' ),
-            'string_read_more' => __( 'Read more', 'jeo' ),
+            'string_read_more' => __( 'Read more', 'plenamata' ),
             'jeoUrl' => JEO_BASEURL,
             'nonce' => wp_create_nonce( 'wp_rest' ),
             'templates' => [
@@ -230,7 +230,7 @@ class Front {
     }
     public function replace_header_close() : void {
         ob_end_clean();
-        if ( is_single() && ! is_home() && ! is_front_page() ) {
+        if ( is_singular( 'post' ) && ! is_home() && ! is_front_page() ) {
             require PLENAMATA_PLUGIN_PATH . 'templates/header-single.php';
         } else {
             require PLENAMATA_PLUGIN_PATH . 'templates/header.php';
