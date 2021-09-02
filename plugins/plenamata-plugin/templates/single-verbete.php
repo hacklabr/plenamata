@@ -1,7 +1,7 @@
 <?php
 $sections = get_terms( [ 'taxonomy' => 'secao', 'hide_empty' => false ] );
 $tags     = get_the_tags( get_the_ID() );
-
+$archive_link = get_post_type_archive_link('verbete');
 get_header(); 
 ?>
 
