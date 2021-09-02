@@ -68,7 +68,7 @@
                 const factor = this.unit === 'ha' ? 100 : 1
 
                 return {
-                    labels: this.areasKm2.map((item, i) => i + 1),
+                    labels: this.areasKm2.map((item, i) => String(i + 1)),
                     datasets: [
                         {
                             data: this.areasKm2.map((areaKm2) => areaKm2 * factor),
@@ -85,32 +85,24 @@
                         legend: {
                             display: false,
                         },
-                        /*
                         zoom: {
-                            limits: {
-                                x: {
-                                    min: 1,
-                                    max: weeks,
-                                    minRange: 10,
-                                    maxRange: 10,
-                                },
-                            },
                             pan: {
                                 enabled: true,
                                 mode: 'x',
+                                threashold: 1,
                             },
                         },
-                        */
                     },
-                    /*
                     scales: {
                         x: {
-                            type: 'linear',
-                            min: Math.max(0, weeks - 10),
+                            type: 'category',
+                            min: Math.max(0, weeks - 12),
                             max: weeks,
                         },
+                        y: {
+                            type: 'linear',
+                        },
                     },
-                    */
                 }
             },
             colors () {
