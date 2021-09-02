@@ -112,6 +112,24 @@ body.home {
                 padding-left: 0;
             }
         }
+
+        .wp-block-columns {
+            .wp-block-column {
+                @include small {
+                margin-bottom: 0;
+            }
+        }
+
+        .wrap-iframe {
+            @include small {
+                margin-bottom: size(15);
+                margin-top: size(15);
+            }
+        }
+
+        p:empty {
+            display: none;
+        }
     }
 
     // Newspack block articles
