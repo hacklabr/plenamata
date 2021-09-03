@@ -164,7 +164,7 @@ class Blocks {
                                     <?= $tressPerDay ?? '' ?>
                                 </span>
                                 <span>
-                                    <?= __("trees/ day", "plenamata") ?>
+                                    <?= __("trees per day", "plenamata") ?>
                                 </span>
                             </div>
 
@@ -173,7 +173,7 @@ class Blocks {
                                     <?= $hecPerDay ?? '' ?>
                                 </span>
                                 <span>
-                                    <?= __("hectares/ day", "plenamata") ?>
+                                    <?= __("hectares per day", "plenamata") ?>
                                 </span>
                             </div>
                         </div>
