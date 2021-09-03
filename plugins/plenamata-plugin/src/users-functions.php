@@ -62,6 +62,9 @@ function plenamata_newspack_posted_by() {
 		$authors      = get_coauthors();
 		$author_count = count($authors);
 		$i            = 1;
+        if( ! $author_count || empty( $author_count ) ) {
+            return;
+        }
 
 		foreach ($authors as $author) {
 			if ('guest-author' === get_post_type($author->ID)) {
