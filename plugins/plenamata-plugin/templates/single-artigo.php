@@ -12,7 +12,7 @@ get_header( 'single' );
 the_post(); ?>
 	
 	<?php 
-	$is_opinion = get_the_category()[0]->slug == "opiniao" ? true : false;
+	$is_opinion = get_the_category()[0]->slug == "_newspack_opinion" ? true : false;
 	if($is_opinion): ?>
 			<div class="opinion-header">
 				<div class="container">
@@ -40,16 +40,9 @@ the_post(); ?>
 		
 		<main id="main" class="site-main">
 			<?php
-			$isImageBehind = false;
-		
-			if (in_array(newspack_featured_image_position(), array('behind'))) {
-				$isImageBehind = true;
-			}
-
+			
 			// Template part for large featured images.
-			if (in_array(newspack_featured_image_position(), array('large', 'behind', 'beside'))) :
-				get_template_part('template-parts/post/large-featured-image');
-			else :
+			
 			?>
 
 				<?php if(!$is_opinion): ?>
@@ -62,11 +55,8 @@ the_post(); ?>
 					</header>
 				<?php endif; ?>
 				
-			<?php endif; ?>
 			
 				<div class="main-content">
-					<?php // Place smaller featured images inside of 'content' area.
-					if ('small' === newspack_featured_image_position()) : ?>
 						<div class="featured-image-small">
 							<div class="featured-image-small__credit-wrapper">
 								<?php newspack_post_thumbnail(); ?>
@@ -105,11 +95,12 @@ the_post(); ?>
 								<?= get_post(get_post_thumbnail_id())->post_content ?>
 							</p>
 						</div><!-- .featured-image-small -->
-					<?php endif; ?>
 					<div class="entry-subhead">
 						<div class="entry-meta">
 								<div class="author-partner">
+									<?php if (get_post_meta($post->ID, 'authors-listing', true) && empty( $terms )) : ?>
 										<?php newspack_posted_by(); ?>
+									<?php endif; ?>
 									<!-- publishers -->
 									<?php 
 										show_publishers($post->ID);
