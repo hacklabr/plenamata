@@ -145,7 +145,7 @@ class Front {
                         'hectares' => __( 'hectares', 'plenamata' ),
                         'km²' => __( 'km²', 'plenamata' ),
                         'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.' => __( 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata' ),
-                        'Estimated number of trees cut down in %s' => __( 'Estimated number of trees cut down in %s', 'plenamata' ),
+                        'Trees cut down in %s' => __( 'Trees cut down in %s', 'plenamata' ),
                         'trees' => __( 'trees', 'plenamata' ),
                         'Source: MapBiomas based on average daily deforestation detected by DETER in %s.' => __( 'Source: MapBiomas based on average daily deforestation detected by DETER in %s.', 'plenamata' ),
                         'Monthly deforestation rate' => __( 'Monthly deforestation rate', 'plenamata' ),
