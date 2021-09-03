@@ -88,23 +88,27 @@
             }
 
             ul {
-                margin: 0;
+                margin: 0 0 0 -0.5rem;
                 padding: 0;
 
                 li {
                     list-style: none;
-                    margin: size(8) 0;
-                    padding: size(8);
+                    margin: 0;
+
                     a {
+                        display: block;
                         font-style: normal;
                         font-weight: normal;
                         font-size: 18px;
                         line-height: 20px;
                         color: var(--secondary);
+                        padding: size(10) size(8);
                     }
                 }
                 li:hover {
-                    background: #F5F1EE;
+                    a {
+                        background: #F5F1EE;
+                    }
                 }
             }
         }
@@ -128,6 +132,7 @@
         summary {
             align-items: center;
             border: 1px solid $c_light;
+            cursor: pointer;
             display: flex;
             font-size: size(18);
             justify-content: space-between;
@@ -191,11 +196,7 @@
             width: 100%;
             grid-gap: 0;
             margin-top: 0;
-            nav {
-                h2 {
-                    margin: 0 size(8);
-                }
-            }
+
             main {
                 h2 {
                     margin: size(30) size(9);

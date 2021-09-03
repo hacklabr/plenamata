@@ -52,6 +52,7 @@
 
             summary {
                 border: 0;
+                cursor: pointer;
                 padding: size(25) 0 0 0;
             }
 
@@ -65,25 +66,28 @@
             }
 
             ul {
-                margin: 0;
+                margin: 0 -0.5rem;
                 padding: 0;
 
                 li {
                     list-style: none;
-                    margin: size(8) 0;
-                    padding: size(8) size(8) size(8) 0;
+                    margin: 0;
 
                     a {
+                        display: block;
                         font-style: normal;
                         font-weight: normal;
                         font-size: size(18);
                         line-height: size(20);
                         color: var(--secondary);
                         text-decoration: none!important;
+                        padding: size(10) size(8);
                     }
                 }
                 li:hover, .active {
-                    background: #F5F1EE;
+                    a {
+                        background: #F5F1EE;
+                    }
                 }
             }
         }
@@ -189,12 +193,7 @@
             grid-gap: 0;
             margin: 0 auto!important;
             padding: 0!important;
-            
-            nav {
-                h2 {
-                    margin: 0 size(8);
-                }
-            }
+
             main {
                 h2 {
                     margin: size(30) size(9);
