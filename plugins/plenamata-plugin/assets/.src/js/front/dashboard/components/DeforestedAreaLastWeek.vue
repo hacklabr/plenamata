@@ -38,7 +38,7 @@
             DashboardPanel,
         },
         props: {
-            now: { type: DateTime, required: true },
+            lastUpdate: { type: Object, required: true },
             state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
@@ -81,11 +81,10 @@
             unitModel: vModel('unit'),
         },
         async created () {
-            const previousWeek = this.now.minus({ weeks: 1 })
-            const startOfWeek = previousWeek.startOf('week')
-            const endOfWeek = previousWeek.endOf('week')
+            const endDate = this.lastUpdate.deter_last_date
+            const startDate = DateTime.fromISO(this.lastUpdate.deter_last_date).minus({ weeks: 1 })
 
-            const data = await api.get(`deter/estados?data1=${startOfWeek.toISODate()}&data2=${endOfWeek.toISODate()}`)
+            const data = await api.get(`deter/estados?data1=${startDate.toISODate()}&data2=${endDate}`)
             this.lastWeek = data
         },
         methods: {
