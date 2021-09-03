@@ -25,7 +25,7 @@
                 </div>
                 <div class="each-item">
                     <!--a href="#">
-                        <?php //_e( 'Natura & Co - Compromisso com a Vida 2030', 'plenamata' );?>
+                        <#?php //_e( 'Natura & Co - Compromisso com a Vida 2030', 'plenamata' );?>
                     </a-->
                 </div>
                 <div class="each-item">
