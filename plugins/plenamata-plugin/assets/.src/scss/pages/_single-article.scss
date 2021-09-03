@@ -1,4 +1,9 @@
-.single-post{
+body.single-post{
+    &.cat-_newspack_opinion{
+        section#primary{
+            margin-top:40px;
+        }
+    }
    #content{
         margin-top: 1rem;
         margin-bottom: 40px;
