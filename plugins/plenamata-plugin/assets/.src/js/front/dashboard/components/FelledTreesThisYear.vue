@@ -11,7 +11,7 @@
             </DashboardMeasure>
         </template>
         <template #meaning>
-            {{ sprintf(__('estimated average of %s trees per minute', 'plenamata'), roundNumber(trees / minutes)) }}
+            {{ sprintf(__('estimated average of %s trees per minute', 'plenamata'), roundNumber(treesPerMinute)) }}
         </template>
         <template #footer>
             {{ sprintf(__('Source: MapBiomas based on average daily deforestation detected by DETER in %s.', 'plenamata'), year) }}
@@ -20,11 +20,10 @@
 </template>
 
 <script>
-    import { DateTime } from 'luxon'
+    import { DateTime, Interval } from 'luxon'
 
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
-    import api from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
 
     export default {
@@ -44,53 +43,37 @@
             return {
                 internalTrees: 0,
                 interval: null,
-                lastData: null,
             }
         },
         computed: {
+            newTrees () {
+                const elapsedTime = Interval.fromDateTimes(DateTime.fromISO(this.lastUpdate.deter_last_date), DateTime.now())
+                return elapsedTime.count('seconds') * this.treesDelta
+            },
             treesDelta () {
-                if (!this.lastData) {
-                    return 0
-                }
-
-                return Number(this.lastData.num_arvores) / 2419200
+                return this.treesPerMinute / 60
+            },
+            treesPerMinute () {
+                return this.trees / this.minutes
             },
         },
         watch: {
-            lastUpdate: {
-                handler: 'fetchData',
-                immediate: true,
-            },
-            state: {
-                handler: 'fetchData',
-                immediate: true,
-            },
             trees: {
-                handler () {
-                    this.internalTrees = this.trees
-
-                    if (this.interval) {
-                        window.clearInterval(this.interval)
-                    }
-
-                    this.interval = window.setInterval(() => {
-                        this.internalTrees += this.treesDelta
-                    }, 1000)
-                },
+                handler: 'recalculateTrees',
                 immediate: true,
             },
         },
         methods: {
-            async fetchData () {
-                if (this.lastUpdate.deter_last_date) {
-                    const endDate = this.lastUpdate.deter_last_date
-                    const startDate = DateTime.fromISO(this.lastUpdate.deter_last_date).minus({ days: 28 })
+            recalculateTrees () {
+                this.internalTrees = this.trees + this.newTrees
 
-                    const filters = this.state ? `estados?estado=${this.state}&` : 'basica?'
-
-                    const data = await api.get(`deter/${filters}data1=${startDate.toISODate()}&data2=${endDate}`)
-                    this.lastData = Array.isArray(data) ? data[0] : data
+                if (this.interval) {
+                    window.clearInterval(this.interval)
                 }
+
+                this.interval = window.setInterval(() => {
+                    this.internalTrees += this.treesDelta
+                }, 1000)
             },
             roundNumber,
         },
