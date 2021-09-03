@@ -6,7 +6,9 @@
             line-height: 24px;
         }
     }
+
     @include mobile{   
+
         background-image: asset-url('img/fundo-newsletter.png');
         background-repeat: no-repeat;
         background-color:#FFF087;
