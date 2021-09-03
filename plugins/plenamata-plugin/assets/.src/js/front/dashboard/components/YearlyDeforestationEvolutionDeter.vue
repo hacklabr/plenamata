@@ -14,7 +14,7 @@
         </template>
         <template #footer>
             {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.deter, updated.sync) }}
-            {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), _x('July', 'month', 'plenamata')) }}
+            {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), _x('July', 'months', 'plenamata')) }}
         </template>
     </DashboardPanel>
 </template>

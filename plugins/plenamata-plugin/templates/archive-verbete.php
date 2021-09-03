@@ -39,6 +39,7 @@
             $entries = get_posts( [
                 'post_type' => 'verbete',
                 'order' => 'ASC',
+                'orderby' => 'title',
                 'numberposts' => -1,
                 'meta_query' => [
                     [ 'key' => 'section', 'value' => $section->term_id ],

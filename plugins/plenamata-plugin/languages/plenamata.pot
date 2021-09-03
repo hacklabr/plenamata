@@ -126,7 +126,7 @@ msgstr ""
 msgid "Sections"
 msgstr ""
 
-#: templates/archive-verbete.php:64
+#: templates/archive-verbete.php:65
 msgid "Acessar verbete completo"
 msgstr ""
 
