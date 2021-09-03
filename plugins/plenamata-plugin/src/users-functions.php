@@ -98,7 +98,7 @@ function plenamata_newspack_posted_by() {
 
 	?>
 		<span class="<?php echo !$showAuthorAvatar ? 'byline' : 'byline single-author-opinion'; ?>">
-			<span><?php echo esc_html__('By', 'jeo'); ?></span>
+			<span><?php echo esc_html__('By', 'plenamata'); ?></span>
 			<?php
 			foreach ($authors as $author) {
 				if ('guest-author' === get_post_type($author->ID)) {
@@ -142,7 +142,7 @@ function plenamata_newspack_posted_by() {
 			/* translators: 1: Author avatar. 2: post author, only visible to screen readers. 3: author link. */
 			'<span class="author-avatar">%1$s</span><span class="byline"><span>%2$s</span> <span class="author vcard"><a class="url fn n" href="%3$s">%4$s</a></span></span>',
 			get_avatar(get_the_author_meta('ID')),
-			esc_html__('by', 'jeo'),
+			esc_html__('by', 'plenamata'),
 			esc_url(get_author_posts_url(get_the_author_meta('ID'))),
 			esc_html(get_the_author())
 		);

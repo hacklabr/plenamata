@@ -25,8 +25,8 @@ class Translations {
 	 * @since 0.1.0
 	 */
 	public function hooks(): void {
-		add_action( 'init', [ $this, 'load_textdomain' ] );
-		add_action( 'init', [ $this, 'script_translations' ], 999 );
+		add_action( 'after_setup_theme', [ $this, 'load_textdomain' ] );
+		add_action( 'wp_enqueue_scripts', [ $this, 'script_translations' ], 999 );
 	}
 
 	public function load_textdomain() {
@@ -40,6 +40,18 @@ class Translations {
 	public function script_translations() {
 		wp_set_script_translations(
 			'plenamata-plugin-blocks',
+			'plenamata',
+			PLENAMATA_PLUGIN_PATH . 'languages'
+		);
+
+		wp_set_script_translations(
+			'plenamata-plugin',
+			'plenamata',
+			PLENAMATA_PLUGIN_PATH . 'languages'
+		);
+
+		wp_set_script_translations(
+			'plenamata-dashboard',
 			'plenamata',
 			PLENAMATA_PLUGIN_PATH . 'languages'
 		);
