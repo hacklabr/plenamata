@@ -127,6 +127,60 @@ class Front {
                 'language' => \ICL_LANGUAGE_CODE,
                 'pluginUrl' => PLENAMATA_PLUGIN_URL,
                 'restUrl' => get_rest_url(),
+                'i18n' => [
+                    '__' => [
+                        'News' => __( 'News', 'plenamata' ),
+                        'Forestry Dashboard' => __( 'Forestry Dashboard', 'plenamata' ),
+                        'States' => __( 'States', 'plenamata' ),
+                        'All states' => __( 'All states', 'plenamata' ),
+                        'Data' => __( 'Data', 'plenamata' ),
+                        'No news to be shown.' => __( 'No news to be shown', 'plenamata' ),
+                        'External link' => __( 'External link', 'plenamata' ),
+                        'estimated average of %s trees per minute' => __( 'estimated average of %s trees per minute', 'plenamata'),
+                        'Source: MapBiomas based on DETER/INPE data.' => __( 'Source: MapBiomas based on DETER/INPE data.', 'plenamata' ),
+                        'Unit' => __( 'Unit', 'plenamata' ),
+                        'hectares per day' => __( 'hectares per day', 'plenamata' ),
+                        'km² per day' => __( 'km² per day', 'plenamata' ),
+                        'Area deforested last week' => __( 'Area deforested last week', 'plenamata' ),
+                        'hectares' => __( 'hectares', 'plenamata' ),
+                        'km²' => __( 'km²', 'plenamata' ),
+                        'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.' => __( 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata' ),
+                        'Estimated number of trees cut down in %s' => __( 'Estimated number of trees cut down in %s', 'plenamata' ),
+                        'trees' => __( 'trees', 'plenamata' ),
+                        'Source: MapBiomas based on average daily deforestation detected by DETER in %s.' => __( 'Source: MapBiomas based on average daily deforestation detected by DETER in %s.', 'plenamata' ),
+                        'Monthly deforestation rate' => __( 'Monthly deforestation rate', 'plenamata' ),
+                        'Timeframe' => __( 'Timeframe', 'plenamata' ),
+                        'during DETER year' => __( 'during DETER year', 'plenamata' ),
+                        'during PRODES year' => __( 'during PRODES year', 'plenamata' ),
+                        'Total deforestation in %s in the selected territory' => __( 'Total deforestation in %s in the selected territory', 'plenamata' ),
+                        'Total deforested area in %s (until last week)' => __( 'Total deforested area in %s (until last week)', 'plenamata' ),
+                        '%s%% increase compared to last year' => __( '%s%% increase compared to last year', 'plenamata' ),
+                        '%s%% decrease compared to last year' => __( '%s%% decrease compared to last year', 'plenamata' ),
+                        'Weekly deforestation rate' => __( 'Weekly deforestation rate', 'plenamata'),
+                        'Period' => __( 'Period', 'plenamata' ),
+                        'during DETER year' => __( 'during DETER year', 'plenamata' ),
+                        'during PRODES year' => __( 'during PRODES year', 'plenamata' ),
+                        'Yearly deforestation alerts (DETER)' => __( 'Yearly deforestation alerts (DETER)', 'plenamata' ),
+                        'The figures represent deforestation for each year up to %s.' => __( 'The figures represent deforestation for each year up to %s.', 'plenamata' ),
+                        'Yearly consolidated deforestation rate (PRODES)' => __( 'Yearly consolidated deforestation rate (PRODES)', 'plenamata' )
+                    ],
+                    '_x' => [
+                        'months' => [
+                            'January' => _x('January', 'months', 'plenamata'),
+                            'February' => _x('February', 'months', 'plenamata'),
+                            'March' => _x('March', 'months', 'plenamata'),
+                            'April' => _x('April', 'months', 'plenamata'),
+                            'May' => _x('May', 'months', 'plenamata'),
+                            'June' => _x('June', 'months', 'plenamata'),
+                            'July' => _x('July', 'months', 'plenamata'),
+                            'August' => _x('August', 'months', 'plenamata'),
+                            'September' => _x('September', 'months', 'plenamata'),
+                            'October' => _x('October', 'months', 'plenamata'),
+                            'November' => _x('November', 'months', 'plenamata'),
+                            'December' => _x('December', 'months', 'plenamata'),
+                        ],
+                    ]
+                ]
             ] );
         }
 
@@ -149,7 +203,7 @@ class Front {
      */
     private function register_jeo_assets(): void {
         wp_enqueue_style( 'mapboxgl', 'https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css', '1.4.1' );
-       
+
         wp_register_script( 'mapboxgl-loader', JEO_BASEURL . '/js/build/mapboxglLoader.js', JEO_VERSION );
 
         wp_register_script( 'jeo-map', JEO_BASEURL . '/js/build/jeoMap.js', [ 'mapboxgl-loader', 'jquery', 'wp-element' ], JEO_VERSION, true );
@@ -243,11 +297,11 @@ class Front {
 
     /**
      * Filter the except length to 20 words.
-     * 
+     *
      *  @param int $length Excerpt length.
      *  @return int (Maybe) modified excerpt length.
      */
     public function excerpt_length( $length ) {
         return 22;
-    }    
+    }
 }
