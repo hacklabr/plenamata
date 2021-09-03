@@ -26,7 +26,7 @@
             </template>
         </template>
         <template #footer>
-            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), '08.27.2021', '08.20.2021') }}
+            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.deter, updated.sync) }}
         </template>
     </DashboardPanel>
 </template>
@@ -51,6 +51,7 @@
             now: { type: DateTime, required: true },
             state: { type: String, default: '' },
             unit: { type: String, default: 'ha' },
+            updated: { type: Object, required: true },
             year: { type: Number, required: true },
         },
         data () {

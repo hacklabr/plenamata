@@ -44,6 +44,7 @@
             days: { type: Number, required: true },
             minutes: { type: Number, required: true },
             unit: { type: String, default: 'ha' },
+            updated: { type: Object, required: true },
             trees: { type: Number, required: true },
             year: { type: Number, required: true },
         },

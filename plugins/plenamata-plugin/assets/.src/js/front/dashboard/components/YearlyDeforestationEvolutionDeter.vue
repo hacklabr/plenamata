@@ -13,7 +13,7 @@
             <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
         </template>
         <template #footer>
-            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), '08.27.2021', '08.20.2021') }}
+            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.deter, updated.sync) }}
             {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), _x('July', 'month', 'plenamata')) }}
         </template>
     </DashboardPanel>
@@ -36,6 +36,7 @@
         props: {
             state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
+            updated: { type: Object, required: true },
         },
         data () {
             const start = DateTime.now().minus({ years: 5 }).startOf('year')

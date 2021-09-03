@@ -31,13 +31,13 @@
                 </fieldset>
 
                 <div class="dashboard__panels" v-if="view === 'data'">
-                    <FelledTreesThisYear :minutes="minutes" :trees="trees" :year="date.year"/>
-                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit.sync="unit" :year="date.year"/>
-                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="date.year"/>
-                    <DeforestedAreaLastWeek :now="date.now" :state="state" :unit.sync="unit"/>
-                    <WeeklyDeforestationEvolution :now="date.now" :source.sync="source" :state="state" :unit.sync="unit" :year.sync="year"/>
-                    <MonthlyDeforestationEvolution :source.sync="source" :state="state" :unit.sync="unit"/>
-                    <YearlyDeforestationEvolutionDeter :state="state" :unit.sync="unit"/>
+                    <FelledTreesThisYear :minutes="minutes" :trees="trees" :updated="updated" :year="date.year"/>
+                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit.sync="unit" :updated="updated" :year="date.year"/>
+                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :updated="updated" :year="date.year"/>
+                    <DeforestedAreaLastWeek :now="date.now" :state="state" :unit.sync="unit" :updated="updated"/>
+                    <WeeklyDeforestationEvolution :now="date.now" :source.sync="source" :state="state" :unit.sync="unit" :updated="updated" :year.sync="year"/>
+                    <MonthlyDeforestationEvolution :source.sync="source" :state="state" :unit.sync="unit" :updated="updated"/>
+                    <YearlyDeforestationEvolutionDeter :state="state" :unit.sync="unit" :updated="updated"/>
                     <YearlyDeforestationEvolutionProdes :state="state" :unit.sync="unit" :year="date.year"/>
                 </div>
 
@@ -67,6 +67,7 @@
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
     import api from '../../utils/api'
+    import { shortDate } from '../../utils/filters'
 
     export default {
         name: 'Dashboard',
@@ -93,6 +94,7 @@
                     year,
                 },
                 lastMonth: [],
+                lastUpdate: {},
                 news: [],
                 source: 'deter',
                 state: '',
@@ -143,6 +145,14 @@
                 }
                 return trees / 2592000
             },
+            updated () {
+                const today = DateTime.now().toISODate()
+
+                return {
+                    deter: shortDate(DateTime.fromISO(this.lastUpdate.deter_last_date || today).toJSDate()).replaceAll('/', '.'),
+                    sync: shortDate(DateTime.fromISO(this.lastUpdate.last_sync || today).toJSDate()).replaceAll('/', '.'),
+                }
+            },
         },
         watch: {
             state: {
@@ -163,12 +173,14 @@
             const monthAgo = now.minus({ months: 1 })
             const twoMonthsAgo = now.minus({ months: 2 })
 
-            const [thisYear, lastMonth] = await Promise.all([
+            const [thisYear, lastMonth, lastUpdate] = await Promise.all([
                 api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`),
                 api.get(`deter/estados?data1=${twoMonthsAgo.toISODate()}&data2=${monthAgo.toISODate()}`),
+                api.get('deter/last_date'),
             ])
             this.thisYear = thisYear
             this.lastMonth = lastMonth
+            this.lastUpdate = lastUpdate
         },
         mounted () {
             const mapEl = document.querySelector('.jeomap')

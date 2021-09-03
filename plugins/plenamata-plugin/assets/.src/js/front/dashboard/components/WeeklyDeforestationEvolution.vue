@@ -20,7 +20,7 @@
             <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
         </template>
         <template #footer>
-            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), '08.27.2021', '08.20.2021') }}
+            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.deter, updated.sync) }}
         </template>
     </DashboardPanel>
 </template>
@@ -45,6 +45,7 @@
             source: { type: String, default: 'prodes' },
             state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
+            updated: { type: Object, required: true },
             year: { type: Number, required: true },
         },
         data () {

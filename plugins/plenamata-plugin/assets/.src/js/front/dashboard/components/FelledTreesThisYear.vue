@@ -33,6 +33,7 @@
         props: {
             minutes: { type: Number, required: true },
             trees: { type: Number, required: true },
+            updated: { type: Object, required: true },
             year: { type: Number, required: true },
         },
         methods: {
