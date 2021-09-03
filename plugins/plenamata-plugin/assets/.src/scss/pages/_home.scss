@@ -329,6 +329,15 @@ body.home {
                 position: relative;
             }
 
+            .wp-block-cover__inner-container {
+                p {
+                    @include small {
+                        position: relative;
+                        z-index: 2;
+                    }
+                }
+            }
+
             .wp-block-column {
                 @include small {
                     margin-bottom: 0;
@@ -370,13 +379,6 @@ body.home {
                 h3 {
                     @include small {
                         margin-top: 0;
-                    }
-                }
-
-                p {
-                    @include small {
-                        position: relative;
-                        z-index: 2;
                     }
                 }
             }

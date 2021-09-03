@@ -56,7 +56,9 @@
                 &.has-post-thumbnail{                    
                     &:not(:first-child){
                         .post-thumbnail {
-                            max-width: 45%!important;
+                            @include tablet-up {
+                                max-width: 45% !important;
+                            }
                         }
                     }
                 }
@@ -104,9 +106,9 @@
                         max-height: 55px;
                         overflow: hidden;
                         margin: 0;
-                        font-size: 22px !important;
+                        font-size: 22px;
                         @include mobile{
-                            font-size: 1.4em !important;
+                            font-size: 1.4em;
                         }
                     }
                 }
