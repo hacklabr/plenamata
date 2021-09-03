@@ -10,11 +10,11 @@ registerBlockType('plenamata/estimatives-area', {
     attributes: {
         headingTitle: {
             type: 'string',
-            default: __("Dados de Desmatamento na Amazônia Brasileira", "plenamata"),
+            default: __("Desmatamento na Amazônia Brasileira", "plenamata"),
         },
         preNumberTitle: {
             type: 'string',
-            default: __("Árvores derrubadas em 2021", "plenamata"),
+            default: __("Árvores derrubadas por desmatamento em 2021", "plenamata"),
         },
         averageTitle: {
             type: 'string',
