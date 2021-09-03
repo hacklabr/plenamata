@@ -11,19 +11,17 @@
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="entry-content">
-		<?php 
-		
-		if($is_opinion): ?>
-			<h3 class="post-excerpt">
-				<?php
-					global $post;
-					
-					if(! boolval(get_theme_mod('disable_excerpt_in_all_posts', false)) && ! boolval(get_post_meta($post->ID, 'hide_post_excerpt', true ))) {
-						the_excerpt();
-					}
-				?>
-			</h3>
-		<?php endif ?>
+
+		<h3 class="post-excerpt">
+			<?php
+				global $post;
+				
+				if(! boolval(get_theme_mod('disable_excerpt_in_all_posts', false)) && ! boolval(get_post_meta($post->ID, 'hide_post_excerpt', true ))) {
+					the_excerpt();
+				}
+			?>
+		</h3>
+
 
 		<?php
 		the_content(
