@@ -11,87 +11,89 @@
         background-position-x: 4px;
         background-color:#FFF087;
         border-radius: 8px;
+}
+.mc4wp-form{
 
-        h3{
-            font-family: 'Archivo';
-            font-style: normal;
-            font-weight: normal;
-            font-size: 22px;
-            line-height: 24px;
-            text-align: center;
-            color: #221D18;
-            margin-top:0px;
-            margin-bottom:34px;
-        }
+    h3{
+        font-family: 'Archivo';
+        font-style: normal;
+        font-weight: normal;
+        font-size: 22px;
+        line-height: 24px;
+        text-align: center;
+        color: #221D18;
+        margin-top:0px;
+        margin-bottom:34px;
+    }
 
-        input[type='email']{font-size: 1rem;}
+    input[type='email']{font-size: 1rem;}
 
-        
-        label{
-            font-family: Archivo;
-            font-style: normal;
-            font-weight: normal;
-            font-size: 12px;
-            line-height: 16px;
-            letter-spacing: 0.02em;
-            color: #272B36;
-        }
-                
-
-        .container_news {
-            display: block;
-            position: relative;
-            margin-bottom: 12px;
-            cursor: pointer;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-
-            input[type="checkbox"] {
-                position: absolute;
-                opacity: 0;
-                cursor: pointer;
-                height: 0;
-                width: 0;
+    
+    label{
+        font-family: Archivo;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.02em;
+        color: #272B36;
+    }
             
-                &:checked ~ .checkmark {
-                    background-color: transparent;
 
-                    &:after {
-                        display: block;
-                    }
-                }
-            }
+    .container_news {
+        display: block;
+        position: relative;
+        margin-bottom: 12px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
 
-            .checkmark {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 24px;
-                width: 24px;
+        input[type="checkbox"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        
+            &:checked ~ .checkmark {
                 background-color: transparent;
 
-                :after {
-                    content: "";
-                    position: absolute;
-                    display: none;
-
-                    left: 9px;
-                    top: 5px;
-                    width: 5px;
-                    height: 10px;
-                    border: solid white;
-                    border-width: 0 3px 3px 0;
-                    -webkit-transform: rotate(45deg);
-                    -ms-transform: rotate(45deg);
-                    transform: rotate(45deg);
+                &:after {
+                    display: block;
                 }
             }
-            
         }
+
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 24px;
+            width: 24px;
+            background-color: transparent;
+
+            :after {
+                content: "";
+                position: absolute;
+                display: none;
+
+                left: 9px;
+                top: 5px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                -webkit-transform: rotate(45deg);
+                -ms-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+        }
+        
     }
 }
+
 
 .mc4wp-alert{
     padding: 5px 10px;

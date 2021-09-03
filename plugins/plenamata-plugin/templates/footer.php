@@ -24,13 +24,13 @@
                     <?php printf( __( 'COPYRIGHT © %s PlenaMata', 'plenamata' ), date( 'Y' ) );?>
                 </div>
                 <div class="each-item">
-                    <a href="#">
-                        <?php _e( 'Privacy Policy', 'plenamata' );?>
-                    </a>
+                    <!--a href="#">
+                        <?php //_e( 'Natura & Co - Compromisso com a Vida 2030', 'plenamata' );?>
+                    </a-->
                 </div>
                 <div class="each-item">
-                    <a href="#">
-                        <?php _e( 'Natura & Co - Compromisso com a Vida 2030', 'plenamata' );?>
+                    <a href="/politica-de-privacidade/">
+                        <?php _e( 'Privacy Policy', 'plenamata' );?>
                     </a>
                 </div>
             </div>
@@ -44,20 +44,6 @@
 <?php if ( is_post_type_archive( 'verbete' ) ) : ?>
 
 <script>
-        /*$(function mostrar(){
-            var allSections = [];
-            var ids = $('main').find(document.getElementsByTagName('h2'));//pegando todas as tags input
-            
-            for (var i = 0; i< ids.length; i++) {
-                allSections.push(ids[i].id);//adicinando o id no array, conforme a posição
-
-                //let contItens = $('#'+ids[i].id).css("background-color", "red");
-                let contItens = $('#'+ids[i].id).siblings('.glossary__entries').children().length;
-                console.log(contItens);
-            }
-                    
-            console.log(allSections);//exibindo
-        });*/
 
         $(function(){            
 
