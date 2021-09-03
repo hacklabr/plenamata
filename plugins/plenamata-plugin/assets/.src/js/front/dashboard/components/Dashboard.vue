@@ -117,10 +117,12 @@
                 }
             },
             days () {
-                return Interval.fromDateTimes(this.date.startOfYear, this.date.now).length('days')
+                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
+                return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('days')
             },
             minutes () {
-                return Interval.fromDateTimes(this.date.startOfYear, this.date.now).length('minutes')
+                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
+                return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('minutes')
             },
             states () {
                 return {

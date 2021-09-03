@@ -1,5 +1,4 @@
 import { registerBlockType } from "@wordpress/blocks";
-import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import { TextControl } from '@wordpress/components';
 import { __ } from "@wordpress/i18n";
 //import './dashboard.scss';
@@ -11,9 +10,7 @@ registerBlockType('plenamata/deforestation-info', {
 
     edit({ attributes, setAttributes }) {
         const {
-            boxTitle = __('Desmatados na Amazônia nos últimos 07 dias.', 'plenamata'),
-            count = 0,
-            dataSource = ''
+            boxTitle = __('Area of deforestation alerts detected last week', 'plenamata'),
         } = attributes;
 
         return (
@@ -24,20 +21,6 @@ registerBlockType('plenamata/deforestation-info', {
                         value={ boxTitle }
                         onChange={ ( boxTitle ) => setAttributes( { boxTitle } ) }
                         placeholder={__('Type the box title', 'plenamata')}
-                    />
-                    <NumberControl
-                        label={__('Count', 'plenamata')}
-                        isShiftStepEnabled={ true }
-                        onChange={ ( count ) => setAttributes( { count } ) }
-                        shiftStep={ 1 }
-                        value={ count }
-                        placeholder={__('Type the count', 'plenamata')}
-                    />
-                    <TextControl
-                        label={__('Source', 'plenamata')}
-                        value={ dataSource }
-                        onChange={ ( dataSource ) => setAttributes( { dataSource } ) }
-                        placeholder={__('Type the source of data', 'plenamata')}
                     />
                 </div>
             </>
@@ -51,11 +34,11 @@ registerBlockType('plenamata/deforestation-info', {
                     <span className="box-title">{attributes.boxTitle}</span>
                     <span className="icon"></span>
                     <div className="wrap">
-                        <span className="count" data-mask="true">{attributes.count}</span>
+                        <span className="count" data-deter="hectaresLastWeek"/>
                         <span className="legend">{__('hectares', 'plenamata')}</span>
                     </div>
                 </div>
-                <span className="data-source">{attributes.dataSource}</span>
+                <span className="data-source" data-deter="sourcesLastWeek"/>
             </div>
         );
     },

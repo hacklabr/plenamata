@@ -94,7 +94,7 @@ class Blocks {
                 "finalInformation" => [
                     "type" => "string"
                 ],
-        
+
                 // Base numbers
                 "baseTrees" => [
                     "type" => "string"
@@ -150,7 +150,7 @@ class Blocks {
                     <h4><?= $preNumberTitle ?? '' ?></h4>
 
                     <div class="number">
-                        <span id="trees-estimative" data-base-trees="<?= $baseTrees ?? '' ?>" data-trees-per-day="<?= $tressPerDay ?? '' ?>" data-date="<?= $baseDate ?? '' ?>">loading...</span>
+                        <span data-deter="treesEstimative"><?= __('loading...', 'plenamata') ?></span>
                         <span><?= __("real-time estimate", "plenamata") ?></span>
                     </div>
                 </div>
@@ -160,21 +160,13 @@ class Blocks {
                         <div class="data">
                             <h4><?= $averageTitle ?? '' ?></h4>
                             <div class="area">
-                                <span data-mask="true">
-                                    <?= $tressPerDay ?? '' ?>
-                                </span>
-                                <span>
-                                    <?= __("trees per day", "plenamata") ?>
-                                </span>
+                                <span data-deter="treesPerDay"></span>
+                                <span><?= __("trees per day", "plenamata") ?></span>
                             </div>
 
                             <div class="area">
-                                <span data-mask="true">
-                                    <?= $hecPerDay ?? '' ?>
-                                </span>
-                                <span>
-                                    <?= __("hectares per day", "plenamata") ?>
-                                </span>
+                                <span data-deter="hectaresPerDay"></span>
+                                <span><?= __("hectares per day", "plenamata") ?></span>
                             </div>
                         </div>
                     </div>
@@ -183,23 +175,13 @@ class Blocks {
                             <h4><?= $deforestedTitle ?? '' ?></h4>
 
                             <div class="area">
-                                <span data-mask="true">
-                                    <?= $warnings ?? '' ?>
-                                </span>
-                                <span data-mask="true">
-                                    <?= __("alerts", "plenamata") ?>
-                                </span>
-                            
+                                <span data-mask="true"><?= $warnings ?? '' ?></span>
+                                <span><?= __("alerts", "plenamata") ?></span>
                             </div>
 
                             <div class="area">
-                                <span data-mask="true">
-                                    <?= $hectares ?? '' ?>
-                                </span>
-
-                                <span>
-                                    <?= __("hectares", "plenamata") ?>
-                                </span>
+                                <span data-deter="hectaresThisYear"></span>
+                                <span><?= __("hectares", "plenamata") ?></span>
                             </div>
                         </div>
 

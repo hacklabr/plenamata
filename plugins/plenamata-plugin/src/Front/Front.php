@@ -196,9 +196,15 @@ class Front {
             true
         );
 
-        wp_localize_script('estimatives-area-front-end', 'estimativesArea', [
-            'utc' => time(),
-            'getLangCode' => apply_filters( "wpml_current_language", NULL ),
+        wp_localize_script('estimatives-area-front-end', 'PlenamataHomeEstimatives', [
+            'language' => apply_filters( "wpml_current_language", NULL ),
+            'i18n' => [
+                '__' => [
+                    'Area of deforestation alerts detected last week' => __( 'Area of deforestation alerts detected last week', 'plenamata' ),
+                    'hectares' => __( 'hectares', 'plenamata' ),
+                    'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.' => __( 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata' ),
+                ]
+            ]
         ]);
 	}
 
