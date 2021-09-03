@@ -159,8 +159,16 @@ the_post(); ?>
 				}
 
 
-				get_template_part('template-parts/content/content', 'single');
+					//get_template_part('template-parts/content/content', 'single');
+					if($is_opinion){
+						get_template_part(require PLENAMATA_PLUGIN_PATH . 'templates/parts/content-single.php');
+					}else{
+						get_template_part('template-parts/content/content', 'single');
+					}
 				?>
+
+
+
 
 			</div><!-- .main-content -->
 
