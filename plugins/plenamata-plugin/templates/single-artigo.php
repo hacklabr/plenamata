@@ -15,12 +15,12 @@ the_post(); ?>
 	$is_opinion = get_the_category()[0]->slug == "_newspack_opinion" ? true : false;
 	if($is_opinion): ?>
 			<div class="opinion-header">
+				<div class="breadcrumb">
+					<a href="<?= site_url(); ?>">Home</a> /
+					<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Articles", "plenamata") ?></a> /
+					<a href="<?= get_category_link(get_the_category()[0]->cat_ID); ?>"><?= get_the_category()[0]->name ?></a> /
+				</div>
 				<div class="container">
-					<div class="breadcrumb">
-						<a href="<?= site_url(); ?>">Home</a> /
-						<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Articles", "plenamata") ?></a> /
-						<a href="<?= get_category_link(get_the_category()[0]->cat_ID); ?>"><?= get_the_category()[0]->name ?></a> /
-					</div>
 					<h1 class="entry-title">
 						<?php echo wp_kses_post(get_the_title()); ?>
 					</h1>	
