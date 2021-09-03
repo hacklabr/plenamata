@@ -174,9 +174,9 @@ if (newspack_is_amp()) : ?>
 		<div class="item">
             <?php 
                 $link = '#';
-                if ( $page = get_page_by_title( 'Glossary', OBJECT, 'page' ) ) {
-                    $link = get_permalink( $page->ID );
-                }
+				if($archive_cpt = 'verbete'){				
+					$link = get_post_type_archive_link( $archive_cpt );
+				}
             ?>
             <a href="<?php echo esc_url( $link );?>" class="each-link">
 				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
