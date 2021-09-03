@@ -1,14 +1,14 @@
 body.single-post{
+    .post-excerpt{
+        border-bottom: 1px solid #FF7373;
+        padding-bottom: 40px;
+        p{
+            margin-bottom: 0!important;
+        }
+    }
     &.cat-_newspack_opinion{
         section#primary{
             margin-top:40px;
-            .post-excerpt{
-                border-bottom: 1px solid #FF7373;
-                padding-bottom: 40px;
-                p{
-                    margin-bottom: 0!important;
-                }
-            }
         }
     }
    #content{
