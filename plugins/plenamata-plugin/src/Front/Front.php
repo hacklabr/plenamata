@@ -149,6 +149,8 @@ class Front {
                         'trees' => __( 'trees', 'plenamata' ),
                         'Source: MapBiomas based on average daily deforestation detected by DETER in %s.' => __( 'Source: MapBiomas based on average daily deforestation detected by DETER in %s.', 'plenamata' ),
                         'Monthly deforestation rate' => __( 'Monthly deforestation rate', 'plenamata' ),
+                        'Deforestation rate in %s' => __( 'Deforestation rate in %s', 'plenamata' ),
+                        'trees per day' => __( 'trees per day', 'plenamata' ),
                         'Timeframe' => __( 'Timeframe', 'plenamata' ),
                         'during DETER year' => __( 'during DETER year', 'plenamata' ),
                         'during PRODES year' => __( 'during PRODES year', 'plenamata' ),
@@ -158,11 +160,13 @@ class Front {
                         '%s%% decrease compared to last year' => __( '%s%% decrease compared to last year', 'plenamata' ),
                         'Weekly deforestation rate' => __( 'Weekly deforestation rate', 'plenamata'),
                         'Period' => __( 'Period', 'plenamata' ),
+                        'Period: %s' => __( 'Period: %s', 'plenamata' ),
                         'during DETER year' => __( 'during DETER year', 'plenamata' ),
                         'during PRODES year' => __( 'during PRODES year', 'plenamata' ),
                         'Yearly deforestation alerts (DETER)' => __( 'Yearly deforestation alerts (DETER)', 'plenamata' ),
                         'The figures represent deforestation for each year up to %s.' => __( 'The figures represent deforestation for each year up to %s.', 'plenamata' ),
-                        'Yearly consolidated deforestation rate (PRODES)' => __( 'Yearly consolidated deforestation rate (PRODES)', 'plenamata' )
+                        'Yearly consolidated deforestation rate (PRODES)' => __( 'Yearly consolidated deforestation rate (PRODES)', 'plenamata' ),
+                        'Source: PRODES/INPE.' => __( 'Source: PRODES/INPE.', 'plenamata' ),
                     ],
                     '_x' => [
                         'months' => [

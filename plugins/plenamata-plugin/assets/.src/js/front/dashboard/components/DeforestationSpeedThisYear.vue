@@ -6,7 +6,7 @@
         <template #measure>
             <DashboardMeasure icon="tree-icon.svg" :number="trees / days">
                 <template #unit>
-                    {{ __( 'trees per day', 'plenamata' ) }}
+                    {{ __('trees per day', 'plenamata') }}
                 </template>
             </DashboardMeasure>
             <DashboardMeasure icon="area-icon.svg" :number="area / days">
