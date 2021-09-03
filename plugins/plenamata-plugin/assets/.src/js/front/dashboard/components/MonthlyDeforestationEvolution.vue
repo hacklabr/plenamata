@@ -23,12 +23,12 @@
 </template>
 
 <script>
-    import { _x } from '@wordpress/i18n'
     import Color from 'color'
     import { DateTime } from 'luxon'
     import { BarChart } from 'vue-chart-3'
 
     import DashboardPanel from './DashboardPanel.vue'
+    import { _x } from '../plugins/i18n'
     import api from '../../utils/api'
     import { vModel } from '../../utils/vue'
 
