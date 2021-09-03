@@ -162,7 +162,7 @@ class Front {
                         'during PRODES year' => __( 'during PRODES year', 'plenamata' ),
                         'Yearly deforestation alerts (DETER)' => __( 'Yearly deforestation alerts (DETER)', 'plenamata' ),
                         'The figures represent deforestation for each year up to %s.' => __( 'The figures represent deforestation for each year up to %s.', 'plenamata' ),
-                        'Yearly consolidated deforestation rate (PRODES)' => __( 'Yearly consolidated deforestation rate (PRODES)', 'plenamata' )                        
+                        'Yearly consolidated deforestation rate (PRODES)' => __( 'Yearly consolidated deforestation rate (PRODES)', 'plenamata' )
                     ],
                     '_x' => [
                         'months' => [
@@ -203,7 +203,7 @@ class Front {
      */
     private function register_jeo_assets(): void {
         wp_enqueue_style( 'mapboxgl', 'https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css', '1.4.1' );
-       
+
         wp_register_script( 'mapboxgl-loader', JEO_BASEURL . '/js/build/mapboxglLoader.js', JEO_VERSION );
 
         wp_register_script( 'jeo-map', JEO_BASEURL . '/js/build/jeoMap.js', [ 'mapboxgl-loader', 'jquery', 'wp-element' ], JEO_VERSION, true );
@@ -297,11 +297,11 @@ class Front {
 
     /**
      * Filter the except length to 20 words.
-     * 
+     *
      *  @param int $length Excerpt length.
      *  @return int (Maybe) modified excerpt length.
      */
     public function excerpt_length( $length ) {
         return 22;
-    }    
+    }
 }
