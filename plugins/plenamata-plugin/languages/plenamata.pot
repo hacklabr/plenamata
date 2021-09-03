@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-09-02T20:26:19+00:00\n"
+"POT-Creation-Date: 2021-09-03T15:38:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: plenamata\n"
@@ -48,7 +48,7 @@ msgid "The minimum version of PHP is <strong>7.2.5</strong>. Please update the P
 msgstr ""
 
 #: src/Admin/Blocks.php:38
-#: assets/build/js/dashboard.js:39852
+#: templates/parts/header/mobile-sidebar.php:155
 msgid "Dashboard"
 msgstr ""
 
@@ -57,11 +57,13 @@ msgid "real-time estimate"
 msgstr ""
 
 #: src/Admin/Blocks.php:167
-msgid "trees/ day"
+#: assets/build/js/dashboard.js:40581
+msgid "trees per day"
 msgstr ""
 
 #: src/Admin/Blocks.php:176
-msgid "hectares/ day"
+#: assets/build/js/dashboard.js:40629
+msgid "hectares per day"
 msgstr ""
 
 #: src/Admin/Blocks.php:190
@@ -71,12 +73,12 @@ msgstr ""
 #: src/Admin/Blocks.php:201
 #: assets/.src/js/admin/blocks/deforestation-info.js:55
 #: assets/build/js/admin/blocks.js:172
-#: assets/build/js/dashboard.js:40557
-#: assets/build/js/dashboard.js:40810
-#: assets/build/js/dashboard.js:41007
-#: assets/build/js/dashboard.js:41199
-#: assets/build/js/dashboard.js:41364
-#: assets/build/js/dashboard.js:41503
+#: assets/build/js/dashboard.js:40769
+#: assets/build/js/dashboard.js:41022
+#: assets/build/js/dashboard.js:41219
+#: assets/build/js/dashboard.js:41411
+#: assets/build/js/dashboard.js:41576
+#: assets/build/js/dashboard.js:41715
 msgid "hectares"
 msgstr ""
 
@@ -91,19 +93,31 @@ msgstr ""
 msgid "Articles"
 msgstr ""
 
-#: src/Front/Front.php:60
+#: src/Front/Front.php:63
 #: templates/archive-verbete.php:7
 #: templates/parts/header/mobile-sidebar.php:186
 #: templates/single-verbete.php:10
 msgid "Glossary"
 msgstr ""
 
-#: src/Front/Front.php:155
+#: src/Front/Front.php:158
 msgid "Read more"
+msgstr ""
+
+#: src/users-functions.php:101
+msgid "By"
+msgstr ""
+
+#: src/users-functions.php:145
+msgid "by"
 msgstr ""
 
 #: templates/archive-verbete.php:8
 msgid "Termos técnicos, políticas públicas e iniciativas para chegar ao desmatamento zero e conservar a floresta explicados com um simples clique, via consulta rápida ou completa."
+msgstr ""
+
+#: templates/archive-verbete.php:11
+msgid "Search for a term"
 msgstr ""
 
 #: templates/archive-verbete.php:23
@@ -124,12 +138,8 @@ msgstr ""
 msgid "COPYRIGHT © %s PlenaMata"
 msgstr ""
 
-#: templates/footer.php:28
-msgid "Privacy Policy"
-msgstr ""
-
 #: templates/footer.php:33
-msgid "Natura & Co - Compromisso com a Vida 2030"
+msgid "Privacy Policy"
 msgstr ""
 
 #: templates/header-single.php:93
@@ -170,10 +180,6 @@ msgstr ""
 
 #: templates/parts/header/mobile-sidebar.php:124
 msgid "Follow us"
-msgstr ""
-
-#: templates/parts/header/mobile-sidebar.php:155
-msgid "Monitor"
 msgstr ""
 
 #: templates/parts/header/mobile-sidebar.php:197
@@ -240,11 +246,11 @@ msgid "Estimatives Area"
 msgstr ""
 
 #: assets/build/js/admin/blocks.js:279
-msgid "Dados de Desmatamento na Amazônia Brasileira"
+msgid "Desmatamento na Amazônia Brasileira"
 msgstr ""
 
 #: assets/build/js/admin/blocks.js:283
-msgid "Árvores derrubadas em 2021"
+msgid "Árvores derrubadas por desmatamento em 2021"
 msgstr ""
 
 #: assets/build/js/admin/blocks.js:287
@@ -303,223 +309,219 @@ msgstr ""
 msgid "Type the final information"
 msgstr ""
 
-#: assets/build/js/dashboard.js:3872
+#: assets/build/js/dashboard.js:3970
 msgid "External link"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "January"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "February"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "March"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "April"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "May"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "June"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
-#: assets/build/js/dashboard.js:41414
+#: assets/build/js/dashboard.js:4634
+#: assets/build/js/dashboard.js:41626
 msgctxt "month"
 msgid "July"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "August"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "September"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "October"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "November"
 msgstr ""
 
-#: assets/build/js/dashboard.js:4400
+#: assets/build/js/dashboard.js:4634
 msgctxt "month"
 msgid "December"
 msgstr ""
 
-#: assets/build/js/dashboard.js:39857
+#: assets/build/js/dashboard.js:40051
+msgid "Forest Dashboard"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40056
 msgid "States"
 msgstr ""
 
-#: assets/build/js/dashboard.js:39890
+#: assets/build/js/dashboard.js:40089
 msgid "All states"
 msgstr ""
 
-#: assets/build/js/dashboard.js:39946
+#: assets/build/js/dashboard.js:40145
 msgid "Data"
 msgstr ""
 
-#: assets/build/js/dashboard.js:39987
+#: assets/build/js/dashboard.js:40186
 msgid "News"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40127
+#: assets/build/js/dashboard.js:40339
 msgid "No news to be shown."
 msgstr ""
 
-#: assets/build/js/dashboard.js:40346
+#: assets/build/js/dashboard.js:40558
 msgid "Deforestation rate in %s"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40369
-msgid "trees per day"
-msgstr ""
-
-#: assets/build/js/dashboard.js:40397
-#: assets/build/js/dashboard.js:40538
-#: assets/build/js/dashboard.js:40791
-#: assets/build/js/dashboard.js:40988
-#: assets/build/js/dashboard.js:41180
-#: assets/build/js/dashboard.js:41345
-#: assets/build/js/dashboard.js:41484
+#: assets/build/js/dashboard.js:40609
+#: assets/build/js/dashboard.js:40750
+#: assets/build/js/dashboard.js:41003
+#: assets/build/js/dashboard.js:41200
+#: assets/build/js/dashboard.js:41392
+#: assets/build/js/dashboard.js:41557
+#: assets/build/js/dashboard.js:41696
 msgid "Unit"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40417
-msgid "hectares per day"
-msgstr ""
-
-#: assets/build/js/dashboard.js:40422
+#: assets/build/js/dashboard.js:40634
 msgid "km² per day"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40444
-#: assets/build/js/dashboard.js:40583
-#: assets/build/js/dashboard.js:40701
+#: assets/build/js/dashboard.js:40656
+#: assets/build/js/dashboard.js:40795
+#: assets/build/js/dashboard.js:40913
 msgid "estimated average of %s trees per minute"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40464
+#: assets/build/js/dashboard.js:40676
 msgid "Source: MapBiomas based on DETER/INPE data."
 msgstr ""
 
-#: assets/build/js/dashboard.js:40509
+#: assets/build/js/dashboard.js:40721
 msgid "Area deforested last week"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40561
-#: assets/build/js/dashboard.js:40814
-#: assets/build/js/dashboard.js:41011
-#: assets/build/js/dashboard.js:41203
-#: assets/build/js/dashboard.js:41368
-#: assets/build/js/dashboard.js:41507
+#: assets/build/js/dashboard.js:40773
+#: assets/build/js/dashboard.js:41026
+#: assets/build/js/dashboard.js:41223
+#: assets/build/js/dashboard.js:41415
+#: assets/build/js/dashboard.js:41580
+#: assets/build/js/dashboard.js:41719
 msgid "km²"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40604
-#: assets/build/js/dashboard.js:40884
-#: assets/build/js/dashboard.js:41072
-#: assets/build/js/dashboard.js:41273
-#: assets/build/js/dashboard.js:41399
+#: assets/build/js/dashboard.js:40816
+#: assets/build/js/dashboard.js:41096
+#: assets/build/js/dashboard.js:41284
+#: assets/build/js/dashboard.js:41485
+#: assets/build/js/dashboard.js:41611
 msgid "Source: DETER/INPE • Latest Update: %s with alerts detected until %s."
 msgstr ""
 
-#: assets/build/js/dashboard.js:40654
+#: assets/build/js/dashboard.js:40866
 msgid "Estimated number of trees cut down in %s"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40680
+#: assets/build/js/dashboard.js:40892
 msgid "trees"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40722
+#: assets/build/js/dashboard.js:40934
 msgid "Source: MapBiomas based on average daily deforestation detected by DETER in %s."
 msgstr ""
 
-#: assets/build/js/dashboard.js:40769
+#: assets/build/js/dashboard.js:40981
 msgid "Monthly deforestation rate"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40830
-#: assets/build/js/dashboard.js:41219
+#: assets/build/js/dashboard.js:41042
+#: assets/build/js/dashboard.js:41431
 msgid "Timeframe"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40849
-#: assets/build/js/dashboard.js:41238
+#: assets/build/js/dashboard.js:41061
+#: assets/build/js/dashboard.js:41450
 msgid "during DETER year"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40853
-#: assets/build/js/dashboard.js:41242
+#: assets/build/js/dashboard.js:41065
+#: assets/build/js/dashboard.js:41454
 msgid "during PRODES year"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40934
+#: assets/build/js/dashboard.js:41146
 msgid "Total deforestation in %s in the selected territory"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40956
+#: assets/build/js/dashboard.js:41168
 msgid "Total deforested area in %s (until last week)"
 msgstr ""
 
-#: assets/build/js/dashboard.js:40966
+#: assets/build/js/dashboard.js:41178
 msgid "on state"
 msgstr ""
 
-#: assets/build/js/dashboard.js:41035
+#: assets/build/js/dashboard.js:41247
 msgid "%s%% increase compared to last year"
 msgstr ""
 
-#: assets/build/js/dashboard.js:41050
+#: assets/build/js/dashboard.js:41262
 msgid "%s%% decrease compared to last year"
 msgstr ""
 
-#: assets/build/js/dashboard.js:41120
+#: assets/build/js/dashboard.js:41332
 msgid "Weekly deforestation rate"
 msgstr ""
 
-#: assets/build/js/dashboard.js:41142
+#: assets/build/js/dashboard.js:41354
 msgid "Period"
 msgstr ""
 
-#: assets/build/js/dashboard.js:41162
+#: assets/build/js/dashboard.js:41374
 msgid "Period: %s"
 msgstr ""
 
-#: assets/build/js/dashboard.js:41322
+#: assets/build/js/dashboard.js:41534
 msgid "Yearly deforestation alerts (DETER)"
 msgstr ""
 
-#: assets/build/js/dashboard.js:41410
+#: assets/build/js/dashboard.js:41622
 msgid "The figures represent deforestation for each year up to %s."
 msgstr ""
 
-#: assets/build/js/dashboard.js:41458
+#: assets/build/js/dashboard.js:41670
 msgid "Yearly consolidated deforestation rate (PRODES)"
 msgstr ""
 
-#: assets/build/js/dashboard.js:41536
+#: assets/build/js/dashboard.js:41748
 msgid "Source: PRODES/INPE."
 msgstr ""
