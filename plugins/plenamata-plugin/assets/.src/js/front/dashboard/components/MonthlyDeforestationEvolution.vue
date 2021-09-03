@@ -23,29 +23,29 @@
 </template>
 
 <script>
-    import { _x } from '@wordpress/i18n'
     import Color from 'color'
     import { DateTime } from 'luxon'
     import { BarChart } from 'vue-chart-3'
 
     import DashboardPanel from './DashboardPanel.vue'
+    import { _x } from '../plugins/i18n'
     import api from '../../utils/api'
     import { vModel } from '../../utils/vue'
 
     const months = [
         null,
-        _x('January', 'month', 'plenamata'),
-        _x('February', 'month', 'plenamata'),
-        _x('March', 'month', 'plenamata'),
-        _x('April', 'month', 'plenamata'),
-        _x('May', 'month', 'plenamata'),
-        _x('June', 'month', 'plenamata'),
-        _x('July', 'month', 'plenamata'),
-        _x('August', 'month', 'plenamata'),
-        _x('September', 'month', 'plenamata'),
-        _x('October', 'month', 'plenamata'),
-        _x('November', 'month', 'plenamata'),
-        _x('December', 'month', 'plenamata'),
+        _x('January', 'months', 'plenamata'),
+        _x('February', 'months', 'plenamata'),
+        _x('March', 'months', 'plenamata'),
+        _x('April', 'months', 'plenamata'),
+        _x('May', 'months', 'plenamata'),
+        _x('June', 'months', 'plenamata'),
+        _x('July', 'months', 'plenamata'),
+        _x('August', 'months', 'plenamata'),
+        _x('September', 'months', 'plenamata'),
+        _x('October', 'months', 'plenamata'),
+        _x('November', 'months', 'plenamata'),
+        _x('December', 'months', 'plenamata'),
     ]
 
     export default {

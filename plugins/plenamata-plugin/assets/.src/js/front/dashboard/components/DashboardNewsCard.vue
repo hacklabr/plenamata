@@ -14,8 +14,7 @@
 </template>
 
 <script>
-    import { __ } from '@wordpress/i18n'
-
+    import { __ } from '../plugins/i18n'
     import { longDate } from '../../utils/filters'
 
     export default {
