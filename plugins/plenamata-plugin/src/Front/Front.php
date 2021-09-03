@@ -127,6 +127,27 @@ class Front {
                 'language' => \ICL_LANGUAGE_CODE,
                 'pluginUrl' => PLENAMATA_PLUGIN_URL,
                 'restUrl' => get_rest_url(),
+                'i18n' => [
+                    '__' => [
+                        'News' => __( 'News', 'plenamata' ),
+                    ],
+                    '_x' => [
+                        'months' => [
+                            'January' => _x('January', 'months', 'plenamata'),
+                            'February' => _x('February', 'months', 'plenamata'),
+                            'March' => _x('March', 'months', 'plenamata'),
+                            'April' => _x('April', 'months', 'plenamata'),
+                            'May' => _x('May', 'months', 'plenamata'),
+                            'June' => _x('June', 'months', 'plenamata'),
+                            'July' => _x('July', 'months', 'plenamata'),
+                            'August' => _x('August', 'months', 'plenamata'),
+                            'September' => _x('September', 'months', 'plenamata'),
+                            'October' => _x('October', 'months', 'plenamata'),
+                            'November' => _x('November', 'months', 'plenamata'),
+                            'December' => _x('December', 'months', 'plenamata'),
+                        ],
+                    ]
+                ]
             ] );
         }
 
