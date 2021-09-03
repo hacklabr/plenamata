@@ -2,7 +2,7 @@
    #content{
         margin-top: 1rem;
         margin-bottom: 40px;
-       
+
         .opinion-header{
            background-color: #F5F1EE;
            padding: 64px 500px;
@@ -54,6 +54,24 @@
            
            .toggable-comments-area{
                background-color: var(--secondary) !important;
+           }
+           h1.entry-title {
+                font-family: 'Archivo';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 40px;
+                line-height: 44px;
+                color:$c_text;            
+           }
+
+           @include mobile {
+               h1.entry-title {
+                    font-family: 'Archivo';
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 26px;
+                    line-height: 28px;
+               }
            }
        }
    }

@@ -101,11 +101,10 @@
                         font-weight: bold !important;
                         color: #221D18;
                         text-transform: initial;
-                        max-height: 60px;
+                        max-height: 55px;
                         overflow: hidden;
                         margin: 0;
-                        font-size: 1.4em !important;
-
+                        font-size: 22px !important;
                         @include mobile{
                             font-size: 1.4em !important;
                         }
@@ -128,7 +127,14 @@
                 .entry-content {
                     max-height: 85px;
                     overflow: hidden;
-                    
+                    p {
+                        font-family: 'Roboto';
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 16px;
+                        line-height: 150%;
+                        /* or 24px */
+                    }
                     @include mobile{
                         display: none;
                     }

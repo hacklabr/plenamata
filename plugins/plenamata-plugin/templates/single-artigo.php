@@ -98,9 +98,7 @@ the_post(); ?>
 					<div class="entry-subhead">
 						<div class="entry-meta">
 								<div class="author-partner">
-									<?php if (get_post_meta($post->ID, 'authors-listing', true) && empty( $terms )) : ?>
-										<?php newspack_posted_by(); ?>
-									<?php endif; ?>
+										<?php plenamata_newspack_posted_by(); ?>
 									<!-- publishers -->
 									<?php 
 										show_publishers($post->ID);
