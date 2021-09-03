@@ -40,6 +40,12 @@ body:not(.home){
 
 // Blocks
 
+// Remove margins to use real size of the spacer
+.wp-block-spacer {
+    margin-bottom: 0 !important;
+    margin-top: 0 !important;
+}
+
 .l-h-22px {
 	line-height: 22px;
 }
