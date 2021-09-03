@@ -31,7 +31,7 @@
                 </fieldset>
 
                 <div class="dashboard__panels" v-if="view === 'data'">
-                    <FelledTreesThisYear :minutes="minutes" :trees="trees" :updated="updated" :year="date.year"/>
+                    <FelledTreesThisYear :lastUpdate="lastUpdate" :minutes="minutes" :trees="trees" :updated="updated" :year="date.year"/>
                     <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit.sync="unit" :updated="updated" :year="date.year"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :updated="updated" :year="date.year"/>
                     <DeforestedAreaLastWeek :lastUpdate="lastUpdate" :state="state" :unit.sync="unit" :updated="updated" v-if="lastUpdate.deter_last_date"/>
@@ -98,7 +98,6 @@
                 news: [],
                 source: 'deter',
                 state: '',
-                trees: 0,
                 thisYear: [],
                 unit: 'ha',
                 view: 'data',
@@ -135,15 +134,15 @@
                     RR: { uf: 'RR', name: 'Roraima', lat: 1.89, long: -61.22, zoom: 6 },
                 }
             },
-            treesDelta () {
-                let trees = 0
-                if (this.state) {
-                    const state = this.lastMonth.find(state => state.uf === this.state)
-                    trees = Number(state.num_arvores)
+            trees () {
+                if (!this.thisYear) {
+                    return 0
+                } else if (this.state) {
+                    const state = this.thisYear.find(state => state.uf === this.state)
+                    return Number(state.num_arvores)
                 } else {
-                    trees = this.lastMonth.reduce((acc, state) => acc + Number(state.num_arvores), 0)
+                    return this.thisYear.reduce((acc, state) => acc + Number(state.num_arvores), 0)
                 }
-                return trees / 2592000
             },
             updated () {
                 const today = DateTime.now().toISODate()
@@ -158,13 +157,9 @@
             state: {
                 async handler () {
                     await this.fetchNews(this.state)
-                    this.updateTrees()
                     this.centerMap(this.state)
                 },
                 immediate: true,
-            },
-            thisYear () {
-                this.updateTrees()
             },
         },
         async created () {
@@ -185,12 +180,6 @@
         mounted () {
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
-
-            setInterval(() => {
-                if (this.trees) {
-                    this.trees += this.treesDelta
-                }
-            }, 1000)
         },
         methods: {
             centerMap (state = '') {
@@ -211,16 +200,6 @@
             async fetchNews (state = '') {
                 const news = await api.get(`${this.$dashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
                 this.news = news
-            },
-            updateTrees () {
-                if (!this.thisYear) {
-                    this.trees = 0
-                } else if (this.state) {
-                    const state = this.thisYear.find(state => state.uf === this.state)
-                    this.trees = Number(state.num_arvores)
-                } else {
-                    this.trees = this.thisYear.reduce((acc, state) => acc + Number(state.num_arvores), 0)
-                }
             },
         },
     }
