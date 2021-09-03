@@ -56,8 +56,7 @@ add_filter('register_taxonomy_args', 'plenamata_secao_capabilities', 10, 3);
 /**
  * Prints HTML with meta information about theme author.
  */
-function plenamata_newspack_posted_by()
-{
+function plenamata_newspack_posted_by() {
 	if (function_exists('coauthors_posts_links')) :
 
 		$authors      = get_coauthors();
