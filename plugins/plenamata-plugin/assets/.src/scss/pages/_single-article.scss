@@ -10,9 +10,12 @@ body.single-post{
 
         .opinion-header{
            background-color: #F5F1EE;
-           padding: 64px 500px;
+           padding: 64px 0 40px;
            margin-bottom: 40px;
-
+            .breadcrumb{
+                width: 1200px;
+                margin: 12px auto;
+            }
            .container{
                width: 1200px;
             }
