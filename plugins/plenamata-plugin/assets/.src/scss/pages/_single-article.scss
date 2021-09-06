@@ -15,15 +15,19 @@ body.single-post{
         margin-top: 1rem;
         margin-bottom: 40px;
 
-        .opinion-header{
-           background-color: #F5F1EE;
-           padding: 64px 0 40px;
-           margin-bottom: 40px;
+        .opinion-header {
+            background-color: #F5F1EE;
+            padding: 60px 0 40px;
+            margin-bottom: 40px;
+            padding-left: 15px;
+            padding-right: 15px;
+
             .breadcrumb{
                 width: 1200px;
                 margin: 12px auto;
             }
            .container{
+               max-width: 90%;
                width: 1200px;
             }
         }
@@ -77,6 +81,17 @@ body.single-post{
                 font-size: 40px;
                 line-height: 44px;
                 color:$c_text;            
+           }
+
+           p {
+                @include mobile {
+                    font-size: size(16) !important;
+                    line-height: size(26);
+                }
+                @include small {
+                    font-size: size(14) !important;
+                    line-height: size(24);
+                }
            }
 
            @include mobile {
