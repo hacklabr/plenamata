@@ -13,7 +13,7 @@
             <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
         </template>
         <template #footer>
-            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.deter, updated.sync) }}
+            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
             {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), _x('July', 'months', 'plenamata')) }}
         </template>
     </DashboardPanel>
