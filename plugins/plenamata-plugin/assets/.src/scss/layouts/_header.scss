@@ -91,7 +91,7 @@ body:not(.mobile-menu-opened) {
     padding-top:0;
     width:100vw;
     background-color:$c_text;
-    top:100px;
+    top:70px;
     nav.main-navigation ul li:hover {
         background: none !important;
     }
@@ -139,10 +139,10 @@ body:not(.mobile-menu-opened) {
     }
     .mobile-search-form.mobile-only {
         display:block !important;
-        position: absolute;
-        bottom: 30px;
+        /*position: absolute;
+        bottom: 30px;*/
         @include mobile {
-            bottom:110px;
+            /*bottom:110px;*/
         }
     }
 }
