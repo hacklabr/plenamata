@@ -60,7 +60,7 @@ create_pack:
   artifacts:
     paths:
       - plenamata-plugin/* 
-    name: plenamata-plugin.zip
+    name: plenamata-plugin
     expire_in: 1 week
 
 deploy:
