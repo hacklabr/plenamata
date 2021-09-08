@@ -33,9 +33,9 @@ footer#colophon.site-footer {
         .widget.widget_nav_menu > div ul {
             width: 100%;
             clear:both;
-            display:grid;
-            grid-template-columns: 1fr 1fr;
-            gap:20px;
+            // display:grid;
+            // grid-template-columns: 1fr 1fr;
+            // gap:20px;
             @include mobile {
                 display: block;
             }
