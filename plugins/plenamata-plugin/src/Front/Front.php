@@ -59,7 +59,7 @@ class Front {
     }
 
     public function custom_titles( array $parts ): array {
-        if ( is_post_type_archive( 'glossario' ) ) {
+        if ( is_post_type_archive( 'verbete' ) ) {
             $parts['title'] = __( 'Glossary', 'plenamata' );
         }
 
@@ -72,9 +72,9 @@ class Front {
     public function body_class( array $classes ): array {
         global $post;
 
-        if ( is_post_type_archive( 'glossario' ) ) {
+        if ( is_post_type_archive( 'verbete' ) ) {
             return array_merge( $classes, [ 'glossary' ] );
-        } else if ( is_singular( 'glossario' ) ) {
+        } else if ( is_singular( 'verbete' ) ) {
             return array_merge( $classes, [ 'glossary', 'glossary-entry' ] );
         }
 
@@ -239,8 +239,8 @@ class Front {
     public function archive_templates( string $template ): string {
         global $wp_query;
 
-        if ( is_post_type_archive( 'glossario' ) ) {
-            $template = PLENAMATA_PLUGIN_PATH . 'templates/archive-glossario.php';
+        if ( is_post_type_archive( 'verbete' ) ) {
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/archive-verbete.php';
         }else if( is_author() ){
             $template = PLENAMATA_PLUGIN_PATH . 'templates/archive.php';
         }
@@ -259,8 +259,8 @@ class Front {
     public function single_templates( string $template ): string {
         global $post;
 
-		if ( $post->post_type === 'glossario' ) {
-			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-glossario.php';
+		if ( $post->post_type === 'verbete' ) {
+			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-verbete.php';
         }else if( $post->post_type === 'post'){
 			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-artigo.php';
 		}

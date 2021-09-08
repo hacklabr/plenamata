@@ -174,7 +174,7 @@ if (newspack_is_amp()) : ?>
 		<div class="item">
             <?php 
                 $link = '#';
-				if($archive_cpt = 'glossario'){				
+				if($archive_cpt = 'verbete'){				
 					$link = get_post_type_archive_link( $archive_cpt );
 				}
             ?>
