@@ -30,6 +30,12 @@ body.home {
                 line-height: size(16);
             }
         }
+
+        @include mobile {
+            & > :last-child {
+                min-height: 200px;
+            }
+        }
     }
 
     .home-intro-cards {
@@ -310,13 +316,14 @@ body.home {
         }
     }
 
-    
+
 
     // Newsletter
     .home-newsletter-container {
         border-radius: 8px;
         margin-bottom: -150px !important;
         overflow: hidden;
+        position: relative;
 
         .wp-block-spacer {
             @include small {
@@ -346,7 +353,7 @@ body.home {
                     padding-right: 15px;
                     z-index: 2;
                 }
-    
+
                 &:first-child {
                     @include small {
                         display: none;
