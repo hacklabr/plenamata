@@ -6,7 +6,7 @@ body.single-post{
             margin-bottom: 0!important;
         }
     }
-    &.cat-_newspack_opinion{
+    &.cat-_newspack_opinion,  &.cat-opiniao{
         section#primary{
             margin-top:40px;
         }
@@ -27,8 +27,10 @@ body.single-post{
                 margin: 12px auto;
             }
            .container{
-               max-width: 90%;
                width: 1200px;
+               @include mobile {
+                   max-width: 90%;
+               }
             }
         }
         
