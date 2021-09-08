@@ -12,7 +12,7 @@ get_header( 'single' );
 the_post(); ?>
 	
 	<?php 
-	$is_opinion = (get_the_category()[0]->slug == "_newspack_opinion" || get_the_category()[0]->slug == 'opiniao') ? true : false;
+	$is_opinion = (get_the_category()[0]->slug == "_newspack_opinion" || get_the_category()[0]->slug == 'opiniao' || get_the_category()[0]->slug == 'opinion') ? true : false;
 	if($is_opinion): ?>
 			<div class="opinion-header">
 				<div class="breadcrumb">

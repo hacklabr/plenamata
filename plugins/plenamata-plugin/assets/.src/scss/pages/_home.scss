@@ -282,7 +282,7 @@ body.home {
 
                 .wp-block-latest-posts__list {
                     li {
-                        a:visited {
+                        a:visited, a:hover, a:active {
                             color: #221d18 !important;
                         }
                     }
