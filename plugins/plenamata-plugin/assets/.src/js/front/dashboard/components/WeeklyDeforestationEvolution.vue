@@ -18,6 +18,7 @@
         </template>
         <template #chart>
             <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
+            <AxisPosition :start="scrollPosition.start" :end="scrollPosition.end" :max="areas.length - 1"/>
         </template>
         <template #footer>
             {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
@@ -30,16 +31,22 @@
     import { DateTime } from 'luxon'
     import { BarChart } from 'vue-chart-3'
 
+    import AxisPosition from './AxisPosition.vue'
     import DashboardPanel from './DashboardPanel.vue'
+    import HasScrollableChart from '../mixins/HasScrollableChart'
     import api from '../../utils/api'
     import { vModel } from '../../utils/vue'
 
     export default {
         name: 'WeeklyDeforestationEvolution',
         components: {
+            AxisPosition,
             BarChart,
             DashboardPanel,
         },
+        mixins: [
+            HasScrollableChart,
+        ],
         props: {
             now: { type: DateTime, required: true },
             source: { type: String, default: 'prodes' },
@@ -73,8 +80,6 @@
                 }
             },
             chartData () {
-                const factor = this.unit === 'ha' ? 100 : 1
-
                 return {
                     labels: this.areasKm2.map((item, i) => String(i + 1)),
                     datasets: [
@@ -98,6 +103,7 @@
                                 enabled: true,
                                 mode: 'x',
                                 threashold: 1,
+                                onPan: this.onChartPan,
                             },
                         },
                     },
@@ -105,7 +111,7 @@
                         x: {
                             type: 'category',
                             min: Math.max(0, weeks - 12),
-                            max: weeks,
+                            max: weeks - 1,
                         },
                         y: {
                             type: 'linear',
