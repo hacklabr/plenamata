@@ -37,7 +37,7 @@
         <?php foreach ( $sections as $section ): ?>
         <?php
             $entries = get_posts( [
-                'post_type' => 'glossario',
+                'post_type' => 'verbete',
                 'order' => 'ASC',
                 'orderby' => 'title',
                 'numberposts' => -1,

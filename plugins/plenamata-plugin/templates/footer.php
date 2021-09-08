@@ -41,7 +41,7 @@
 
 <?php wp_footer(); ?>
 
-<?php if ( is_post_type_archive( 'glossario' ) ) : ?>
+<?php if ( is_post_type_archive( 'verbete' ) ) : ?>
 
 <script>
 
