@@ -30,12 +30,6 @@ body.home {
                 line-height: size(16);
             }
         }
-
-        @include mobile {
-            & > :last-child {
-                min-height: 200px;
-            }
-        }
     }
 
     .home-intro-cards {
@@ -331,18 +325,18 @@ body.home {
             }
         }
 
+        .wp-block-cover__inner-container {
+            p {
+                @include small {
+                    position: relative;
+                    z-index: 2;
+                }
+            }
+        }
+
         .wp-block-columns {
             @include small {
                 position: relative;
-            }
-
-            .wp-block-cover__inner-container {
-                p {
-                    @include small {
-                        position: relative;
-                        z-index: 2;
-                    }
-                }
             }
 
             .wp-block-column {
