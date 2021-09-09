@@ -30,6 +30,12 @@ body.home {
                 line-height: size(16);
             }
         }
+
+        @include mobile {
+            & > :last-child {
+                min-height: 200px;
+            }
+        }
     }
 
     .home-intro-cards {
