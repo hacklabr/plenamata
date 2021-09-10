@@ -27,6 +27,12 @@ class Blocks {
 	 * @since 0.1.0
 	 */
 	public function hooks(): void {
+        /**
+         * Override the block core/latest-posts
+         */
+        remove_action( 'init', 'register_block_core_latest_posts', 10 );
+        require_once PLENAMATA_PLUGIN_PATH . 'blocks/latest-posts.php';
+
 		add_action( 'init', [ $this, 'register_blocks' ] );
 	}
 
