@@ -27,7 +27,6 @@
 </template>
 
 <script>
-    import Color from 'color'
     import { DateTime } from 'luxon'
     import { BarChart } from 'vue-chart-3'
 
@@ -85,7 +84,7 @@
                     datasets: [
                         {
                             data: this.areas,
-                            backgroundColor: this.colors,
+                            backgroundColor: '#FF7373',
                         },
                     ],
                 }
@@ -110,7 +109,7 @@
                     scales: {
                         x: {
                             type: 'category',
-                            min: Math.max(0, weeks - 12),
+                            min: Math.max(0, weeks - 15),
                             max: weeks - 1,
                         },
                         y: {
@@ -120,10 +119,6 @@
                         },
                     },
                 }
-            },
-            colors () {
-                const color = Color('#FF7373')
-                return [color.lighten(0.2).string(), '#FF7373']
             },
             dateInterval () {
                 if (this.source === 'deter') {
