@@ -50,6 +50,7 @@ function custom_render_block_core_latest_posts( $attributes ) {
 	if ( isset( $attributes['categories'] ) ) {
 		$args['category__in'] = array_column( $attributes['categories'], 'id' );
 	}
+
 	if ( isset( $attributes['selectedAuthor'] ) ) {
 		$args['author'] = $attributes['selectedAuthor'];
 	}
@@ -64,21 +65,27 @@ function custom_render_block_core_latest_posts( $attributes ) {
 		$list_items_markup .= '<li>';
 
 		/**
-		 * Get the terms of the post
+		 * When set to display only one category, does not display it above posts
 		 */
-		$post_terms = get_the_terms( $post, 'category' );
+		if ( ! isset( $args['category__in'] ) || count( $args['category__in'] ) != 1 )  {
 
-		if ( $post_terms && ! is_wp_error( $post_terms ) ) {
-			$post_terms_html = '<ul class="list-terms">';
+			/**
+			 * Get the terms of the post
+			 */
+			$post_terms = get_the_terms( $post, 'category' );
 
-			foreach ( $post_terms as $term ) {
-				$post_terms_html .= '<li class="term-' . sanitize_title( $term->name ) . '">';
-				$post_terms_html .= esc_attr( $term->name );
-				$post_terms_html .= '</li>';
+			if ( $post_terms && ! is_wp_error( $post_terms ) ) {
+				$post_terms_html = '<ul class="list-terms">';
+
+				foreach ( $post_terms as $term ) {
+					$post_terms_html .= '<li class="term-' . sanitize_title( $term->name ) . '">';
+					$post_terms_html .= esc_attr( $term->name );
+					$post_terms_html .= '</li>';
+				}
+
+				$post_terms_html .= '</ul>';
+				$list_items_markup .= $post_terms_html;
 			}
-
-			$post_terms_html .= '</ul>';
-			$list_items_markup .= $post_terms_html;
 		}
 
 		if ( $attributes['displayFeaturedImage'] && has_post_thumbnail( $post ) ) {
