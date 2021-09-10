@@ -223,17 +223,21 @@
     }
 
     &__image {
+        flex: 1;
         margin-right: size(8);
-        width: 25%;
 
         @include mobile {
-            width: 40%;
+            flex: 2;
         }
     }
 
-    & > :nth-child(2) > div {
-        display: flex;
-        flex-wrap: wrap;
+    & > :nth-child(2) {
+        flex: 3;
+
+        & > div {
+            display: flex;
+            flex-wrap: wrap;
+        }
     }
 
     &__date, &__source {
