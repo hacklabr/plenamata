@@ -332,7 +332,7 @@ body.home {
         }
 
         .wp-block-cover__inner-container {
-            p {
+            .has-text-align-center {
                 @include small {
                     position: relative;
                     z-index: 2;
