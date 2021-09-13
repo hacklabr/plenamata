@@ -14,7 +14,7 @@
         </template>
         <template #footer>
             {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
-            {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), _x('July', 'months', 'plenamata')) }}
+            {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), previousMonth) }}
         </template>
     </DashboardPanel>
 </template>
@@ -24,8 +24,25 @@
     import { BarChart } from 'vue-chart-3'
 
     import DashboardPanel from './DashboardPanel.vue'
+    import { _x } from '../plugins/i18n'
     import api from '../../utils/api'
     import { vModel } from '../../utils/vue'
+
+    const months = [
+        null,
+        _x('January', 'months', 'plenamata'),
+        _x('February', 'months', 'plenamata'),
+        _x('March', 'months', 'plenamata'),
+        _x('April', 'months', 'plenamata'),
+        _x('May', 'months', 'plenamata'),
+        _x('June', 'months', 'plenamata'),
+        _x('July', 'months', 'plenamata'),
+        _x('August', 'months', 'plenamata'),
+        _x('September', 'months', 'plenamata'),
+        _x('October', 'months', 'plenamata'),
+        _x('November', 'months', 'plenamata'),
+        _x('December', 'months', 'plenamata'),
+    ]
 
     export default {
         name: 'YearlyDeforestationEvolutionDeter',
@@ -39,8 +56,8 @@
             updated: { type: Object, required: true },
         },
         data () {
-            const start = DateTime.now().minus({ years: 5 }).startOf('year')
-            const end = DateTime.now().minus({ years: 1 }).endOf('year')
+            const end = DateTime.now()
+            const start = end.startOf('year')
 
             return {
                 date: {
@@ -59,7 +76,7 @@
                 }
             },
             areasKm2 () {
-                return this.data.map(datum => Number(datum.areamunkm))
+                return this.data.map(datum => Number(datum[0].areamunkm))
             },
             chartData () {
                 return {
@@ -81,9 +98,13 @@
                     },
                 }
             },
+            previousMonth () {
+                const index = Math.max(1, this.date.end.month - 1)
+                return months[index]
+            },
             unitModel: vModel('unit'),
             years () {
-                return this.data.map(datum => datum.year)
+                return this.data.map(datum => datum[0].year)
             },
         },
         watch: {
@@ -98,7 +119,14 @@
 
                 const filters = this.state ? `estados?estado=${this.state}&` : 'basica?'
 
-                const data = await api.get(`deter/${filters}data1=${start.toISODate()}&data2=${end.toISODate()}&group_by=ano`)
+                const intervals = [[start, end]]
+                for (let i = 1; i < 5; i++) {
+                    intervals.unshift([start.minus({ years: i }), end.minus({ years: i })])
+                }
+
+                const data = await Promise.all(intervals.map(([start, end]) => {
+                    return api.get(`deter/${filters}data1=${start.toISODate()}&data2=${end.toISODate()}&group_by=ano`)
+                }))
                 this.data = data
             },
         },
