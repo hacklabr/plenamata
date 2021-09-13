@@ -1,13 +1,13 @@
 import { sprintf } from '@wordpress/i18n'
 
 const { DateTime, Interval } = window.luxon
-const i18n = window.PlenamataHomeEstimatives.i18n
+const i18n = window.PlenamataDashboard.i18n
 
 const __ = (text, domain) => i18n?.__?.[text] ?? text
 const _x = (text, context, domain) => i18n?._x?.[context]?.[text] ?? text
 
-const numberLocale = new Intl.NumberFormat(window.PlenamataHomeEstimatives.language || 'en')
-const shortDateLocale = new Intl.DateTimeFormat(window.PlenamataHomeEstimatives.language || 'en', { dateStyle: 'short' })
+const numberLocale = new Intl.NumberFormat(window.PlenamataDashboard.language || 'en')
+const shortDateLocale = new Intl.DateTimeFormat(window.PlenamataDashboard.language || 'en', { dateStyle: 'short' })
 
 function formatDate (datetime) {
     return shortDateLocale.format(datetime.toJSDate()).replaceAll('/', '.')

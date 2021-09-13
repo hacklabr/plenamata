@@ -126,7 +126,7 @@ class Front {
             );
 
             wp_localize_script( 'plenamata-dashboard', 'PlenamataDashboard', [
-                'language' => \ICL_LANGUAGE_CODE,
+                'language' => apply_filters( 'wpml_current_language', NULL ),
                 'pluginUrl' => PLENAMATA_PLUGIN_URL,
                 'restUrl' => get_rest_url(),
                 'i18n' => [
@@ -190,24 +190,26 @@ class Front {
             ] );
         }
 
-        wp_enqueue_script(
-            'estimatives-area-front-end',
-            PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
-            [ 'luxon' ],
-            false,
-            true
-        );
+        if ( has_block( 'plenamata/estimatives-area' ) ) {
+            wp_enqueue_script(
+                'estimatives-area-front-end',
+                PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
+                [ 'luxon' ],
+                false,
+                true
+            );
 
-        wp_localize_script('estimatives-area-front-end', 'PlenamataHomeEstimatives', [
-            'language' => apply_filters( "wpml_current_language", NULL ),
-            'i18n' => [
-                '__' => [
-                    'Area of deforestation alerts detected last week' => __( 'Area of deforestation alerts detected last week', 'plenamata' ),
-                    'hectares' => __( 'hectares', 'plenamata' ),
-                    'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.' => __( 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata' ),
+            wp_localize_script('estimatives-area-front-end', 'PlenamataDashboard', [
+                'language' => apply_filters( 'wpml_current_language', NULL ),
+                'i18n' => [
+                    '__' => [
+                        'Area of deforestation alerts detected last week' => __( 'Area of deforestation alerts detected last week', 'plenamata' ),
+                        'hectares' => __( 'hectares', 'plenamata' ),
+                        'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.' => __( 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata' ),
+                    ]
                 ]
-            ]
-        ]);
+            ]);
+        }
 	}
 
     /**

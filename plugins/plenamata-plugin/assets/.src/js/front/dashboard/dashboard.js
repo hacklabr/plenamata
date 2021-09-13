@@ -12,7 +12,7 @@ export class Dashboard {
         Chart.register(BarController, BarElement, CategoryScale, Legend, LinearScale, Tooltip, ZoomPlugin)
 
         Vue.use(Globals)
-        Vue.use(I18n, { locale: window.PlenamataDashboard.i18n })
+        Vue.use(I18n)
 
         document.querySelectorAll('.vue-dashboard-app').forEach((el) => {
             new Vue({
