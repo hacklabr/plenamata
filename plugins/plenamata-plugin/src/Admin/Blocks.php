@@ -82,9 +82,6 @@ class Blocks {
             'render_callback' => [ $this, 'estimatives_area_render_callback' ],
             'attributes' => [
                 // Strings
-                "boxTitle" => [
-                    "type" => "string"
-                ],
                 "headingTitle" => [
                     "type" => "string"
                 ],
@@ -100,26 +97,10 @@ class Blocks {
                 "finalInformation" => [
                     "type" => "string"
                 ],
-
                 // Base numbers
-                "baseTrees" => [
-                    "type" => "string"
-                ],
-                "tressPerDay" => [
-                    "type" => "string"
-                ],
-                "hecPerDay" => [
-                    "type" => "string"
-                ],
-                "hectares" => [
-                    "type" => "string"
-                ],
                 "warnings" => [
                     "type" => "string"
                 ],
-                "baseDate" => [
-                    "type" => "string"
-                ]
             ],
         ] );
 
@@ -129,12 +110,6 @@ class Blocks {
             'editor_style' => 'plenamata-plugin-blocks',
             'attributes' => [
                 'boxTitle' => [
-                    'type' => 'string'
-                ],
-                'count' => [
-                    'type' => 'string'
-                ],
-                'dataSource' => [
                     'type' => 'string'
                 ],
             ],
