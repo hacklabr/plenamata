@@ -112,6 +112,8 @@ class Front {
 			true
 		);
 
+        wp_register_script( 'luxon', 'https://unpkg.com/luxon@2/build/global/luxon.min.js', [], false, true );
+
         if ( get_page_template_slug() === 'template-dashboard.php' ) {
             $this->register_jeo_assets();
 
@@ -191,7 +193,7 @@ class Front {
         wp_enqueue_script(
             'estimatives-area-front-end',
             PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
-            [],
+            [ 'luxon' ],
             false,
             true
         );

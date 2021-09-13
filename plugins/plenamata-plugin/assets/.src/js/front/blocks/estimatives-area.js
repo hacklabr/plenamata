@@ -1,6 +1,6 @@
 import { sprintf } from '@wordpress/i18n'
-import { DateTime, Interval } from 'luxon'
 
+const { DateTime, Interval } = window.luxon
 const i18n = window.PlenamataHomeEstimatives.i18n
 
 const __ = (text, domain) => i18n?.__?.[text] ?? text
