@@ -14,12 +14,25 @@
                 <span>{{ __('Weekly', 'plenamata') }}</span>
             </label>
         </fieldset>
+        <div class="deforestation-charts__chart">
+            <keep-alive>
+                <YearlyDeforestationChart key="year" v-if="view === 'year'"/>
+                <MonthlyDeforestationChart key="month" v-if="view === 'month'"/>
+            </keep-alive>
+        </div>
     </div>
 </template>
 
 <script>
+    import MonthlyDeforestationChart from './MonthlyDeforestationChart.vue'
+    import YearlyDeforestationChart from './YearlyDeforestationChart.vue'
+
     export default {
         name: 'DeforestationCharts',
+        components: {
+            MonthlyDeforestationChart,
+            YearlyDeforestationChart,
+        },
         data () {
             return {
                 view: 'year',
