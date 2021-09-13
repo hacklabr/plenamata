@@ -1,0 +1,59 @@
+<template>
+    <BarChart :chartData="chartData" :height="150" :options="chartOptions"/>
+</template>
+
+<script>
+    import { BarChart } from 'vue-chart-3'
+
+    import api from '../../utils/api'
+
+    const { DateTime } = window.luxon
+
+    export default {
+        name: 'YearlyDeforestationChart',
+        components: {
+            BarChart,
+        },
+        data () {
+            return {
+                data: [],
+            }
+        },
+        computed: {
+            areas () {
+                return this.data.map(datum => Number(datum[0].areamunkm))
+            },
+            chartData () {
+                return {
+                    labels: this.years,
+                    datasets: [
+                        {
+                            data: this.areas,
+                            backgroundColor: '#FF7373',
+                        },
+                    ],
+                }
+            },
+            chartOptions () {
+                return {}
+            },
+            years () {
+                return this.data.map(datum => String(datum[0].year))
+            },
+        },
+        async created () {
+            const baseEnd = DateTime.now()
+            const baseStart = baseEnd.startOf('year')
+
+            const intervals = [[baseStart, baseEnd]]
+            for (let i = 1; i < 5; i++) {
+                intervals.unshift([baseStart.minus({ years: i }), baseEnd.minus({ years: i })])
+            }
+
+            const data = await Promise.all(intervals.map(([start, end]) => {
+                return api.get(`deter/basica?data1=${start.toISODate()}&data2=${end.toISODate()}&group_by=ano`)
+            }))
+            this.data = data
+        },
+    }
+</script>
