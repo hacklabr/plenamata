@@ -79,6 +79,7 @@ class Blocks {
             'api_version' => 2,
             'editor_script' => 'plenamata-plugin-blocks',
             'editor_style' => 'plenamata-plugin-blocks',
+            'script' => 'estimatives-area-front-end',
             'render_callback' => [ $this, 'estimatives_area_render_callback' ],
             'attributes' => [
                 // Strings
@@ -108,6 +109,7 @@ class Blocks {
             'api_version' => 2,
             'editor_script' => 'plenamata-plugin-blocks',
             'editor_style' => 'plenamata-plugin-blocks',
+            'script' => 'estimatives-area-front-end',
             'attributes' => [
                 'boxTitle' => [
                     'type' => 'string'
