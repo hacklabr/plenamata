@@ -51,6 +51,7 @@
             DashboardPanel,
         },
         props: {
+            lastUpdate: { type: Object, required: true },
             state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
@@ -99,8 +100,8 @@
                 }
             },
             previousMonth () {
-                const index = Math.max(1, this.date.end.month - 1)
-                return months[index]
+                const month = DateTime.fromISO(this.lastUpdate.deter_last_date).month
+                return months[month]
             },
             unitModel: vModel('unit'),
             years () {

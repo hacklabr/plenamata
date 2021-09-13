@@ -37,7 +37,7 @@
                     <DeforestedAreaLastWeek :lastUpdate="lastUpdate" :state="state" :unit.sync="unit" :updated="updated" v-if="lastUpdate.deter_last_date"/>
                     <WeeklyDeforestationEvolution :now="date.now" :source.sync="source" :state="state" :unit.sync="unit" :updated="updated" :year.sync="year"/>
                     <MonthlyDeforestationEvolution :source.sync="source" :state="state" :unit.sync="unit" :updated="updated"/>
-                    <YearlyDeforestationEvolutionDeter :state="state" :unit.sync="unit" :updated="updated"/>
+                    <YearlyDeforestationEvolutionDeter :lastUpdate="lastUpdate" :state="state" :unit.sync="unit" :updated="updated"/>
                     <YearlyDeforestationEvolutionProdes :state="state" :unit.sync="unit" :year="date.year"/>
                 </div>
 
