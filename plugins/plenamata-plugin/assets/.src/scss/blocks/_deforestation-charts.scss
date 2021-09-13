@@ -1,0 +1,46 @@
+.deforestation-charts-block {
+    h3:not(.has-text-color) {
+        color: #666352;
+    }
+}
+
+.deforestation-charts {
+    &__toggle {
+        border: none;
+        display: flex;
+        margin: 0 0 size(16);
+        padding: 0;
+        width: auto;
+
+        label {
+            align-items: center;
+            color: #BBB;
+            display: flex;
+            flex: 1;
+            font-weight: bold;
+            justify-content: center;
+
+            &:first-of-type {
+                border-radius: 5px 0 0 5px;
+            }
+
+            &:last-of-type {
+                border-radius: 0 5px 5px 0;
+            }
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.05);
+                color: #AAA;
+            }
+
+            &.active {
+                background-color: $c_red;
+                color: white;
+            }
+
+            input {
+                display: none;
+            }
+        }
+    }
+}

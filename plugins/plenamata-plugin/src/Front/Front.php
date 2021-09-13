@@ -208,6 +208,14 @@ class Front {
                 ]
             ]
         ]);
+
+        wp_register_script(
+            'deforestation-charts-front-end',
+            PLENAMATA_PLUGIN_URL . 'assets/build/js/deforestation-charts.js',
+            [ 'luxon' ],
+            false,
+            true
+        );
 	}
 
     /**

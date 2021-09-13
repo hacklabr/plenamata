@@ -116,6 +116,18 @@ class Blocks {
                 ],
             ],
         ] );
+
+        register_block_type( 'plenamata/deforestation-charts', [
+            'api_version' => 2,
+            'editor_script' => 'plenamata-plugin-blocks',
+            'editor_style' => 'plenamata-plugin-blocks',
+            'script' => 'deforestation-charts-front-end',
+            'attributes' => [
+                'boxTitle' => [
+                    'type' => 'string'
+                ],
+            ],
+        ] );
     }
 
     public function estimatives_area_render_callback( $attributes ) {

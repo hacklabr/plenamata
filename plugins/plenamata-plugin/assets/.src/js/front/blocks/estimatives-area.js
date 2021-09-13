@@ -63,7 +63,7 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
     document.querySelectorAll('[data-mask=true]').forEach((el) => {
         const num = Number(el.textContent)
         if (num) {
-            el.textContent = roundNumber(Number(num))
+            el.textContent = roundNumber(+num)
         }
     })
 })
