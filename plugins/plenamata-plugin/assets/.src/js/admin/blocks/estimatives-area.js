@@ -1,4 +1,4 @@
-import { __experimentalNumberControl as NumberControl, TextControl } from '@wordpress/components';
+import { TextControl } from '@wordpress/components';
 import { __ } from "@wordpress/i18n";
 import { registerBlockType } from '@wordpress/blocks';
 
@@ -44,9 +44,8 @@ registerBlockType('plenamata/estimatives-area', {
         }
 
         return (
-            <div className="estimatives-area">
+            <div className="plenamata-block estimatives-area">
                 <div className="heading">
-
                     <TextControl
                         label={__('Heading text', 'plenamata')}
                         value={attributes.headingTitle}
@@ -70,25 +69,21 @@ registerBlockType('plenamata/estimatives-area', {
                             onChange={updateAttribute('averageTitle')}
                         />
                     </div>
+
                     <div>
                         <TextControl
                             label={__('Deforested text', 'plenamata')}
                             value={attributes.deforestedTitle}
                             onChange={updateAttribute('deforestedTitle')}
                         />
+                    </div>
 
-                        <div className="data">
-                            <div className="area">
-                                <span>
-                                    <NumberControl
-                                        label={__("Warnings", "plenamata")}
-                                        value={ attributes.warnings }
-                                        onChange={ updateAttribute('warnings') }
-                                    />
-                                </span>
-                            </div>
-                        </div>
-
+                    <div className="area">
+                        <TextControl
+                            label={__('Warnings', 'plenamata')}
+                            value={ attributes.warnings }
+                            onChange={ updateAttribute('warnings') }
+                        />
                     </div>
                 </div>
 

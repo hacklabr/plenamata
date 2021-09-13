@@ -14,8 +14,8 @@ registerBlockType('plenamata/deforestation-info', {
         } = attributes;
 
         return (
-            <>
-                <div className="deforestation-info">
+            <div className="plenamata-block deforestation-info">
+                <div>
                     <TextControl
                         label={__('Title', 'plenamata')}
                         value={ boxTitle }
@@ -23,7 +23,7 @@ registerBlockType('plenamata/deforestation-info', {
                         placeholder={__('Type the box title', 'plenamata')}
                     />
                 </div>
-            </>
+            </div>
         );
     },
 
