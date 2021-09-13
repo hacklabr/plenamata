@@ -12,7 +12,6 @@ export class DeforestationCharts {
         Vue.use(I18n)
 
         document.querySelectorAll('.vue-deforestation-charts').forEach((el) => {
-            console.log(el)
             new Vue({
                 el,
                 render: (h) => h(DeforestationChartsApp),
