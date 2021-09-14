@@ -5,7 +5,9 @@
 <script>
     import { BarChart } from 'vue-chart-3'
 
+    import { __, sprintf } from '../../dashboard/plugins/i18n'
     import api from '../../utils/api'
+    import { humanNumber, roundNumber } from '../../utils/filters'
 
     const { DateTime } = window.luxon
 
@@ -35,7 +37,23 @@
                 }
             },
             chartOptions () {
-                return {}
+                return {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: ({ raw }) => sprintf(__('%s km²', 'plenamata'), humanNumber(raw)),
+                                title: ([{ label }]) => sprintf(__('Week %s', 'plenamata'), label),
+                            },
+                        },
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: (value) => roundNumber(value),
+                            },
+                        },
+                    },
+                }
             },
             weeks () {
                 return this.data.map(datum => String(datum.week))

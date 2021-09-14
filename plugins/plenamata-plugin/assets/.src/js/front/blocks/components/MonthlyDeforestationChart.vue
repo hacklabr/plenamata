@@ -5,8 +5,9 @@
 <script>
     import { BarChart } from 'vue-chart-3'
 
+    import { __, _x, sprintf } from '../../dashboard/plugins/i18n'
     import api from '../../utils/api'
-    import { _x } from '../../dashboard/plugins/i18n'
+    import { humanNumber, roundNumber } from '../../utils/filters'
 
     const { DateTime } = window.luxon
     const months = [
@@ -51,7 +52,22 @@
                 }
             },
             chartOptions () {
-                return {}
+                return {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: ({ raw }) => sprintf(__('%s km²', 'plenamata'), humanNumber(raw)),
+                            },
+                        },
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: (value) => roundNumber(value),
+                            },
+                        },
+                    },
+                }
             },
             months () {
                 return this.data.map(datum => months[datum.month])
