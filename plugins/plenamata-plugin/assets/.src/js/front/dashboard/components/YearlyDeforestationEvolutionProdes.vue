@@ -22,7 +22,9 @@
     import { BarChart } from 'vue-chart-3'
 
     import DashboardPanel from './DashboardPanel.vue'
+    import { __, sprintf } from '../plugins/i18n'
     import api from '../../utils/api'
+    import { humanNumber, roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
     export default {
@@ -68,6 +70,18 @@
                     plugins: {
                         legend: {
                             display: false,
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: ({ raw }) => sprintf(this.unit === 'ha' ? __('%s ha', 'plenamata') : __('%s km²', 'plenamata'), humanNumber(raw)),
+                            },
+                        },
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: (value) => roundNumber(value),
+                            },
                         },
                     },
                 }

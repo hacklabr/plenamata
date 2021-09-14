@@ -31,8 +31,9 @@
     import AxisPosition from './AxisPosition.vue'
     import DashboardPanel from './DashboardPanel.vue'
     import HasScrollableChart from '../mixins/HasScrollableChart'
-    import { _x } from '../plugins/i18n'
+    import { __, _x, sprintf } from '../plugins/i18n'
     import api from '../../utils/api'
+    import { humanNumber, roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
     const months = [
@@ -102,6 +103,12 @@
                         legend: {
                             position: 'bottom',
                         },
+                        tooltip: {
+                            callbacks: {
+                                label: ({ raw }) => sprintf(this.unit === 'ha' ? __('%s ha', 'plenamata') : __('%s km²', 'plenamata'), humanNumber(raw)),
+                                title: ([{ dataset, label }]) => `${label} (${dataset.label})`,
+                            },
+                        },
                         zoom: {
                             pan: {
                                 enabled: true,
@@ -119,6 +126,9 @@
                             type: 'linear',
                             min: 0,
                             suggestedMax: this.maxValue,
+                            ticks: {
+                                callback: (value) => roundNumber(value),
+                            },
                         },
                     },
                 }

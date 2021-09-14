@@ -33,7 +33,9 @@
     import AxisPosition from './AxisPosition.vue'
     import DashboardPanel from './DashboardPanel.vue'
     import HasScrollableChart from '../mixins/HasScrollableChart'
+    import { __, sprintf } from '../plugins/i18n'
     import api from '../../utils/api'
+    import { humanNumber, roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
     export default {
@@ -97,6 +99,12 @@
                         legend: {
                             display: false,
                         },
+                        tooltip: {
+                            callbacks: {
+                                label: ({ raw }) => sprintf(this.unit === 'ha' ? __('%s ha', 'plenamata') : __('%s km²', 'plenamata'), humanNumber(raw)),
+                                title: ([{ label }]) => sprintf(__('Week %s', 'plenamata'), label),
+                            },
+                        },
                         zoom: {
                             pan: {
                                 enabled: true,
@@ -116,6 +124,9 @@
                             type: 'linear',
                             min: 0,
                             suggestedMax: Math.max(...this.areas),
+                            ticks: {
+                                callback: (value) => roundNumber(value),
+                            },
                         },
                     },
                 }
