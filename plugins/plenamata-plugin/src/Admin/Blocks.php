@@ -156,12 +156,12 @@ class Blocks {
                             <h4><?= $averageTitle ?? '' ?></h4>
                             <div class="area">
                                 <span data-deter="treesPerDay"></span>
-                                <span><?= __("trees per day", "plenamata") ?></span>
+                                <span><?= __("trees", "plenamata") ?></span>
                             </div>
 
                             <div class="area">
                                 <span data-deter="hectaresPerDay"></span>
-                                <span><?= __("hectares per day", "plenamata") ?></span>
+                                <span><?= __("hectares", "plenamata") ?></span>
                             </div>
                         </div>
                     </div>
