@@ -12,6 +12,10 @@
         padding: 10px 15px 15px;
     }
 
+    @include desktop {
+        height: calc(100% - 32px);
+    }
+
     .heading {
         border-bottom: 1px solid var(--accent-color);
         margin-bottom: 28px;
@@ -56,18 +60,16 @@
             span {
                 &:first-child {
                     color: var(--dark);
-                    font-size: 68px;
+                    font-size: 60px;
                     display: inline-block;
                     margin-right: 15px;
                     max-width: 100%;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    white-space: nowrap;
-                    line-height: 62px;
+                    line-height: 1;
                     letter-spacing: -2px;
+                    word-break: keep-all;
 
                     @include tablet {
-                        font-size: 44px;
+                        font-size: 40px;
                     }
 
                     @include mobile {
@@ -160,5 +162,6 @@
 
     .final-info {
         font-size: 12px;
+        margin-top: 40px;
     }
 }
