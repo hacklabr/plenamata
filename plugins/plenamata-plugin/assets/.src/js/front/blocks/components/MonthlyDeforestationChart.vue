@@ -7,7 +7,7 @@
 
     import { __, _x, sprintf } from '../../dashboard/plugins/i18n'
     import api from '../../utils/api'
-    import { humanNumber, roundNumber } from '../../utils/filters'
+    import { roundNumber } from '../../utils/filters'
 
     const { DateTime } = window.luxon
     const months = [
@@ -56,7 +56,7 @@
                     plugins: {
                         tooltip: {
                             callbacks: {
-                                label: ({ raw }) => sprintf(__('%s km²', 'plenamata'), humanNumber(raw)),
+                                label: ({ raw }) => sprintf(__('%s km²', 'plenamata'), roundNumber(raw)),
                             },
                         },
                     },
