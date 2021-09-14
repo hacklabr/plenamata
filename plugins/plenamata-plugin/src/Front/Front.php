@@ -178,7 +178,7 @@ class Front {
                 'during PRODES year' => __( 'during PRODES year', 'plenamata' ),
                 'estimated average of %s trees per minute' => __( 'estimated average of %s trees per minute', 'plenamata'),
                 'External link' => __( 'External link', 'plenamata' ),
-                'Forestry Dashboard' => __( 'Forestry Dashboard', 'plenamata' ),
+                'Forestry Dashboard - Legal Amazon' => __( 'Forestry Dashboard - Legal Amazon', 'plenamata' ),
                 'hectares' => __( 'hectares', 'plenamata' ),
                 'hectares per day' => __( 'hectares per day', 'plenamata' ),
                 'km²' => __( 'km²', 'plenamata' ),

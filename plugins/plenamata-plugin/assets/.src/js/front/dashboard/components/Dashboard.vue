@@ -2,7 +2,7 @@
     <div class="dashboard">
         <header class="dashboard__header">
             <div class="container">
-                <h1>{{ __('Forestry Dashboard', 'plenamata') }}</h1>
+                <h1>{{ __('Forestry Dashboard - Legal Amazon', 'plenamata') }}</h1>
                 <form>
                     <div>
                         <label for="select-estados">{{ __('States', 'plenamata') }}</label>
