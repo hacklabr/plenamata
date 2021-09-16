@@ -1,0 +1,205 @@
+.archive, .author, .blog {
+
+    // cabeçalho do autor
+    .page-header {
+        &.author{
+            background-color: #F5F1EE;
+        }
+
+        flex-direction: column;
+        
+        .page-title::before {
+            display: none;
+        }
+
+        @include mobile{
+            margin-top: 40px;
+        }
+
+        .breadcrumb{
+            max-width: 90%;
+            width: 1200px;
+            margin: 32px auto;
+            font-weight: bold;
+            text-transform: capitalize;
+
+            a{
+                color: var(--secondary);
+            }
+        }
+        .author-main-content {
+            align-items: center;
+            .page-title { 
+                display: none !important; 
+            }
+        }
+        
+        img {
+            width: 189px;
+            height: 189px;
+        }
+    }
+
+    #primary.content-area {
+
+        #main {
+            width: 70%;
+
+            @include mobile {
+                width: 100%;
+            }
+          
+            .post {
+                @include mobile {
+                    flex-direction: column !important;
+                }
+                &.has-post-thumbnail{                    
+                    &:not(:first-child){
+                        .post-thumbnail {
+                            @include tablet-up {
+                                max-width: 45% !important;
+                            }
+                        }
+                    }
+                }
+
+                .post-thumbnail {
+                   flex-basis: 60%;
+
+                   @include mobile {
+                        flex-basis: 100%;
+                        max-width: 100%;
+                        width: 100%;
+                   }
+                }
+
+                .post-container-author-page {
+                    @include mobile {
+                        flex-direction: column;
+                    }
+                }
+            }
+
+            .entry-container {
+
+                .cat-links {
+                    margin-bottom: 16px!important;
+                   
+                    
+                    a:nth-of-type(1), .custom-separator{
+                        display: none;
+                    }
+                   
+                    a{
+                        font-style: normal;
+                        font-weight: bold;
+                        text-transform: uppercase;
+                        color: #FF7373;
+                    }
+                }
+
+                .entry-header {
+                    .entry-title {
+                        font-weight: bold !important;
+                        color: #221D18;
+                        text-transform: initial;
+                        overflow: hidden;
+                        margin: 0;
+                        font-size: 22px;
+                        @include mobile{
+                            font-size: 1.4em;
+                        }
+                    }
+                }
+
+                .entry-meta {
+                    margin: 0;
+                    padding: 8px 0;
+                    
+                    .entry-data {
+                        font-style: normal;
+                        font-weight: normal;
+                        color: #0A0A0A;
+                        mix-blend-mode: normal;
+                        opacity: 0.5;
+                    }
+                }
+
+                .entry-content {
+                    max-height: 85px;
+                    overflow: hidden;
+                    p {
+                        font-family: 'Roboto';
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 16px;
+                        line-height: 150%;
+                        /* or 24px */
+                    }
+                    @include mobile{
+                        display: none;
+                    }
+                }
+
+            }
+            
+            .pagination{
+                border-width: 1px;
+            }
+
+            nav[role=navigation].navigation.pagination .nav-links>*{
+                color: var(--secondary) !important;
+            }
+
+            nav[role=navigation].navigation.pagination .nav-links>.current {
+                background-color: #F5F1EE !important;
+                border-radius: 50% !important;
+            }
+        }
+
+        .category-page-sidebar{
+            .content{
+                .category-most-read{
+                    .header{
+                        p{
+                            text-transform: uppercase;
+                        }
+                    }
+                    .posts{
+                        background-color: #f5f1eeff;
+                        .post{
+                            .post-link{
+                                text-align: center;
+                            }
+                            .post-date{
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.authors-list-sidebar{
+    margin-top: 48px;
+    .post{
+        border: none !important;
+        a{
+            display: flex;
+            font-weight: bold;
+            flex-direction: row;
+            color: var(--secondary);
+
+            img{
+                margin-right: 8px;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+
+

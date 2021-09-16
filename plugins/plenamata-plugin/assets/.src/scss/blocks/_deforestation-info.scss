@@ -1,0 +1,104 @@
+.deforestation-info {
+    background-color: #221D18;
+    border-radius: 8px;
+    color: #FFF087;
+    margin-bottom: 20px;
+    padding: 20px;
+    --dark: #221D18;
+
+    .box-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        @include tablet {
+            display: block;
+        }
+
+        span {
+            color: var(--c-gray);
+
+            &.box-title {
+                display: inline-block;
+                line-height: 1.6;
+                font-weight: bold;
+                max-width: 145px;
+
+                @include tablet {
+                    font-size: 16px;
+                    max-width: 100%;
+                }
+
+                @include desktop {
+                    font-size: 18px;
+                }
+
+                @media screen and (min-width: 1024px) and (max-width: 1280px) {
+                    font-size: 14px;
+                }
+            }
+
+            &.icon {
+                align-items: center;
+                background-image: asset-url('img/eye.svg');
+                background-size: 100%;
+                background-repeat: no-repeat;
+                background-position: center;
+                display: flex;
+                height: 60px;
+                margin-right: var(--s-small);
+                width: 60px;
+
+                @include desktop {
+                    margin-right: var(--s-large);
+                }
+            }
+
+            &.count {
+                font-family: 'Roboto';
+                font-size: 70px;
+                letter-spacing: -3px;
+                line-height: 0.9;
+
+                @include tablet {
+                    font-size: 44px;
+                }
+
+                @media screen and (min-width: 1024px) and (max-width: 1280px) {
+                    font-size: 38px;
+                }
+            }
+
+            &.legend {
+                display: flex;
+                align-items: flex-end;
+                padding: 0 0 0 10px;
+
+                @include desktop {
+                    padding: 0 0 5px 10px;
+                }
+    
+                @include mobile {
+                    display: inline;
+                }
+            }
+        }
+        .wrap {
+            display: flex;
+
+            @include desktop {
+            }
+
+            @include mobile {
+                align-items: flex-end;
+            }
+        }
+    }
+
+    .data-source {
+        color: white;
+        display: block;
+        font-size: 12px;
+        padding-top: 20px;
+    }
+}

@@ -1,0 +1,94 @@
+<template>
+    <DashboardPanel type="measure">
+        <template #title>
+            {{ __('Area deforested last week', 'plenamata') }}
+        </template>
+        <template #measure>
+            <DashboardMeasure icon="area-icon.svg" :number="area">
+                <template #unit>
+                    <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
+                        <option value="ha">{{ __('hectares', 'plenamata') }}</option>
+                        <option value="km2">{{ __('km²', 'plenamata') }}</option>
+                    </select>
+                </template>
+            </DashboardMeasure>
+        </template>
+        <template #meaning>
+            {{ sprintf(__('estimated average of %s trees per minute', 'plenamata'), roundNumber(trees / 10080)) }}
+        </template>
+        <template #footer>
+            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
+        </template>
+    </DashboardPanel>
+</template>
+
+<script>
+    import { DateTime } from 'luxon'
+
+    import DashboardMeasure from './DashboardMeasure.vue'
+    import DashboardPanel from './DashboardPanel.vue'
+    import api from '../../utils/api'
+    import { roundNumber } from '../../utils/filters'
+    import { vModel } from '../../utils/vue'
+
+    export default {
+        name: 'TotalDeforestationThisYear',
+        components: {
+            DashboardMeasure,
+            DashboardPanel,
+        },
+        props: {
+            lastUpdate: { type: Object, required: true },
+            state: { type: String, required: true },
+            unit: { type: String, default: 'ha' },
+            updated: { type: Object, required: true },
+        },
+        data () {
+            return {
+                lastWeek: null,
+            }
+        },
+        computed: {
+            area () {
+                if (this.unit === 'ha') {
+                    return this.areaKm2 * 100
+                } else {
+                    return this.areaKm2
+                }
+            },
+            areaKm2 () {
+                if (!this.lastWeek) {
+                    return 0
+                }
+                if (this.state) {
+                    const state = this.lastWeek.find(state => state.uf === this.state)
+                    return Number(state.areamunkm)
+                } else {
+                    return this.lastWeek.reduce((acc, state) => acc + Number(state.areamunkm), 0)
+                }
+            },
+            trees () {
+                if (!this.lastWeek) {
+                    return 0
+                }
+                if (this.state) {
+                    const state = this.lastWeek.find(state => state.uf === this.state)
+                    return Number(state.num_arvores)
+                } else {
+                    return this.lastWeek.reduce((acc, state) => acc + Number(state.num_arvores), 0)
+                }
+            },
+            unitModel: vModel('unit'),
+        },
+        async created () {
+            const endDate = this.lastUpdate.deter_last_date
+            const startDate = DateTime.fromISO(this.lastUpdate.deter_last_date).minus({ weeks: 1 })
+
+            const data = await api.get(`deter/estados?data1=${startDate.toISODate()}&data2=${endDate}`)
+            this.lastWeek = data
+        },
+        methods: {
+            roundNumber,
+        },
+    }
+</script>

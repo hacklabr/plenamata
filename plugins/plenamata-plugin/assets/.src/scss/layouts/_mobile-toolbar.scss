@@ -1,0 +1,29 @@
+.mobile-toolbar {
+    .item {
+        button, a {
+            padding: 10px;
+            font-size: 14px;
+            color:$c_text;
+            background: none;
+            border-radius:none;
+            line-height: inherit;
+            font-family: 'Archivo';
+            text-align: center;
+
+            display: inline;
+            .item--title {
+                font-family: 'Archivo';
+                font-style: normal;
+                font-weight: normal;
+                font-size: 12px;
+                line-height: 13px;
+                /* identical to box height */
+                color:$c_text;
+                
+                text-align: center;
+                text-transform: uppercase;
+            }
+        }
+        
+    }
+}

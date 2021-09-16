@@ -1,0 +1,57 @@
+.blog, .archive{
+    section.custom-archive{
+        &#primary{
+            margin-top: 40px;
+        }
+        header.page-header {
+            h1.page-title,  .page-description{
+                font-family: Archivo;
+                font-style: normal;
+                font-weight: normal !important;
+                font-size: 48px;
+                line-height: 64px;
+                margin-bottom:0px;
+                /* identical to box height, or 133% */
+                text-align: center;
+                text-transform: uppercase;
+                color: #221D18;
+            }
+
+            @include mobile {
+                margin-bottom: 20px;
+                margin-top: 70px;
+
+                h1.page-title {
+                    line-height: 50px;
+                }
+            }
+        }
+
+        article {
+            .entry-title {
+                @include mobile {
+                    font-size: size(18) !important;
+                    line-height: size(22) !important;
+                    max-height: none;
+                }
+
+                @include tablet {
+                    max-height: none !important;
+                }
+            }
+
+            figure.post-thumbnail {
+                @include mobile {
+                    max-width: 100% !important;
+                }
+            }
+
+            .entry-content {
+                @include mobile {
+                    display: block !important;
+                }
+            }
+        }
+    }
+
+}

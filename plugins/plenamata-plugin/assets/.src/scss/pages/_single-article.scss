@@ -1,0 +1,110 @@
+body.single-post{
+    .post-excerpt{
+        border-bottom: 1px solid #FF7373;
+        padding-bottom: 40px;
+        p{
+            margin-bottom: 0!important;
+        }
+    }
+    &.cat-_newspack_opinion,  &.cat-opiniao,  &.cat-opinion{
+        section#primary{
+            margin-top:40px;
+        }
+    }
+   #content{
+        margin-top: 1rem;
+        margin-bottom: 40px;
+
+        .opinion-header {
+            background-color: #F5F1EE;
+            padding: 60px 0 40px;
+            margin-bottom: 40px;
+            padding-left: 15px;
+            padding-right: 15px;
+
+            .breadcrumb{
+                width: 1200px;
+                margin: 12px auto;
+            }
+           .container{
+               width: 1200px;
+               @include mobile {
+                   max-width: 90%;
+               }
+            }
+        }
+        
+        .breadcrumb{
+            margin-bottom: 48px;
+            margin-top: 16px;
+            
+            a{
+                color: var(--secondary);
+                font-weight: bold;
+                text-transform: capitalize;
+            }
+        }
+
+       #primary{
+   
+           .entry-header, .post-thumbnail{
+               margin-bottom: 30px;
+           }
+   
+           .entry-subhead .entry-meta .author-partner .author-avatar{
+               display: none;
+           }
+   
+         
+           .tags-links{
+               a{
+                   color: var(--secondary);
+                   background-color: rgb(82, 48, 150, 0.1);
+               }
+           }
+   
+           h3{
+               border-bottom: solid 1px #FF7373;
+               padding-bottom: 40px;
+           }
+           
+           .author-bio .author-bio-text .author-bio-header .accent-header{
+               color: var(--secondary);
+               text-transform: capitalize;
+           }
+           
+           .toggable-comments-area{
+               background-color: var(--secondary) !important;
+           }
+           h1.entry-title {
+                font-family: 'Archivo';
+                font-style: normal;
+                font-weight: bold;
+                font-size: 40px;
+                line-height: 44px;
+                color:$c_text;            
+           }
+
+           p {
+                @include mobile {
+                    font-size: size(16) !important;
+                    line-height: size(26);
+                }
+                @include small {
+                    font-size: size(14) !important;
+                    line-height: size(24);
+                }
+           }
+
+           @include mobile {
+               h1.entry-title {
+                    font-family: 'Archivo';
+                    font-style: normal;
+                    font-weight: bold;
+                    font-size: 26px;
+                    line-height: 28px;
+               }
+           }
+       }
+   }
+}

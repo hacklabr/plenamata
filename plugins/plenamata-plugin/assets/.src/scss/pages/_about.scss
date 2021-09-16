@@ -1,0 +1,9 @@
+.page-template{
+    .about-columns{
+        @include mobile {
+            .wp-block-column:first-child{
+                display:none;
+            }
+        }
+    }
+}

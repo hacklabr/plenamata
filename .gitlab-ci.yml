@@ -1,65 +1,82 @@
----
-image: docker:18.01.0-ce-git
-services:
-- docker:18.01.0-ce-dind
-
+# Our stages
 stages:
-- build
-- deploy
-
+  - build_composer
+  - build_assets
+  - create_pack
+  - deploy
 variables:
-  RELEASE_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
-  HOMOLOG_IMAGE: $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME-$CI_COMMIT_SHORT_SHA
   KUBECONFIG: /etc/k8s-config
 
 
-build to homolog:
-  stage: build
-  script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker build -t $HOMOLOG_IMAGE -f compose/production/wordpress/Dockerfile .
-    - docker push $HOMOLOG_IMAGE
+build_composer:
+  stage: build_composer
   only:
     - /master/
-  environment: homolog
   tags:
     - docker
-
-deploy to homolog:
-  stage: deploy
-  image: hacklab/kubectl:latest
+  image: composer:2.1.5
   script:
-    - echo ${kube_config} | base64 -d > ${KUBECONFIG}
-    - kubectl -n <namespace> --record deployment.apps/wordpress set image deployment.v1.apps/wordpress wordpress=$HOMOLOG_IMAGE
+    - composer build --working-dir=./plugins/plenamata-plugin/
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - plugins/plenamata-plugin/vendor/
+      - plugins/plenamata-plugin/vendor_prefixed/
+    
+build_assets:
+  stage: build_assets
   only:
     - /master/
-  environment: homolog
   tags:
     - docker
-
-
-build to production:
-  stage: build
+  image: node:12
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - plugins/plenamata-plugin/vendor/
+      - plugins/plenamata-plugin/vendor_prefixed/
+      - plugins/plenamata-plugin/assets/build
+    
   script:
-    - docker login -u "gitlab-ci-token" -p "$CI_JOB_TOKEN" $CI_REGISTRY
-    - docker build -t $RELEASE_IMAGE -f compose/production/wordpress/Dockerfile .
-    - docker tag $RELEASE_IMAGE "$CI_REGISTRY_IMAGE:latest"
-    - docker push $RELEASE_IMAGE
-    - docker push "$CI_REGISTRY_IMAGE:latest"
+    - npm --prefix plugins/plenamata-plugin/ install
+    - npm --prefix plugins/plenamata-plugin/ run build
+    - rm -rf plugins/plenamata-plugin/node_modules
+
+create_pack:
+  stage: create_pack
   only:
-    - tags
-  environment: production
+    - /master/
   tags:
     - docker
+  image: alpine:3.14
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - plugins/plenamata-plugin/vendor/
+      - plugins/plenamata-plugin/vendor_prefixed/
+      - plugins/plenamata-plugin/assets/build
+  script:
+    - cp -ra plugins/plenamata-plugin plenamata-plugin  
+  artifacts:
+    paths:
+      - plenamata-plugin/* 
+    name: plenamata-plugin
+    expire_in: 1 week
 
-deploy to production:
+deploy:
   stage: deploy
   image: hacklab/kubectl:latest
+  cache:
+    key: $CI_COMMIT_REF_SLUG
+    paths:
+      - plugins/plenamata-plugin/vendor/
+      - plugins/plenamata-plugin/vendor_prefixed/
+      - plugins/plenamata-plugin/assets/build
   script:
-    - echo ${kube_config} | base64 -d > ${KUBECONFIG}
-    - kubectl -n <namespace> --record deployment.apps/wordpress set image deployment.v1.apps/wordpress wordpress=$RELEASE_IMAGE
+    - echo ${kubeconfig} | base64 -d > ${KUBECONFIG}
+    - kubectl cp "plugins/plenamata-plugin" plenamata-site-dev/$(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1):"/var/www/html/wp-content/plugins/"
+    - kubectl exec -n plenamata-site-dev -it $(kubectl get pods -n plenamata-site-dev | grep wordpress | cut -d ' ' -f 1) -- sh -c "chown -R www-data /var/www/html/wp-content/plugins/plenamata-plugin && chgrp -R www-data /var/www/html/wp-content/plugins/plenamata-plugin" 
   only:
-    - tags
-  environment: production
+    - /master/
   tags:
     - docker

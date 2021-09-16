@@ -1,6 +1,5 @@
-node_modules
-themes/plenamata/dist/
-themes/plenamata/dist/
+themes/jaci/dist/app.js
+themes/jaci/dist/app.css
 
 wp-content/*
 wp-content/themes/*

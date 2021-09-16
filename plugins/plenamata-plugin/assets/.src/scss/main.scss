@@ -1,0 +1,28 @@
+// Settings
+@import './settings/mixins';
+@import './settings/variables';
+@import './settings/global';
+@import './settings/typography';
+
+// Blocks
+@import './blocks/deforestation-charts';
+@import './blocks/deforestation-info';
+@import './blocks/estimatives-area';
+@import './blocks/latest-posts';
+@import './blocks/newsletter';
+
+// Layouts
+@import './layouts/header';
+@import './layouts/footer';
+@import './layouts/mobile-toolbar';
+
+// Pages
+@import './pages/dashboard';
+@import './pages/glossary';
+@import './pages/home';
+@import './pages/single-glossary';
+@import './pages/single-article';
+@import './pages/contact';
+@import './pages/archive';
+@import './pages/blog';
+@import './pages/about';

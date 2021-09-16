@@ -1,0 +1,39 @@
+ul.wp-block-latest-posts {
+    li {
+        text-align: center;
+
+        ul.list-terms {
+            list-style: none;
+            margin-bottom: size(10);
+            margin-left: 0;
+            padding-left: 0;
+            padding-right: 0;
+            text-align: center;
+            text-transform: uppercase;
+
+            li {
+                color: #FF7373 !important;
+                display: inline-block;
+                font-family: 'Archivo';
+                font-size: size(14);
+                font-weight: 700;
+                margin-bottom: 0;
+                margin-right: 5px;
+                padding-bottom: 0 !important;
+
+                &:after {
+                    content: "\2022";
+                    margin-left: 5px;
+                }
+
+                &:last-child {
+                    margin-right: 0;
+
+                    &:after {
+                        content: "";
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,166 @@
+body.page-template:not(.home) #primary {
+    margin-top: 80px;
+
+    #main.site-main {
+
+        h2 {
+            margin-top: 40px;
+            font-family: Archivo;
+            font-style: normal;
+            font-weight: normal!important;
+            font-size: 48px;
+            line-height: 64px;
+            text-transform: uppercase;
+            color: #221D18;
+        }
+
+        .wp-block-columns {
+            width: 100%;
+            margin: 40px 0 0;
+            justify-content: space-between;
+
+            .contato-text {
+                max-width: 516px!important; 
+                p { 
+                    font-family: Roboto;
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 18px;
+                    line-height: 175%;
+                    color: #221D18;
+                    max-width: 516px!important; 
+                }
+            }
+            .wp-block-column:nth-child(2) {
+                max-width: 625px;
+            }
+        }
+
+
+        .form-contato {
+            display: inline-flex;
+            flex-flow: wrap;
+
+            input {
+                font-family: Archivo;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 15px;
+                padding: 16px 24px;
+                border: 1px solid #523096;
+            }
+
+            .contato-nome {
+                width: calc(50% - 14.5px);
+                margin-right: 14.5px;
+                margin-bottom: 14.5px;
+            }
+
+            .contato-email {
+                width: calc(50% - 14.5px);
+                margin-left: 14.5px;
+                margin-bottom: 14.5px;
+            }
+
+            .contato-mensagem {
+                width: 100%;
+                margin: 14.5px 0;
+                height: 185px;
+
+                textarea {
+                    width: 100%;
+                    height: 100%;
+                    border: 1px solid #523096;
+                    padding: 24px;
+                    font-family: Archivo; 
+                    font-size: 14px;
+                    line-height: 15px;
+                    font-style: normal; 
+                    font-weight: bold;
+                }
+            }
+
+            .contato-enviar {
+                width: 100%;
+
+                input[type=checkbox] {
+                    position: relative;
+                    width: 16px; height: 16px;
+                    border: 1px solid #000000;
+                    box-sizing: border-box;
+                    border-radius: 4px;
+                    margin: 0;
+                    padding: 0;
+                    margin-right: 8px;
+                }
+
+                input[type=submit] { 
+                    width: calc(50% - 14.5px);
+                    background: #523096;
+                    border-radius: 4px;
+                    float: left;
+                    margin: 12px 0;
+                }
+
+                .wpcf7-list-item {
+                    margin: 14.5px 0 12px;
+
+                    a {
+                        color: #523096;
+                        font-weight: bold;
+                    }
+
+                    .wpcf7-list-item-label{
+                        font-family: Archivo;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 14px;
+                        line-height: 15px;
+                        color: #000000;
+                    }
+
+                }
+
+            }
+
+        }
+    }
+}
+
+@include mobile {
+
+    #primary {
+        #main.site-main {    
+            h2 {
+                font-weight: normal!important;
+            }
+            .wp-block-columns {    
+                justify-content: center;
+                .contato-text {
+                    p { 
+                        font-size: 14px!important;
+                        line-height: 24px;
+                        margin: 40px 0 32px;
+                    }
+                }
+                .wp-block-column:nth-child(1), .wp-block-column:nth-child(2) {
+                    max-width: 100%!important;
+                }
+            }
+            .form-contato {
+                .contato-nome, .contato-email, .contato-mensagem {
+                    width: 100%!important;
+                    margin: 8px 0!important;
+                }
+                .contato-enviar {
+                    input[type=submit] {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+
+
+}

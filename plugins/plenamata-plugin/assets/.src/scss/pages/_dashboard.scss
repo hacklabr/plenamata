@@ -1,0 +1,256 @@
+.page-template-template-dashboard {
+    // needed to work div map with position:sticky;
+    #page {
+        overflow: inherit !important;
+    }
+    .site-content {
+        margin-top:65px !important;
+    }
+    .jeomap {
+        min-height: 100vh;
+
+        @include mobile {
+            min-height: 100vw;
+        }
+
+        @include tablet-up {
+            max-width: 50vw;
+        }
+    }
+}
+
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+
+    @include mobile {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+    }
+
+    &__header {
+        background-color: $c_purple;
+        color: white;
+        grid-column: 1;
+        grid-row: 1;
+        padding: size(30);
+
+        h1 {
+            color: white;
+            font-size: size(18);
+            text-transform: uppercase;
+        }
+
+        form {
+            label {
+                display: block;
+            }
+        }
+    }
+
+    main {
+        background-color: white;
+        color: $c_text;
+        grid-column: 1;
+        grid-row: 2;
+
+        @include mobile {
+            grid-row: 3;
+        }
+    }
+
+    &__tabs {
+        border: none;
+        display: flex;
+        margin: size(32) auto;
+        width: auto;
+
+        label {
+            align-items: center;
+            border-bottom: 1px solid $c_light;
+            display: flex;
+            flex: 1;
+            font-weight: bold;
+            justify-content: center;
+            padding: size(10);
+            text-align: center;
+            text-transform: uppercase;
+
+            &.active {
+                border-bottom: 5px solid $c_purple;
+            }
+
+            img {
+                margin-right: 1ch;
+            }
+        }
+
+        input {
+            display: none;
+        }
+    }
+
+    &__panels {
+        padding: 0 size(8);
+    }
+
+    &__news {
+        padding: 0 size(16);
+    }
+
+    &__axis-position {
+        height: 8px;
+        width: 100%;
+
+        rect:nth-of-type(1) {
+            border-radius: 10px;
+            fill: #F7F7F7;
+        }
+
+        rect:nth-of-type(2) {
+            border-radius: 10px;
+            fill: #DDD;
+        }
+    }
+
+    &__map {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+
+        @include mobile {
+            grid-column: 1;
+            grid-row: 2;
+        }
+
+        @include tablet-up {
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+    }
+}
+
+.dashboard-panel {
+    border: 1px solid $c_light;
+    border-radius: size(4);
+    margin: size(40) 0;
+
+    main {
+        border-radius: size(4) size(4) 0 0;
+        padding: size(16) size(16) size(32);
+    }
+
+    h2 {
+        color: $c_purple !important;
+        font-size: size(16);
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    p {
+        text-align: center;
+    }
+
+    &__measure {
+        align-items: baseline;
+        display: flex;
+        justify-content: center;
+        line-height: 1;
+        margin: size(32) size(16);
+        text-align: center;
+    }
+
+    &__icon {
+        align-self: center;
+    }
+
+    &__number {
+        font-size: size(60);
+        padding: 0 size(16);
+
+        @include mobile {
+            font-size: size(40);
+        }
+    }
+
+    &__unit {
+        select {
+            background: transparent;
+            border: none;
+        }
+    }
+
+    &__meaning {
+        background-color: $c_purple;
+        border-radius: size(8);
+        color: white;
+        padding: size(4) size(16);
+        text-align: center;
+    }
+
+    &__filters {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        select {
+            background: transparent;
+            border: none;
+            margin: size(16);
+        }
+    }
+
+    footer {
+        background-color: $c_lighter;
+        border-radius: 0 0 size(4) size(4);
+        padding: size(4) size(16);
+    }
+}
+
+.dashboard-news {
+    display: flex;
+    margin-bottom: size(32);
+
+    h2 {
+        font-size: size(18);
+        margin: 0 0 size(8);
+
+        a {
+            color: $c_text;
+        }
+    }
+
+    &__image {
+        flex: 1;
+        margin-right: size(8);
+
+        @include mobile {
+            flex: 2;
+        }
+    }
+
+    & > :nth-child(2) {
+        flex: 3;
+
+        & > div {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+
+    &__date, &__source {
+        color: size(14);
+    }
+
+    &__date {
+        margin-right: size(16);
+        opacity: 0.5;
+    }
+
+    &__source {
+        color: $c_purple;
+        font-weight: bold;
+    }
+}
