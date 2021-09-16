@@ -5,8 +5,9 @@
  * @package PlenamataPlugin
  * @since 0.1.0
  */
-    $maps = get_posts(['post_type' => 'map', 'post_status' => 'publish']);
-    $map_id = empty($maps) ? 0 : $maps[0]->ID;
+    $language = apply_filters( 'wpml_current_language', NULL );
+    $options = get_option( 'plenamata_options', [] );
+    $map_id = $options[ 'plenamata_dashboard_map_' . $language ];
     get_header();
 ?>
 <div class="vue-dashboard-app"></div>

@@ -28,8 +28,9 @@ class SettingsPage {
 	 * @since 0.1.0
 	 */
 	public function hooks(): void {
-		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_styles' ] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_styles' ] );
 		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
+        add_action( 'admin_init', [ $this, 'init_settings_page' ] );
 		add_action( 'admin_menu', [ $this, 'add_menu' ] );
         add_action( 'admin_menu', [ $this, 'rename_menu_entries' ] );
 	}
@@ -94,9 +95,57 @@ class SettingsPage {
 		);
 	}
 
+    /**
+     * Register fields to plugin's settings page
+     */
+    public function init_settings_page(): void {
+        register_setting( 'plenamata-plugin', 'plenamata_options' );
+
+        add_settings_section(
+            'plenamata_dashboard',
+            __( 'Dashboard', 'plenamata' ),
+            [ $this, 'settings_section_cb' ],
+            'plenamata-plugin'
+        );
+
+        $active_languages = apply_filters( 'wpml_active_languages', NULL, [] );
+
+        foreach ($active_languages as $key => $language) {
+            $field_id = 'plenamata_dashboard_map_' . $key;
+
+            add_settings_field(
+                $field_id,
+                sprintf( __( 'Map ID - %s', 'plenamata' ), $language[ 'translated_name' ] ),
+                [ $this, 'settings_input_cb' ],
+                'plenamata-plugin',
+                'plenamata_dashboard',
+                [
+                    'label_for' => $field_id,
+                    'type' => 'text',
+                ],
+            );
+        }
+    }
+
     public function rename_menu_entries(): void {
         global $menu;
         $menu[ 5 ][ 0 ] = __( 'Articles', 'plenamata' );
+    }
+
+    public function settings_input_cb( array $args ): void {
+        $options = get_option( 'plenamata_options' );
+        $key = $args[ 'label_for' ];
+        ?>
+        <input
+            id="<?= esc_attr( $key ) ?>"
+            name="plenamata_options[<?= esc_attr( $key ) ?>]"
+            type="<?= $args[ 'type' ] ?>"
+            value="<?= isset( $options[ $key ] ) ? esc_attr( $options[ $key ] ) : '' ?>"
+        >
+        <?php
+    }
+
+    public function settings_section_cb(): void {
     }
 
 	/**
