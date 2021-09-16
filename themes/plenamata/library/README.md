@@ -1,1 +1,0 @@
-# All files are using `require`: The ideia is migrate later to classes
