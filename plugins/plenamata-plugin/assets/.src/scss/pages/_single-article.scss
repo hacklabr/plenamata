@@ -51,10 +51,30 @@ body.single-post{
                margin-bottom: 30px;
            }
 
-           .entry-content {
-               a {
-                   color: var(--secondary);
-               }
+            .entry-content {
+                a {
+                    color: var(--secondary);
+
+                    &:active, &:hover {
+                        text-decoration: underline !important;
+                    }
+                }
+
+               .wp-block-pullquote {
+                blockquote {
+                    &::before, &::after {
+                        border-color: var(--secondary);
+                    }
+
+                    p {
+                        font-size: 1.375em !important;
+
+                        &:first-of-type::before {
+                            color: var(--secondary);
+                        }
+                    }
+                }
+            }
            }
 
            .entry-subhead .entry-meta .author-partner .author-avatar{
