@@ -17,8 +17,6 @@ use PlenamataPlugin\Common\RestApi;
 use PlenamataPlugin\Front\Front;
 use PlenamataPlugin\Admin\Blocks;
 use PlenamataPlugin\Admin\SettingsPage;
-use PlenamataPlugin\Vendor\Auryn\Injector;
-use PlenamataPlugin\Vendor\Auryn\InjectionException;
 
 /**
  * Class Plugin
@@ -41,22 +39,11 @@ class Plugin {
 	 * @since 0.1.0
 	 */
 	const VERSION = '0.3.6';
-	/**
-	 * Dependency Injection Container.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @var Injector
-	 */
-	private $injector;
 
 	/**
 	 * Plugin constructor.
-	 *
-	 * @param Injector $injector Dependency Injection Container.
 	 */
-	public function __construct( Injector $injector ) {
-		$this->injector = $injector;
+	public function __construct() {
 	}
 
 	/**
@@ -76,33 +63,39 @@ class Plugin {
 	 * Run admin part
 	 *
 	 * @since 0.1.0
-	 *
-	 * @throws InjectionException If a cyclic gets detected when provisioning.
 	 */
 	private function run_admin(): void {
-		$this->injector->make( Translations::class )->hooks();
-        $this->injector->make( Blocks::class )->hooks();
-        $this->injector->make( Blocks::class )->filters();
-		$this->injector->make( SettingsPage::class )->hooks();
-        $this->injector->make( RestApi::class )->hooks();
-        $this->injector->make( RestApi::class )->filters();
+        $blocks = new Blocks();
+        $rest_api = new RestApi();
+        $settings_page = new SettingsPage();
+        $translations = new Translations();
+
+		$translations->hooks();
+        $blocks->hooks();
+        $blocks->filters();
+		$settings_page->hooks();
+        $rest_api->hooks();
+        $rest_api->filters();
 	}
 
 	/**
 	 * Run frontend part
 	 *
 	 * @since 0.1.0
-	 *
-	 * @throws InjectionException If a cyclic gets detected when provisioning.
 	 */
 	private function run_front(): void {
-		$this->injector->make( Translations::class )->hooks();
-		$this->injector->make( Blocks::class )->hooks();
-        $this->injector->make( Blocks::class )->filters();
-		$this->injector->make( Front::class )->hooks();
-        $this->injector->make( Front::class )->filters();
-        $this->injector->make( RestApi::class )->hooks();
-        $this->injector->make( RestApi::class )->filters();
+        $blocks = new Blocks();
+        $front = new Front();
+        $rest_api = new RestApi();
+        $translations = new Translations();
+
+		$translations->hooks();
+		$blocks->hooks();
+        $blocks->filters();
+		$front->hooks();
+        $front->filters();
+        $rest_api->hooks();
+        $rest_api->filters();
 	}
 
 }

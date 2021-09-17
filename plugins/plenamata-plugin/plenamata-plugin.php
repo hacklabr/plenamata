@@ -22,7 +22,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 use PlenamataPlugin\Plugin;
-use PlenamataPlugin\Vendor\Auryn\Injector;
 
 if ( version_compare( phpversion(), '7.2.5', '<' ) ) {
 
@@ -84,14 +83,8 @@ define( 'PLENAMATA_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 function run_plenamata_plugin() {
 	require_once PLENAMATA_PLUGIN_PATH . 'vendor/autoload.php';
 
-	$injector = new Injector();
-	( $injector->make( Plugin::class ) )->run();
-
-	/**
-	 * You can use the $injector->make( PlenamataPlugin\Some\Class::class ) for get any plugin class.
-	 * More detail: https://github.com/wppunk/WPPlugin#dependency-injection-container
-	 */
-	do_action( 'plenamata_plugin_init', $injector );
+	$plugin = new Plugin();
+	$plugin->run();
 }
 
 add_action( 'plugins_loaded', 'run_plenamata_plugin' );

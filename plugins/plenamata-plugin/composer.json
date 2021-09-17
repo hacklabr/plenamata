@@ -49,9 +49,6 @@
 			"composer dumpautoload"
 		],
 		"build": [
-			"composer require rdlowrey/auryn",
-			"composer scoper -n",
-			"composer remove rdlowrey/auryn",
 			"composer dumpautoload"
 		],
 		"init-project": [
