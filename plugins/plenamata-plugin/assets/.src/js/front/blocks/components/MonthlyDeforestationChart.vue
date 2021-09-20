@@ -70,7 +70,7 @@
                 }
             },
             months () {
-                return this.data.map(datum => months[datum.month])
+                return this.data.map(datum => months[datum.month].slice(0, 3))
             },
         },
         async created () {
