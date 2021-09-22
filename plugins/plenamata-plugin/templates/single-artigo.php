@@ -33,7 +33,7 @@ the_post(); ?>
         <div class="initiative-header">
             <div>
                 <div class="initiative-header__category">
-                    <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/eye.svg" alt="">
+                    <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/macaw-eye.svg" alt="">
                     <span><?= __('Good Initiatives', 'plenamata') ?></span>
                 </div>
                 <h1 class="initiative-header__title"><?= wp_kses_post(get_the_title()) ?></h1>
