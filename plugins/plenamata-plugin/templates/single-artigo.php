@@ -10,42 +10,58 @@
 
 get_header( 'single' );
 the_post(); ?>
-	
-	<?php 
-	$is_opinion = (get_the_category()[0]->slug == "_newspack_opinion" || get_the_category()[0]->slug == 'opiniao' || get_the_category()[0]->slug == 'opinion') ? true : false;
-	if($is_opinion): ?>
+
+	<?php
+    $category = get_the_category()[0];
+	$is_opinion = ($category->slug == "_newspack_opinion" || $category->slug == 'opiniao' || $category->slug == 'opinion') ? true : false;
+	$is_initiative = ($category->slug == 'boas-iniciativas' || $category->slug == 'good-initiatives') ? true : false;
+
+    if ($is_opinion): ?>
 			<div class="opinion-header">
 				<div class="breadcrumb">
 					<a href="<?= site_url(); ?>">Home</a> /
 					<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Articles", "plenamata") ?></a> /
-					<a href="<?= get_category_link(get_the_category()[0]->cat_ID); ?>"><?= get_the_category()[0]->name ?></a> /
+					<a href="<?= get_category_link($category->cat_ID); ?>"><?= $category->name ?></a> /
 				</div>
 				<div class="container">
 					<h1 class="entry-title">
 						<?php echo wp_kses_post(get_the_title()); ?>
-					</h1>	
+					</h1>
 				</div>
 			</div>
+    <?php elseif ($is_initiative): ?>
+        <div class="initiative-header">
+            <div>
+                <div class="initiative-header__category">
+                    <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/eye.svg" alt="">
+                    <span><?= __('Good Initiatives', 'plenamata') ?></span>
+                </div>
+                <h1 class="initiative-header__title"><?= wp_kses_post(get_the_title()) ?></h1>
+            </div>
+            <div class="initiative-header__thumbnail">
+                <img src="<?php the_post_thumbnail_url('large') ?>" alt="">
+            </div>
+        </div>
 	<?php endif; ?>
 
 	<section id="primary" class="content-area <?php echo esc_attr(newspack_get_category_tag_classes(get_the_ID())) . ' ' . newspack_featured_image_position(); ?>">
-		
-		<?php if(!$is_opinion): ?>
+
+		<?php if(!$is_opinion && !$is_initiative): ?>
 			<div class="breadcrumb">
 				<a href="<?= site_url(); ?>">Home</a> /
 				<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Articles", "plenamata") ?></a> /
-				<a href="<?= get_category_link(get_the_category()[0]->cat_ID); ?>"><?= get_the_category()[0]->name ?></a> /
+				<a href="<?= get_category_link($category->cat_ID); ?>"><?= $category->name ?></a> /
 			</div>
 		<?php endif; ?>
-		
+
 		<main id="main" class="site-main">
 			<?php
-			
+
 			// Template part for large featured images.
-			
+
 			?>
 
-				<?php if(!$is_opinion): ?>
+				<?php if (!$is_opinion && !$is_initiative): ?>
 					<header class="entry-header">
 						<div class="wrapper-entry-title">
 							<h1 class="entry-title">
@@ -54,16 +70,16 @@ the_post(); ?>
 						</div>
 					</header>
 				<?php endif; ?>
-				
-			
+
+
 				<div class="main-content">
 					<?php // Place smaller featured images inside of 'content' area.
-					if (!$is_opinion){
+					if (!$is_opinion && !$is_initiative){
 						if ('small' === newspack_featured_image_position()) : ?>
 							<div class="featured-image-small">
 								<div class="featured-image-small__credit-wrapper">
 									<?php newspack_post_thumbnail(); ?>
-		
+
 									<?php if(class_exists('Newspack_Image_Credits') && (!empty(Newspack_Image_Credits::get_media_credit(get_post_thumbnail_id())['credit']) || !empty(get_post(get_post_thumbnail_id())->post_content))): ?>
 										<div class="image-info">
 											<div class="image-info-container">
@@ -75,16 +91,16 @@ the_post(); ?>
 															<?= (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])) ? '<a href="' . $image_meta['credit_url'] . '">' : null ?>
 															<span class="credit">
 																<?= $image_meta['credit'] ?>
-		
+
 																<?= isset($image_meta['organization']) && !empty($image_meta['organization']) ? ' / ' . $image_meta['organization'] : null ?>
 															</span>
 															<?= (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])) ? '</a>' : null ?>
-		
+
 														<?php
 														}
 														?>
 													</div>
-		
+
 												</div>
 											</div>
 											<i class="fas fa-camera"></i>
@@ -102,7 +118,7 @@ the_post(); ?>
 							<div class="featured-image-small">
 								<div class="featured-image-small__credit-wrapper">
 									<?php newspack_post_thumbnail(); ?>
-		
+
 									<?php if(class_exists('Newspack_Image_Credits') && (!empty(Newspack_Image_Credits::get_media_credit(get_post_thumbnail_id())['credit']) || !empty(get_post(get_post_thumbnail_id())->post_content))): ?>
 										<div class="image-info">
 											<div class="image-info-container">
@@ -114,23 +130,23 @@ the_post(); ?>
 															<?= (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])) ? '<a href="' . $image_meta['credit_url'] . '">' : null ?>
 															<span class="credit">
 																<?= $image_meta['credit'] ?>
-		
+
 																<?= isset($image_meta['organization']) && !empty($image_meta['organization']) ? ' / ' . $image_meta['organization'] : null ?>
 															</span>
 															<?= (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])) ? '</a>' : null ?>
-		
+
 														<?php
 														}
 														?>
 													</div>
-		
+
 												</div>
 											</div>
 											<i class="fas fa-camera"></i>
 										</div>
 									<?php endif; ?>
 								</div>
-						<?php endif; 	
+						<?php endif;
 					}
 					?>
 					<div class="entry-subhead">
@@ -138,7 +154,7 @@ the_post(); ?>
 								<div class="author-partner">
 										<?php plenamata_newspack_posted_by(); ?>
 									<!-- publishers -->
-									<?php 
+									<?php
 										show_publishers($post->ID);
 									?>
 									<!-- publishers -->
@@ -160,7 +176,7 @@ the_post(); ?>
 
 
 					//get_template_part('template-parts/content/content', 'single');
-					
+
 					get_template_part(require PLENAMATA_PLUGIN_PATH . 'templates/parts/content-single.php');
 				?>
 
@@ -170,14 +186,14 @@ the_post(); ?>
 			</div><!-- .main-content -->
 
 		</main><!-- #main -->
-		
+
 		<div class="after-post-content-widget-area">
 			<?php if ( is_single() ):
-				dynamic_sidebar('after_post_widget_area'); 
+				dynamic_sidebar('after_post_widget_area');
 			endif;
 			?>
 		</div>
-		
+
 		<div class="main-content">
 			<?php
 			// If comments are open or we have at least one comment, load up the comment template.
@@ -187,11 +203,11 @@ the_post(); ?>
 
 			?>
 		</div>
-		
-		<?php 
+
+		<?php
 			if(!is_page()) {
-				get_template_part('template-parts/content/content', 'republish-post'); 
-				get_template_part('template-parts/content/content', 'related-posts'); 
+				get_template_part('template-parts/content/content', 'republish-post');
+				get_template_part('template-parts/content/content', 'related-posts');
 			}
 		?>
 	</section><!-- #primary -->

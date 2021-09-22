@@ -1,0 +1,56 @@
+.initiative-header {
+    background-color: $c_purple;
+    display: flex;
+    height: 600px;
+
+    & > * {
+        flex: 1;
+    }
+
+    & > :first-child {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: size(50);
+
+        @include desktop {
+            align-items: flex-end;
+        }
+    }
+
+    &__category, &__title {
+        max-width: 600px;
+        width: 100%;
+    }
+
+    &__category {
+        align-items: center;
+        display: flex;
+
+        img {
+            height: size(40);
+        }
+
+        span {
+            color: white;
+            font-size: size(14);
+            font-weight: bold;
+            margin-left: size(14);
+            text-transform: uppercase;
+        }
+    }
+
+    &__title {
+        color: white;
+        margin  : size(40) 0 0;
+    }
+
+    &__thumbnail {
+        img {
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+        }
+    }
+}
