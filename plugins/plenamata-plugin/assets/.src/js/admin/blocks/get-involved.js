@@ -42,9 +42,7 @@ registerBlockType('plenamata/get-involved', {
                     <h4>{ __('How to get involved', 'plenamata') }</h4>
                 </header>
                 <main className="plenamata-block-box__main plenamata-get-involved-block__main">
-                    <RichText.Content
-                        value={ content }
-                    />
+                    <RichText.Content value={ content }/>
                 </main>
             </section>
         )

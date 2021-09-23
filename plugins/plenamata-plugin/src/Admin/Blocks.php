@@ -139,6 +139,29 @@ class Blocks {
                 ],
             ],
         ] );
+
+        register_block_type( 'plenamata/initiative', [
+            'api_version' => 2,
+            'editor_script' => 'plenamata-plugin-blocks',
+            'editor_style' => 'plenamata-plugin-blocks',
+            'attributes' => [
+                'name' => [
+                    'type' => 'string'
+                ],
+                'what' => [
+                    'type' => 'string'
+                ],
+                'where' => [
+                    'type' => 'string',
+                ],
+                'whereImage' => [
+                    'type' => 'string',
+                ],
+                'who' => [
+                    'type' => 'string'
+                ],
+            ]
+        ]);
     }
 
     public function estimatives_area_render_callback( $attributes ) {
