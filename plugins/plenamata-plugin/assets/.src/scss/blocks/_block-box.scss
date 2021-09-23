@@ -1,0 +1,30 @@
+.plenamata-block-box {
+    &__header {
+        background-color: var(--primary);
+        border-radius: 10px 10px 0 0;
+        padding: size(20) size(30);
+        text-align: center;
+
+        h4 {
+            color: white;
+            margin: 0;
+            font-size: size(18);
+            text-transform: uppercase;
+        }
+    }
+
+    &__main {
+        background-color: $c_lighter;
+        padding: size(30);
+    }
+}
+
+.plenamata-get-involved-block {
+    &__main {
+        text-align: center;
+
+        p {
+            font-size: size(16) !important;
+        }
+    }
+}

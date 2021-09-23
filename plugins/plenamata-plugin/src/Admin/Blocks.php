@@ -128,6 +128,17 @@ class Blocks {
                 ],
             ],
         ] );
+
+        register_block_type( 'plenamata/get-involved', [
+            'api_version' => 2,
+            'editor_script' => 'plenamata-plugin-blocks',
+            'editor_style' => 'plenamata-plugin-blocks',
+            'attributes' => [
+                'content' => [
+                    'type' => 'string',
+                ],
+            ],
+        ] );
     }
 
     public function estimatives_area_render_callback( $attributes ) {
