@@ -65,33 +65,26 @@ registerBlockType('plenamata/initiative', {
                             />
                         </dd>
                     </dl>
-                    <dl>
+                    <dl className="plenamata-initiative-block__map">
                         <dt>{ __('Where it operates', 'plenamata') }</dt>
                         <dd>
+                            { (whereImage) ? <img src={ whereImage } alt=""/> : null }
                             <RichText
                                 value={ where }
                                 onChange={ (where) => setAttributes({ where }) }
                             />
                         </dd>
-                        <dd className="plenamata-initiative-block__map">
-                            <MediaUploadCheck>
-                                <MediaUpload
-                                    allowedTypes={ ALLOW_IMAGES }
-                                    onSelect={ (media) => setAttributes({ whereImage: media.url }) }
-                                    render={ ({ open }) => <>
-                                        { (whereImage)
-                                            ? (
-                                                <img src={ whereImage } alt=""/>
-                                            )
-                                            : null
-                                        }
-                                        <Button variant="primary" onClick={ open }>
-                                            { __('Upload media', 'plenamata') }
-                                        </Button>
-                                    </> }
-                                />
-                            </MediaUploadCheck>
-                        </dd>
+                        <MediaUploadCheck>
+                            <MediaUpload
+                                allowedTypes={ ALLOW_IMAGES }
+                                onSelect={ (media) => setAttributes({ whereImage: media.sizes.medium.url }) }
+                                render={ ({ open }) => (
+                                    <Button className="is-primary" onClick={ open }>
+                                        { __('Upload media', 'plenamata') }
+                                    </Button>
+                                ) }
+                            />
+                        </MediaUploadCheck>
                     </dl>
                 </main>
             </section>
@@ -127,15 +120,8 @@ registerBlockType('plenamata/initiative', {
                     </dl>
                     <dl>
                         <dt>{ __('Where it operates', 'plenamata') }</dt>
-                        { (whereImage)
-                            ? (
-                                <dd>
-                                    <img src={ whereImage } alt=""/>
-                                </dd>
-                            )
-                            : null
-                        }
-                        <dd>
+                        <dd className="plenamata-initiative-block__map">
+                            { (whereImage) ? <img src={ whereImage } alt=""/> : null }
                             <RichText.Content value={ where }/>
                         </dd>
                     </dl>
