@@ -1,27 +1,38 @@
 .initiative-header {
-    background-color: $c_purple;
-    display: flex;
-    height: 600px;
-
-    & > * {
-        flex: 1;
-    }
-
     & > :first-child {
         align-items: center;
+        background-color: $c_purple;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: size(50);
+    }
 
-        @include desktop {
+    @include tablet {
+        & > :first-child {
+            padding: size(96) size(32) size(32);
+        }
+    }
+
+    @include desktop {
+        display: flex;
+        height: 600px;
+
+        & > * {
+            flex: 1;
+        }
+
+        & > :first-child {
             align-items: flex-end;
+            padding: size(50);
         }
     }
 
     &__category, &__title {
-        max-width: 600px;
         width: 100%;
+
+        @include desktop {
+            max-width: 600px;
+        }
     }
 
     &__category {
@@ -43,7 +54,7 @@
 
     &__title {
         color: white;
-        margin  : size(40) 0 0;
+        margin  : size(24) 0 0;
     }
 
     &__thumbnail {

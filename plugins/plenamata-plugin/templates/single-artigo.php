@@ -39,7 +39,7 @@ the_post(); ?>
                 <h1 class="initiative-header__title"><?= wp_kses_post(get_the_title()) ?></h1>
             </div>
             <div class="initiative-header__thumbnail">
-                <img src="<?php the_post_thumbnail_url('large') ?>" alt="">
+                <?php the_post_thumbnail() ?>
             </div>
         </div>
 	<?php endif; ?>
