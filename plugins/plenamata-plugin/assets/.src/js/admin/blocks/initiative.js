@@ -1,14 +1,15 @@
 import { MediaUpload, MediaUploadCheck, RichText, useBlockProps } from '@wordpress/block-editor'
 import { registerBlockType } from '@wordpress/blocks'
 import { Button } from '@wordpress/components'
-import { __ } from '@wordpress/i18n'
 import { box } from '@wordpress/icons'
+
+import { __ } from './utils/i18n'
 
 const ALLOW_IMAGES = ['image']
 
 registerBlockType('plenamata/initiative', {
     apiVersion: 2,
-    title: __('Initiative', 'plenamata'),
+    title: __('The initiative', 'plenamata'),
     icon: box,
     category: 'text',
     attributes: {

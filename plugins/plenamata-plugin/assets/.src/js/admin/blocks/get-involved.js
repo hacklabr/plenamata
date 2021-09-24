@@ -1,7 +1,8 @@
 import { RichText, useBlockProps } from '@wordpress/block-editor'
 import { registerBlockType } from '@wordpress/blocks'
-import { __ } from '@wordpress/i18n'
 import { box } from '@wordpress/icons'
+
+import { __ } from './utils/i18n'
 
 registerBlockType('plenamata/get-involved', {
     apiVersion: 2,

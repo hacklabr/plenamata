@@ -62,6 +62,27 @@ class Blocks {
 			false
 		);
 
+        wp_localize_script(
+            'plenamata-plugin-blocks',
+            'PlenamataBlocks',
+            [
+                'i18n' => [
+                    '__' => [
+                        'Contact information' => __( 'Contact information', 'plenamata' ),
+                        'How to get involved' => __( 'How to get involved', 'plenamata' ),
+                        'Project website' => __( 'Project website', 'plenamata' ),
+                        'Social media' => __( 'Social media', 'plenamata' ),
+                        'The initiative' => __( 'The initiative', 'plenamata' ),
+                        'Upload media' => __( 'Upload media', 'plenamata' ),
+                        'What it does' => __( 'What it does', 'plenamata' ),
+                        'Where it operates' => __( 'Where it operates', 'plenamata' ),
+                        'Who does it' => __( 'Who does it', 'plenamata' ),
+                        'Who is it' => __( 'Who is it', 'plenamata' ),
+                    ],
+                ],
+            ]
+        );
+
         wp_register_style(
             'plenamata-plugin-blocks',
             PLENAMATA_PLUGIN_URL . 'assets/build/css/admin/blocks.css',
