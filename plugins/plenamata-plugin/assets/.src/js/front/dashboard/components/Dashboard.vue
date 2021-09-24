@@ -182,20 +182,44 @@
         mounted () {
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
+
+            this.setMapObject();
+
         },
         methods: {
+            setMapObject() {
+                if ( typeof this.jeomap != 'undefined' ) {
+                    return
+                }
+                
+                let mapEl = document.querySelector('.jeomap')
+                let uuid = mapEl.dataset['uui_id']
+                this.jeomap = window.jeomaps[uuid]
+				if ( window.innerWidth >= 900 ) {
+					this.jeomap.map.scrollZoom.enable();
+                    this.jeomap.map.dragPan.enable();
+					this.jeomap.map.touchZoomRotate.enable();
+					this.jeomap.map.dragRotate.enable();
+
+				} else {
+                    this.jeomap.map.scrollZoom.disable();
+                    this.jeomap.map.dragPan.disable();
+					this.jeomap.map.touchZoomRotate.disable();
+					this.jeomap.map.dragRotate.disable();
+                }
+            },
             centerMap (state = '') {
                 const mapEl = this.$refs.map.lastChild
+                this.setMapObject();
+
                 if (mapEl) {
-                    const uuid = mapEl.dataset['uui_id']
-                    const JeoMap = window.jeomaps[uuid]
                     if (state) {
                         /* One state */
                         const stateData = this.states[state]
-                        JeoMap.map.flyTo({ center: [stateData.long, stateData.lat], zoom: stateData.zoom || JeoMap.getArg('initial_zoom') })
+                        this.jeomap.map.flyTo({ center: [stateData.long, stateData.lat], zoom: stateData.zoom || JeoMap.getArg('initial_zoom') })
                     } else {
                         /* All Brasil */
-                        JeoMap.map.flyTo({ center: [JeoMap.getArg('center_lon'), JeoMap.getArg('center_lat')], zoom: JeoMap.getArg('initial_zoom') })
+                        this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
                     }
                 }
             },
