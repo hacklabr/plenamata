@@ -68,7 +68,9 @@ registerBlockType('plenamata/initiative', {
                     <dl className="plenamata-initiative-block__map">
                         <dt>{ __('Where it operates', 'plenamata') }</dt>
                         <dd>
-                            { (whereImage) ? <img src={ whereImage } alt=""/> : null }
+                            { (whereImage) ? (
+                                <img src={ whereImage } alt=""/>
+                            ) : null }
                             <RichText
                                 value={ where }
                                 onChange={ (where) => setAttributes({ where }) }
@@ -100,31 +102,43 @@ registerBlockType('plenamata/initiative', {
                     <h4>{ __('The initiative', 'plenamata') }</h4>
                 </header>
                 <main className="plenamata-block-box__main plenamata-initiative-block__main">
-                    <dl>
-                        <dt>{ __('Who is it', 'plenamata') }</dt>
-                        <dd>
-                            <RichText.Content value={ name }/>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>{ __('Who does it', 'plenamata') }</dt>
-                        <dd>
-                            <RichText.Content value={ who }/>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>{ __('What it does', 'plenamata') }</dt>
-                        <dd>
-                            <RichText.Content value={ what }/>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>{ __('Where it operates', 'plenamata') }</dt>
-                        <dd className="plenamata-initiative-block__map">
-                            { (whereImage) ? <img src={ whereImage } alt=""/> : null }
-                            <RichText.Content value={ where }/>
-                        </dd>
-                    </dl>
+                    { (name) ? (
+                        <dl>
+                            <dt>{ __('Who is it', 'plenamata') }</dt>
+                            <dd>
+                                <RichText.Content value={ name }/>
+                            </dd>
+                        </dl>
+                    ) : null }
+                    { (who) ? (
+                        <dl>
+                            <dt>{ __('Who does it', 'plenamata') }</dt>
+                            <dd>
+                                <RichText.Content value={ who }/>
+                            </dd>
+                        </dl>
+                    ) : null }
+                    { (what) ? (
+                        <dl>
+                            <dt>{ __('What it does', 'plenamata') }</dt>
+                            <dd>
+                                <RichText.Content value={ what }/>
+                            </dd>
+                        </dl>
+                    ) : null }
+                    { (where || whereImage) ? (
+                        <dl>
+                            <dt>{ __('Where it operates', 'plenamata') }</dt>
+                            <dd className="plenamata-initiative-block__map">
+                                { (whereImage) ? (
+                                    <img src={ whereImage } alt=""/>
+                                ) : null }
+                                { (where) ? (
+                                    <RichText.Content value={ where }/>
+                                ) : null }
+                            </dd>
+                        </dl>
+                    ) : null }
                 </main>
             </section>
         )
