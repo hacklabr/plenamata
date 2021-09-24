@@ -9,7 +9,7 @@ const ALLOW_IMAGES = ['image']
 
 registerBlockType('plenamata/initiative', {
     apiVersion: 2,
-    title: __('The initiative', 'plenamata'),
+    title: __('The Initiative', 'plenamata'),
     icon: box,
     category: 'text',
     attributes: {
@@ -36,11 +36,11 @@ registerBlockType('plenamata/initiative', {
         return (
             <section { ...blockProps }>
                 <header className="plenamata-block-box__header plenamata-initiative-block__header">
-                    <h4>{ __('The initiative', 'plenamata') }</h4>
+                    <h4>{ __('The Initiative', 'plenamata') }</h4>
                 </header>
                 <main className="plenamata-block-box__main plenamata-initiative-block__main">
                     <dl>
-                        <dt>{ __('Who is it', 'plenamata') }</dt>
+                        <dt>{ __('Name', 'plenamata') }</dt>
                         <dd>
                             <RichText
                                 value={ name }
@@ -49,7 +49,7 @@ registerBlockType('plenamata/initiative', {
                         </dd>
                     </dl>
                     <dl>
-                        <dt>{ __('Who does it', 'plenamata') }</dt>
+                        <dt>{ __("Who's involved?", 'plenamata') }</dt>
                         <dd>
                             <RichText
                                 value={ who }
@@ -58,7 +58,7 @@ registerBlockType('plenamata/initiative', {
                         </dd>
                     </dl>
                     <dl>
-                        <dt>{ __('What it does', 'plenamata') }</dt>
+                        <dt>{ __('What is it?', 'plenamata') }</dt>
                         <dd>
                             <RichText
                                 value={ what }
@@ -67,7 +67,7 @@ registerBlockType('plenamata/initiative', {
                         </dd>
                     </dl>
                     <dl className="plenamata-initiative-block__map">
-                        <dt>{ __('Where it operates', 'plenamata') }</dt>
+                        <dt>{ __('Where is it?', 'plenamata') }</dt>
                         <dd>
                             { (whereImage) ? (
                                 <img src={ whereImage } alt=""/>
@@ -83,7 +83,7 @@ registerBlockType('plenamata/initiative', {
                                 onSelect={ (media) => setAttributes({ whereImage: media.sizes.medium.url }) }
                                 render={ ({ open }) => (
                                     <Button className="is-primary" onClick={ open }>
-                                        { __('Upload media', 'plenamata') }
+                                        { __('Upload image', 'plenamata') }
                                     </Button>
                                 ) }
                             />
@@ -100,12 +100,12 @@ registerBlockType('plenamata/initiative', {
         return (
             <section { ...blockProps }>
                 <header className="plenamata-block-box__header plenamata-initiative-block__header">
-                    <h4>{ __('The initiative', 'plenamata') }</h4>
+                    <h4>{ __('The Initiative', 'plenamata') }</h4>
                 </header>
                 <main className="plenamata-block-box__main plenamata-initiative-block__main">
                     { (name) ? (
                         <dl>
-                            <dt>{ __('Who is it', 'plenamata') }</dt>
+                            <dt>{ __('Name', 'plenamata') }</dt>
                             <dd>
                                 <RichText.Content value={ name }/>
                             </dd>
@@ -113,7 +113,7 @@ registerBlockType('plenamata/initiative', {
                     ) : null }
                     { (who) ? (
                         <dl>
-                            <dt>{ __('Who does it', 'plenamata') }</dt>
+                            <dt>{ __("Who's involved?", 'plenamata') }</dt>
                             <dd>
                                 <RichText.Content value={ who }/>
                             </dd>
@@ -121,7 +121,7 @@ registerBlockType('plenamata/initiative', {
                     ) : null }
                     { (what) ? (
                         <dl>
-                            <dt>{ __('What it does', 'plenamata') }</dt>
+                            <dt>{ __('What is it?', 'plenamata') }</dt>
                             <dd>
                                 <RichText.Content value={ what }/>
                             </dd>
@@ -129,7 +129,7 @@ registerBlockType('plenamata/initiative', {
                     ) : null }
                     { (where || whereImage) ? (
                         <dl>
-                            <dt>{ __('Where it operates', 'plenamata') }</dt>
+                            <dt>{ __('Where is it?', 'plenamata') }</dt>
                             <dd className="plenamata-initiative-block__map">
                                 { (whereImage) ? (
                                     <img src={ whereImage } alt=""/>
