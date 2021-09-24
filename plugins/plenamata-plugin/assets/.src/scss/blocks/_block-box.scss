@@ -16,6 +16,31 @@
     &__main {
         background-color: $c_lighter;
         padding: size(20) size(30);
+
+        dl {
+            display: block;
+            font-size: size(16);
+
+            dt {
+                display: inline-block;
+                font-weight: bold;
+                margin-right: size(8);
+
+                &:after {
+                    content: ':';
+                }
+            }
+
+            dd {
+                display: inline;
+                margin: 0;
+            }
+
+            img {
+                display: block;
+                margin: size(10) 0;
+            }
+        }
     }
 }
 
@@ -25,37 +50,16 @@
 
         p {
             font-size: size(16) !important;
+
+            &:empty {
+                display: none;
+            }
         }
     }
 }
 
 .plenamata-initiative-block {
     max-width: size(300);
-
-    dl {
-        display: block;
-        font-size: size(16);
-    }
-
-    dt {
-        display: inline-block;
-        font-weight: bold;
-        margin-right: size(8);
-
-        &:after {
-            content: ':';
-        }
-    }
-
-    dd {
-        display: inline;
-        margin: 0;
-    }
-
-    img {
-        display: block;
-        margin: size(10) 0;
-    }
 
     button {
         display: block;

@@ -134,7 +134,16 @@ class Blocks {
             'editor_script' => 'plenamata-plugin-blocks',
             'editor_style' => 'plenamata-plugin-blocks',
             'attributes' => [
+                'contactInfo' => [
+                    'type' => 'string',
+                ],
                 'content' => [
+                    'type' => 'string',
+                ],
+                'socialNetworks' => [
+                    'type' => 'string',
+                ],
+                'website' => [
                     'type' => 'string',
                 ],
             ],
