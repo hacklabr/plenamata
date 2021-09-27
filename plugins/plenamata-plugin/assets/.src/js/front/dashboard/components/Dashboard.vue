@@ -187,11 +187,8 @@
 
         },
         methods: {
-            setMapObject() {
-                if ( typeof this.jeomap != 'undefined' ) {
-                    return
-                }
-                
+            setMapObject() {                
+
                 let mapEl = document.querySelector('.jeomap')
                 let uuid = mapEl.dataset['uui_id']
                 this.jeomap = window.jeomaps[uuid]
