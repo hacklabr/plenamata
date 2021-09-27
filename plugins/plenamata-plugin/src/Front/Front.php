@@ -56,6 +56,40 @@ class Front {
         // change excer_length
         add_filter( 'excerpt_length', [ $this, 'excerpt_length' ], 50 );
 
+        // change map markers style 
+        add_filter( 'jeomap_js_images', [ $this, 'jeo_change_js_image' ], 10, 1 );
+        
+        // change map markers style 
+        add_filter( 'jeomap_js_cluster', [ $this, 'jeo_change_js_cluster' ], 10, 1 );
+    }
+
+    /**
+     * Change jeomap(mapbox) image and image style
+     *
+     * @param array $images
+     * @return array
+     */
+    public function jeo_change_js_image( $images ) {
+        $images[ '/js/src/icons/news-marker' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/pin.png';
+        $images[ '/js/src/icons/news-marker' ][ 'icon_size' ] = 0.3;
+    
+        $images[ '/js/src/icons/news' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/news-icon
+        .png';
+        $images[ '/js/src/icons/news' ][ 'icon_size' ] = 0.25;
+        $images[ '/js/src/icons/news' ][ 'text_color' ] = '#FFFFFF';
+
+        return $images;
+    }
+
+    /**
+     * Change jeomap(mapbox) cluster circle-color
+     *
+     * @param array $cluster
+     * @return array
+     */
+    public function jeo_change_js_cluster( $cluster ) {
+        $cluster[ 'circle_color'] = '#523096';
+        return $cluster;
     }
 
     public function custom_titles( array $parts ): array {
@@ -201,7 +235,7 @@ class Front {
                 'trees' => __( 'trees', 'plenamata' ),
                 'Trees cut down in %s' => __( 'Trees cut down in %s', 'plenamata' ),
                 'trees per day' => __( 'trees per day', 'plenamata' ),
-                'Unit' => __( 'Unit', 'plenamata' ),
+                'Unit' => __( 'Unit', 'plenamatmarkera' ),
                 'Week %s' => __( 'Week %s', 'plenamata' ),
                 'Weekly' => __( 'Weekly', 'plenamata' ),
                 'Weekly and monthly data are from %s.' => __( 'Weekly and monthly data are from %s.', 'plenamata' ),
@@ -248,7 +282,24 @@ class Front {
                 'moreInfo' => file_get_contents( jeo_get_template( 'map-more-info.ejs' ) ),
                 'popup' => file_get_contents( jeo_get_template( 'generic-popup.ejs' ) ),
                 'postPopup' => file_get_contents( jeo_get_template( 'post-popup.ejs' ) )
-            ]
+            ],
+            'cluster' => apply_filters( 'jeomap_js_cluster', [
+                'circle_color' => '#ffffff'
+            ] ),
+            'images' => apply_filters( 'jeomap_js_images', [
+                '/js/src/icons/news-marker' => [
+                    'url' => JEO_BASEURL . '/js/src/icons/news-marker.png',
+                    'icon_size' => 0.1,
+                ],
+                '/js/src/icons/news-marker-hover' => [
+                    'url' => JEO_BASEURL . '/js/src/icons/news-marker-hover.png',
+                    'icon_size' => 0.1,
+                ],
+                '/js/src/icons/news' => [
+                    'url' => JEO_BASEURL . '/js/src/icons/news.png',
+                    'icon_size' => 0.13,
+                ],
+            ] )
         ] );
 
 
