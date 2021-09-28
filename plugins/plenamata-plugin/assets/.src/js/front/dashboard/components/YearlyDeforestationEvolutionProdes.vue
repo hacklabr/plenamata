@@ -24,6 +24,7 @@
     import DashboardPanel from './DashboardPanel.vue'
     import { __, sprintf } from '../plugins/i18n'
     import api from '../../utils/api'
+    import { prodesState } from '../../utils/converters'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -52,7 +53,7 @@
                 }
             },
             areasKm2 () {
-                return this.data.map(datum => Number(datum.areakm))
+                return this.sortedData.map(datum => Number(datum.areakm))
             },
             chartData () {
                 return {
@@ -86,9 +87,12 @@
                     },
                 }
             },
+            sortedData () {
+                return this.data.sort((a, b) => a.year > b.year ? 1 : -1)
+            },
             unitModel: vModel('unit'),
             years () {
-                return this.data.map(datum => datum.year)
+                return this.sortedData.map(datum => datum.year)
             },
         },
         watch: {
@@ -99,10 +103,10 @@
         },
         methods: {
             async fetchData () {
-                const filters = this.state ? `estados?estado=${this.state}&` : 'basica?'
+                const filters = this.state ? 'taxaanoestado?' : 'taxaano?'
 
-                const data = await api.get(`prodes/${filters}ano1=2008&ano2=${this.year}&group_by=ano`)
-                this.data = data
+                const data = await api.get(`prodes/${filters}`)
+                this.data = this.state ? data.filter(datum => datum.uf === prodesState(this.state)) : data
             },
         },
     }
