@@ -183,27 +183,23 @@
         mounted () {
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
-
-            this.setMapObject();
-
+            this.setMapObject()
         },
         methods: {
             setMapObject() {
-                 
                 let mapEl = document.querySelector('.jeomap')
                 let uuid = mapEl.dataset['uui_id']
                 this.jeomap = window.jeomaps[uuid]
 				if ( window.innerWidth >= 900 ) {
-					this.jeomap.map.scrollZoom.enable();
-                    this.jeomap.map.dragPan.enable();
-					this.jeomap.map.touchZoomRotate.enable();
-					this.jeomap.map.dragRotate.enable();
-
+					this.jeomap.map.scrollZoom.enable()
+                    this.jeomap.map.dragPan.enable()
+					this.jeomap.map.touchZoomRotate.enable()
+					this.jeomap.map.dragRotate.enable()
 				} else {
-                    this.jeomap.map.scrollZoom.disable();
-                    this.jeomap.map.dragPan.disable();
-					this.jeomap.map.touchZoomRotate.disable();
-					this.jeomap.map.dragRotate.disable();
+                    this.jeomap.map.scrollZoom.disable()
+                    this.jeomap.map.dragPan.disable()
+					this.jeomap.map.touchZoomRotate.disable()
+					this.jeomap.map.dragRotate.disable()
                 }
             },
             centerMap (state = '') {
