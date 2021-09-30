@@ -24,7 +24,6 @@
     import DashboardPanel from './DashboardPanel.vue'
     import { __, sprintf } from '../plugins/i18n'
     import api from '../../utils/api'
-    import { prodesState } from '../../utils/converters'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -103,10 +102,10 @@
         },
         methods: {
             async fetchData () {
-                const filters = this.state ? 'taxaanoestado?' : 'taxaano?'
+                const filters = this.state ? `taxaanoestado?uf=${this.state}` : 'taxaano'
 
                 const data = await api.get(`prodes/${filters}`)
-                this.data = this.state ? data.filter(datum => datum.uf === prodesState(this.state)) : data
+                this.data = data
             },
         },
     }
