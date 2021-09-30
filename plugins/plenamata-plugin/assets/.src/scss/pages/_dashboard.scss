@@ -7,7 +7,7 @@
         margin-top:65px !important;
     }
     .jeomap {
-        min-height: 100vh;
+        min-height: calc(100vh - 65px);
 
         @include mobile {
             min-height: 100vw;
@@ -15,6 +15,10 @@
 
         @include tablet-up {
             max-width: 50vw;
+
+            .is-sticky & {
+                min-height: 100vh;
+            }
         }
     }
 }
