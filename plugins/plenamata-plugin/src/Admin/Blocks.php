@@ -75,9 +75,9 @@ class Blocks {
                         'Social media' => __( 'Social media', 'plenamata' ),
                         'The Initiative' => __( 'The Initiative', 'plenamata' ),
                         'Upload image' => __( 'Upload image', 'plenamata' ),
-                        'What is it?' => __( 'What is it?', 'plenamata' ),
-                        'Where is it?' => __( 'Where is it?', 'plenamata' ),
-                        "Who's involved?" => __( "Who's involved?", 'plenamata' ),
+                        'What is it' => __( 'What is it', 'plenamata' ),
+                        'Where is it' => __( 'Where is it', 'plenamata' ),
+                        "Who's involved" => __( "Who's involved", 'plenamata' ),
                     ],
                 ],
             ]
