@@ -56,10 +56,10 @@ class Front {
         // change excer_length
         add_filter( 'excerpt_length', [ $this, 'excerpt_length' ], 50 );
 
-        // change map markers style 
+        // change map markers style
         add_filter( 'jeomap_js_images', [ $this, 'jeo_change_js_image' ], 10, 1 );
-        
-        // change map markers style 
+
+        // change map markers style
         add_filter( 'jeomap_js_cluster', [ $this, 'jeo_change_js_cluster' ], 10, 1 );
     }
 
@@ -72,7 +72,7 @@ class Front {
     public function jeo_change_js_image( $images ) {
         $images[ '/js/src/icons/news-marker' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/pin.png';
         $images[ '/js/src/icons/news-marker' ][ 'icon_size' ] = 0.3;
-    
+
         $images[ '/js/src/icons/news' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/news-icon
         .png';
         $images[ '/js/src/icons/news' ][ 'icon_size' ] = 0.25;
@@ -149,6 +149,16 @@ class Front {
 		);
 
         wp_register_script( 'luxon', 'https://unpkg.com/luxon@2/build/global/luxon.min.js', [], false, true );
+
+        if ( get_page_template_slug() === 'template-about.php' ) {
+            wp_enqueue_script(
+                'plenamata-about-page',
+                PLENAMATA_PLUGIN_URL . 'assets/build/js/about-page.js',
+                [],
+                Plugin::VERSION,
+                true
+            );
+        }
 
         if ( get_page_template_slug() === 'template-dashboard.php' ) {
             $this->register_jeo_assets();
@@ -322,7 +332,9 @@ class Front {
     }
 
     public function page_templates ( string $template ): string {
-        if ( get_page_template_slug() === 'template-dashboard.php' ) {
+        if ( get_page_template_slug() === 'template-about.php' ) {
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/template-about.php';
+        } elseif ( get_page_template_slug() === 'template-dashboard.php' ) {
             $template = PLENAMATA_PLUGIN_PATH . 'templates/template-dashboard.php';
         }
 
