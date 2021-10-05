@@ -22,7 +22,7 @@ $contact = get_post($contact);
         </h2>
         <ul>
             <li>
-                <a href="#">
+                <a href="#section-0">
                     <?= __('The initiative', 'plenamata') ?>
                 </a>
             </li>
@@ -35,6 +35,7 @@ $contact = get_post($contact);
     </nav>
 
     <main>
+        <div id="section-0"></div>
         <?php the_content() ?>
     </main>
 </div>

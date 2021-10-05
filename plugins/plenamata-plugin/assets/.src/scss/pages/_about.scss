@@ -1,8 +1,79 @@
-.page-template{
-    .about-columns{
-        @include mobile {
-            .wp-block-column:first-child{
-                display:none;
+// .page-template{
+//     .about-columns{
+//         @include mobile {
+//             .wp-block-column:first-child{
+//                 display:none;
+//             }
+//         }
+//     }
+// }
+
+.about {
+
+    &__header {
+        align-items: center;
+        background-image: asset-url('img/about-header.jpg');
+        background-position: center;
+        background-size: cover;
+        display: flex;
+        height: 252px;
+        justify-content: center;
+        margin-top: 65px;
+
+        h1 {
+            color: white;
+        }
+    }
+
+    &__body {
+        display: grid;
+        grid-gap: size(40) size(80);
+        grid-template-columns: 3fr 7fr;
+        margin: size(40) auto;
+        max-width: size(1024);
+        width: 100%;
+
+        @media screen and (max-width: size(1024)) {
+            grid-template-columns: 1fr;
+            padding: 0 size(8);
+        }
+
+        nav {
+            h2 {
+                font-style: normal;
+                font-weight: bold;
+                font-size: size(18);
+                line-height: size(20);
+                text-transform: uppercase;
+                margin-bottom: size(24);
+                padding: size(24) 0;
+                border-bottom: 1px solid $c_red;
+                color: $c_text;
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+
+                li {
+                    list-style: none;
+                    margin: 0;
+
+                    a {
+                        color: var(--secondary);
+                        display: block;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: size(18);
+                        padding: size(10) size(8);
+                    }
+                }
+                li:hover {
+
+                    a {
+                        background: #F5F1EE;
+                    }
+                }
             }
         }
     }

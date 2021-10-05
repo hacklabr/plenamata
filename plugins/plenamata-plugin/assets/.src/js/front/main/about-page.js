@@ -6,7 +6,7 @@ document.defaultView.document.addEventListener('DOMContentLoaded', () => {
 
     for (let i = 0; i < headings.length; i++) {
         const heading = headings.item(i)
-        const slug = 'section-' + i
+        const slug = 'section-' + (i + 1)
         heading.id = slug
 
         const a = document.createElement('a')
