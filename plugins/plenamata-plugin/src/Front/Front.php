@@ -336,6 +336,8 @@ class Front {
             $template = PLENAMATA_PLUGIN_PATH . 'templates/template-about.php';
         } elseif ( get_page_template_slug() === 'template-dashboard.php' ) {
             $template = PLENAMATA_PLUGIN_PATH . 'templates/template-dashboard.php';
+        } elseif ( get_page_template_slug() === 'template-scoreboard.php' ) {
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/template-scoreboard.php';
         }
 
         return $template;

@@ -1,0 +1,53 @@
+.realtime-scoreboard {
+    align-items: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-evenly;
+    left: 0;
+    padding: 5vw;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+
+    &__primary {
+
+    }
+
+    &__secondary {
+
+    }
+
+    &__footer {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+
+        & > :nth-child(1) {
+            flex: 1;
+        }
+
+        & > :nth-child(2) {
+            flex: 2;
+        }
+    }
+
+    &__logos {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+
+        img {
+
+            &.square {
+                width: 6vw;
+            }
+
+            &.rectangle {
+                width: 9vw;
+            }
+        }
+    }
+}
