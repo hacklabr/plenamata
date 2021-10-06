@@ -19,6 +19,7 @@ mix
 mix
 	.js( assetsDir + '/js/admin/settings/app.js', 'js/admin/settings.js' )
 	.js( assetsDir + '/js/front/main/app.js', 'js/main.js' )
+    .js( assetsDir + '/js/front/main/about-page.js', 'js/about-page.js' )
     .js( assetsDir + '/js/front/dashboard/dashboard.js', 'js/dashboard.js' )
     .js( assetsDir + '/js/front/blocks/deforestation-charts.js', 'js/deforestation-charts.js' )
     .js( assetsDir + '/js/front/blocks/estimatives-area.js', 'js/estimatives-area.js' )
