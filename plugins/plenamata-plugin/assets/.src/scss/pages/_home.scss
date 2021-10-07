@@ -160,7 +160,16 @@ body.home {
             }
 
             .wp-block-image {
-                @include tablet {
+                @include tablet-up {
+                    height: 100%;
+
+                    picture, img {
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                @include mobile {
                     img {
                         width: 100%;
                     }
