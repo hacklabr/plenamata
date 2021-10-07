@@ -3,34 +3,103 @@
     background-color: white;
     display: flex;
     flex-direction: column;
+    font-size: min(2vh, 2vw);
     height: 100vh;
-    justify-content: space-evenly;
+    justify-content: space-between;
     left: 0;
-    padding: 5vw;
+    padding: 10vh 10vw;
     position: absolute;
     top: 0;
     width: 100vw;
 
-    &__primary {
+    h1 {
+        border-bottom: 0.1em solid $c_red;
+        color: inherit !important;
+        font-size: 2em;
+        margin: 0;
+        padding-bottom: 0.25em;
+        text-align: center;
+        width: 100%;
+    }
 
+    p {
+        font-size: 1em !important;
+        line-height: 2em;
+        margin: 0 auto;
+        max-width: 50em;
+    }
+
+    [data-deter] {
+        line-height: 0.875;
+    }
+
+    &__primary {
+        text-align: center;
+
+        [data-deter] {
+            font-size: 9em;
+            font-variant-numeric: tabular-nums;
+        }
     }
 
     &__secondary {
+        align-items: center;
+        display: flex;
+        justify-content: space-evenly;
+        min-width: 70vw;
+        text-align: center;
+        width: 100%;
 
+        [data-deter] {
+            color: $c_purple;
+            font-size: 2.5em;
+        }
+    }
+
+    &__source {
+
+        p {
+            margin-top: 0.5em;
+            text-align: center;
+        }
     }
 
     &__footer {
-        align-items: center;
+        align-items: flex-end;
         display: flex;
         justify-content: space-between;
         width: 100%;
 
         & > :nth-child(1) {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-right: 5vw;
             flex: 1;
+
+            a {
+                color: $c_purple;
+                font-size: 1.25em;
+            }
+
+            img {
+                height: 2.5em;
+            }
         }
 
         & > :nth-child(2) {
             flex: 2;
+
+            h2 {
+                border-bottom: 0.1em solid #CCC;
+                color: black !important;
+                font-size: 1em;
+                font-weight: 500 !important;
+                margin: 0 0 0.5em;
+                padding-bottom: 0.5em;
+                text-align: center;
+            }
         }
     }
 
@@ -42,11 +111,11 @@
         img {
 
             &.square {
-                width: 6vw;
+                width: 4em;
             }
 
             &.rectangle {
-                width: 9vw;
+                width: 6em;
             }
         }
     }

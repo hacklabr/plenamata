@@ -20,19 +20,19 @@
         <h1><?= sprintf(__('Deforestation in the Legal Amazon in %s', 'plenamata'), date('Y')) ?></h1>
 
         <div class="realtime-scoreboard__primary">
-            <div data-deter="treesEstimative"></div>
+            <div data-deter="treesEstimative">888.888.888</div>
             <div><?= __('trees cut down so far', 'plenamata') ?></div>
         </div>
 
         <div>
             <div class="realtime-scoreboard__secondary">
                 <div>
-                    <div data-deter="treesPerDay"></div>
+                    <div data-deter="treesPerDay">8.888.888</div>
                     <div><?= __('trees per day', 'plenamata') ?></div>
                 </div>
 
                 <div>
-                    <div data-deter="hectaresPerDay"></div>
+                    <div data-deter="hectaresPerDay">8.888</div>
                     <div><?= __('hectares per day', 'plenamata') ?></div>
                 </div>
             </div>
@@ -41,10 +41,12 @@
             </div>
         </div>
 
+        <div><?php the_content() ?></div>
+
         <footer class="realtime-scoreboard__footer">
             <div>
                 <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/scoreboard/plenamata.svg" alt="Plenamata">
-                <p><?= __('Visit', 'plenamata') ?> <a href="https://plenamata.eco">https://plenamata.eco</a></p>
+                <a href="https://plenamata.eco">https://plenamata.eco</a>
             </div>
             <div>
                 <h2><?= _x('Creators', 'credits', 'plenamata') ?></h2>
