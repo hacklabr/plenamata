@@ -30,6 +30,7 @@
     }
 
     [data-deter] {
+        font-variant-numeric: tabular-nums;
         line-height: 1;
     }
 
@@ -38,7 +39,6 @@
 
         [data-deter] {
             font-size: 9em;
-            font-variant-numeric: tabular-nums;
         }
     }
 
