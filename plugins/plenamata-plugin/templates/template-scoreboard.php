@@ -41,13 +41,16 @@
             </div>
         </div>
 
-        <div><?php the_content() ?></div>
+        <div class="realtime-scoreboard__content">
+            <?php the_content() ?>
+        </div>
 
         <footer class="realtime-scoreboard__footer">
             <div>
                 <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/scoreboard/plenamata.svg" alt="Plenamata">
                 <a href="https://plenamata.eco">https://plenamata.eco</a>
             </div>
+
             <div>
                 <h2><?= _x('Creators', 'credits', 'plenamata') ?></h2>
                 <div class="realtime-scoreboard__logos">
@@ -57,6 +60,10 @@
                     <img class="rectangle" src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/scoreboard/hacklab.svg" alt="Hacklab">
                     <img class="rectangle" src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/scoreboard/naturaeco.svg" alt="Natura &co">
                 </div>
+            </div>
+
+            <div class="realtime-scoreboard__copyright">
+                © 2021 PlenaMata
             </div>
         </footer>
     </div>

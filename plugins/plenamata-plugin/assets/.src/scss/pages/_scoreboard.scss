@@ -64,9 +64,17 @@
         }
     }
 
+    &__content {
+
+        p {
+            text-align: center;
+        }
+    }
+
     &__footer {
         align-items: flex-end;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-between;
         width: 100%;
 
@@ -118,5 +126,12 @@
                 width: 6em;
             }
         }
+    }
+
+    &__copyright {
+        color: #AAA;
+        margin-top: 0.5em;
+        text-align: right;
+        width: 80vw;
     }
 }
