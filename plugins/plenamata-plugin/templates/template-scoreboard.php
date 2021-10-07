@@ -20,19 +20,19 @@
         <h1><?= sprintf(__('Deforestation in the Legal Amazon in %s', 'plenamata'), date('Y')) ?></h1>
 
         <div class="realtime-scoreboard__primary">
-            <div data-deter="treesEstimative">888.888.888</div>
+            <div data-deter="treesEstimative"><?= __('loading...', 'plenamata') ?></div>
             <div><?= __('trees cut down so far', 'plenamata') ?></div>
         </div>
 
         <div>
             <div class="realtime-scoreboard__secondary">
                 <div>
-                    <div data-deter="treesPerDay">8.888.888</div>
+                    <div data-deter="treesPerDay"><?= __('loading...', 'plenamata') ?></div>
                     <div><?= __('trees per day', 'plenamata') ?></div>
                 </div>
 
                 <div>
-                    <div data-deter="hectaresPerDay">8.888</div>
+                    <div data-deter="hectaresPerDay"><?= __('loading...', 'plenamata') ?></div>
                     <div><?= __('hectares per day', 'plenamata') ?></div>
                 </div>
             </div>

@@ -150,6 +150,27 @@ class Front {
 
         wp_register_script( 'luxon', 'https://unpkg.com/luxon@2/build/global/luxon.min.js', [], false, true );
 
+        wp_register_script(
+            'estimatives-area-front-end',
+            PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
+            [ 'luxon' ],
+            false,
+            true
+        );
+
+        wp_localize_script( 'estimatives-area-front-end', 'PlenamataDashboard', [
+            'i18n' => $dashboard_i18n,
+            'language' => apply_filters( 'wpml_current_language', NULL ),
+        ] );
+
+        wp_register_script(
+            'deforestation-charts-front-end',
+            PLENAMATA_PLUGIN_URL . 'assets/build/js/deforestation-charts.js',
+            [ 'luxon' ],
+            false,
+            true
+        );
+
         if ( get_page_template_slug() === 'template-about.php' ) {
             wp_enqueue_script(
                 'plenamata-about-page',
@@ -179,26 +200,9 @@ class Front {
             ] );
         }
 
-        wp_register_script(
-            'estimatives-area-front-end',
-            PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
-            [ 'luxon' ],
-            false,
-            true
-        );
-
-        wp_localize_script('estimatives-area-front-end', 'PlenamataDashboard', [
-            'i18n' => $dashboard_i18n,
-            'language' => apply_filters( 'wpml_current_language', NULL ),
-        ]);
-
-        wp_register_script(
-            'deforestation-charts-front-end',
-            PLENAMATA_PLUGIN_URL . 'assets/build/js/deforestation-charts.js',
-            [ 'luxon' ],
-            false,
-            true
-        );
+        if ( get_page_template_slug() === 'template-scoreboard.php' ) {
+            wp_enqueue_script( 'estimatives-area-front-end' );
+        }
 	}
 
     /**
