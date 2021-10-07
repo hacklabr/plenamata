@@ -1,7 +1,7 @@
 name: Generate zip file
 on:
   push:
-    branch:
+    branches:
     - master
     - develop
 jobs:
