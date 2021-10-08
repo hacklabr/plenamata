@@ -4,10 +4,10 @@
         overflow: inherit !important;
     }
     .site-content {
-        margin-top:65px !important;
+        margin-top:68px !important;
     }
     .jeomap {
-        min-height: calc(100vh - 65px);
+        min-height: calc(100vh - 68px);
 
         @include mobile {
             min-height: 100vw;
@@ -16,7 +16,17 @@
         @include tablet-up {
             max-width: 50vw;
 
-            .is-sticky & {
+            canvas {
+                height: 100% !important;
+            }
+        }
+    }
+
+    &.is-sticky {
+
+        .jeomap {
+
+            @include tablet-up {
                 min-height: 100vh;
             }
         }
