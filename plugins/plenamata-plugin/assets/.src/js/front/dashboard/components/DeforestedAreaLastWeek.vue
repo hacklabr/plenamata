@@ -28,18 +28,18 @@
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
     import { fetchDeterData } from '../../utils/api'
-    import { roundNumber } from '../../utils/filters'
+    import { firstValue, roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
     export default {
-        name: 'TotalDeforestationThisYear',
+        name: 'DeforestedAreaLastWeek',
         components: {
             DashboardMeasure,
             DashboardPanel,
         },
         props: {
+            filters: { type: Object, required: true },
             lastUpdate: { type: Object, required: true },
-            state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
         },
@@ -60,35 +60,31 @@
                 if (!this.lastWeek) {
                     return 0
                 }
-                if (this.state) {
-                    const state = this.lastWeek.find(state => state.uf === this.state)
-                    return Number(state.areamunkm)
-                } else {
-                    return this.lastWeek.reduce((acc, state) => acc + Number(state.areamunkm), 0)
-                }
+                return Number(this.lastWeek.areamunkm)
             },
             trees () {
                 if (!this.lastWeek) {
                     return 0
                 }
-                if (this.state) {
-                    const state = this.lastWeek.find(state => state.uf === this.state)
-                    return Number(state.num_arvores)
-                } else {
-                    return this.lastWeek.reduce((acc, state) => acc + Number(state.num_arvores), 0)
-                }
+                return Number(this.lastWeek.num_arvores)
             },
             unitModel: vModel('unit'),
         },
-        async created () {
-            const endDate = this.lastUpdate.deter_last_date
-            const startDate = DateTime.fromISO(this.lastUpdate.deter_last_date).minus({ weeks: 1 })
-
-            const data = await fetchDeterData({ estado: true, data1: startDate.toISODate(), data2: endDate })
-            this.lastWeek = data
+        watch: {
+            filters: {
+                handler: 'fetchData',
+                immediate: true,
+            },
         },
         methods: {
             roundNumber,
+            async fetchData () {
+                const endDate = this.lastUpdate.deter_last_date
+                const startDate = DateTime.fromISO(this.lastUpdate.deter_last_date).minus({ weeks: 1 })
+
+                const data = await fetchDeterData({ ...this.filters, data1: startDate.toISODate(), data2: endDate })
+                this.lastWeek = firstValue(data)
+            },
         },
     }
 </script>

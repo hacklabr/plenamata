@@ -31,14 +31,14 @@
                 </fieldset>
 
                 <div class="dashboard__panels" v-if="view === 'data'">
-                    <FelledTreesThisYear :lastUpdate="lastUpdate" :minutes="minutes" :trees="trees" :year="date.year"/>
-                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit.sync="unit" :updated="updated" :year="date.year"/>
+                    <FelledTreesThisYear :lastUpdate="lastUpdate" :minutes="minutes" :trees="trees" :year="date.year" v-if="lastUpdate"/>
+                    <TotalDeforestationThisYear :areaKm2="areaKm2" :filters="filters" :now="date.now" :unit.sync="unit" :updated="updated" :year="date.year"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="date.year"/>
-                    <DeforestedAreaLastWeek :lastUpdate="lastUpdate" :state="state" :unit.sync="unit" :updated="updated" v-if="lastUpdate.deter_last_date"/>
-                    <WeeklyDeforestationEvolution :now="date.now" :source.sync="source" :state="state" :unit.sync="unit" :updated="updated" :year.sync="year"/>
-                    <MonthlyDeforestationEvolution :source.sync="source" :state="state" :unit.sync="unit" :updated="updated"/>
-                    <YearlyDeforestationEvolutionDeter :lastUpdate="lastUpdate" :state="state" :unit.sync="unit" :updated="updated"/>
-                    <YearlyDeforestationEvolutionProdes :state="state" :unit.sync="unit" :year="date.year"/>
+                    <DeforestedAreaLastWeek :filters="filters" :lastUpdate="lastUpdate" :unit.sync="unit" :updated="updated" v-if="lastUpdate"/>
+                    <WeeklyDeforestationEvolution :filters="filters" :now="date.now" :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="year"/>
+                    <MonthlyDeforestationEvolution :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated"/>
+                    <YearlyDeforestationEvolutionDeter :filters="filters" :lastUpdate="lastUpdate" :unit.sync="unit" :updated="updated" v-if="lastUpdate"/>
+                    <YearlyDeforestationEvolutionProdes :filters="filters" :unit.sync="unit" :year="date.year"/>
                 </div>
 
                 <div class="dashboard__news" v-else-if="view === 'news'">
@@ -67,7 +67,7 @@
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
     import { fetchDeterData, fetchLastDate, fetchNews } from '../../utils/api'
-    import { shortDate } from '../../utils/filters'
+    import { firstValue, shortDate } from '../../utils/filters'
 
     export default {
         name: 'Dashboard',
@@ -93,12 +93,12 @@
                     startOfYear,
                     year,
                 },
-                lastMonth: [],
-                lastUpdate: {},
+                lastMonth: null,
+                lastUpdate: null,
                 news: [],
                 source: 'deter',
                 state: '',
-                thisYear: [],
+                thisYear: null,
                 unit: 'ha',
                 view: 'data',
                 year,
@@ -109,12 +109,7 @@
                 if (!this.thisYear) {
                     return 0
                 }
-                if (this.state) {
-                    const state = this.thisYear.find(state => state.uf === this.state)
-                    return Number(state.areamunkm)
-                } else {
-                    return this.thisYear.reduce((acc, state) => acc + Number(state.areamunkm), 0)
-                }
+                return Number(this.thisYear.areamunkm)
             },
             days () {
                 const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
@@ -147,23 +142,23 @@
             trees () {
                 if (!this.thisYear) {
                     return 0
-                } else if (this.state) {
-                    const state = this.thisYear.find(state => state.uf === this.state)
-                    return Number(state.num_arvores)
-                } else {
-                    return this.thisYear.reduce((acc, state) => acc + Number(state.num_arvores), 0)
                 }
+                return Number(this.thisYear.num_arvores)
             },
             updated () {
                 const today = DateTime.now().toISODate()
 
                 return {
-                    deter: shortDate(DateTime.fromISO(this.lastUpdate.deter_last_date || today).toJSDate()).replaceAll('/', '.'),
-                    sync: shortDate(DateTime.fromISO(this.lastUpdate.last_sync || today).toJSDate()).replaceAll('/', '.'),
+                    deter: shortDate(DateTime.fromISO(this.lastUpdate?.deter_last_date || today).toJSDate()).replaceAll('/', '.'),
+                    sync: shortDate(DateTime.fromISO(this.lastUpdate?.last_sync || today).toJSDate()).replaceAll('/', '.'),
                 }
             },
         },
         watch: {
+            filters: {
+                handler: 'fetchData',
+                immediate: true,
+            },
             state: {
                 async handler () {
                     await this.fetchNews(this.state)
@@ -173,18 +168,7 @@
             },
         },
         async created () {
-            const { now, startOfYear } = this.date
-
-            const monthAgo = now.minus({ months: 1 })
-            const twoMonthsAgo = now.minus({ months: 2 })
-
-            const [thisYear, lastMonth, lastUpdate] = await Promise.all([
-                fetchDeterData({ estado: true, data1: startOfYear.toISODate(), data2: now.toISODate() }),
-                fetchDeterData({ estado: true, data1: twoMonthsAgo.toISODate(), data2: monthAgo.toISODate() }),
-                fetchLastDate(),
-            ])
-            this.thisYear = thisYear
-            this.lastMonth = lastMonth
+            const lastUpdate = await fetchLastDate()
             this.lastUpdate = lastUpdate
         },
         mounted () {
@@ -197,16 +181,16 @@
                 let mapEl = document.querySelector('.jeomap')
                 let uuid = mapEl.dataset['uui_id']
                 this.jeomap = window.jeomaps[uuid]
-				if ( window.innerWidth >= 900 ) {
-					this.jeomap.map.scrollZoom.enable()
+                if ( window.innerWidth >= 900 ) {
+                    this.jeomap.map.scrollZoom.enable()
                     this.jeomap.map.dragPan.enable()
-					this.jeomap.map.touchZoomRotate.enable()
-					this.jeomap.map.dragRotate.enable()
-				} else {
+                    this.jeomap.map.touchZoomRotate.enable()
+                    this.jeomap.map.dragRotate.enable()
+                } else {
                     this.jeomap.map.scrollZoom.disable()
                     this.jeomap.map.dragPan.disable()
-					this.jeomap.map.touchZoomRotate.disable()
-					this.jeomap.map.dragRotate.disable()
+                    this.jeomap.map.touchZoomRotate.disable()
+                    this.jeomap.map.dragRotate.disable()
                 }
             },
             centerMap (state = '') {
@@ -223,6 +207,19 @@
                         this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
                     }
                 }
+            },
+            async fetchData () {
+                const { now, startOfYear } = this.date
+
+                const monthAgo = now.minus({ months: 1 })
+                const twoMonthsAgo = now.minus({ months: 2 })
+
+                const [thisYear, lastMonth] = await Promise.all([
+                    fetchDeterData({ ...this.filters, data1: startOfYear.toISODate(), data2: now.toISODate() }),
+                    fetchDeterData({ ...this.filters, data1: twoMonthsAgo.toISODate(), data2: monthAgo.toISODate() }),
+                ])
+                this.thisYear = firstValue(thisYear)
+                this.lastMonth = firstValue(lastMonth)
             },
             async fetchNews (state = '') {
                 const news = await fetchNews(state)

@@ -31,11 +31,7 @@ function searchParams (object) {
 
 export async function fetchDeterData ({ estado = null, uc = null, ti = null, ...args }) {
     if (estado) {
-        if (estado === true) {
-            return get(`${BASE_URL}deter/estados?${searchParams(args)}`)
-        } else {
-            return get(`${BASE_URL}deter/estados?${searchParams(args)}`)
-        }
+        return get(`${BASE_URL}deter/estados?estado=${estado}&${searchParams(args)}`)
     } else {
         return get(`${BASE_URL}deter/basica?${searchParams(args)}`)
     }

@@ -37,7 +37,7 @@
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
     import { fetchDeterData } from '../../utils/api'
-    import { roundNumber } from '../../utils/filters'
+    import { firstValue, roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
     export default {
@@ -88,12 +88,12 @@
             },
         },
         methods: {
-            fetchData () {
+            async fetchData () {
                 const lastYear = this.now.minus({ years: 1 })
                 const startOfYear = lastYear.startOf('year')
 
                 const data = await fetchDeterData({ ...this.filters, data1: startOfYear.toISODate(), data2: lastYear.toISODate() })
-                this.lastYear = data
+                this.lastYear = firstValue(data)
             },
             roundNumber,
         },
