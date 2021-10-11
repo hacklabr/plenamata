@@ -34,7 +34,7 @@
     import WeeklyDeforestationChart from './WeeklyDeforestationChart.vue'
     import YearlyDeforestationChart from './YearlyDeforestationChart.vue'
     import { _x } from '../../dashboard/plugins/i18n'
-    import api from '../../utils/api'
+    import { fetchLastDate } from '../../utils/api'
     import { shortDate } from '../../utils/filters'
 
     const { DateTime } = window.luxon
@@ -88,7 +88,7 @@
             },
         },
         async created () {
-            const lastUpdate =  await api.get('deter/last_date')
+            const lastUpdate =  await fetchLastDate()
             this.lastUpdate = lastUpdate
         },
     }

@@ -27,7 +27,7 @@
 
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
-    import api from '../../utils/api'
+    import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -84,7 +84,7 @@
             const endDate = this.lastUpdate.deter_last_date
             const startDate = DateTime.fromISO(this.lastUpdate.deter_last_date).minus({ weeks: 1 })
 
-            const data = await api.get(`deter/estados?data1=${startDate.toISODate()}&data2=${endDate}`)
+            const data = await fetchDeterData({ estado: true, data1: startDate.toISODate(), data2: endDate })
             this.lastWeek = data
         },
         methods: {

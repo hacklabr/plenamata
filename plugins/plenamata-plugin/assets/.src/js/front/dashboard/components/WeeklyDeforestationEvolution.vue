@@ -34,7 +34,7 @@
     import DashboardPanel from './DashboardPanel.vue'
     import HasScrollableChart from '../mixins/HasScrollableChart'
     import { __, sprintf } from '../plugins/i18n'
-    import api from '../../utils/api'
+    import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -49,9 +49,9 @@
             HasScrollableChart,
         ],
         props: {
+            filters: { type: Object, required: true },
             now: { type: DateTime, required: true },
             source: { type: String, default: 'prodes' },
-            state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
             year: { type: Number, required: true },
@@ -143,7 +143,7 @@
                 }
             },
             filterKey () {
-                return `${this.state}|${this.year}|${this.source}`
+                return JSON.stringify({ ...this.filters, source: this.source, year: this.year })
             },
             maxYear () {
                 if (this.source === 'deter' || this.now.month >= 8) {
@@ -180,9 +180,7 @@
             async fetchData () {
                 const { start, end } = this.dateInterval
 
-                const filters = this.state ? `estados?estado=${this.state}&` : 'basica?'
-
-                const data = await api.get(`deter/${filters}data1=${start.toISODate()}&data2=${end.toISODate()}&group_by=semana`)
+                const data = await fetchDeterData({ ...this.filters, data1: start.toISODate(), data2: end.toISODate(), group_by: 'semana' })
                 this.data = data
             },
         },

@@ -23,7 +23,7 @@
 
     import DashboardPanel from './DashboardPanel.vue'
     import { __, sprintf } from '../plugins/i18n'
-    import api from '../../utils/api'
+    import { fetchProdesData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -34,7 +34,7 @@
             DashboardPanel,
         },
         props: {
-            state: { type: String, required: true },
+            filters: { type: Object, required: true },
             unit: { type: String, default: 'ha' },
             year: { type: Number, required: true },
         },
@@ -95,16 +95,14 @@
             },
         },
         watch: {
-            state: {
+            filters: {
                 handler: 'fetchData',
                 immediate: true,
             },
         },
         methods: {
             async fetchData () {
-                const filters = this.state ? `taxaanoestado?uf=${this.state}` : 'taxaano'
-
-                const data = await api.get(`prodes/${filters}`)
+                const data = await fetchProdesData(this.filters)
                 this.data = data
             },
         },

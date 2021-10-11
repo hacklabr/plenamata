@@ -32,7 +32,7 @@
     import DashboardPanel from './DashboardPanel.vue'
     import HasScrollableChart from '../mixins/HasScrollableChart'
     import { __, _x, sprintf } from '../plugins/i18n'
-    import api from '../../utils/api'
+    import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -63,8 +63,8 @@
             HasScrollableChart,
         ],
         props: {
+            filters: { type: Object, required: true },
             source: { type: String, default: 'prodes' },
-            state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
         },
@@ -160,7 +160,7 @@
                 return datasets
             },
             filterKey () {
-                return `${this.state}|${this.source}`
+                return JSON.stringify({ ...this.filters, source: this.source })
             },
             maxValue () {
                 return Math.max(...this.chartData.datasets.map((dataset) => {
@@ -200,9 +200,7 @@
         },
         methods: {
             async fetchData () {
-                const filters = this.state ? `estados?estado=${this.state}&` : 'basica?'
-
-                const data = await api.get(`deter/${filters}data1=${this.startDate.toISODate()}&data2=${this.date.end.toISODate()}&group_by=mes`)
+                const data = await fetchDeterData({ ...this.filters, data1: this.startDate.toISODate(), data2: this.date.end.toISODate(), group_by: 'mes' })
                 this.data = data
             },
         },

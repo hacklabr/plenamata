@@ -66,7 +66,7 @@
     import WeeklyDeforestationEvolution from './WeeklyDeforestationEvolution.vue'
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
-    import api from '../../utils/api'
+    import { fetchDeterData, fetchLastDate, fetchNews } from '../../utils/api'
     import { shortDate } from '../../utils/filters'
 
     export default {
@@ -120,6 +120,13 @@
                 const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
                 return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('days')
             },
+            filters () {
+                if (this.state) {
+                    return { estado: this.state }
+                } else {
+                    return {}
+                }
+            },
             minutes () {
                 const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
                 return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('minutes')
@@ -172,9 +179,9 @@
             const twoMonthsAgo = now.minus({ months: 2 })
 
             const [thisYear, lastMonth, lastUpdate] = await Promise.all([
-                api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`),
-                api.get(`deter/estados?data1=${twoMonthsAgo.toISODate()}&data2=${monthAgo.toISODate()}`),
-                api.get('deter/last_date'),
+                fetchDeterData({ estado: true, data1: startOfYear.toISODate(), data2: now.toISODate() }),
+                fetchDeterData({ estado: true, data1: twoMonthsAgo.toISODate(), data2: monthAgo.toISODate() }),
+                fetchLastDate(),
             ])
             this.thisYear = thisYear
             this.lastMonth = lastMonth
@@ -218,7 +225,7 @@
                 }
             },
             async fetchNews (state = '') {
-                const news = await api.get(`${this.$dashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
+                const news = await fetchNews(state)
                 this.news = news
             },
         },

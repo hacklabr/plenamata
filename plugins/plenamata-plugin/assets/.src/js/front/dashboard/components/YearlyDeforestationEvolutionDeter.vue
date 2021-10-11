@@ -25,7 +25,7 @@
 
     import DashboardPanel from './DashboardPanel.vue'
     import { __, _x, sprintf } from '../plugins/i18n'
-    import api from '../../utils/api'
+    import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -52,8 +52,8 @@
             DashboardPanel,
         },
         props: {
+            filters: { type: Object, required: true },
             lastUpdate: { type: Object, required: true },
-            state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
         },
@@ -122,7 +122,7 @@
             },
         },
         watch: {
-            state: {
+            filters: {
                 handler: 'fetchData',
                 immediate: true,
             },
@@ -131,15 +131,13 @@
             async fetchData () {
                 const { start, end } = this.date
 
-                const filters = this.state ? `estados?estado=${this.state}&` : 'basica?'
-
                 const intervals = [[start, end]]
                 for (let i = 1; i < 5; i++) {
                     intervals.unshift([start.minus({ years: i }), end.minus({ years: i })])
                 }
 
                 const data = await Promise.all(intervals.map(([start, end]) => {
-                    return api.get(`deter/${filters}data1=${start.toISODate()}&data2=${end.toISODate()}&group_by=ano`)
+                    return fetchDeterData({ ...this.filters, data1: start.toISODate(), data2: end.toISODate(), group_by: 'ano' })
                 }))
                 this.data = data
             },
