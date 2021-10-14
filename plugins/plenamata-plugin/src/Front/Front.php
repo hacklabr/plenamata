@@ -353,7 +353,7 @@ class Front {
 		if ( $post->post_type === 'verbete' ) {
 			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-verbete.php';
         }else if( $post->post_type === 'post'){
-			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-artigo.php';
+			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-news.php';
 		}
 
         return $template;
