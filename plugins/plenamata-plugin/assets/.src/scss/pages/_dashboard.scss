@@ -61,11 +61,16 @@
             flex-wrap: wrap;
 
             & > div {
-                margin: 0 size(8) size(8) 0;
+                margin: 0 size(16) size(16) 0;
             }
 
             label {
                 display: block;
+            }
+
+            select {
+                border-radius: size(5);
+                padding: size(5);
             }
 
             a {
