@@ -29,7 +29,7 @@ function searchParams (object) {
     return params
 }
 
-export async function fetchDeterData ({ estado = null, uc = null, ti = null, ...args }) {
+export async function fetchDeterData ({ estado, municipio, uc, ti, ...args }) {
     if (estado) {
         return get(`${BASE_URL}deter/estados?estado=${estado}&${searchParams(args)}`)
     } else {
@@ -45,7 +45,7 @@ export async function fetchNews (state = '') {
     return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
 }
 
-export async function fetchProdesData ({ estado = null, uc = null, ti = null, ...args }) {
+export async function fetchProdesData ({ estado, municipio, uc, ti, ...args }) {
     if (estado) {
         return get(`${BASE_URL}prodes/taxaanoestado?uf=${estado}`)
     } else {

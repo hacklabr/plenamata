@@ -6,11 +6,31 @@
                 <form>
                     <div>
                         <label for="select-estados">{{ __('States', 'plenamata') }}</label>
-                        <select id="select-estados" v-model="state">
+                        <select id="select-estados" name="select-estados" v-model="filters.estado">
                             <option value="">{{ __('All states', 'plenamata') }}</option>
                             <option v-for="state of states" :key="state.uf" :value="state.uf">{{ state.name }}</option>
                         </select>
                     </div>
+                    <div>
+                        <label for="select-municipios">{{ __('Municipalities', 'plenamata') }}</label>
+                        <select id="select-municipios" name="select-municipios" v-model="filters.municipio" :disabled="!filters.estado">
+                            <option value="">{{ __('All municipalities', 'plenamata') }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="select-municipios">{{ __('Indigenous Lands', 'plenamata') }}</label>
+                        <select id="select-municipios" name="select-municipios" v-model="filters.ti">
+                            <option value="">{{ __('All ILs', 'plenamata') }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="select-municipios">{{ __('Conservation Units', 'plenamata') }}</label>
+                        <select id="select-municipios" name="select-municipios" v-model="filters.uc">
+                            <option value="">{{ __('All CUs', 'plenamata') }}</option>
+                        </select>
+                    </div>
+
+                    <a href="javascript:void(0)" @click="clearFilters" @keypress.enter="clearFilters">{{ __('Clear filters', 'plenamata') }}</a>
                 </form>
             </div>
         </header>
@@ -93,11 +113,16 @@
                     startOfYear,
                     year,
                 },
+                filters: {
+                    estado: '',
+                    municipio: '',
+                    ti: '',
+                    uc: '',
+                },
                 lastMonth: null,
                 lastUpdate: null,
                 news: [],
                 source: 'deter',
-                state: '',
                 thisYear: null,
                 unit: 'ha',
                 view: 'data',
@@ -114,13 +139,6 @@
             days () {
                 const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
                 return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('days')
-            },
-            filters () {
-                if (this.state) {
-                    return { estado: this.state }
-                } else {
-                    return {}
-                }
             },
             minutes () {
                 const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
@@ -158,11 +176,13 @@
             filters: {
                 handler: 'fetchData',
                 immediate: true,
+                deep: true,
             },
-            state: {
+            'filters.estado': {
                 async handler () {
-                    await this.fetchNews(this.state)
-                    this.centerMap(this.state)
+                    this.filters.municipio = ''
+                    await this.fetchNews(this.filters.estado)
+                    this.centerMap(this.filters.estado)
                 },
                 immediate: true,
             },
@@ -177,22 +197,6 @@
             this.setMapObject()
         },
         methods: {
-            setMapObject() {
-                let mapEl = document.querySelector('.jeomap')
-                let uuid = mapEl.dataset['uui_id']
-                this.jeomap = window.jeomaps[uuid]
-                if ( window.innerWidth >= 900 ) {
-                    this.jeomap.map.scrollZoom.enable()
-                    this.jeomap.map.dragPan.enable()
-                    this.jeomap.map.touchZoomRotate.enable()
-                    this.jeomap.map.dragRotate.enable()
-                } else {
-                    this.jeomap.map.scrollZoom.disable()
-                    this.jeomap.map.dragPan.disable()
-                    this.jeomap.map.touchZoomRotate.disable()
-                    this.jeomap.map.dragRotate.disable()
-                }
-            },
             centerMap (state = '') {
                 const mapEl = this.$refs.map.lastChild
                 this.setMapObject();
@@ -206,6 +210,14 @@
                         /* All Brasil */
                         this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
                     }
+                }
+            },
+            clearFilters () {
+                this.filters = {
+                    estado: '',
+                    municipio: '',
+                    ti: '',
+                    uc: '',
                 }
             },
             async fetchData () {
@@ -224,6 +236,22 @@
             async fetchNews (state = '') {
                 const news = await fetchNews(state)
                 this.news = news
+            },
+            setMapObject() {
+                let mapEl = document.querySelector('.jeomap')
+                let uuid = mapEl.dataset['uui_id']
+                this.jeomap = window.jeomaps[uuid]
+                if ( window.innerWidth >= 900 ) {
+                    this.jeomap.map.scrollZoom.enable()
+                    this.jeomap.map.dragPan.enable()
+                    this.jeomap.map.touchZoomRotate.enable()
+                    this.jeomap.map.dragRotate.enable()
+                } else {
+                    this.jeomap.map.scrollZoom.disable()
+                    this.jeomap.map.dragPan.disable()
+                    this.jeomap.map.touchZoomRotate.disable()
+                    this.jeomap.map.dragRotate.disable()
+                }
             },
         },
     }

@@ -57,8 +57,26 @@
         }
 
         form {
+            display: flex;
+            flex-wrap: wrap;
+
+            & > div {
+                margin: 0 size(8) size(8) 0;
+            }
+
             label {
                 display: block;
+            }
+
+            a {
+                color: #FFF087;
+                font-weight: bold;
+                text-align: right;
+                width: 100%;
+
+                &:hover {
+                    color: white;
+                }
             }
         }
     }
