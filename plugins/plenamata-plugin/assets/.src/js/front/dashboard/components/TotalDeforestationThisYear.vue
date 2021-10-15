@@ -36,6 +36,7 @@
 
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
+    import { getAreaKm2 } from '../../utils'
     import { fetchDeterData } from '../../utils/api'
     import { firstValue, roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
@@ -77,7 +78,7 @@
                 if (!this.lastYear) {
                     return 0
                 }
-                return Number(this.lastYear.areamunkm)
+                return getAreaKm2(this.lastYear)
             },
             unitModel: vModel('unit'),
         },

@@ -6,6 +6,7 @@
     import { BarChart } from 'vue-chart-3'
 
     import { __, _x, sprintf } from '../../dashboard/plugins/i18n'
+    import { getAreaKm2 } from '../../utils'
     import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
 
@@ -38,7 +39,7 @@
         },
         computed: {
             areas () {
-                return this.data.map(datum => Number(datum.areamunkm))
+                return this.data.map(getAreaKm2)
             },
             chartData () {
                 return {

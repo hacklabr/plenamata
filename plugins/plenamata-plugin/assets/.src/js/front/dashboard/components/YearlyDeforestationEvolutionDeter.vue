@@ -25,6 +25,7 @@
 
     import DashboardPanel from './DashboardPanel.vue'
     import { __, _x, sprintf } from '../plugins/i18n'
+    import { getAreaKm2 } from '../../utils'
     import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
@@ -78,7 +79,7 @@
                 }
             },
             areasKm2 () {
-                return this.data.map(datum => Number(datum[0].areamunkm))
+                return this.data.map(datum => getAreaKm2(datum[0]))
             },
             chartData () {
                 return {

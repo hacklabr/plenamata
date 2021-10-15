@@ -34,6 +34,7 @@
     import DashboardPanel from './DashboardPanel.vue'
     import HasScrollableChart from '../mixins/HasScrollableChart'
     import { __, sprintf } from '../plugins/i18n'
+    import { getAreaKm2 } from '../../utils'
     import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
@@ -71,7 +72,7 @@
                     }
                 })
 
-                return sortedData.map((datum) => Number(datum.areamunkm))
+                return sortedData.map(getAreaKm2)
             },
             areas () {
                 if (this.unit === 'ha') {

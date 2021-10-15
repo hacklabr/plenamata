@@ -32,6 +32,7 @@
     import DashboardPanel from './DashboardPanel.vue'
     import HasScrollableChart from '../mixins/HasScrollableChart'
     import { __, _x, sprintf } from '../plugins/i18n'
+    import { getAreaKm2 } from '../../utils'
     import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
@@ -89,7 +90,7 @@
                     datasets: this.datasets.map((dataset) => {
                         return {
                             label: dataset.label,
-                            data: dataset.data.map((datum) => Number(datum.areamunkm) * factor),
+                            data: dataset.data.map((datum) => getAreaKm2(datum) * factor),
                             backgroundColor: dataset.backgroundColor,
                         }
                     }),

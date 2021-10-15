@@ -29,11 +29,34 @@ function searchParams (object) {
     return params
 }
 
-export async function fetchDeterData ({ estado, municipio, uc, ti, ...args }) {
+export async function fetchDeterData ({ estado, municipio, ti, uc, ...args }) {
+    const params = searchParams(args)
+
     if (estado) {
-        return get(`${BASE_URL}deter/estados?estado=${estado}&${searchParams(args)}`)
+        return get(`${BASE_URL}deter/estados?estado=${estado}&${params}`)
+    } else if (municipio) {
+        const collection = await get(`${BASE_URL}deter/municipios?${params}`)
+        if (municipio === true) {
+            return collection
+        } else {
+            return collection.find(item => item.geo_cod === municipio)
+        }
+    } else if (ti) {
+        const collection = await get(`${BASE_URL}deter/ti?${params}`)
+        if (ti === true) {
+            return collection
+        } else {
+            return collection.find(item => item.terra_indigena === ti)
+        }
+    } else if (uc) {
+        const collection = await get(`${BASE_URL}deter/uc?${params}`)
+        if (uc === true) {
+            return collection
+        } else {
+            return collection.find(item => item.uc === uc)
+        }
     } else {
-        return get(`${BASE_URL}deter/basica?${searchParams(args)}`)
+        return get(`${BASE_URL}deter/basica?${params}`)
     }
 }
 
@@ -45,9 +68,32 @@ export async function fetchNews (state = '') {
     return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
 }
 
-export async function fetchProdesData ({ estado, municipio, uc, ti, ...args }) {
+export async function fetchProdesData ({ estado, municipio, ti, uc, ...args }) {
+    const params = searchParams(args)
+
     if (estado) {
         return get(`${BASE_URL}prodes/taxaanoestado?uf=${estado}`)
+    } else if (municipio) {
+        const collection = await get(`${BASE_URL}prodes/municipios?${params}`)
+        if (municipio === true) {
+            return collection
+        } else {
+            return collection.find(item => item.geo_cod === municipio)
+        }
+    } else if (ti) {
+        const collection = await get(`${BASE_URL}prodes/ti?${params}`)
+        if (ti === true) {
+            return collection
+        } else {
+            return collection.find(item => item.terra_indigena === ti)
+        }
+    } else if (uc) {
+        const collection = await get(`${BASE_URL}prodes/uc?${params}`)
+        if (uc === true) {
+            return collection
+        } else {
+            return collection.find(item => item.uc === uc)
+        }
     } else {
         return get(`${BASE_URL}prodes/taxaano`)
     }

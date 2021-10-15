@@ -27,6 +27,7 @@
 
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
+    import { getAreaKm2, getTrees } from '../../utils'
     import { fetchDeterData } from '../../utils/api'
     import { firstValue, roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
@@ -60,13 +61,13 @@
                 if (!this.lastWeek) {
                     return 0
                 }
-                return Number(this.lastWeek.areamunkm)
+                return getAreaKm2(this.lastWeek)
             },
             trees () {
                 if (!this.lastWeek) {
                     return 0
                 }
-                return Number(this.lastWeek.num_arvores)
+                return getTrees(this.lastWeek)
             },
             unitModel: vModel('unit'),
         },
