@@ -229,12 +229,14 @@
             },
             'filters.ti' () {
                 if (this.filters.ti) {
+                    this.filters.estado = ''
                     this.filters.municipio = ''
                     this.filters.uc = ''
                 }
             },
             'filters.uc' () {
                 if (this.filters.uc) {
+                    this.filters.estado = ''
                     this.filters.municipio = ''
                     this.filters.ti = ''
                 }
