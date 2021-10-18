@@ -17,7 +17,7 @@
 </head>
 <body <?php body_class(); ?>>
     <div class="realtime-scoreboard">
-        <h1><?= sprintf(__('Deforestation in the Legal Amazon in %s', 'plenamata'), date('Y')) ?></h1>
+        <h1><?= get_the_title() ?></h1>
 
         <div class="realtime-scoreboard__primary">
             <div data-deter="treesEstimative"><?= __('loading...', 'plenamata') ?></div>
@@ -36,34 +36,19 @@
                     <div><?= __('hectares per day', 'plenamata') ?></div>
                 </div>
             </div>
-            <div class="realtime-scoreboard__source">
-                <p><?= __('Sources: DETER/INPE and MapBiomas', 'plenamata') ?></p>
-            </div>
-        </div>
-
-        <div class="realtime-scoreboard__content">
-            <?php the_content() ?>
         </div>
 
         <footer class="realtime-scoreboard__footer">
-            <div>
-                <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/scoreboard/plenamata.svg" alt="Plenamata">
+            <div class="realtime-scoreboard__source">
+                <p><?= __('Sources: DETER/INPE and MapBiomas', 'plenamata') ?></p>
+            </div>
+
+            <div class="realtime-scoreboard__logo">
+                <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/logo-black-text.svg" alt="Plenamata">
+            </div>
+
+            <div class="realtime-scoreboard__link">
                 <a href="https://plenamata.eco">https://plenamata.eco</a>
-            </div>
-
-            <div>
-                <h2><?= _x('Creators', 'credits', 'plenamata') ?></h2>
-                <div class="realtime-scoreboard__logos">
-                    <img class="square" src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/scoreboard/natura.svg" alt="Natura">
-                    <img class="rectangle" src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/scoreboard/infoamazonia.svg" alt="InfoAmazonia">
-                    <img class="square" src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/scoreboard/mapbiomas.svg" alt="MapBiomas">
-                    <img class="rectangle" src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/scoreboard/hacklab.svg" alt="Hacklab">
-                    <img class="rectangle" src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/scoreboard/naturaeco.svg" alt="Natura &co">
-                </div>
-            </div>
-
-            <div class="realtime-scoreboard__copyright">
-                © 2021 PlenaMata
             </div>
         </footer>
     </div>
