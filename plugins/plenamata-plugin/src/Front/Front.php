@@ -221,6 +221,7 @@ class Front {
                 'All ILs' => __( 'All ILs', 'plenamata' ),
                 'All municipalities' => __( 'All municipalities', 'plenamata' ),
                 'All states' => __( 'All states', 'plenamata' ),
+                'Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.' => __( 'Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata' ),
                 'Area deforested last week' => __( 'Area deforested last week', 'plenamata' ),
                 'Area of deforestation alerts detected last week' => __( 'Area of deforestation alerts detected last week', 'plenamata' ),
                 'Clear filters' => __( 'Clear filters', 'plenamata' ),
@@ -248,6 +249,7 @@ class Front {
                 'Source: MapBiomas based on average daily deforestation detected by DETER in %s.' => __( 'Source: MapBiomas based on average daily deforestation detected by DETER in %s.', 'plenamata' ),
                 'Source: MapBiomas based on DETER/INPE data.' => __( 'Source: MapBiomas based on DETER/INPE data.', 'plenamata' ),
                 'Source: PRODES/INPE.' => __( 'Source: PRODES/INPE.', 'plenamata' ),
+                'Sources: DETER/INPE and MapBiomas' =>  __( 'Sources: DETER/INPE and MapBiomas', 'plenamata' ),
                 'States' => __( 'States', 'plenamata' ),
                 'The figures represent deforestation for each year up to %s.' => __( 'The figures represent deforestation for each year up to %s.', 'plenamata' ),
                 'Timeframe' => __( 'Timeframe', 'plenamata' ),
@@ -255,6 +257,7 @@ class Front {
                 'Total deforested area in %s (until last week)' => __( 'Total deforested area in %s (until last week)', 'plenamata' ),
                 'trees' => __( 'trees', 'plenamata' ),
                 'Trees cut down in %s' => __( 'Trees cut down in %s', 'plenamata' ),
+                'trees cut sown so far' => __( 'trees cut down so far', 'plenamata' ),
                 'trees per day' => __( 'trees per day', 'plenamata' ),
                 'Unit' => __( 'Unit', 'plenamatmarkera' ),
                 'Week %s' => __( 'Week %s', 'plenamata' ),
@@ -360,7 +363,7 @@ class Front {
 		if ( $post->post_type === 'verbete' ) {
 			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-verbete.php';
         }else if( $post->post_type === 'post'){
-			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-artigo.php';
+			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-news.php';
 		}
 
         return $template;

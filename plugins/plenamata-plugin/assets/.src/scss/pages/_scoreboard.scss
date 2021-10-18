@@ -12,6 +12,10 @@
     top: 0;
     width: 100vw;
 
+    * {
+        font-size: 1em;
+    }
+
     h1 {
         border-bottom: 0.1em solid $c_red;
         color: inherit !important;
@@ -56,6 +60,30 @@
         }
     }
 
+    &__footer {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+
+        & > * {
+            flex: 1;
+        }
+
+        & > :nth-child(2) {
+            text-align: center;
+        }
+
+        & > :nth-child(3) {
+            text-align: right;
+        }
+
+        a {
+            color: $c_purple;
+        }
+    }
+
     &__source {
 
         p {
@@ -64,73 +92,10 @@
         }
     }
 
-    &__content {
-
-        p {
-            text-align: center;
-        }
-    }
-
-    &__footer {
-        align-items: flex-end;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        width: 100%;
-
-        & > :nth-child(1) {
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-right: 5vw;
-            flex: 1;
-
-            a {
-                color: $c_purple;
-                font-size: 1.25em;
-            }
-
-            img {
-                height: 2.5em;
-            }
-        }
-
-        & > :nth-child(2) {
-            flex: 2;
-
-            h2 {
-                border-bottom: 0.1em solid #CCC;
-                color: black !important;
-                font-size: 1em;
-                font-weight: 500 !important;
-                margin: 0 0 0.5em;
-                padding-bottom: 0.5em;
-                text-align: center;
-            }
-        }
-    }
-
-    &__logos {
-        align-items: center;
-        display: flex;
-        justify-content: space-between;
+    &__logo {
 
         img {
-
-            &.square {
-                width: 4em;
-            }
-
-            &.rectangle {
-                width: 6em;
-            }
+            height: 2em;
         }
-    }
-
-    &__copyright {
-        color: #AAA;
-        text-align: right;
-        width: 80vw;
     }
 }

@@ -14,6 +14,7 @@
         </template>
         <template #footer>
             {{ __('Source: PRODES/INPE.', 'plenamata') }}
+            {{ __('Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata') }}
         </template>
     </DashboardPanel>
 </template>

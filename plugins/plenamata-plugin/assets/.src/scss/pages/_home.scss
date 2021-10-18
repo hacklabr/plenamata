@@ -162,6 +162,11 @@ body.home {
             }
 
             .wp-block-image {
+
+                figcaption {
+                    display: none;
+                }
+
                 @include tablet-up {
                     height: 100%;
 

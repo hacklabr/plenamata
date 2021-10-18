@@ -118,7 +118,7 @@ if (newspack_is_amp()) : ?>
 
 			</div>
 		</div>
-		
+
 		<div class="social-menus">
 			<div class="social-menus--title">
 				<?= __("Follow us", "plenamata") ?>
@@ -127,8 +127,6 @@ if (newspack_is_amp()) : ?>
 			newspack_social_menu_header();
 			?>
 		</div>
-
-		
 
 		<?php if (newspack_is_amp()) : ?>
 	</amp-sidebar>
@@ -141,7 +139,7 @@ if (newspack_is_amp()) : ?>
 	<div class="wrapper">
 
 		<div class="item">
-            <?php 
+            <?php
                 $link = '#';
                 if ( $page = get_page_by_title( 'Dashboard', OBJECT, 'page' ) ) {
                     $link = get_permalink( $page->ID );
@@ -158,30 +156,30 @@ if (newspack_is_amp()) : ?>
             </a>
 		</div>
 		<div class="item">
-            <?php 
+            <?php
                 $link = get_permalink( get_option( 'page_for_posts' ) );				;
             ?>
             <a href="<?php echo esc_url( $link );?>" class="each-link">
 				<svg xmlns="http://www.w3.org/2000/svg" width="15" height="18" viewBox="0 0 15 18" fill="none">
 					<path d="M8.2548 0H1.8C0.81 0 0 0.81 0 1.8V16.2C0 17.19 0.81 18 1.8 18H12.6C13.59 18 14.4 17.19 14.4 16.2V6.1452C14.4 5.6682 14.2101 5.2101 13.8726 4.8726L9.5274 0.5274C9.1899 0.1899 8.7318 0 8.2548 0ZM9.9 14.4H4.5C4.0032 14.4 3.6 13.9968 3.6 13.5C3.6 13.0032 4.0032 12.6 4.5 12.6H9.9C10.3968 12.6 10.8 13.0032 10.8 13.5C10.8 13.9968 10.3968 14.4 9.9 14.4ZM9.9 10.8H4.5C4.0032 10.8 3.6 10.3968 3.6 9.9C3.6 9.4032 4.0032 9 4.5 9H9.9C10.3968 9 10.8 9.4032 10.8 9.9C10.8 10.3968 10.3968 10.8 9.9 10.8ZM8.1 6.3V1.35L13.05 6.3H8.1Z" fill="#FF7373"/>
-				</svg>                
+				</svg>
 				<div class="item--title">
-                    <?php _e( 'Articles', 'plenamata' );?>
+                    <?php _e( 'News', 'plenamata' );?>
                 </div>
            	</a>
 		</div>
-		
+
 		<div class="item">
-            <?php 
+            <?php
                 $link = '#';
-				if($archive_cpt = 'verbete'){				
+				if($archive_cpt = 'verbete'){
 					$link = get_post_type_archive_link( $archive_cpt );
 				}
             ?>
             <a href="<?php echo esc_url( $link );?>" class="each-link">
 				<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
 					<path d="M9 0C4.0293 0 0 4.0293 0 9C0 13.9707 4.0293 18 9 18C13.9707 18 18 13.9707 18 9C18 4.0293 13.9707 0 9 0ZM9 13.5C8.5032 13.5 8.1 13.0968 8.1 12.6V9C8.1 8.5032 8.5032 8.1 9 8.1C9.4968 8.1 9.9 8.5032 9.9 9V12.6C9.9 13.0968 9.4968 13.5 9 13.5ZM9.45 6.3H8.55C8.3016 6.3 8.1 6.0984 8.1 5.85V4.95C8.1 4.7016 8.3016 4.5 8.55 4.5H9.45C9.6984 4.5 9.9 4.7016 9.9 4.95V5.85C9.9 6.0984 9.6984 6.3 9.45 6.3Z" fill="#FF7373"/>
-				</svg>				
+				</svg>
 				<div class="item--title">
                     <?php _e( 'Glossary', 'plenamata' );?>
             	</div>
@@ -198,7 +196,7 @@ if (newspack_is_amp()) : ?>
 				</div>
 			</button>
 		</div>
-		
+
 	</div>
 
 </div>

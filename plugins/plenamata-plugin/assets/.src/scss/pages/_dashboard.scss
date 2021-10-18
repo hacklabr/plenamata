@@ -20,6 +20,25 @@
                 height: 100% !important;
             }
         }
+
+        .legend-container {
+            max-height: 280px;
+
+            .hideable-content {
+                max-height: 250px;
+            }
+
+            a.more-info-button {
+                background-color: $c_purple;
+                color: white;
+                padding: size(5);
+
+                &:hover {
+                    background-color: darken($c_purple, 10%);
+                    color: white;
+                }
+            }
+        }
     }
 
     &.is-sticky {
