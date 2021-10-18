@@ -39,21 +39,21 @@ export async function fetchDeterData ({ estado, municipio, ti, uc, ...args }) {
         if (municipio === true) {
             return collection
         } else {
-            return collection.find(item => item.geo_cod === municipio)
+            return collection.filter(item => item.geo_cod === municipio)
         }
     } else if (ti) {
         const collection = await get(`${BASE_URL}deter/ti?${params}`)
         if (ti === true) {
             return collection
         } else {
-            return collection.find(item => item.terra_indigena === ti)
+            return collection.filter(item => item.terra_indigena === ti)
         }
     } else if (uc) {
         const collection = await get(`${BASE_URL}deter/uc?${params}`)
         if (uc === true) {
             return collection
         } else {
-            return collection.find(item => item.uc === uc)
+            return collection.filter(item => item.uc === uc)
         }
     } else {
         return get(`${BASE_URL}deter/basica?${params}`)
@@ -78,21 +78,21 @@ export async function fetchProdesData ({ estado, municipio, ti, uc, ...args }) {
         if (municipio === true) {
             return collection
         } else {
-            return collection.find(item => item.geo_cod === municipio)
+            return collection.filter(item => item.geo_cod === municipio)
         }
     } else if (ti) {
         const collection = await get(`${BASE_URL}prodes/ti?${params}`)
         if (ti === true) {
             return collection
         } else {
-            return collection.find(item => item.terra_indigena === ti)
+            return collection.filter(item => item.terra_indigena === ti)
         }
     } else if (uc) {
         const collection = await get(`${BASE_URL}prodes/uc?${params}`)
         if (uc === true) {
             return collection
         } else {
-            return collection.find(item => item.uc === uc)
+            return collection.filter(item => item.uc === uc)
         }
     } else {
         return get(`${BASE_URL}prodes/taxaano`)
