@@ -58,7 +58,7 @@
                     <TotalDeforestationThisYear :areaKm2="areaKm2" :filters="filters" :now="date.now" :unit.sync="unit" :updated="updated" :year="date.year"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="date.year"/>
                     <DeforestedAreaLastWeek :filters="filters" :lastUpdate="lastUpdate" :unit.sync="unit" :updated="updated" v-if="lastUpdate"/>
-                    <WeeklyDeforestationEvolution :filters="filters" :now="date.now" :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="year"/>
+                    <WeeklyDeforestationEvolution :filters="filters" :lastUpdate="lastUpdate" :now="date.now" :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="year" v-if="lastUpdate"/>
                     <MonthlyDeforestationEvolution :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated"/>
                     <YearlyDeforestationEvolutionDeter :filters="filters" :lastUpdate="lastUpdate" :unit.sync="unit" :updated="updated" v-if="lastUpdate"/>
                     <YearlyDeforestationEvolutionProdes :filters="filters" :unit.sync="unit" :year="date.year"/>

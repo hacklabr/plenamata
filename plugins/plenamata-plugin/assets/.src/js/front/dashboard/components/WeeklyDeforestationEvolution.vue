@@ -51,6 +51,7 @@
         ],
         props: {
             filters: { type: Object, required: true },
+            lastUpdate: { type: Object, required: true },
             now: { type: DateTime, required: true },
             source: { type: String, default: 'prodes' },
             unit: { type: String, default: 'ha' },
@@ -64,15 +65,32 @@
         },
         computed: {
             areasKm2 () {
-                const sortedData = this.data.slice().sort((a, b) => {
-                    if (a.year === b.year) {
-                        return (a.week > b.week) ? 1 : -1
-                    } else {
-                        return (a.year > b.year) ? 1 : -1
-                    }
-                })
+                const { start, end } = this.dateInterval
+                const startYear = start.year
+                const endYear = end.year
 
-                return sortedData.map(getAreaKm2)
+                const sortedData = []
+
+                if (this.source === 'deter') {
+                    for (let i = 1; i <= end.weekNumber; i++) {
+                        sortedData.push(this.findAreaKm2(i, startYear))
+                    }
+                } else {
+                    if (startYear === endYear) {
+                        for (let i = start.weekNumber; i <= end.weekNumber; i++) {
+                            sortedData.push(this.findAreaKm2(i, startYear))
+                        }
+                    } else {
+                        for (let i = start.weekNumber; i <= start.weeksInWeekYear; i++) {
+                            sortedData.push(this.findAreaKm2(i, startYear))
+                        }
+                        for (let i = 1; i <= end.weekNumber; i++) {
+                            sortedData.push(this.findAreaKm2(i, endYear))
+                        }
+                    }
+                }
+
+                return sortedData
             },
             areas () {
                 if (this.unit === 'ha') {
@@ -133,13 +151,15 @@
                 }
             },
             dateInterval () {
+                const lastSync = DateTime.fromISO(this.lastUpdate.deter_last_date)
+                console.log(lastSync)
                 if (this.source === 'deter') {
                     const start = DateTime.fromObject({ day: 1, month: 1, year: this.year })
-                    const end = DateTime.fromObject({ day: 31, month: 12, year: this.year })
+                    const end = DateTime.min(DateTime.fromObject({ day: 31, month: 12, year: this.year }), lastSync)
                     return { start, end }
                 } else {
                     const start = DateTime.fromObject({ day: 1, month: 8, year: this.yearModel })
-                    const end = DateTime.fromObject({ day: 31, month: 7, year: this.yearModel + 1 })
+                    const end = DateTime.min(DateTime.fromObject({ day: 31, month: 7, year: this.yearModel + 1 }), lastSync)
                     return { start, end }
                 }
             },
@@ -183,6 +203,12 @@
 
                 const data = await fetchDeterData({ ...this.filters, data1: start.toISODate(), data2: end.toISODate(), group_by: 'semana' })
                 this.data = data
+            },
+            findAreaKm2 (week, year) {
+                const found = this.data.find((datum) => {
+                    return datum.week === week && datum.year === year
+                })
+                return found ? getAreaKm2(found) : 0
             },
         },
     }
