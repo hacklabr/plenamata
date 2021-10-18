@@ -218,6 +218,7 @@ class Front {
                 '%s ha' => __( '%s ha', 'plenamata' ),
                 '%s km²' => __( '%s km²', 'plenamata' ),
                 'All states' => __( 'All states', 'plenamata' ),
+                'Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.' => __( 'Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata' ),
                 'Area deforested last week' => __( 'Area deforested last week', 'plenamata' ),
                 'Area of deforestation alerts detected last week' => __( 'Area of deforestation alerts detected last week', 'plenamata' ),
                 'Data' => __( 'Data', 'plenamata' ),
