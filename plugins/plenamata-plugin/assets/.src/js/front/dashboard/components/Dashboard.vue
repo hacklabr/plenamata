@@ -56,6 +56,7 @@
 
 <script>
     import { DateTime, Interval } from 'luxon'
+    import scrollIntoView from 'scroll-into-view'
 
     import DashboardNewsCard from './DashboardNewsCard.vue'
     import DeforestationSpeedThisYear from './DeforestationSpeedThisYear.vue'
@@ -183,28 +184,40 @@
         mounted () {
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
-
-            this.setMapObject();
-
+            this.setMapObject()
         },
         methods: {
             setMapObject() {
-                 
                 let mapEl = document.querySelector('.jeomap')
                 let uuid = mapEl.dataset['uui_id']
                 this.jeomap = window.jeomaps[uuid]
 				if ( window.innerWidth >= 900 ) {
-					this.jeomap.map.scrollZoom.enable();
-                    this.jeomap.map.dragPan.enable();
-					this.jeomap.map.touchZoomRotate.enable();
-					this.jeomap.map.dragRotate.enable();
-
+					this.jeomap.map.scrollZoom.enable()
+                    this.jeomap.map.dragPan.enable()
+					this.jeomap.map.touchZoomRotate.enable()
+					this.jeomap.map.dragRotate.enable()
 				} else {
-                    this.jeomap.map.scrollZoom.disable();
-                    this.jeomap.map.dragPan.disable();
-					this.jeomap.map.touchZoomRotate.disable();
-					this.jeomap.map.dragRotate.disable();
+                    this.jeomap.map.scrollZoom.disable()
+                    this.jeomap.map.dragPan.disable()
+					this.jeomap.map.touchZoomRotate.disable()
+					this.jeomap.map.dragRotate.disable()
                 }
+                this.jeomap.map.on('click', 'unclustered-points', ( e ) => {
+                    this.openNewsPinClick( e )
+                })
+            },
+            clearSelectedNews() {
+                let selectedNews = document.querySelector( '.dashboard__news .selected' )
+                if ( selectedNews !== null ) {
+                    selectedNews.classList.remove( 'selected' )
+                }
+            },
+            openNewsPinClick( e ) {
+                let postId = e.features[0].properties.id
+                let newsElem = document.querySelector( '[data-id="' + postId + '"]' )
+                newsElem.classList.add( 'selected' );
+                scrollIntoView(newsElem);
+
             },
             centerMap (state = '') {
                 const mapEl = this.$refs.map.lastChild
@@ -225,6 +238,7 @@
                 const news = await api.get(`${this.$dashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
                 this.news = news
             },
+
         },
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <article class="dashboard-news">
+    <article class="dashboard-news" :data-id="post.id">
         <div class="dashboard-news__image">
             <img v-if="post.plenamata_thumbnail" :src="post.plenamata_thumbnail" alt="">
         </div>
