@@ -4,10 +4,10 @@
         overflow: inherit !important;
     }
     .site-content {
-        margin-top:65px !important;
+        margin-top:68px !important;
     }
     .jeomap {
-        min-height: 100vh;
+        min-height: calc(100vh - 68px);
 
         @include mobile {
             min-height: 100vw;
@@ -15,6 +15,39 @@
 
         @include tablet-up {
             max-width: 50vw;
+
+            canvas {
+                height: 100% !important;
+            }
+        }
+
+        .legend-container {
+            max-height: 280px;
+
+            .hideable-content {
+                max-height: 250px;
+            }
+
+            a.more-info-button {
+                background-color: $c_purple;
+                color: white;
+                padding: size(5);
+
+                &:hover {
+                    background-color: darken($c_purple, 10%);
+                    color: white;
+                }
+            }
+        }
+    }
+
+    &.is-sticky {
+
+        .jeomap {
+
+            @include tablet-up {
+                min-height: 100vh;
+            }
         }
     }
 }
@@ -212,6 +245,12 @@
 .dashboard-news {
     display: flex;
     margin-bottom: size(32);
+
+    transition:100ms linear border;
+
+    &.selected {
+        border-right:5px solid $c_purple;
+    }
 
     h2 {
         font-size: size(18);

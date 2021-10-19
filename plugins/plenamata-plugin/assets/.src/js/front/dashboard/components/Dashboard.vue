@@ -18,13 +18,13 @@
         <main>
             <div class="container">
                 <fieldset class="dashboard__tabs">
-                    <label class="dashboard__tab" :class="{ active: view === 'data' }">
-                        <input type="radio" name="dashboard-tabs" value="data" v-model="view">
+                    <label class="dashboard__tab" :class="{ active: view === 'data' }" id="dashboard-tab-data">
+                        <input type="radio" name="dashboard-tabs" ref="tabDataRadio" value="data" v-model="view">
                         <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-chart-icon.svg`" alt="">
                         {{ __('Data', 'plenamata') }}
                     </label>
-                    <label class="dashboard__tab" :class="{ active: view === 'news' }">
-                        <input type="radio" name="dashboard-tabs" value="news" v-model="view">
+                    <label class="dashboard__tab" :class="{ active: view === 'news' }" id="dashboard-tab-news">
+                        <input type="radio" name="dashboard-tabs" ref="tabNewsRadio" value="news" v-model="view">
                         <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-newspaper-icon.svg`" alt="">
                         {{ __('News', 'plenamata') }}
                     </label>
@@ -185,7 +185,6 @@
         mounted () {
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
-            console.log( this.$refs )
             this.setMapObject()
         },
         methods: {
@@ -214,12 +213,18 @@
             openNews( e ) {
                 this.clearSelectedNews();
                 let postId = e.features[0].properties.id
-                let newsElem = document.querySelector( '[data-id="' + postId + '"]' )
-                if ( newsElem == null ) {
-                    return;
-                }
-                newsElem.classList.add( 'selected' );
-                scrollIntoView(newsElem);
+                this.view = 'news';
+                //scrollIntoView( document.querySelector( '#dashboard-tab-news' ) );
+                setTimeout( () => {
+                    let newsElem = document.querySelector( '[data-id="' + postId + '"]' )
+                    if ( newsElem == null ) {
+                        //alert( 'nulo' );
+                        return;
+                    }
+                    scrollIntoView(newsElem);
+                    newsElem.classList.add( 'selected' );
+                }, 900)
+
             },
             centerMap (state = '') {
                 const mapEl = this.$refs.map.lastChild
