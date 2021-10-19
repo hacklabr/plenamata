@@ -15,8 +15,8 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
         api.get(`deter/basica?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`)
     ])
 
-    const lastSync = DateTime.fromISO(updated.last_sync)
-    const lastDate = DateTime.fromISO(updated.deter_last_date)
+    const lastSync = DateTime.fromISO(updated.last_sync, { zone: 'utc' })
+    const lastDate = DateTime.fromISO(updated.deter_last_date, { zone: 'utc' })
 
     const daysThisYear = Interval.fromDateTimes(startOfYear, lastDate)
     const elapsedTime = Interval.fromDateTimes(lastDate, now)
