@@ -1,7 +1,7 @@
 name: Generate zip file
 on:
   push:
-    branches:
+    branch:
     - master
     - develop
 jobs:
@@ -17,6 +17,7 @@ jobs:
         npm install
         npm run build
         cd ${{ github.workspace }}/plugins
+        ls
         ls plenamata-plugin
     - uses: actions/upload-artifact@v2
       with:
