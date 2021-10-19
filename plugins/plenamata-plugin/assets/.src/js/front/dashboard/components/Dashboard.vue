@@ -214,7 +214,6 @@
                 this.clearSelectedNews();
                 let postId = e.features[0].properties.id
                 this.view = 'news';
-                //scrollIntoView( document.querySelector( '#dashboard-tab-news' ) );
                 setTimeout( () => {
                     let newsElem = document.querySelector( '[data-id="' + postId + '"]' )
                     if ( newsElem == null ) {

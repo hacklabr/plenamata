@@ -1,0 +1,27 @@
+name: Generate zip file
+on:
+  push:
+    branches:
+    - master
+    - develop
+jobs:
+  tag:
+    name: New tag
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Build # Remove or modify this step as needed
+      run: |
+        cd ${{ github.workspace }}/plugins/plenamata-plugin
+        composer build 
+        npm install
+        npm run build
+        cd ${{ github.workspace }}/plugins
+        ls plenamata-plugin
+    - uses: actions/upload-artifact@v2
+      with:
+        name: plenamata-plugin
+        path: |
+          ./plugins/plenamata-plugin/*
+          !plugins/plenamata-plugin/node_modules
+          !plugins/plenamata-plugin/node_modules/*

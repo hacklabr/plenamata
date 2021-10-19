@@ -56,10 +56,10 @@ class Front {
         // change excer_length
         add_filter( 'excerpt_length', [ $this, 'excerpt_length' ], 50 );
 
-        // change map markers style 
+        // change map markers style
         add_filter( 'jeomap_js_images', [ $this, 'jeo_change_js_image' ], 10, 1 );
-        
-        // change map markers style 
+
+        // change map markers style
         add_filter( 'jeomap_js_cluster', [ $this, 'jeo_change_js_cluster' ], 10, 1 );
     }
 
@@ -72,7 +72,7 @@ class Front {
     public function jeo_change_js_image( $images ) {
         $images[ '/js/src/icons/news-marker' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/pin.png';
         $images[ '/js/src/icons/news-marker' ][ 'icon_size' ] = 0.3;
-    
+
         $images[ '/js/src/icons/news' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/news-icon
         .png';
         $images[ '/js/src/icons/news' ][ 'icon_size' ] = 0.25;
@@ -150,6 +150,37 @@ class Front {
 
         wp_register_script( 'luxon', 'https://unpkg.com/luxon@2/build/global/luxon.min.js', [], false, true );
 
+        wp_register_script(
+            'estimatives-area-front-end',
+            PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
+            [ 'luxon' ],
+            false,
+            true
+        );
+
+        wp_localize_script( 'estimatives-area-front-end', 'PlenamataDashboard', [
+            'i18n' => $dashboard_i18n,
+            'language' => apply_filters( 'wpml_current_language', NULL ),
+        ] );
+
+        wp_register_script(
+            'deforestation-charts-front-end',
+            PLENAMATA_PLUGIN_URL . 'assets/build/js/deforestation-charts.js',
+            [ 'luxon' ],
+            false,
+            true
+        );
+
+        if ( get_page_template_slug() === 'template-about.php' ) {
+            wp_enqueue_script(
+                'plenamata-about-page',
+                PLENAMATA_PLUGIN_URL . 'assets/build/js/about-page.js',
+                [],
+                Plugin::VERSION,
+                true
+            );
+        }
+
         if ( get_page_template_slug() === 'template-dashboard.php' ) {
             $this->register_jeo_assets();
 
@@ -169,26 +200,9 @@ class Front {
             ] );
         }
 
-        wp_register_script(
-            'estimatives-area-front-end',
-            PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
-            [ 'luxon' ],
-            false,
-            true
-        );
-
-        wp_localize_script('estimatives-area-front-end', 'PlenamataDashboard', [
-            'i18n' => $dashboard_i18n,
-            'language' => apply_filters( 'wpml_current_language', NULL ),
-        ]);
-
-        wp_register_script(
-            'deforestation-charts-front-end',
-            PLENAMATA_PLUGIN_URL . 'assets/build/js/deforestation-charts.js',
-            [ 'luxon' ],
-            false,
-            true
-        );
+        if ( get_page_template_slug() === 'template-scoreboard.php' ) {
+            wp_enqueue_script( 'estimatives-area-front-end' );
+        }
 	}
 
     /**
@@ -204,6 +218,7 @@ class Front {
                 '%s ha' => __( '%s ha', 'plenamata' ),
                 '%s km²' => __( '%s km²', 'plenamata' ),
                 'All states' => __( 'All states', 'plenamata' ),
+                'Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.' => __( 'Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata' ),
                 'Area deforested last week' => __( 'Area deforested last week', 'plenamata' ),
                 'Area of deforestation alerts detected last week' => __( 'Area of deforestation alerts detected last week', 'plenamata' ),
                 'Data' => __( 'Data', 'plenamata' ),
@@ -227,6 +242,7 @@ class Front {
                 'Source: MapBiomas based on average daily deforestation detected by DETER in %s.' => __( 'Source: MapBiomas based on average daily deforestation detected by DETER in %s.', 'plenamata' ),
                 'Source: MapBiomas based on DETER/INPE data.' => __( 'Source: MapBiomas based on DETER/INPE data.', 'plenamata' ),
                 'Source: PRODES/INPE.' => __( 'Source: PRODES/INPE.', 'plenamata' ),
+                'Sources: DETER/INPE and MapBiomas' =>  __( 'Sources: DETER/INPE and MapBiomas', 'plenamata' ),
                 'States' => __( 'States', 'plenamata' ),
                 'The figures represent deforestation for each year up to %s.' => __( 'The figures represent deforestation for each year up to %s.', 'plenamata' ),
                 'Timeframe' => __( 'Timeframe', 'plenamata' ),
@@ -234,6 +250,7 @@ class Front {
                 'Total deforested area in %s (until last week)' => __( 'Total deforested area in %s (until last week)', 'plenamata' ),
                 'trees' => __( 'trees', 'plenamata' ),
                 'Trees cut down in %s' => __( 'Trees cut down in %s', 'plenamata' ),
+                'trees cut sown so far' => __( 'trees cut down so far', 'plenamata' ),
                 'trees per day' => __( 'trees per day', 'plenamata' ),
                 'Unit' => __( 'Unit', 'plenamatmarkera' ),
                 'Week %s' => __( 'Week %s', 'plenamata' ),
@@ -322,8 +339,12 @@ class Front {
     }
 
     public function page_templates ( string $template ): string {
-        if ( get_page_template_slug() === 'template-dashboard.php' ) {
+        if ( get_page_template_slug() === 'template-about.php' ) {
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/template-about.php';
+        } elseif ( get_page_template_slug() === 'template-dashboard.php' ) {
             $template = PLENAMATA_PLUGIN_PATH . 'templates/template-dashboard.php';
+        } elseif ( get_page_template_slug() === 'template-scoreboard.php' ) {
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/template-scoreboard.php';
         }
 
         return $template;
@@ -335,7 +356,7 @@ class Front {
 		if ( $post->post_type === 'verbete' ) {
 			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-verbete.php';
         }else if( $post->post_type === 'post'){
-			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-artigo.php';
+			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-news.php';
 		}
 
         return $template;

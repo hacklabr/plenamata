@@ -153,6 +153,8 @@ body.home {
             }
 
             .wp-block-column {
+                align-self: auto;
+
                 @include mobile {
                     margin-left: 0;
                     margin-right: 0;
@@ -160,7 +162,22 @@ body.home {
             }
 
             .wp-block-image {
-                @include tablet {
+
+                figcaption {
+                    display: none;
+                }
+
+                @include tablet-up {
+                    height: 100%;
+
+                    figure, img, picture {
+                        display: block;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                @include mobile {
                     img {
                         width: 100%;
                     }

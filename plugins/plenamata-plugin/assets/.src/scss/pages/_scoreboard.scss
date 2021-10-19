@@ -1,0 +1,101 @@
+.realtime-scoreboard {
+    align-items: center;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    font-size: min(2vh, 2vw);
+    height: 100vh;
+    justify-content: space-between;
+    left: 0;
+    padding: 10vh 10vw;
+    position: absolute;
+    top: 0;
+    width: 100vw;
+
+    * {
+        font-size: 1em;
+    }
+
+    h1 {
+        border-bottom: 0.1em solid $c_red;
+        color: inherit !important;
+        font-size: 2em;
+        margin: 0;
+        padding-bottom: 0.25em;
+        text-align: center;
+        width: 100%;
+    }
+
+    p {
+        font-size: 1em !important;
+        line-height: 2em;
+        margin: 0 auto;
+        max-width: 50em;
+    }
+
+    [data-deter] {
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
+    }
+
+    &__primary {
+        text-align: center;
+
+        [data-deter] {
+            font-size: 9em;
+        }
+    }
+
+    &__secondary {
+        align-items: center;
+        display: flex;
+        justify-content: space-evenly;
+        min-width: 70vw;
+        text-align: center;
+        width: 100%;
+
+        [data-deter] {
+            color: $c_purple;
+            font-size: 2.5em;
+        }
+    }
+
+    &__footer {
+        align-items: center;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 100%;
+
+        & > * {
+            flex: 1;
+        }
+
+        & > :nth-child(2) {
+            text-align: center;
+        }
+
+        & > :nth-child(3) {
+            text-align: right;
+        }
+
+        a {
+            color: $c_purple;
+        }
+    }
+
+    &__source {
+
+        p {
+            margin-top: 0.5em;
+            text-align: center;
+        }
+    }
+
+    &__logo {
+
+        img {
+            height: 2em;
+        }
+    }
+}

@@ -41,7 +41,9 @@ class Blocks {
     }
 
     public function custom_page_templates( array $templates ): array {
-        $templates['template-dashboard.php'] = __( 'Dashboard', 'plenamata' );
+        $templates[ 'template-about.php' ] = __( 'About', 'plenamata' );
+        $templates[ 'template-dashboard.php' ] = __( 'Dashboard', 'plenamata' );
+        $templates[ 'template-scoreboard.php' ] = __( 'Real-time Scoreboard', 'plenamata' );
 
         return $templates;
     }
@@ -75,9 +77,9 @@ class Blocks {
                         'Social media' => __( 'Social media', 'plenamata' ),
                         'The Initiative' => __( 'The Initiative', 'plenamata' ),
                         'Upload image' => __( 'Upload image', 'plenamata' ),
-                        'What is it?' => __( 'What is it?', 'plenamata' ),
-                        'Where is it?' => __( 'Where is it?', 'plenamata' ),
-                        "Who's involved?" => __( "Who's involved?", 'plenamata' ),
+                        'What is it' => __( 'What is it', 'plenamata' ),
+                        'Where is it' => __( 'Where is it', 'plenamata' ),
+                        "Who's involved" => __( "Who's involved", 'plenamata' ),
                     ],
                 ],
             ]

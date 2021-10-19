@@ -129,7 +129,7 @@ class SettingsPage {
 
     public function rename_menu_entries(): void {
         global $menu;
-        $menu[ 5 ][ 0 ] = __( 'Articles', 'plenamata' );
+        $menu[ 5 ][ 0 ] = __( 'News', 'plenamata' );
     }
 
     public function settings_input_cb( array $args ): void {

@@ -20,7 +20,7 @@ the_post(); ?>
 			<div class="opinion-header">
 				<div class="breadcrumb">
 					<a href="<?= site_url(); ?>">Home</a> /
-					<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Articles", "plenamata") ?></a> /
+					<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __('News', 'plenamata') ?></a> /
 					<a href="<?= get_category_link($category->cat_ID); ?>"><?= $category->name ?></a> /
 				</div>
 				<div class="container">
@@ -49,7 +49,7 @@ the_post(); ?>
 		<?php if(!$is_opinion && !$is_initiative): ?>
 			<div class="breadcrumb">
 				<a href="<?= site_url(); ?>">Home</a> /
-				<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __("Articles", "plenamata") ?></a> /
+				<a href="<?= get_post_type_archive_link('post'); ?>"><?=  __('News', 'plenamata') ?></a> /
 				<a href="<?= get_category_link($category->cat_ID); ?>"><?= $category->name ?></a> /
 			</div>
 		<?php endif; ?>

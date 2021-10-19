@@ -14,6 +14,7 @@
         </template>
         <template #footer>
             {{ __('Source: PRODES/INPE.', 'plenamata') }}
+            {{ __('Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata') }}
         </template>
     </DashboardPanel>
 </template>
@@ -24,7 +25,6 @@
     import DashboardPanel from './DashboardPanel.vue'
     import { __, sprintf } from '../plugins/i18n'
     import api from '../../utils/api'
-    import { prodesState } from '../../utils/converters'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -103,10 +103,10 @@
         },
         methods: {
             async fetchData () {
-                const filters = this.state ? 'taxaanoestado?' : 'taxaano?'
+                const filters = this.state ? `taxaanoestado?uf=${this.state}` : 'taxaano'
 
                 const data = await api.get(`prodes/${filters}`)
-                this.data = this.state ? data.filter(datum => datum.uf === prodesState(this.state)) : data
+                this.data = data
             },
         },
     }
