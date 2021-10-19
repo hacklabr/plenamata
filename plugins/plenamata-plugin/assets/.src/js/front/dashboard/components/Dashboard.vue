@@ -41,13 +41,13 @@
         <main>
             <div class="container">
                 <fieldset class="dashboard__tabs">
-                    <label class="dashboard__tab" :class="{ active: view === 'data' }">
-                        <input type="radio" name="dashboard-tabs" value="data" v-model="view">
+                    <label class="dashboard__tab" :class="{ active: view === 'data' }" id="dashboard-tab-data">
+                        <input type="radio" name="dashboard-tabs" ref="tabDataRadio" value="data" v-model="view">
                         <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-chart-icon.svg`" alt="">
                         {{ __('Data', 'plenamata') }}
                     </label>
-                    <label class="dashboard__tab" :class="{ active: view === 'news' }">
-                        <input type="radio" name="dashboard-tabs" value="news" v-model="view">
+                    <label class="dashboard__tab" :class="{ active: view === 'news' }" id="dashboard-tab-news">
+                        <input type="radio" name="dashboard-tabs" ref="tabNewsRadio" value="news" v-model="view">
                         <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-newspaper-icon.svg`" alt="">
                         {{ __('News', 'plenamata') }}
                     </label>
@@ -79,6 +79,7 @@
 
 <script>
     import { DateTime, Interval } from 'luxon'
+    import scrollIntoView from 'scroll-into-view'
 
     import DashboardNewsCard from './DashboardNewsCard.vue'
     import DeforestationSpeedThisYear from './DeforestationSpeedThisYear.vue'
@@ -92,6 +93,7 @@
     import { capitalize, getAreaKm2, getTrees, sortBy } from '../../utils'
     import { fetchDeterData, fetchLastDate, fetchNews } from '../../utils/api'
     import { firstValue, shortDate } from '../../utils/filters'
+    import { clearSelectedNews } from '../../utils/mapInteractions'
 
     export default {
         name: 'Dashboard',
@@ -146,11 +148,11 @@
                 return getAreaKm2(this.thisYear)
             },
             days () {
-                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
+                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' }) : this.date.now
                 return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('days')
             },
             minutes () {
-                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
+                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' }) : this.date.now
                 return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('minutes')
             },
             municipalities () {
@@ -283,6 +285,7 @@
                     uc: '',
                 }
             },
+            clearSelectedNews,
             async fetchData () {
                 const { now, startOfYear } = this.date
 
@@ -300,21 +303,40 @@
                 const news = await fetchNews(state)
                 this.news = news
             },
+            openNews(e) {
+                this.clearSelectedNews()
+                let postId = e.features[0].properties.id
+                this.view = 'news'
+                setTimeout(() => {
+                    let newsElem = document.querySelector(`[data-id="${postId}"]`)
+                    if (newsElem == null) {
+                        return
+                    }
+                    scrollIntoView(newsElem)
+                    newsElem.classList.add('selected')
+                }, 900)
+            },
             setMapObject() {
                 let mapEl = document.querySelector('.jeomap')
                 let uuid = mapEl.dataset['uui_id']
                 this.jeomap = window.jeomaps[uuid]
-                if ( window.innerWidth >= 900 ) {
-                    this.jeomap.map.scrollZoom.enable()
+                window.dashboardJeoMap = this.jeomap
+
+				if ( window.innerWidth >= 900 ) {
+					this.jeomap.map.scrollZoom.enable()
                     this.jeomap.map.dragPan.enable()
-                    this.jeomap.map.touchZoomRotate.enable()
-                    this.jeomap.map.dragRotate.enable()
-                } else {
+					this.jeomap.map.touchZoomRotate.enable()
+					this.jeomap.map.dragRotate.enable()
+				} else {
                     this.jeomap.map.scrollZoom.disable()
                     this.jeomap.map.dragPan.disable()
-                    this.jeomap.map.touchZoomRotate.disable()
-                    this.jeomap.map.dragRotate.disable()
+					this.jeomap.map.touchZoomRotate.disable()
+					this.jeomap.map.dragRotate.disable()
                 }
+
+                this.jeomap.map.on('click', 'unclustered-points', (e) => {
+                    this.openNews(e)
+                })
             },
         },
     }

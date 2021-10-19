@@ -1,5 +1,5 @@
 <template>
-    <article class="dashboard-news">
+    <article class="dashboard-news" :data-id="post.id" @click="openPin(post, $event)">
         <div class="dashboard-news__image">
             <img v-if="post.plenamata_thumbnail" :src="post.plenamata_thumbnail" alt="">
         </div>
@@ -15,7 +15,9 @@
 
 <script>
     import { __ } from '../plugins/i18n'
-    import { longDate } from '../../utils/filters'
+    import { longDate, shortDate } from '../../utils/filters'
+    import { clearSelectedNews } from '../../utils/mapInteractions'
+
 
     export default {
         name: 'DashboardNewsCard',
@@ -38,6 +40,43 @@
         },
         methods: {
             longDate,
+            shortDate,
+            clearSelectedNews,
+            openPin( post, e ) {
+
+                let newsElem = document.querySelector( '[data-id="' + post.id + '"]' );
+                if  ( ! newsElem.classList.contains( 'selected' ) ) {
+                    e.preventDefault();
+                    this.clearSelectedNews();
+
+                    newsElem.classList.add( 'selected' );
+                }
+
+
+                if( post.meta && post.meta._related_point && post.meta._related_point[0] ) {
+                    console.log( post.meta._related_point )
+
+                    window.dashboardJeoMap.map.flyTo({
+                        center: [post.meta._related_point[0]._geocode_lon, post.meta._related_point[0]._geocode_lat],
+                        zoom: 6
+                    });
+                    let html = '<article class="popup popup-wmt"><div class="popup__date">' + this.shortDate(post.date) + '</div><h2><a href="' + post.link + '">' + post.title.rendered + '</a></h2></article>'
+
+                    setTimeout( () => {
+                        let mapPopUp = new mapboxgl.Popup()
+                        .setLngLat([post.meta._related_point[0]._geocode_lon, post.meta._related_point[0]._geocode_lat])
+                        .setHTML( html )
+                        .addTo( window.dashboardJeoMap.map );
+
+                        mapPopUp.on( 'close', () =>  {
+                            this.clearSelectedNews()
+                            document.querySelectorAll('.mapboxgl-popup').forEach((popup) => popup.remove());
+                        });
+
+                    }, 600 )
+                }
+            },
+
         },
     }
 </script>

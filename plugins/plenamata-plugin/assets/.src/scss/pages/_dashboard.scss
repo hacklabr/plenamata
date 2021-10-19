@@ -269,6 +269,12 @@
     display: flex;
     margin-bottom: size(32);
 
+    transition: 100ms linear border;
+
+    &.selected {
+        border-right:5px solid $c_purple;
+    }
+
     h2 {
         font-size: size(18);
         margin: 0 0 size(8);

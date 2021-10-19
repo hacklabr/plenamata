@@ -46,7 +46,7 @@
         },
         computed: {
             newTrees () {
-                const elapsedTime = Interval.fromDateTimes(DateTime.fromISO(this.lastUpdate.deter_last_date), DateTime.now())
+                const elapsedTime = Interval.fromDateTimes(DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' }), DateTime.now())
                 return elapsedTime.count('seconds') * this.treesDelta
             },
             treesDelta () {

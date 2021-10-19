@@ -33,6 +33,7 @@
         "resolve-url-loader": "^2.3.1",
         "sass": "^1.23.7",
         "sass-loader": "^7.3.1",
+        "scroll-into-view": "^1.16.0",
         "vue-template-compiler": "^2.6.11"
     },
     "browserslist": [
