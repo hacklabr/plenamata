@@ -69,6 +69,7 @@
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
     import api from '../../utils/api'
     import { shortDate } from '../../utils/filters'
+    import { clearSelectedNews } from '../../utils/mapInteractions'
 
     export default {
         name: 'Dashboard',
@@ -184,6 +185,7 @@
         mounted () {
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
+            console.log( this.$refs )
             this.setMapObject()
         },
         methods: {
@@ -191,6 +193,8 @@
                 let mapEl = document.querySelector('.jeomap')
                 let uuid = mapEl.dataset['uui_id']
                 this.jeomap = window.jeomaps[uuid]
+                window.dashboardJeoMap = this.jeomap
+
 				if ( window.innerWidth >= 900 ) {
 					this.jeomap.map.scrollZoom.enable()
                     this.jeomap.map.dragPan.enable()
@@ -203,21 +207,19 @@
 					this.jeomap.map.dragRotate.disable()
                 }
                 this.jeomap.map.on('click', 'unclustered-points', ( e ) => {
-                    this.openNewsPinClick( e )
+                    this.openNews( e )
                 })
             },
-            clearSelectedNews() {
-                let selectedNews = document.querySelector( '.dashboard__news .selected' )
-                if ( selectedNews !== null ) {
-                    selectedNews.classList.remove( 'selected' )
-                }
-            },
-            openNewsPinClick( e ) {
+            clearSelectedNews,
+            openNews( e ) {
+                this.clearSelectedNews();
                 let postId = e.features[0].properties.id
                 let newsElem = document.querySelector( '[data-id="' + postId + '"]' )
+                if ( newsElem == null ) {
+                    return;
+                }
                 newsElem.classList.add( 'selected' );
                 scrollIntoView(newsElem);
-
             },
             centerMap (state = '') {
                 const mapEl = this.$refs.map.lastChild
