@@ -15,7 +15,7 @@
                         <label for="select-municipios">{{ __('Municipalities', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.municipio" :disabled="!filters.estado">
                             <option value="">{{ __('All municipalities', 'plenamata') }}</option>
-                            <option v-for="municipality of municipalities" :key="municipality.geo_cod" :value="municipality.geo_cod">{{ municipality.municipio }}</option>
+                            <option v-for="municipality of data.municipalities" :key="municipality.mun_geo_cod" :value="municipality.mun_geo_cod">{{ municipality.municipio }}</option>
                         </select>
                     </div>
                     <div>
@@ -91,7 +91,7 @@
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
     import { capitalize, getAreaKm2, getTrees, sortBy } from '../../utils'
-    import { fetchDeterData, fetchLastDate, fetchNews } from '../../utils/api'
+    import { fetchDeterData, fetchLastDate, fetchMunicipalities, fetchNews } from '../../utils/api'
     import { firstValue, shortDate } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
 
@@ -155,27 +155,17 @@
                 const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' }) : this.date.now
                 return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('minutes')
             },
-            municipalities () {
-                if (this.filters.estado) {
-                    const ibge = String(this.states[this.filters.estado].ibge)
-                    return this.data.municipalities
-                        .filter(municipality => municipality.geo_cod.startsWith(ibge))
-                        .sort(sortBy(municipality => municipality.municipio))
-                } else {
-                    return []
-                }
-            },
             states () {
                 return {
-                    AC: { uf: 'AC', name: 'Acre', ibge: 12, lat: -8.77, long: -70.55, zoom: 6 },
-                    AM: { uf: 'AM', name: 'Amazonas', ibge: 13, lat: -3.07, long: -61.66, zoom: 5 },
-                    AP: { uf: 'AP', name: 'Amapá', ibge: 16, lat: 1.41, long: -51.77, zoom: 6 },
-                    MA: { uf: 'MA', name: 'Maranhão', ibge: 21, lat: -2.55, long: -44.30, zoom: 5 },
-                    MT: { uf: 'MT', name: 'Mato Grosso', ibge: 51, lat: -12.64, long: -55.42, zoom: 5 },
-                    PA: { uf: 'PA', name: 'Pará', ibge: 15, lat: -5.53, long: -52.29, zoom: 5 },
-                    RO: { uf: 'RO', name: 'Rondônia', ibge: 11, lat: -11.22, long: -62.80, zoom: 6 },
-                    RR: { uf: 'RR', name: 'Roraima', ibge: 14, lat: 1.89, long: -61.22, zoom: 6 },
-                    TO: { uf: 'TO', name: 'Tocantins', ibge: 17, lat: -10.18, long: -48.33, zoom: 5 },
+                    AC: { uf: 'AC', name: 'Acre', lat: -8.77, long: -70.55, zoom: 6 },
+                    AM: { uf: 'AM', name: 'Amazonas', lat: -3.07, long: -61.66, zoom: 5 },
+                    AP: { uf: 'AP', name: 'Amapá', lat: 1.41, long: -51.77, zoom: 6 },
+                    MA: { uf: 'MA', name: 'Maranhão', lat: -2.55, long: -44.30, zoom: 5 },
+                    MT: { uf: 'MT', name: 'Mato Grosso', lat: -12.64, long: -55.42, zoom: 5 },
+                    PA: { uf: 'PA', name: 'Pará', lat: -5.53, long: -52.29, zoom: 5 },
+                    RO: { uf: 'RO', name: 'Rondônia', lat: -11.22, long: -62.80, zoom: 6 },
+                    RR: { uf: 'RR', name: 'Roraima', lat: 1.89, long: -61.22, zoom: 6 },
+                    TO: { uf: 'TO', name: 'Tocantins', lat: -10.18, long: -48.33, zoom: 5 },
                 }
             },
             tis () {
@@ -214,12 +204,14 @@
                     this.filters.municipio = ''
 
                     if (this.filters.estado) {
+                        this.data.municipalities = await fetchMunicipalities(this.filters.estado)
                         this.filters.ti = ''
                         this.filters.uc = ''
+                    } else {
+                        this.data.municipalities = []
                     }
 
                     await this.fetchNews(this.filters.estado)
-                    this.centerMap(this.filters.estado)
                 },
                 immediate: true,
             },
@@ -247,13 +239,12 @@
         async created () {
             const data2 = this.date.now.toISODate()
 
-            const [lastUpdate, municipalities, tis, ucs] = await Promise.all([
+            const [lastUpdate, tis, ucs] = await Promise.all([
                 fetchLastDate(),
-                fetchDeterData({ municipio: true, data1: '2016-01-01' , data2 }),
                 fetchDeterData({ ti: true, data1: '2016-01-01' , data2 }),
                 fetchDeterData({ uc: true, data1: '2016-01-01' , data2 }),
             ])
-            this.data = { municipalities, tis, ucs }
+            this.data = { municipalities: [], tis, ucs }
             this.lastUpdate = lastUpdate
         },
         mounted () {
@@ -262,15 +253,19 @@
             this.setMapObject()
         },
         methods: {
-            centerMap (state = '') {
+            centerMap () {
                 const mapEl = this.$refs.map.lastChild
-                this.setMapObject();
+                this.setMapObject()
+
+                const { municipio, estado, ti, uc } = this.filters
 
                 if (mapEl) {
-                    if (state) {
-                        /* One state */
-                        const stateData = this.states[state]
-                        this.jeomap.map.flyTo({ center: [stateData.long, stateData.lat], zoom: stateData.zoom || JeoMap.getArg('initial_zoom') })
+                    if (municipio) {
+                        const municipality = this.data.municipalities.find(municipality => municipality.mun_geo_cod === municipio)
+                        this.jeomap.map.flyTo({ center: [+municipality.long, +municipality.lat], zoom: 7 })
+                    } else if (estado) {
+                        const state = this.states[estado]
+                        this.jeomap.map.flyTo({ center: [state.long, state.lat], zoom: state.zoom || JeoMap.getArg('initial_zoom') })
                     } else {
                         /* All Brasil */
                         this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
@@ -298,6 +293,7 @@
                 ])
                 this.thisYear = firstValue(thisYear)
                 this.lastMonth = firstValue(lastMonth)
+                this.centerMap()
             },
             async fetchNews (state = '') {
                 const news = await fetchNews(state)

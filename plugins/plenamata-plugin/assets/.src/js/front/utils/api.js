@@ -29,6 +29,10 @@ function searchParams (object) {
     return params
 }
 
+export async function fetchConservationUnits () {
+    return get(`${BASE_URL}deter/lista/uc`)
+}
+
 export async function fetchDeterData ({ estado, municipio, ti, uc, ...args }) {
     const params = searchParams(args)
 
@@ -59,8 +63,16 @@ export async function fetchDeterData ({ estado, municipio, ti, uc, ...args }) {
     }
 }
 
+export async function fetchIndigenousLands () {
+    return get(`${BASE_URL}deter/lista/ti`)
+}
+
 export async function fetchLastDate () {
     return get(`${BASE_URL}deter/last_date`)
+}
+
+export async function fetchMunicipalities (uf) {
+    return get(`${BASE_URL}deter/lista/municipio?uf=${uf}`)
 }
 
 export async function fetchNews (state = '') {
