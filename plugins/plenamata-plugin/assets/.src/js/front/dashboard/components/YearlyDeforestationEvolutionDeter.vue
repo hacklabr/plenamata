@@ -126,6 +126,7 @@
             filters: {
                 handler: 'fetchData',
                 immediate: true,
+                deep: true,
             },
         },
         methods: {
