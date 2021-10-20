@@ -105,7 +105,7 @@
         },
         methods: {
             async fetchData () {
-                const data = await fetchProdesData(this.filters)
+                const data = await fetchProdesData({ ...this.filters, ano1: 2000, ano2: this.year, group_by: 'ano' })
                 this.data = data
             },
         },
