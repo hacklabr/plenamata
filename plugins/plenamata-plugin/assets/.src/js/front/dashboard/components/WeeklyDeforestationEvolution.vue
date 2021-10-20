@@ -151,8 +151,7 @@
                 }
             },
             dateInterval () {
-                const lastSync = DateTime.fromISO(this.lastUpdate.deter_last_date)
-                console.log(lastSync)
+                const lastSync = DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' })
                 if (this.source === 'deter') {
                     const start = DateTime.fromObject({ day: 1, month: 1, year: this.year })
                     const end = DateTime.min(DateTime.fromObject({ day: 31, month: 12, year: this.year }), lastSync)
