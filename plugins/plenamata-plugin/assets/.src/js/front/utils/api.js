@@ -32,15 +32,14 @@ function searchParams (object) {
 export async function fetchDeterData ({ estado, municipio, ti, uc, ...args }) {
     const params = searchParams(args)
 
-    if (estado) {
-        return get(`${BASE_URL}deter/estados?estado=${estado}&${params}`)
-    } else if (municipio) {
-        const collection = await get(`${BASE_URL}deter/municipios?${params}`)
+    if (municipio) {
         if (municipio === true) {
-            return collection
+            return await get(`${BASE_URL}deter/municipios?${params}`)
         } else {
-            return collection.filter(item => item.geo_cod === municipio)
+            return await get(`${BASE_URL}deter/municipios?geocode=${municipio}&${params}`)
         }
+    } else if (estado) {
+        return get(`${BASE_URL}deter/estados?estado=${estado}&${params}`)
     } else if (ti) {
         const collection = await get(`${BASE_URL}deter/ti?${params}`)
         if (ti === true) {
@@ -71,15 +70,14 @@ export async function fetchNews (state = '') {
 export async function fetchProdesData ({ estado, municipio, ti, uc, ...args }) {
     const params = searchParams(args)
 
-    if (estado) {
-        return get(`${BASE_URL}prodes/taxaanoestado?uf=${estado}`)
-    } else if (municipio) {
-        const collection = await get(`${BASE_URL}prodes/municipios?${params}`)
+    if (municipio) {
         if (municipio === true) {
-            return collection
+            return await get(`${BASE_URL}prodes/municipios?${params}`)
         } else {
-            return collection.filter(item => item.geo_cod === municipio)
+            return await get(`${BASE_URL}prodes/municipios?geocode=${municipio}&${params}`)
         }
+    } else if (estado) {
+        return get(`${BASE_URL}prodes/taxaanoestado?uf=${estado}`)
     } else if (ti) {
         const collection = await get(`${BASE_URL}prodes/ti?${params}`)
         if (ti === true) {
