@@ -37,11 +37,7 @@ export async function fetchDeterData ({ estado, municipio, ti, uc, ...args }) {
     const params = searchParams(args)
 
     if (municipio) {
-        if (municipio === true) {
-            return await get(`${BASE_URL}deter/municipios?${params}`)
-        } else {
-            return await get(`${BASE_URL}deter/municipios?geocode=${municipio}&${params}`)
-        }
+        return get(`${BASE_URL}deter/municipios?geocode=${municipio}&${params}`)
     } else if (estado) {
         return get(`${BASE_URL}deter/estados?estado=${estado}&${params}`)
     } else if (ti) {
@@ -83,11 +79,7 @@ export async function fetchProdesData ({ estado, municipio, ti, uc, ...args }) {
     const params = searchParams(args)
 
     if (municipio) {
-        if (municipio === true) {
-            return await get(`${BASE_URL}prodes/municipios?${params}`)
-        } else {
-            return await get(`${BASE_URL}prodes/municipios?geocode=${municipio}&${params}`)
-        }
+        return get(`${BASE_URL}prodes/municipios?geocode=${municipio}&${params}`)
     } else if (estado) {
         return get(`${BASE_URL}prodes/taxaanoestado?uf=${estado}`)
     } else if (ti) {
