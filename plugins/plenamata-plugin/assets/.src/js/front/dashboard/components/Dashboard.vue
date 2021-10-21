@@ -22,14 +22,14 @@
                         <label for="select-municipios">{{ __('Indigenous Lands', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.ti">
                             <option value="">{{ __('All ILs', 'plenamata') }}</option>
-                            <option v-for="ti of tis" :key="ti.terra_indigena" :value="ti.terra_indigena">{{ ti.terra_indigena }}</option>
+                            <option v-for="ti of tis" :key="ti.code" :value="ti.code">{{ ti.ti }}</option>
                         </select>
                     </div>
                     <div>
                         <label for="select-municipios">{{ __('Conservation Units', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.uc">
                             <option value="">{{ __('All CUs', 'plenamata') }}</option>
-                            <option v-for="uc of ucs" :key="uc.uc" :value="uc.uc">{{ uc.label }}</option>
+                            <option v-for="uc of ucs" :key="uc.code" :value="String(uc.uc)">{{ capitalize(uc.uc) }}</option>
                         </select>
                     </div>
 
@@ -90,8 +90,8 @@
     import WeeklyDeforestationEvolution from './WeeklyDeforestationEvolution.vue'
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
-    import { capitalize, getAreaKm2, getTrees, sortBy } from '../../utils'
-    import { fetchDeterData, fetchLastDate, fetchMunicipalities, fetchNews } from '../../utils/api'
+    import { capitalize, getAreaKm2, getTrees, localeSortBy } from '../../utils'
+    import { fetchConservationUnits, fetchDeterData, fetchIndigenousLands, fetchLastDate, fetchMunicipalities, fetchNews } from '../../utils/api'
     import { firstValue, shortDate } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
 
@@ -171,7 +171,7 @@
             tis () {
                 return this.data.tis
                     .slice(0)
-                    .sort(sortBy(ti => ti.terra_indigena))
+                    .sort(localeSortBy(ti => ti.ti))
             },
             trees () {
                 if (!this.thisYear) {
@@ -181,8 +181,8 @@
             },
             ucs () {
                 return this.data.ucs
-                    .map(uc => ({ uc: uc.uc, label: capitalize(uc.uc) }))
-                    .sort(sortBy(uc => uc.uc))
+                    .slice(0)
+                    .sort(localeSortBy(uc => uc.uc))
             },
             updated () {
                 const today = DateTime.now().toISODate()
@@ -237,12 +237,10 @@
             },
         },
         async created () {
-            const data2 = this.date.now.toISODate()
-
             const [lastUpdate, tis, ucs] = await Promise.all([
                 fetchLastDate(),
-                fetchDeterData({ ti: true, data1: '2016-01-01' , data2 }),
-                fetchDeterData({ uc: true, data1: '2016-01-01' , data2 }),
+                fetchIndigenousLands(),
+                fetchConservationUnits(),
             ])
             this.data = { municipalities: [], tis, ucs }
             this.lastUpdate = lastUpdate
@@ -253,6 +251,7 @@
             this.setMapObject()
         },
         methods: {
+            capitalize,
             centerMap () {
                 const mapEl = this.$refs.map.lastChild
                 this.setMapObject()
