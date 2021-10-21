@@ -1,9 +1,7 @@
 const BASE_URL = 'https://plenamata.solved.eco.br/api/'
 const cache = new Map()
 
-async function get (urlFragment, cacheable = true) {
-    const url = urlFragment.startsWith('http') ? urlFragment : `${BASE_URL}${urlFragment}`
-
+async function get (url, cacheable = true) {
     if (cacheable && cache.has(url)) {
         return Promise.resolve(cache.get(url))
     }
