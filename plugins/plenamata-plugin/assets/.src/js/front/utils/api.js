@@ -39,19 +39,9 @@ export async function fetchDeterData ({ estado, municipio, ti, uc, ...args }) {
     } else if (estado) {
         return get(`${BASE_URL}deter/estados?estado=${estado}&${params}`)
     } else if (ti) {
-        const collection = await get(`${BASE_URL}deter/ti?${params}`)
-        if (ti === true) {
-            return collection
-        } else {
-            return collection.filter(item => item.terra_indigena === ti)
-        }
+        return get(`${BASE_URL}deter/ti?cod=${ti}&${params}`)
     } else if (uc) {
-        const collection = await get(`${BASE_URL}deter/uc?${params}`)
-        if (uc === true) {
-            return collection
-        } else {
-            return collection.filter(item => item.uc === uc)
-        }
+        return get(`${BASE_URL}deter/uc?cod=${uc}&${params}`)
     } else {
         return get(`${BASE_URL}deter/basica?${params}`)
     }
@@ -81,19 +71,9 @@ export async function fetchProdesData ({ estado, municipio, ti, uc, ...args }) {
     } else if (estado) {
         return get(`${BASE_URL}prodes/taxaanoestado?uf=${estado}`)
     } else if (ti) {
-        const collection = await get(`${BASE_URL}prodes/ti?${params}`)
-        if (ti === true) {
-            return collection
-        } else {
-            return collection.filter(item => item.terra_indigena === ti)
-        }
+        return get(`${BASE_URL}prodes/ti?cod=${ti}&${params}`)
     } else if (uc) {
-        const collection = await get(`${BASE_URL}prodes/uc?${params}`)
-        if (uc === true) {
-            return collection
-        } else {
-            return collection.filter(item => item.uc === uc)
-        }
+        return get(`${BASE_URL}prodes/uc?cod=${uc}&${params}`)
     } else {
         return get(`${BASE_URL}prodes/taxaano`)
     }

@@ -29,7 +29,7 @@
                         <label for="select-municipios">{{ __('Conservation Units', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.uc">
                             <option value="">{{ __('All CUs', 'plenamata') }}</option>
-                            <option v-for="uc of ucs" :key="uc.code" :value="String(uc.uc)">{{ capitalize(uc.uc) }}</option>
+                            <option v-for="uc of ucs" :key="uc.code" :value="String(uc.code)">{{ capitalize(uc.uc) }}</option>
                         </select>
                     </div>
 
