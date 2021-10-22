@@ -24,7 +24,7 @@
 
     import DashboardPanel from './DashboardPanel.vue'
     import { __, sprintf } from '../plugins/i18n'
-    import { getAreaKm2, sortBy } from '../../utils'
+    import { getAreaKm2 } from '../../utils'
     import { fetchProdesData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
@@ -54,7 +54,10 @@
                 }
             },
             areasKm2 () {
-                return this.sortedData.map(getAreaKm2)
+                return this.years.map((year) => {
+                    const datum = this.data.find((datum) => datum.year === year)
+                    return getAreaKm2(datum)
+                })
             },
             chartData () {
                 return {
@@ -88,12 +91,24 @@
                     },
                 }
             },
-            sortedData () {
-                return this.data.sort(sortBy(item => item.year))
-            },
             unitModel: vModel('unit'),
             years () {
-                return this.sortedData.map(datum => datum.year)
+                if (this.data.length === 0) {
+                    return []
+                }
+
+                const first = this.data.reduce((acc, curr) => {
+                    return (!acc || curr.year < acc) ? curr.year : acc
+                }, null)
+                const last = this.data.reduce((acc, curr) => {
+                    return (!acc || curr.year > acc) ? curr.year : acc
+                }, null)
+
+                const years = []
+                for (let year = first; year <= last; year++) {
+                    years.push(year)
+                }
+                return years
             },
         },
         watch: {

@@ -79,7 +79,13 @@
                 }
             },
             areasKm2 () {
-                return this.data.map(datum => getAreaKm2(datum[0]))
+                return this.years.map((year) => {
+                    if (!datum[0]) {
+                        return 0
+                    }
+                    const datum = this.data.find((datum) => datum[0].year === year)
+                    return datum ? getAreaKm2(datum[0]) : 0
+                })
             },
             chartData () {
                 return {
@@ -113,13 +119,22 @@
                     },
                 }
             },
+            intervals () {
+                const { start, end } = this.date
+
+                const intervals = [[start, end]]
+                for (let i = 1; i < 5; i++) {
+                    intervals.unshift([start.minus({ years: i }), end.minus({ years: i })])
+                }
+                return intervals
+            },
             previousMonth () {
                 const month = DateTime.fromISO(this.lastUpdate.deter_last_date).month
                 return months[month]
             },
             unitModel: vModel('unit'),
             years () {
-                return this.data.map(datum => datum[0].year)
+                return this.intervals.map(([start]) => start.year)
             },
         },
         watch: {
@@ -131,14 +146,7 @@
         },
         methods: {
             async fetchData () {
-                const { start, end } = this.date
-
-                const intervals = [[start, end]]
-                for (let i = 1; i < 5; i++) {
-                    intervals.unshift([start.minus({ years: i }), end.minus({ years: i })])
-                }
-
-                const data = await Promise.all(intervals.map(([start, end]) => {
+                const data = await Promise.all(this.intervals.map(([start, end]) => {
                     return fetchDeterData({ ...this.filters, data1: start.toISODate(), data2: end.toISODate(), group_by: 'ano' })
                 }))
                 this.data = data
