@@ -15,7 +15,7 @@ async function get (url, cacheable = true) {
         return data
     } catch (err) {
         console.error(err)
-        return Promise.reject(undefined)
+        return Promise.resolve([])
     }
 }
 

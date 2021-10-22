@@ -5,10 +5,16 @@ export function capitalize (phrase) {
 }
 
 export function getAreaKm2 (datum) {
+    if (!datum) {
+        return 0
+    }
     return Number(datum.areakm || datum.areamunkm || datum.areauckm || datum.areatikm || 0)
 }
 
 export function getTrees (datum) {
+    if (!datum) {
+        return 0
+    }
     return Number(datum.num_arvores || 0)
 }
 
