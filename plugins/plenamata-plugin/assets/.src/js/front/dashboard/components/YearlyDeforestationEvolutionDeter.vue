@@ -80,10 +80,7 @@
             },
             areasKm2 () {
                 return this.years.map((year) => {
-                    if (!datum[0]) {
-                        return 0
-                    }
-                    const datum = this.data.find((datum) => datum[0].year === year)
+                    const datum = this.data.find((datum) => datum[0]?.year === year)
                     return datum ? getAreaKm2(datum[0]) : 0
                 })
             },
