@@ -9,6 +9,28 @@
     .jeomap {
         min-height: calc(100vh - 68px);
 
+        .mapboxgl-popup {
+            max-width:300px !important;
+        }
+        .mapboxgl-popup-content {
+            width:300px;
+            border-radius:8px;
+
+            article {
+                display:flex;
+                flex-direction: column-reverse;
+
+                .popup__date {
+                    font-family: 'Archivo';
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: size(14);
+                    line-height: size(15);
+                    padding-top:size(10);        
+                }
+            }
+        }
+
         @include mobile {
             min-height: 100vw;
         }
@@ -185,6 +207,16 @@
             top: 0;
         }
     }
+    &__loadmore {
+        background-color: $c_purple;
+        border-radius: size(8);
+        color: white;
+        padding: size(4) size(16);
+        text-align: center;
+        font-weight: bold;
+        display:inline-block;
+        width:100%;
+    }
 }
 
 .dashboard-panel {
@@ -269,13 +301,15 @@
     display: flex;
     margin-bottom: size(32);
 
-    transition: 100ms linear border;
+    transition: 100ms linear background;
 
     &.selected {
-        border-right:5px solid $c_purple;
+        background:$c_lighter;
     }
 
     h2 {
+        padding-top:10px;
+        padding-right:10px;
         font-size: size(18);
         margin: 0 0 size(8);
 
@@ -288,6 +322,9 @@
         flex: 1;
         margin-right: size(8);
 
+        img {
+            height:100%;
+        }
         @include mobile {
             flex: 2;
         }

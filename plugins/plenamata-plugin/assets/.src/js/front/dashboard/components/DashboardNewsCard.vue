@@ -54,7 +54,6 @@
 
 
                 if( post.meta && post.meta._related_point && post.meta._related_point[0] ) {
-                    console.log( post.meta._related_point )
 
                     window.dashboardJeoMap.map.flyTo({
                         center: [post.meta._related_point[0]._geocode_lon, post.meta._related_point[0]._geocode_lat],
