@@ -15,7 +15,7 @@
         .mapboxgl-popup-content {
             width:300px;
             border-radius:8px;
-            
+
             article {
                 display:flex;
                 flex-direction: column-reverse;
@@ -206,6 +206,16 @@
             position: sticky;
             top: 0;
         }
+    }
+    &__loadmore {
+        background-color: $c_purple;
+        border-radius: size(8);
+        color: white;
+        padding: size(4) size(16);
+        text-align: center;
+        font-weight: bold;
+        display:inline-block;
+        width:100%;
     }
 }
 

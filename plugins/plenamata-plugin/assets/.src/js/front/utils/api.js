@@ -1,7 +1,7 @@
 const BASE_URL = 'https://plenamata.solved.eco.br/api/'
 const cache = new Map()
 
-async function get (url, cacheable = true) {
+async function get (url, cacheable = true, saveHeaders = false ) {
     if (cacheable && cache.has(url)) {
         return Promise.resolve(cache.get(url))
     }
@@ -11,6 +11,9 @@ async function get (url, cacheable = true) {
         const data = await req.json()
         if (cacheable) {
             cache.set(url, data)
+        }
+        if ( saveHeaders ) {
+            window.lastGetRequestHeader = req.headers;
         }
         return data
     } catch (err) {
@@ -59,12 +62,12 @@ export async function fetchMunicipalities (uf) {
     return get(`${BASE_URL}deter/lista/municipio?uf=${uf}`)
 }
 
-export async function fetchNews (state = '') {
-    return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
+export async function fetchNews (state = '', pageNum = 1) {
+    return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}&page=${pageNum}`, false, true )
 }
 
 export async function fetchUniqueNews (postId) {
-    return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/${postId}/?_embed`, false)
+    return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/${postId}/?_embed`, false, false)
 }
 
 export async function fetchProdesData ({ estado, municipio, ti, uc, ...args }) {

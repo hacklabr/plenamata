@@ -67,6 +67,9 @@
                 <div class="dashboard__news" v-else-if="view === 'news'">
                     <DashboardNewsCard v-for="post of news" :key="post.id" :post="post"/>
                     <p v-if="news.length === 0">{{ __('No news to be shown.', 'plenamata') }}</p>
+                    <a href="#" class="dashboard__loadmore" @click="loadMore($event)" v-if="currentFetchNewsPage < wpApiTotalPages ">
+                        {{ __('Load more', 'plenamata') }}
+                    </a>
                 </div>
             </div>
         </main>
@@ -138,6 +141,8 @@
                 unit: 'ha',
                 view: 'data',
                 year,
+                currentFetchNewsPage: 1,
+                wpApiTotalPages: 999999,
             }
         },
         computed: {
@@ -303,6 +308,15 @@
             async fetchNews (state = '') {
                 const news = await fetchNews(state)
                 this.news = news
+                this.currentFetchNewsPage = 1
+                this.updateWPTotalPages()
+            },
+
+            async fetchNewsByPage (state = '', pageNum = 1) {
+                const news = await fetchNews(state, pageNum)
+                this.news = this.news = [...this.news, ...news]
+                this.currentFetchNewsPage = pageNum
+                this.updateWPTotalPages()
             },
             async fetchUniqueNews (postId, callback) {
                 let news = await fetchUniqueNews(postId)
@@ -312,7 +326,13 @@
                     callback( news )
                 }
             },
-
+            updateWPTotalPages() {
+                if (window.lastGetRequestHeader && typeof window.lastGetRequestHeader.get == 'function' ) {
+                    if ( window.lastGetRequestHeader.get('X-WP-TotalPages') ) {
+                        this.wpApiTotalPages = parseInt( window.lastGetRequestHeader.get('X-WP-TotalPages') )
+                    }
+                }
+            },
             openNews(e) {
                 this.clearSelectedNews()
                 const postId = e.features[0].properties.id
@@ -355,6 +375,14 @@
                 this.jeomap.map.on('click', 'unclustered-points', (e) => {
                     this.openNews(e)
                 })
+            },
+            loadMore( e ) {
+                e.preventDefault();
+
+                let nextPage = this.currentFetchNewsPage + 1;
+                console.log( this.currentFetchNewsPage );
+                this.fetchNewsByPage( this.filters.estado, nextPage );
+                console.log( this.currentFetchNewsPage );
             },
         },
     }
