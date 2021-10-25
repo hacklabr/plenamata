@@ -1,5 +1,5 @@
 <template>
-    <article class="dashboard-news" :data-id="post.id" v-on:click="openPin( post, $event )">
+    <article class="dashboard-news" :data-id="post.id" @click="openPin(post, $event)">
         <div class="dashboard-news__image">
             <img v-if="post.plenamata_thumbnail" :src="post.plenamata_thumbnail" alt="">
         </div>
@@ -51,7 +51,7 @@
 
                     newsElem.classList.add( 'selected' );
                 }
-            
+
 
                 if( post.meta && post.meta._related_point && post.meta._related_point[0] ) {
                     console.log( post.meta._related_point )
@@ -67,7 +67,7 @@
                         .setLngLat([post.meta._related_point[0]._geocode_lon, post.meta._related_point[0]._geocode_lat])
                         .setHTML( html )
                         .addTo( window.dashboardJeoMap.map );
-                    
+
                         mapPopUp.on( 'close', () =>  {
                             this.clearSelectedNews()
                             document.querySelectorAll('.mapboxgl-popup').forEach((popup) => popup.remove());

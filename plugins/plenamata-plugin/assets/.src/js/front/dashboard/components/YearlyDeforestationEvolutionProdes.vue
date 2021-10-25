@@ -24,7 +24,8 @@
 
     import DashboardPanel from './DashboardPanel.vue'
     import { __, sprintf } from '../plugins/i18n'
-    import api from '../../utils/api'
+    import { getAreaKm2 } from '../../utils'
+    import { fetchProdesData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -35,7 +36,7 @@
             DashboardPanel,
         },
         props: {
-            state: { type: String, required: true },
+            filters: { type: Object, required: true },
             unit: { type: String, default: 'ha' },
             year: { type: Number, required: true },
         },
@@ -53,7 +54,10 @@
                 }
             },
             areasKm2 () {
-                return this.sortedData.map(datum => Number(datum.areakm))
+                return this.years.map((year) => {
+                    const datum = this.data.find((datum) => datum.year === year)
+                    return getAreaKm2(datum)
+                })
             },
             chartData () {
                 return {
@@ -87,25 +91,36 @@
                     },
                 }
             },
-            sortedData () {
-                return this.data.sort((a, b) => a.year > b.year ? 1 : -1)
-            },
             unitModel: vModel('unit'),
             years () {
-                return this.sortedData.map(datum => datum.year)
+                if (this.data.length === 0) {
+                    return []
+                }
+
+                const first = this.data.reduce((acc, curr) => {
+                    return (!acc || curr.year < acc) ? curr.year : acc
+                }, null)
+                const last = this.data.reduce((acc, curr) => {
+                    return (!acc || curr.year > acc) ? curr.year : acc
+                }, null)
+
+                const years = []
+                for (let year = first; year <= last; year++) {
+                    years.push(year)
+                }
+                return years
             },
         },
         watch: {
-            state: {
+            filters: {
                 handler: 'fetchData',
                 immediate: true,
+                deep: true,
             },
         },
         methods: {
             async fetchData () {
-                const filters = this.state ? `taxaanoestado?uf=${this.state}` : 'taxaano'
-
-                const data = await api.get(`prodes/${filters}`)
+                const data = await fetchProdesData({ ...this.filters, ano1: 2000, ano2: this.year, group_by: 'ano' })
                 this.data = data
             },
         },

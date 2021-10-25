@@ -6,11 +6,34 @@
                 <form>
                     <div>
                         <label for="select-estados">{{ __('States', 'plenamata') }}</label>
-                        <select id="select-estados" v-model="state">
+                        <select id="select-estados" name="select-estados" v-model="filters.estado">
                             <option value="">{{ __('All states', 'plenamata') }}</option>
                             <option v-for="state of states" :key="state.uf" :value="state.uf">{{ state.name }}</option>
                         </select>
                     </div>
+                    <div>
+                        <label for="select-municipios">{{ __('Municipalities', 'plenamata') }}</label>
+                        <select id="select-municipios" name="select-municipios" v-model="filters.municipio" :disabled="!filters.estado">
+                            <option value="">{{ __('All municipalities', 'plenamata') }}</option>
+                            <option v-for="municipality of data.municipalities" :key="municipality.mun_geo_cod" :value="municipality.mun_geo_cod">{{ municipality.municipio }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="select-municipios">{{ __('Indigenous Lands', 'plenamata') }}</label>
+                        <select id="select-municipios" name="select-municipios" v-model="filters.ti">
+                            <option value="">{{ __('All ILs', 'plenamata') }}</option>
+                            <option v-for="ti of tis" :key="ti.code" :value="String(ti.code)">{{ ti.ti }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="select-municipios">{{ __('Conservation Units', 'plenamata') }}</label>
+                        <select id="select-municipios" name="select-municipios" v-model="filters.uc">
+                            <option value="">{{ __('All CUs', 'plenamata') }}</option>
+                            <option v-for="uc of ucs" :key="uc.code" :value="String(uc.code)">{{ capitalize(uc.uc) }}</option>
+                        </select>
+                    </div>
+
+                    <a href="javascript:void(0)" @click="clearFilters" @keypress.enter="clearFilters">{{ __('Clear filters', 'plenamata') }}</a>
                 </form>
             </div>
         </header>
@@ -31,14 +54,14 @@
                 </fieldset>
 
                 <div class="dashboard__panels" v-if="view === 'data'">
-                    <FelledTreesThisYear :lastUpdate="lastUpdate" :minutes="minutes" :trees="trees" :year="date.year"/>
-                    <TotalDeforestationThisYear :areaKm2="areaKm2" :now="date.now" :state="state" :unit.sync="unit" :updated="updated" :year="date.year"/>
+                    <FelledTreesThisYear :lastUpdate="lastUpdate" :minutes="minutes" :trees="trees" :year="date.year" v-if="lastUpdate"/>
+                    <TotalDeforestationThisYear :areaKm2="areaKm2" :filters="filters" :now="date.now" :unit.sync="unit" :updated="updated" :year="date.year"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="date.year"/>
-                    <DeforestedAreaLastWeek :lastUpdate="lastUpdate" :state="state" :unit.sync="unit" :updated="updated" v-if="lastUpdate.deter_last_date"/>
-                    <WeeklyDeforestationEvolution :now="date.now" :source.sync="source" :state="state" :unit.sync="unit" :updated="updated" :year.sync="year"/>
-                    <MonthlyDeforestationEvolution :source.sync="source" :state="state" :unit.sync="unit" :updated="updated"/>
-                    <YearlyDeforestationEvolutionDeter :lastUpdate="lastUpdate" :state="state" :unit.sync="unit" :updated="updated"/>
-                    <YearlyDeforestationEvolutionProdes :state="state" :unit.sync="unit" :year="date.year"/>
+                    <DeforestedAreaLastWeek :filters="filters" :lastUpdate="lastUpdate" :unit.sync="unit" :updated="updated" v-if="lastUpdate"/>
+                    <WeeklyDeforestationEvolution :filters="filters" :lastUpdate="lastUpdate" :now="date.now" :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="year" v-if="lastUpdate"/>
+                    <MonthlyDeforestationEvolution :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated"/>
+                    <YearlyDeforestationEvolutionDeter :filters="filters" :lastUpdate="lastUpdate" :unit.sync="unit" :updated="updated" v-if="lastUpdate"/>
+                    <YearlyDeforestationEvolutionProdes :filters="filters" :unit.sync="unit" :year="date.year"/>
                 </div>
 
                 <div class="dashboard__news" v-else-if="view === 'news'">
@@ -67,8 +90,9 @@
     import WeeklyDeforestationEvolution from './WeeklyDeforestationEvolution.vue'
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
-    import api from '../../utils/api'
-    import { shortDate } from '../../utils/filters'
+    import { capitalize, getAreaKm2, getTrees, localeSortBy } from '../../utils'
+    import { fetchConservationUnits, fetchDeterData, fetchIndigenousLands, fetchLastDate, fetchMunicipalities, fetchNews } from '../../utils/api'
+    import { firstValue, shortDate } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
 
     export default {
@@ -90,17 +114,27 @@
             const year = now.year
 
             return {
+                data: {
+                    municipalities: [],
+                    ucs: [],
+                    tis: [],
+                },
                 date: {
                     now,
                     startOfYear,
                     year,
                 },
-                lastMonth: [],
-                lastUpdate: {},
+                filters: {
+                    estado: '',
+                    municipio: '',
+                    ti: '',
+                    uc: '',
+                },
+                lastMonth: null,
+                lastUpdate: null,
                 news: [],
                 source: 'deter',
-                state: '',
-                thisYear: [],
+                thisYear: null,
                 unit: 'ha',
                 view: 'data',
                 year,
@@ -111,19 +145,14 @@
                 if (!this.thisYear) {
                     return 0
                 }
-                if (this.state) {
-                    const state = this.thisYear.find(state => state.uf === this.state)
-                    return Number(state.areamunkm)
-                } else {
-                    return this.thisYear.reduce((acc, state) => acc + Number(state.areamunkm), 0)
-                }
+                return getAreaKm2(this.thisYear)
             },
             days () {
-                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
+                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' }) : this.date.now
                 return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('days')
             },
             minutes () {
-                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date) : this.date.now
+                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' }) : this.date.now
                 return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('minutes')
             },
             states () {
@@ -139,47 +168,81 @@
                     TO: { uf: 'TO', name: 'Tocantins', lat: -10.18, long: -48.33, zoom: 5 },
                 }
             },
+            tis () {
+                return this.data.tis
+                    .slice(0)
+                    .sort(localeSortBy(ti => ti.ti))
+            },
             trees () {
                 if (!this.thisYear) {
                     return 0
-                } else if (this.state) {
-                    const state = this.thisYear.find(state => state.uf === this.state)
-                    return Number(state.num_arvores)
-                } else {
-                    return this.thisYear.reduce((acc, state) => acc + Number(state.num_arvores), 0)
                 }
+                return getTrees(this.thisYear)
+            },
+            ucs () {
+                return this.data.ucs
+                    .slice(0)
+                    .sort(localeSortBy(uc => uc.uc))
             },
             updated () {
                 const today = DateTime.now().toISODate()
 
                 return {
-                    deter: shortDate(DateTime.fromISO(this.lastUpdate.deter_last_date || today).toJSDate()).replaceAll('/', '.'),
-                    sync: shortDate(DateTime.fromISO(this.lastUpdate.last_sync || today).toJSDate()).replaceAll('/', '.'),
+                    deter: shortDate(DateTime.fromISO(this.lastUpdate?.deter_last_date || today).toJSDate()).replaceAll('/', '.'),
+                    sync: shortDate(DateTime.fromISO(this.lastUpdate?.last_sync || today).toJSDate()).replaceAll('/', '.'),
                 }
             },
         },
         watch: {
-            state: {
+            filters: {
+                handler: 'fetchData',
+                immediate: true,
+                deep: true,
+            },
+            'filters.estado': {
                 async handler () {
-                    await this.fetchNews(this.state)
-                    this.centerMap(this.state)
+                    this.filters.municipio = ''
+
+                    if (this.filters.estado) {
+                        this.data.municipalities = await fetchMunicipalities(this.filters.estado)
+                        this.filters.ti = ''
+                        this.filters.uc = ''
+                    } else {
+                        this.data.municipalities = []
+                    }
+
+                    await this.fetchNews(this.filters.estado)
                 },
                 immediate: true,
             },
+            'filters.municipio' () {
+                if (this.filters.municipio) {
+                    this.filters.ti = ''
+                    this.filters.uc = ''
+                }
+            },
+            'filters.ti' () {
+                if (this.filters.ti) {
+                    this.filters.estado = ''
+                    this.filters.municipio = ''
+                    this.filters.uc = ''
+                }
+            },
+            'filters.uc' () {
+                if (this.filters.uc) {
+                    this.filters.estado = ''
+                    this.filters.municipio = ''
+                    this.filters.ti = ''
+                }
+            },
         },
         async created () {
-            const { now, startOfYear } = this.date
-
-            const monthAgo = now.minus({ months: 1 })
-            const twoMonthsAgo = now.minus({ months: 2 })
-
-            const [thisYear, lastMonth, lastUpdate] = await Promise.all([
-                api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`),
-                api.get(`deter/estados?data1=${twoMonthsAgo.toISODate()}&data2=${monthAgo.toISODate()}`),
-                api.get('deter/last_date'),
+            const [lastUpdate, tis, ucs] = await Promise.all([
+                fetchLastDate(),
+                fetchIndigenousLands(),
+                fetchConservationUnits(),
             ])
-            this.thisYear = thisYear
-            this.lastMonth = lastMonth
+            this.data = { municipalities: [], tis, ucs }
             this.lastUpdate = lastUpdate
         },
         mounted () {
@@ -188,6 +251,72 @@
             this.setMapObject()
         },
         methods: {
+            capitalize,
+            centerMap () {
+                const mapEl = this.$refs.map.lastChild
+                this.setMapObject()
+
+                const { municipio, estado, ti, uc } = this.filters
+
+                if (mapEl) {
+                    if (municipio) {
+                        const municipality = this.data.municipalities.find(municipality => municipality.mun_geo_cod === municipio)
+                        this.jeomap.map.flyTo({ center: [+municipality.long, +municipality.lat], zoom: 7 })
+                    } else if (estado) {
+                        const state = this.states[estado]
+                        this.jeomap.map.flyTo({ center: [state.long, state.lat], zoom: state.zoom || JeoMap.getArg('initial_zoom') })
+                    } else if (ti) {
+                        const point = this.data.tis.find(item => item.code == ti)
+                        this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
+                    } else if (uc) {
+                        const point = this.data.ucs.find(item => item.code == uc)
+                        this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
+                    } else {
+                        /* All Brasil */
+                        this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
+                    }
+                }
+            },
+            clearFilters () {
+                this.filters = {
+                    estado: '',
+                    municipio: '',
+                    ti: '',
+                    uc: '',
+                }
+            },
+            clearSelectedNews,
+            async fetchData () {
+                const { now, startOfYear } = this.date
+
+                const monthAgo = now.minus({ months: 1 })
+                const twoMonthsAgo = now.minus({ months: 2 })
+
+                const [thisYear, lastMonth] = await Promise.all([
+                    fetchDeterData({ ...this.filters, data1: startOfYear.toISODate(), data2: now.toISODate() }),
+                    fetchDeterData({ ...this.filters, data1: twoMonthsAgo.toISODate(), data2: monthAgo.toISODate() }),
+                ])
+                this.thisYear = firstValue(thisYear)
+                this.lastMonth = firstValue(lastMonth)
+                this.centerMap()
+            },
+            async fetchNews (state = '') {
+                const news = await fetchNews(state)
+                this.news = news
+            },
+            openNews(e) {
+                this.clearSelectedNews()
+                let postId = e.features[0].properties.id
+                this.view = 'news'
+                setTimeout(() => {
+                    let newsElem = document.querySelector(`[data-id="${postId}"]`)
+                    if (newsElem == null) {
+                        return
+                    }
+                    scrollIntoView(newsElem)
+                    newsElem.classList.add('selected')
+                }, 900)
+            },
             setMapObject() {
                 let mapEl = document.querySelector('.jeomap')
                 let uuid = mapEl.dataset['uui_id']
@@ -205,46 +334,11 @@
 					this.jeomap.map.touchZoomRotate.disable()
 					this.jeomap.map.dragRotate.disable()
                 }
-                this.jeomap.map.on('click', 'unclustered-points', ( e ) => {
-                    this.openNews( e )
+
+                this.jeomap.map.on('click', 'unclustered-points', (e) => {
+                    this.openNews(e)
                 })
             },
-            clearSelectedNews,
-            openNews( e ) {
-                this.clearSelectedNews();
-                let postId = e.features[0].properties.id
-                this.view = 'news';
-                setTimeout( () => {
-                    let newsElem = document.querySelector( '[data-id="' + postId + '"]' )
-                    if ( newsElem == null ) {
-                        //alert( 'nulo' );
-                        return;
-                    }
-                    scrollIntoView(newsElem);
-                    newsElem.classList.add( 'selected' );
-                }, 900)
-
-            },
-            centerMap (state = '') {
-                const mapEl = this.$refs.map.lastChild
-                this.setMapObject();
-
-                if (mapEl) {
-                    if (state) {
-                        /* One state */
-                        const stateData = this.states[state]
-                        this.jeomap.map.flyTo({ center: [stateData.long, stateData.lat], zoom: stateData.zoom || JeoMap.getArg('initial_zoom') })
-                    } else {
-                        /* All Brasil */
-                        this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
-                    }
-                }
-            },
-            async fetchNews (state = '') {
-                const news = await api.get(`${this.$dashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
-                this.news = news
-            },
-
         },
     }
 </script>

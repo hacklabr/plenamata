@@ -6,7 +6,8 @@
     import { BarChart } from 'vue-chart-3'
 
     import { __, sprintf } from '../../dashboard/plugins/i18n'
-    import api from '../../utils/api'
+    import { getAreaKm2 } from '../../utils'
+    import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
 
     const { DateTime } = window.luxon
@@ -23,7 +24,7 @@
         },
         computed: {
             areas () {
-                return this.data.map(datum => Number(datum[0].areamunkm))
+                return this.data.map(datum => getAreaKm2(datum[0]))
             },
             chartData () {
                 return {
@@ -68,7 +69,7 @@
             }
 
             const data = await Promise.all(intervals.map(([start, end]) => {
-                return api.get(`deter/basica?data1=${start.toISODate()}&data2=${end.toISODate()}&group_by=ano`)
+                return fetchDeterData({ data1: start.toISODate(), data2: end.toISODate(), group_by: 'ano' })
             }))
             this.data = data
         },

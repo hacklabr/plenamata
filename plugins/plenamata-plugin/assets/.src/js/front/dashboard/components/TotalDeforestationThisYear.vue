@@ -6,7 +6,7 @@
         <template #measure>
             <p>
                 {{ sprintf(__('Total deforested area in %s (until last week)', 'plenamata'), year) }}
-                <span v-if="state">{{ __('on state', 'plenamata') }}</span>
+                <span v-if="filters.estado">{{ __('on state', 'plenamata') }}</span>
             </p>
             <DashboardMeasure :number="area">
                 <template #unit>
@@ -36,8 +36,9 @@
 
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
-    import api from '../../utils/api'
-    import { roundNumber } from '../../utils/filters'
+    import { getAreaKm2 } from '../../utils'
+    import { fetchDeterData } from '../../utils/api'
+    import { firstValue, roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
     export default {
@@ -48,8 +49,8 @@
         },
         props: {
             areaKm2: { type: Number, required: true },
+            filters: { type: Object, default: '' },
             now: { type: DateTime, required: true },
-            state: { type: String, default: '' },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
             year: { type: Number, required: true },
@@ -77,23 +78,25 @@
                 if (!this.lastYear) {
                     return 0
                 }
-                if (this.state) {
-                    const state = this.lastYear.find(state => state.uf === this.state)
-                    return Number(state.areamunkm)
-                } else {
-                    return this.lastYear.reduce((acc, state) => acc + Number(state.areamunkm), 0)
-                }
+                return getAreaKm2(this.lastYear)
             },
             unitModel: vModel('unit'),
         },
-        async created () {
-            const lastYear = this.now.minus({ years: 1 })
-            const startOfYear = lastYear.startOf('year')
-
-            const data = await api.get(`deter/estados?data1=${startOfYear.toISODate()}&data2=${lastYear.toISODate()}`)
-            this.lastYear = data
+        watch: {
+            filters: {
+                handler: 'fetchData',
+                immediate: true,
+                deep: true,
+            },
         },
         methods: {
+            async fetchData () {
+                const lastYear = this.now.minus({ years: 1 })
+                const startOfYear = lastYear.startOf('year')
+
+                const data = await fetchDeterData({ ...this.filters, data1: startOfYear.toISODate(), data2: lastYear.toISODate() })
+                this.lastYear = firstValue(data)
+            },
             roundNumber,
         },
     }

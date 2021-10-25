@@ -1,7 +1,7 @@
 import { sprintf } from '@wordpress/i18n'
 
 import { __ } from '../dashboard/plugins/i18n'
-import api from '../utils/api'
+import { fetchDeterData, fetchLastDate } from '../utils/api'
 import { roundNumber, shortDate } from '../utils/filters'
 
 const { DateTime, Interval } = window.luxon
@@ -11,17 +11,17 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
     const startOfYear = now.startOf('year')
 
     const [updated, thisYear] = await Promise.all([
-        api.get('deter/last_date'),
-        api.get(`deter/basica?data1=${startOfYear.toISODate()}&data2=${now.toISODate()}`)
+        fetchLastDate(),
+        fetchDeterData({ data1: startOfYear.toISODate(), data2: now.toISODate() }),
     ])
 
-    const lastSync = DateTime.fromISO(updated.last_sync)
-    const lastDate = DateTime.fromISO(updated.deter_last_date)
+    const lastSync = DateTime.fromISO(updated.last_sync, { zone: 'utc' })
+    const lastDate = DateTime.fromISO(updated.deter_last_date, { zone: 'utc' })
 
     const daysThisYear = Interval.fromDateTimes(startOfYear, lastDate)
     const elapsedTime = Interval.fromDateTimes(lastDate, now)
 
-    const lastWeek = await api.get(`deter/basica?data1=${lastDate.minus({ weeks: 1 }).toISODate()}&data2=${lastDate.toISODate()}`)
+    const lastWeek = await fetchDeterData({ data1: lastDate.minus({ weeks: 1 }).toISODate(), data2: lastDate.toISODate() })
 
 	document.querySelectorAll('[data-deter]').forEach((el) => {
         const deterLabel = el.dataset.deter

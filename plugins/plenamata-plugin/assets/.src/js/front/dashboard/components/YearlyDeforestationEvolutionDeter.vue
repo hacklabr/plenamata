@@ -25,7 +25,8 @@
 
     import DashboardPanel from './DashboardPanel.vue'
     import { __, _x, sprintf } from '../plugins/i18n'
-    import api from '../../utils/api'
+    import { getAreaKm2 } from '../../utils'
+    import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -52,8 +53,8 @@
             DashboardPanel,
         },
         props: {
+            filters: { type: Object, required: true },
             lastUpdate: { type: Object, required: true },
-            state: { type: String, required: true },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
         },
@@ -78,7 +79,10 @@
                 }
             },
             areasKm2 () {
-                return this.data.map(datum => Number(datum[0].areamunkm))
+                return this.years.map((year) => {
+                    const datum = this.data.find((datum) => datum[0]?.year === year)
+                    return datum ? getAreaKm2(datum[0]) : 0
+                })
             },
             chartData () {
                 return {
@@ -112,34 +116,35 @@
                     },
                 }
             },
+            intervals () {
+                const { start, end } = this.date
+
+                const intervals = [[start, end]]
+                for (let i = 1; i < 5; i++) {
+                    intervals.unshift([start.minus({ years: i }), end.minus({ years: i })])
+                }
+                return intervals
+            },
             previousMonth () {
                 const month = DateTime.fromISO(this.lastUpdate.deter_last_date).month
                 return months[month]
             },
             unitModel: vModel('unit'),
             years () {
-                return this.data.map(datum => datum[0].year)
+                return this.intervals.map(([start]) => start.year)
             },
         },
         watch: {
-            state: {
+            filters: {
                 handler: 'fetchData',
                 immediate: true,
+                deep: true,
             },
         },
         methods: {
             async fetchData () {
-                const { start, end } = this.date
-
-                const filters = this.state ? `estados?estado=${this.state}&` : 'basica?'
-
-                const intervals = [[start, end]]
-                for (let i = 1; i < 5; i++) {
-                    intervals.unshift([start.minus({ years: i }), end.minus({ years: i })])
-                }
-
-                const data = await Promise.all(intervals.map(([start, end]) => {
-                    return api.get(`deter/${filters}data1=${start.toISODate()}&data2=${end.toISODate()}&group_by=ano`)
+                const data = await Promise.all(this.intervals.map(([start, end]) => {
+                    return fetchDeterData({ ...this.filters, data1: start.toISODate(), data2: end.toISODate(), group_by: 'ano' })
                 }))
                 this.data = data
             },
