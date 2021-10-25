@@ -22,7 +22,7 @@
                         <label for="select-municipios">{{ __('Indigenous Lands', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.ti">
                             <option value="">{{ __('All ILs', 'plenamata') }}</option>
-                            <option v-for="ti of tis" :key="ti.code" :value="ti.code">{{ ti.ti }}</option>
+                            <option v-for="ti of tis" :key="ti.code" :value="String(ti.code)">{{ ti.ti }}</option>
                         </select>
                     </div>
                     <div>
@@ -265,6 +265,12 @@
                     } else if (estado) {
                         const state = this.states[estado]
                         this.jeomap.map.flyTo({ center: [state.long, state.lat], zoom: state.zoom || JeoMap.getArg('initial_zoom') })
+                    } else if (ti) {
+                        const point = this.data.tis.find(item => item.code == ti)
+                        this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
+                    } else if (uc) {
+                        const point = this.data.ucs.find(item => item.code == uc)
+                        this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
                     } else {
                         /* All Brasil */
                         this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
