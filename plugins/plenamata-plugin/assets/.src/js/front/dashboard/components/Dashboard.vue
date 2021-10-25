@@ -305,13 +305,6 @@
                 this.news = news
             },
             async fetchUniqueNews (postId, callback) {
-                console.log( this.news[0].id );
-                console.log( postId );
-                let found = this.news.find( news => news.id === postId )
-                console.log( found );
-                if ( typeof found !== 'undefined' ) {
-                    return;
-                }
                 let news = await fetchUniqueNews(postId)
                 this.news.push( news )
 

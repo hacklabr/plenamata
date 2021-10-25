@@ -269,13 +269,15 @@
     display: flex;
     margin-bottom: size(32);
 
-    transition: 100ms linear border;
+    transition: 100ms linear background;
 
     &.selected {
-        border-right:5px solid $c_purple;
+        background:$c_lighter;
     }
 
     h2 {
+        padding-top:10px;
+        padding-right:10px;
         font-size: size(18);
         margin: 0 0 size(8);
 
@@ -288,6 +290,9 @@
         flex: 1;
         margin-right: size(8);
 
+        img {
+            height:100%;
+        }
         @include mobile {
             flex: 2;
         }
