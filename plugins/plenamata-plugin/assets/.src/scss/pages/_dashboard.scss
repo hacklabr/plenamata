@@ -9,6 +9,28 @@
     .jeomap {
         min-height: calc(100vh - 68px);
 
+        .mapboxgl-popup {
+            max-width:300px !important;
+        }
+        .mapboxgl-popup-content {
+            width:300px;
+            border-radius:8px;
+            
+            article {
+                display:flex;
+                flex-direction: column-reverse;
+
+                .popup__date {
+                    font-family: 'Archivo';
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: size(14);
+                    line-height: size(15);
+                    padding-top:size(10);        
+                }
+            }
+        }
+
         @include mobile {
             min-height: 100vw;
         }
