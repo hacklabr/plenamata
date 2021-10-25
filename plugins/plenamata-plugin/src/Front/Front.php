@@ -73,8 +73,7 @@ class Front {
         $images[ '/js/src/icons/news-marker' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/pin.png';
         $images[ '/js/src/icons/news-marker' ][ 'icon_size' ] = 0.3;
 
-        $images[ '/js/src/icons/news' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/news-icon
-        .png';
+        $images[ '/js/src/icons/news' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/news-icon.png';
         $images[ '/js/src/icons/news' ][ 'icon_size' ] = 0.25;
         $images[ '/js/src/icons/news' ][ 'text_color' ] = '#FFFFFF';
 
