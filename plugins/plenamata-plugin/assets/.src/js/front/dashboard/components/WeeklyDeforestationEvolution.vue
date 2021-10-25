@@ -77,11 +77,11 @@
                     }
                 } else {
                     if (startYear === endYear) {
-                        for (let i = start.weekNumber; i <= end.weekNumber; i++) {
+                        for (let i = start.weekNumber + 1; i <= end.weekNumber; i++) {
                             sortedData.push(this.findAreaKm2(i, startYear))
                         }
                     } else {
-                        for (let i = start.weekNumber; i <= start.weeksInWeekYear; i++) {
+                        for (let i = start.weekNumber + 1; i <= start.weeksInWeekYear; i++) {
                             sortedData.push(this.findAreaKm2(i, startYear))
                         }
                         for (let i = 1; i <= end.weekNumber; i++) {
