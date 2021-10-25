@@ -91,7 +91,7 @@
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
     import { capitalize, getAreaKm2, getTrees, localeSortBy } from '../../utils'
-    import { fetchConservationUnits, fetchDeterData, fetchIndigenousLands, fetchLastDate, fetchMunicipalities, fetchNews } from '../../utils/api'
+    import { fetchConservationUnits, fetchDeterData, fetchIndigenousLands, fetchLastDate, fetchMunicipalities, fetchNews, fetchUniqueNews } from '../../utils/api'
     import { firstValue, shortDate } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
 
@@ -254,7 +254,7 @@
             capitalize,
             centerMap () {
                 const mapEl = this.$refs.map.lastChild
-                this.setMapObject()
+                //this.setMapObject()
 
                 const { municipio, estado, ti, uc } = this.filters
 
@@ -304,15 +304,39 @@
                 const news = await fetchNews(state)
                 this.news = news
             },
+            async fetchUniqueNews (postId, callback) {
+                console.log( this.news[0].id );
+                console.log( postId );
+                let found = this.news.find( news => news.id === postId )
+                console.log( found );
+                if ( typeof found !== 'undefined' ) {
+                    return;
+                }
+                let news = await fetchUniqueNews(postId)
+                this.news.push( news )
+
+                if ( typeof callback === 'function' ) {
+                    callback( news )
+                }
+            },
+
             openNews(e) {
                 this.clearSelectedNews()
-                let postId = e.features[0].properties.id
+                const postId = e.features[0].properties.id
                 this.view = 'news'
+                let newsElem = document.querySelector(`[data-id="${postId}"]`)
+                if (newsElem == null) {
+                    // if element no exists, load it!
+                    this.fetchUniqueNews( postId, () => {
+                        setTimeout(() => {
+                            let newsElem = document.querySelector(`[data-id="${postId}"]`)
+                            scrollIntoView(newsElem)
+                            newsElem.classList.add('selected')
+                        }, 900)
+                    } ) 
+                    return
+                }
                 setTimeout(() => {
-                    let newsElem = document.querySelector(`[data-id="${postId}"]`)
-                    if (newsElem == null) {
-                        return
-                    }
                     scrollIntoView(newsElem)
                     newsElem.classList.add('selected')
                 }, 900)

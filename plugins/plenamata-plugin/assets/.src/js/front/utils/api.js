@@ -63,6 +63,10 @@ export async function fetchNews (state = '') {
     return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}`, false)
 }
 
+export async function fetchUniqueNews (postId) {
+    return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/${postId}/?_embed`, false)
+}
+
 export async function fetchProdesData ({ estado, municipio, ti, uc, ...args }) {
     const params = searchParams(args)
 
