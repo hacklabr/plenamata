@@ -335,6 +335,10 @@
             },
             async fetchUniqueNews (postId, callback) {
                 let news = await fetchUniqueNews(postId)
+                let found = this.news.find( element => element.id === postId )
+                if ( found ) {
+                    return;
+                }
                 this.news.unshift( news );
 
                 if ( typeof callback === 'function' ) {
@@ -393,10 +397,11 @@
                     this.openNews(e)
                 })
             },
-            loadMore (e) {
-                e.preventDefault()
-                const nextPage = this.currentFetchNewsPage + 1
-                this.fetchNewsByPage(this.filters.estado, nextPage)
+            loadMore( e ) {
+                e.preventDefault();
+
+                let nextPage = this.currentFetchNewsPage + 1;
+                this.fetchNewsByPage( this.filters.estado, nextPage );
             },
             toggleFilters () {
                 this.showFilters = !this.showFilters
