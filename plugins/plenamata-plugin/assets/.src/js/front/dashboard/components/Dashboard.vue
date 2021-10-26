@@ -329,6 +329,11 @@
             },
             async fetchUniqueNews (postId, callback) {
                 let news = await fetchUniqueNews(postId)
+                let found = this.news.find( element => element.id === postId )
+                if ( found ) {
+                    alert( 'duplicado!')
+                    return;
+                }
                 this.news.unshift( news );
 
                 if ( typeof callback === 'function' ) {
@@ -343,7 +348,6 @@
                 }
             },
             openNews(e) {
-                console.log( e );
                 this.clearSelectedNews()
                 const postId = e.features[0].properties.id
                 this.view = 'news'
@@ -392,9 +396,7 @@
                 e.preventDefault();
 
                 let nextPage = this.currentFetchNewsPage + 1;
-                console.log( this.currentFetchNewsPage );
                 this.fetchNewsByPage( this.filters.estado, nextPage );
-                console.log( this.currentFetchNewsPage );
             },
         },
     }
