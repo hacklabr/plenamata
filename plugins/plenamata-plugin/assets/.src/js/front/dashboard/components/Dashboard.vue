@@ -2,8 +2,13 @@
     <div class="dashboard">
         <header class="dashboard__header">
             <div class="container">
-                <h1>{{ __('Forestry Dashboard - Legal Amazon', 'plenamata') }}</h1>
-                <form>
+                <div class="dashboard__title">
+                    <h1>{{ _x('Dashboard', 'Data Dashboard', 'plenamata') }}</h1>
+                    <div class="dashboard__filter-toggle" :class="{ '-on': showFilters }">
+                        <a href="javascript:void(0)" @click="toggleFilters" @keypress.enter="toggleFilters">{{ _x('Filter', 'verb', 'plenamata') }}</a>
+                    </div>
+                </div>
+                <form :class="{ '-hidden': !showFilters }">
                     <div>
                         <label for="select-estados">{{ __('State', 'plenamata') }}</label>
                         <select id="select-estados" name="select-estados" v-model="filters.estado">
@@ -138,6 +143,7 @@
                 lastMonth: null,
                 lastUpdate: null,
                 news: [],
+                showFilters: false,
                 source: 'deter',
                 thisYear: null,
                 unit: 'ha',
@@ -332,14 +338,14 @@
                     callback( news )
                 }
             },
-            updateWPTotalPages() {
+            updateWPTotalPages () {
                 if (window.lastGetRequestHeader && typeof window.lastGetRequestHeader.get == 'function' ) {
                     if ( window.lastGetRequestHeader.get('X-WP-TotalPages') ) {
                         this.wpApiTotalPages = parseInt( window.lastGetRequestHeader.get('X-WP-TotalPages') )
                     }
                 }
             },
-            openNews(e) {
+            openNews (e) {
                 this.clearSelectedNews()
                 const postId = e.features[0].properties.id
                 this.view = 'news'
@@ -360,7 +366,7 @@
                     newsElem.classList.add('selected')
                 }, 900)
             },
-            setMapObject() {
+            setMapObject () {
                 let mapEl = document.querySelector('.jeomap')
                 let uuid = mapEl.dataset['uui_id']
                 this.jeomap = window.jeomaps[uuid]
@@ -379,19 +385,19 @@
                 }
 
             },
-            setMapEvents() {
+            setMapEvents () {
                 this.jeomap.map.on('click', 'unclustered-points', (e) => {
                     this.openNews(e)
                 })
             },
-            loadMore( e ) {
-                e.preventDefault();
-
-                let nextPage = this.currentFetchNewsPage + 1;
-                console.log( this.currentFetchNewsPage );
-                this.fetchNewsByPage( this.filters.estado, nextPage );
-                console.log( this.currentFetchNewsPage );
+            loadMore (e) {
+                e.preventDefault()
+                const nextPage = this.currentFetchNewsPage + 1
+                this.fetchNewsByPage(this.filters.estado, nextPage)
             },
+            toggleFilters () {
+                this.showFilters = !this.showFilters
+            }
         },
     }
 </script>

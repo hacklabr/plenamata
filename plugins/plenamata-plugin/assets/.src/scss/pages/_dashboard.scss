@@ -103,6 +103,13 @@
             display: flex;
             flex-wrap: wrap;
 
+            @media screen and (max-width: #{size(599)}) {
+
+                &.-hidden {
+                    display: none;
+                }
+            }
+
             & > div {
                 margin: 0 size(16) size(16) 0;
 
@@ -135,6 +142,44 @@
                 &:hover {
                     color: white;
                 }
+            }
+        }
+    }
+
+    &__title {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__filter-toggle {
+        display: none;
+
+        @media screen and (max-width: #{size(599)}) {
+            display: block;
+        }
+
+        a {
+            color: white;
+            font-size: size(12);
+            text-transform: uppercase;
+
+            &:after {
+                background-image: asset-url('img/white-chevron-down.svg');
+                background-position: center;
+                background-repeat: no-repeat;
+                content: '';
+                display: inline-block;
+                height: 1em;
+                margin-left: size(8);
+                width: 1em;
+            }
+        }
+
+        &.-on {
+
+            a:after {
+                background-image: asset-url('img/white-chevron-up.svg');
             }
         }
     }
