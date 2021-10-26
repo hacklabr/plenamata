@@ -89,6 +89,7 @@
         color: white;
         grid-column: 1;
         grid-row: 1;
+        max-width: 100vw;
         padding: size(30);
 
         h1 {
@@ -117,8 +118,8 @@
 
             select {
                 border-radius: size(5);
-                max-width: calc(100vw - #{size(46)});
                 padding: size(5);
+                width: calc(100vw - #{size(60)});
 
                 @media screen and (min-width: #{size(600)}) {
                     width: 100%;
