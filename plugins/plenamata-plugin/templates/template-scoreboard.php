@@ -20,19 +20,19 @@
         <h1><?= get_the_title() ?></h1>
 
         <div class="realtime-scoreboard__primary">
-            <div data-deter="treesEstimative"><?= __('loading...', 'plenamata') ?></div>
+            <div data-deter="treesEstimative"><?= __('Loading...', 'plenamata') ?></div>
             <div><?= __('trees cut down so far', 'plenamata') ?></div>
         </div>
 
         <div>
             <div class="realtime-scoreboard__secondary">
                 <div>
-                    <div data-deter="treesPerDay"><?= __('loading...', 'plenamata') ?></div>
+                    <div data-deter="treesPerDay"><?= __('Loading...', 'plenamata') ?></div>
                     <div><?= __('trees per day', 'plenamata') ?></div>
                 </div>
 
                 <div>
-                    <div data-deter="hectaresPerDay"><?= __('loading...', 'plenamata') ?></div>
+                    <div data-deter="hectaresPerDay"><?= __('Loading...', 'plenamata') ?></div>
                     <div><?= __('hectares per day', 'plenamata') ?></div>
                 </div>
             </div>

@@ -12,21 +12,21 @@
                         </select>
                     </div>
                     <div>
-                        <label for="select-municipios">{{ __('Municipalities', 'plenamata') }}</label>
+                        <label for="select-municipios">{{ __('Municipality', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.municipio" :disabled="!filters.estado">
                             <option value="">{{ __('All municipalities', 'plenamata') }}</option>
                             <option v-for="municipality of data.municipalities" :key="municipality.mun_geo_cod" :value="municipality.mun_geo_cod">{{ municipality.municipio }}</option>
                         </select>
                     </div>
                     <div>
-                        <label for="select-municipios">{{ __('Indigenous Lands', 'plenamata') }}</label>
+                        <label for="select-municipios">{{ __('Indigenous Land', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.ti">
                             <option value="">{{ __('All ILs', 'plenamata') }}</option>
                             <option v-for="ti of tis" :key="ti.code" :value="String(ti.code)">{{ ti.ti }}</option>
                         </select>
                     </div>
                     <div>
-                        <label for="select-municipios">{{ __('Conservation Units', 'plenamata') }}</label>
+                        <label for="select-municipios">{{ __('Conservation Unit', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.uc">
                             <option value="">{{ __('All CUs', 'plenamata') }}</option>
                             <option v-for="uc of ucs" :key="uc.code" :value="String(uc.code)">{{ capitalize(uc.uc) }}</option>
@@ -352,7 +352,7 @@
                             scrollIntoView(newsElem)
                             newsElem.classList.add('selected')
                         }, 900)
-                    } ) 
+                    } )
                     return
                 }
                 setTimeout(() => {
