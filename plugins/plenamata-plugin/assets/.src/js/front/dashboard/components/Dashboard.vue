@@ -68,7 +68,7 @@
                     <DashboardNewsCard v-for="post of news" :key="post.id" :post="post"/>
                     <p v-if="news.length === 0">{{ __('No news to be shown.', 'plenamata') }}</p>
                     <a href="#" class="dashboard__loadmore" @click="loadMore($event)" v-if="currentFetchNewsPage < wpApiTotalPages ">
-                        {{ __('Load more', 'plenamata') }}
+                        {{ loadMoreText }}
                     </a>
                 </div>
             </div>
@@ -97,6 +97,8 @@
     import { fetchConservationUnits, fetchDeterData, fetchIndigenousLands, fetchLastDate, fetchMunicipalities, fetchNews, fetchUniqueNews } from '../../utils/api'
     import { firstValue, shortDate } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
+    import { __ } from '../../dashboard/plugins/i18n'
+
 
     export default {
         name: 'Dashboard',
@@ -143,6 +145,7 @@
                 year,
                 currentFetchNewsPage: 1,
                 wpApiTotalPages: 999999,
+                loadMoreText: __( 'Load more', 'plenamata' )
             }
         },
         computed: {
@@ -254,12 +257,13 @@
             const mapEl = document.querySelector('.jeomap')
             this.$refs.map.appendChild(mapEl)
             this.setMapObject()
+            this.setMapEvents()
         },
         methods: {
             capitalize,
             centerMap () {
                 const mapEl = this.$refs.map.lastChild
-                //this.setMapObject()
+                this.setMapObject()
 
                 const { municipio, estado, ti, uc } = this.filters
 
@@ -313,14 +317,16 @@
             },
 
             async fetchNewsByPage (state = '', pageNum = 1) {
+                this.loadMoreText = __( 'Loading...', 'plenamata' )
                 const news = await fetchNews(state, pageNum)
                 this.news = this.news = [...this.news, ...news]
                 this.currentFetchNewsPage = pageNum
                 this.updateWPTotalPages()
+                this.loadMoreText = __( 'Load more', 'plenamata' )
             },
             async fetchUniqueNews (postId, callback) {
                 let news = await fetchUniqueNews(postId)
-                this.news.push( news )
+                this.news.unshift( news );
 
                 if ( typeof callback === 'function' ) {
                     callback( news )
@@ -372,6 +378,8 @@
 					this.jeomap.map.dragRotate.disable()
                 }
 
+            },
+            setMapEvents() {
                 this.jeomap.map.on('click', 'unclustered-points', (e) => {
                     this.openNews(e)
                 })

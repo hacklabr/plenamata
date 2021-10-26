@@ -266,6 +266,8 @@ class Front {
                 'Yearly' => __( 'Yearly', 'plenamata' ),
                 'Yearly consolidated deforestation rate (PRODES)' => __( 'Yearly consolidated deforestation rate (PRODES)', 'plenamata' ),
                 'Yearly deforestation alerts (DETER)' => __( 'Yearly deforestation alerts (DETER)', 'plenamata' ),
+                'Load more' => __( 'Load more', 'plenamata' ),
+                'Loading...' => __( 'Loading...', 'plenamata' ),
             ],
             '_x' => [
                 'months' => [

@@ -216,6 +216,11 @@
         font-weight: bold;
         display:inline-block;
         width:100%;
+        transition:100ms ease background;
+        &:hover {
+            background-color: darken($c_purple, 10%);
+            color: white;
+        }
     }
 }
 
@@ -321,9 +326,10 @@
     &__image {
         flex: 1;
         margin-right: size(8);
+        height:131px;
 
         img {
-            height:100%;
+            height:131px;
         }
         @include mobile {
             flex: 2;
