@@ -231,6 +231,7 @@ class Front {
                 'during PRODES year' => __( 'during PRODES year', 'plenamata' ),
                 'estimated average of %s trees per minute' => __( 'estimated average of %s trees per minute', 'plenamata'),
                 'External link' => __( 'External link', 'plenamata' ),
+                'Forestry Dashboard' => __( 'Forestry Dashboard', 'plenamata' ),
                 'hectares' => __( 'hectares', 'plenamata' ),
                 'hectares per day' => __( 'hectares per day', 'plenamata' ),
                 'Indigenous Land' => __( 'Indigenous Land', 'plenamata' ),
@@ -269,9 +270,6 @@ class Front {
                 'Yearly deforestation alerts (DETER)' => __( 'Yearly deforestation alerts (DETER)', 'plenamata' ),
             ],
             '_x' => [
-                'Data Dashboard' => [
-                    'Dashboard' => _x( 'Dashboard', 'Data Dashboard', 'plenamata' ),
-                ],
                 'months' => [
                     'January' => _x( 'January', 'months', 'plenamata' ),
                     'February' => _x( 'February', 'months', 'plenamata' ),

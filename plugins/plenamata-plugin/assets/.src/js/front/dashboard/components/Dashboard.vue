@@ -3,7 +3,7 @@
         <header class="dashboard__header">
             <div class="container">
                 <div class="dashboard__title">
-                    <h1>{{ _x('Dashboard', 'Data Dashboard', 'plenamata') }}</h1>
+                    <h1>{{ __('Forestry Dashboard', 'plenamata') }}</h1>
                     <div class="dashboard__filter-toggle" :class="{ '-on': showFilters }">
                         <a href="javascript:void(0)" @click="toggleFilters" @keypress.enter="toggleFilters">{{ _x('Filter', 'verb', 'plenamata') }}</a>
                     </div>
