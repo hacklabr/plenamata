@@ -2,31 +2,36 @@
     <div class="dashboard">
         <header class="dashboard__header">
             <div class="container">
-                <h1>{{ __('Forestry Dashboard - Legal Amazon', 'plenamata') }}</h1>
-                <form>
+                <div class="dashboard__title">
+                    <h1>{{ __('Forestry Dashboard', 'plenamata') }}</h1>
+                    <div class="dashboard__filter-toggle" :class="{ '-on': showFilters }">
+                        <a href="javascript:void(0)" @click="toggleFilters" @keypress.enter="toggleFilters">{{ _x('Filter', 'verb', 'plenamata') }}</a>
+                    </div>
+                </div>
+                <form :class="{ '-hidden': !showFilters }">
                     <div>
-                        <label for="select-estados">{{ __('States', 'plenamata') }}</label>
+                        <label for="select-estados">{{ __('State', 'plenamata') }}</label>
                         <select id="select-estados" name="select-estados" v-model="filters.estado">
                             <option value="">{{ __('All states', 'plenamata') }}</option>
                             <option v-for="state of states" :key="state.uf" :value="state.uf">{{ state.name }}</option>
                         </select>
                     </div>
                     <div>
-                        <label for="select-municipios">{{ __('Municipalities', 'plenamata') }}</label>
+                        <label for="select-municipios">{{ __('Municipality', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.municipio" :disabled="!filters.estado">
                             <option value="">{{ __('All municipalities', 'plenamata') }}</option>
                             <option v-for="municipality of data.municipalities" :key="municipality.mun_geo_cod" :value="municipality.mun_geo_cod">{{ municipality.municipio }}</option>
                         </select>
                     </div>
                     <div>
-                        <label for="select-municipios">{{ __('Indigenous Lands', 'plenamata') }}</label>
+                        <label for="select-municipios">{{ __('Indigenous Land', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.ti">
                             <option value="">{{ __('All ILs', 'plenamata') }}</option>
                             <option v-for="ti of tis" :key="ti.code" :value="String(ti.code)">{{ ti.ti }}</option>
                         </select>
                     </div>
                     <div>
-                        <label for="select-municipios">{{ __('Conservation Units', 'plenamata') }}</label>
+                        <label for="select-municipios">{{ __('Conservation Unit', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.uc">
                             <option value="">{{ __('All CUs', 'plenamata') }}</option>
                             <option v-for="uc of ucs" :key="uc.code" :value="String(uc.code)">{{ capitalize(uc.uc) }}</option>
@@ -138,6 +143,7 @@
                 lastMonth: null,
                 lastUpdate: null,
                 news: [],
+                showFilters: false,
                 source: 'deter',
                 thisYear: null,
                 unit: 'ha',
@@ -331,7 +337,6 @@
                 let news = await fetchUniqueNews(postId)
                 let found = this.news.find( element => element.id === postId )
                 if ( found ) {
-                    alert( 'duplicado!')
                     return;
                 }
                 this.news.unshift( news );
@@ -340,14 +345,14 @@
                     callback( news )
                 }
             },
-            updateWPTotalPages() {
+            updateWPTotalPages () {
                 if (window.lastGetRequestHeader && typeof window.lastGetRequestHeader.get == 'function' ) {
                     if ( window.lastGetRequestHeader.get('X-WP-TotalPages') ) {
                         this.wpApiTotalPages = parseInt( window.lastGetRequestHeader.get('X-WP-TotalPages') )
                     }
                 }
             },
-            openNews(e) {
+            openNews (e) {
                 this.clearSelectedNews()
                 const postId = e.features[0].properties.id
                 this.view = 'news'
@@ -360,7 +365,7 @@
                             scrollIntoView(newsElem)
                             newsElem.classList.add('selected')
                         }, 900)
-                    } ) 
+                    } )
                     return
                 }
                 setTimeout(() => {
@@ -368,7 +373,7 @@
                     newsElem.classList.add('selected')
                 }, 900)
             },
-            setMapObject() {
+            setMapObject () {
                 let mapEl = document.querySelector('.jeomap')
                 let uuid = mapEl.dataset['uui_id']
                 this.jeomap = window.jeomaps[uuid]
@@ -387,7 +392,7 @@
                 }
 
             },
-            setMapEvents() {
+            setMapEvents () {
                 this.jeomap.map.on('click', 'unclustered-points', (e) => {
                     this.openNews(e)
                 })
@@ -398,6 +403,9 @@
                 let nextPage = this.currentFetchNewsPage + 1;
                 this.fetchNewsByPage( this.filters.estado, nextPage );
             },
+            toggleFilters () {
+                this.showFilters = !this.showFilters
+            }
         },
     }
 </script>

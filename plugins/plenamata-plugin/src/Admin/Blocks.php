@@ -211,7 +211,7 @@ class Blocks {
                     <h4><?= $preNumberTitle ?? '' ?></h4>
 
                     <div class="number">
-                        <span data-deter="treesEstimative"><?= __('loading...', 'plenamata') ?></span>
+                        <span data-deter="treesEstimative"><?= __('Loading...', 'plenamata') ?></span>
                         <span><?= __("real-time estimate", "plenamata") ?></span>
                     </div>
                 </div>
