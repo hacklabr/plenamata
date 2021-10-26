@@ -251,7 +251,7 @@ class Front {
                 'Source: MapBiomas based on DETER/INPE data.' => __( 'Source: MapBiomas based on DETER/INPE data.', 'plenamata' ),
                 'Source: PRODES/INPE.' => __( 'Source: PRODES/INPE.', 'plenamata' ),
                 'Sources: DETER/INPE and MapBiomas' =>  __( 'Sources: DETER/INPE and MapBiomas', 'plenamata' ),
-                'States' => __( 'States', 'plenamata' ),
+                'State' => __( 'State', 'plenamata' ),
                 'The figures represent deforestation for each year up to %s.' => __( 'The figures represent deforestation for each year up to %s.', 'plenamata' ),
                 'Timeframe' => __( 'Timeframe', 'plenamata' ),
                 'Total deforestation in %s in the selected territory' => __( 'Total deforestation in %s in the selected territory', 'plenamata' ),

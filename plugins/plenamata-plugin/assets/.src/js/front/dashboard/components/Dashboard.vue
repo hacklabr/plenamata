@@ -5,7 +5,7 @@
                 <h1>{{ __('Forestry Dashboard - Legal Amazon', 'plenamata') }}</h1>
                 <form>
                     <div>
-                        <label for="select-estados">{{ __('States', 'plenamata') }}</label>
+                        <label for="select-estados">{{ __('State', 'plenamata') }}</label>
                         <select id="select-estados" name="select-estados" v-model="filters.estado">
                             <option value="">{{ __('All states', 'plenamata') }}</option>
                             <option v-for="state of states" :key="state.uf" :value="state.uf">{{ state.name }}</option>
