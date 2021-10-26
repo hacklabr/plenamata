@@ -259,6 +259,9 @@
             this.setMapObject()
             this.setMapEvents()
         },
+        beforeUpdate () {
+            this.setMapObject()
+        },
         methods: {
             capitalize,
             centerMap () {
@@ -340,6 +343,7 @@
                 }
             },
             openNews(e) {
+                console.log( e );
                 this.clearSelectedNews()
                 const postId = e.features[0].properties.id
                 this.view = 'news'
