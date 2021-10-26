@@ -265,6 +265,9 @@
             this.setMapObject()
             this.setMapEvents()
         },
+        beforeUpdate () {
+            this.setMapObject()
+        },
         methods: {
             capitalize,
             centerMap () {
