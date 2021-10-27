@@ -352,9 +352,8 @@
                     }
                 }
             },
-            openNews (e) {
+            openNews (postId) {
                 this.clearSelectedNews()
-                const postId = e.features[0].properties.id
                 this.view = 'news'
                 let newsElem = document.querySelector(`[data-id="${postId}"]`)
                 if (newsElem == null) {
@@ -394,8 +393,14 @@
             },
             setMapEvents () {
                 this.jeomap.map.on('click', 'unclustered-points', (e) => {
-                    this.openNews(e)
+                    this.openNews( e.features[0].properties.id )
                 })
+                document.body.addEventListener( 'jeo-open-spiderifier-pin', (e) => {
+                    //console.log( e.detail );
+                    this.openNews( e.detail.id )
+                    
+                })
+
             },
             loadMore( e ) {
                 e.preventDefault();
