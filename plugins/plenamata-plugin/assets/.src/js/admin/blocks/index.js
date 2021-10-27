@@ -1,3 +1,4 @@
+import './cop26-banner';
 import './deforestation-charts';
 import './deforestation-info';
 import './estimatives-area';

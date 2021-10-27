@@ -71,6 +71,7 @@ class Blocks {
                 'i18n' => [
                     '__' => [
                         'Contact information' => __( 'Contact information', 'plenamata' ),
+                        'from November 1st to 12th in Glasgow' => __( 'from November 1st to 12th in Glasgow', 'plenamata' ),
                         'How to get involved' => __( 'How to get involved', 'plenamata' ),
                         'Name' => __( 'Name', 'plenamata' ),
                         'Project website' => __( 'Project website', 'plenamata' ),
@@ -127,6 +128,23 @@ class Blocks {
                 ],
             ],
         ] );
+
+        register_block_type( 'plenamata/cop26-banner', [
+            'api_version' => 2,
+            'editor_script' => 'plenamata-plugin-blocks',
+            'editor_style' => 'plenamata-plugin-blocks',
+            'attributes' => [
+                'buttonLink' => [
+                    'type' => 'string'
+                ],
+                'buttonText' => [
+                    'type' => 'string'
+                ],
+                'title' => [
+                    'type' => 'string'
+                ],
+            ],
+        ]);
 
         register_block_type( 'plenamata/deforestation-info', [
             'api_version' => 2,
