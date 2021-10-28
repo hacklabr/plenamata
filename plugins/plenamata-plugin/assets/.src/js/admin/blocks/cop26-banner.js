@@ -15,7 +15,6 @@ registerBlockType('plenamata/cop26-banner', {
 
         return (
             <div { ...blockProps }>
-                <img src="/wp-content/plugins/plenamata-plugin/assets/build/img/cop26.png" alt="COP26"/>
                 <div>
                     <TextControl
                         label={ __('Title', 'plenamata') }
