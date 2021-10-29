@@ -1,11 +1,8 @@
 .estimatives-area {
-    background-color: white;
+    background-color: $c_lighter;
     border-radius: 8px;
     padding: 20px 28px 28px;
-    --accent-color: #FF7373;
-    --second-accent-color: #523096;
-    --dark: #221D18;
-    color: var(--dark);
+    color: $c_text;
 
     @include mobile {
         margin-bottom: 30px !important;
@@ -17,7 +14,7 @@
     }
 
     .heading {
-        border-bottom: 1px solid var(--accent-color);
+        border-bottom: 1px solid $c_red;
         margin-bottom: 28px;
 
         @include small {
@@ -25,7 +22,7 @@
         }
 
         h3 {
-            font-size: 24px;
+            font-size: size(23);
             font-weight: 500 !important;
             margin: 0;
 
@@ -36,7 +33,7 @@
         }
 
         .heading-title {
-            color: var(--accent-color);
+            color: $c_red;
             margin-bottom: 0;
             margin-top: 10px;
         }
@@ -59,7 +56,7 @@
 
             span {
                 &:first-child {
-                    color: var(--dark);
+                    color: $c_text;
                     font-size: 60px;
                     display: inline-block;
                     margin-right: 15px;
@@ -144,7 +141,7 @@
                     }
 
                     &:first-child {
-                        color: var(--second-accent-color);
+                        color: $c_purple;
                         font-size: 32px;
                         line-height: 1.3;
 

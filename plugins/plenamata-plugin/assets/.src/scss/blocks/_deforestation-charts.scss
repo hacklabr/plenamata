@@ -1,15 +1,24 @@
 .deforestation-charts-block {
-    background-color: white;
+    background-color: $c_lighter;
     border-radius: 8px;
     padding: size(16);
 
-    h3:not(.has-text-color) {
-        color: #222;
-        font-family: 'Roboto';
+    h3 {
+        border-bottom: 1px solid $c_red;
+        font-size: size(23);
+        font-weight: 500 !important;
+        margin: 0 0 size(28);
+
+        @include small {
+            font-size: size(20);
+            line-height: size(26);
+            padding: size(15);
+        }
     }
 }
 
 .deforestation-charts {
+
     &__toggle {
         border: none;
         display: flex;
@@ -59,7 +68,6 @@
     }
 
     &__source {
-        color: #666352 !important;
         font-size: 0.75em !important;
         line-height: 1.5;
         margin-bottom: 0;
