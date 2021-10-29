@@ -1,7 +1,8 @@
 import { useBlockProps } from '@wordpress/block-editor'
 import { registerBlockType } from '@wordpress/blocks'
 import { TextControl } from '@wordpress/components'
-import { __ } from '@wordpress/i18n'
+
+import { __ } from './utils/i18n'
 
 registerBlockType('plenamata/cop26-banner', {
     title: __('COP26 Banner', 'plenamata'),
