@@ -167,6 +167,9 @@ class Blocks {
                 'boxTitle' => [
                     'type' => 'string'
                 ],
+                'parenthical' => [
+                    'type' => 'string'
+                ],
             ],
         ] );
 

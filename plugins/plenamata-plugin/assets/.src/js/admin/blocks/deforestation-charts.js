@@ -10,7 +10,8 @@ registerBlockType('plenamata/deforestation-charts', {
 
     edit ({ attributes, setAttributes }) {
         const {
-            boxTitle = __('Evolution per period (deforested square kilometers)')
+            boxTitle = __('Evolution per period (deforested square kilometers)'),
+            parenthical = '',
         } = attributes
 
         const blockProps = useBlockProps({ className: 'plenamata-block deforestation-charts' })
@@ -25,6 +26,14 @@ registerBlockType('plenamata/deforestation-charts', {
                         placeholder={ __('Type the box title', 'plenamata') }
                     />
                 </div>
+                <div>
+                    <TextControl
+                        label={ __('Parenthical', 'plenamata') }
+                        value={ parenthical }
+                        onChange={ ( parenthical ) => setAttributes( { parenthical } ) }
+                        placeholder={ __('Type the text inside parenthesis', 'plenamata') }
+                    />
+                </div>
             </div>
         )
     },
@@ -32,9 +41,11 @@ registerBlockType('plenamata/deforestation-charts', {
     save ({ attributes }) {
         const blockProps = useBlockProps.save({ className: 'deforestation-charts-block' })
 
+        const { boxTitle, parenthical } = attributes
+
         return (
             <div { ...blockProps }>
-                <h3>{ attributes.boxTitle }</h3>
+                <h3>{ boxTitle } <small>({ parenthical })</small></h3>
                 <div className="vue-deforestation-charts"/>
             </div>
         )

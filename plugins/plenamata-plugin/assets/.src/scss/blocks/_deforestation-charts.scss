@@ -1,7 +1,7 @@
 .deforestation-charts-block {
     background-color: $c_lighter;
     border-radius: 8px;
-    padding: size(16);
+    padding: size(32);
 
     h3 {
         border-bottom: 1px solid $c_red;
@@ -13,6 +13,10 @@
             font-size: size(20);
             line-height: size(26);
             padding: size(15);
+        }
+
+        small {
+            font-size: 75%;
         }
     }
 }

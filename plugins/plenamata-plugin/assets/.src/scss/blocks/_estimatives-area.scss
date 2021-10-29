@@ -1,7 +1,7 @@
 .estimatives-area {
     background-color: $c_lighter;
     border-radius: 8px;
-    padding: 20px 28px 28px;
+    padding: size(32);
     color: $c_text;
 
     @include mobile {
