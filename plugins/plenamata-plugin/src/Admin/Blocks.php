@@ -242,11 +242,13 @@ class Blocks {
                         <div class="data">
                             <h4><?= $averageTitle ?? '' ?></h4>
                             <div class="area">
+                                <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/tree-icon.svg" alt="">
                                 <span data-deter="treesPerDay"></span>
                                 <span><?= __("trees", "plenamata") ?></span>
                             </div>
 
                             <div class="area">
+                                <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/area-icon.svg" alt="">
                                 <span data-deter="hectaresPerDay"></span>
                                 <span><?= __("hectares", "plenamata") ?></span>
                             </div>
@@ -257,11 +259,13 @@ class Blocks {
                             <h4><?= $deforestedTitle ?? '' ?></h4>
 
                             <div class="area">
+                                <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/alert-icon.svg" alt="">
                                 <span data-mask="true"><?= $warnings ?? '' ?></span>
                                 <span><?= __("alerts", "plenamata") ?></span>
                             </div>
 
                             <div class="area">
+                                <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/area-icon.svg" alt="">
                                 <span data-deter="hectaresThisYear"></span>
                                 <span><?= __("hectares", "plenamata") ?></span>
                             </div>
