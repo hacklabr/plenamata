@@ -2,8 +2,8 @@
     display: grid;
     grid-gap: 32px;
     grid-template-columns: 1fr 1fr;
-    margin-bottom: size(32) !important;
-    margin-top: size(32) !important;
+    margin: size(32) 0 !important;
+    max-width: 100% !important;
 
     @include tablet {
         grid-template-columns: 1fr;
