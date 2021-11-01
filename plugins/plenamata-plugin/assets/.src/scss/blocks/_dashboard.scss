@@ -16,6 +16,10 @@
         & > * {
             height: 100%;
             width: 100%;
+
+            @include tablet {
+                height: auto;
+            }
         }
     }
 }
