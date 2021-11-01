@@ -1,0 +1,21 @@
+.dashboard-grid {
+    display: grid;
+    grid-gap: 32px;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: size(32) !important;
+    margin-top: size(32) !important;
+
+    @include tablet {
+        grid-template-columns: 1fr;
+    }
+
+    & > .wp-block-column {
+        height: 100%;
+        margin: 0;
+
+        & > * {
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
