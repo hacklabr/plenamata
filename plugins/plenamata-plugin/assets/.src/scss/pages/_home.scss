@@ -221,10 +221,18 @@ body.home {
 
     // Newspack block articles
     .wp-block-newspack-blocks-homepage-articles {
+
         article {
             // Thumbnail of the each article
             .post-thumbnail {
                 max-width: 400px;
+            }
+
+            .columns-2 {
+
+                .post-thumbnail {
+                    max-width: 100%;
+                }
             }
 
             // Wrapper of the each article
