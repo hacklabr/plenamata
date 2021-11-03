@@ -1,0 +1,22 @@
+article.type-post {
+    .entry-meta {
+
+        img {
+            border-radius: 50%;
+        }
+
+        .byline {
+
+            .author-prefix {
+                display: none;
+            }
+
+            .author {
+
+                a {
+                    color: $c_purple;
+                }
+            }
+        }
+    }
+}
