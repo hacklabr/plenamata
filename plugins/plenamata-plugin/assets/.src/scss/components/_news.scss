@@ -21,4 +21,15 @@ article.type-post {
             }
         }
     }
+
+    .widget-boas & {
+
+        .entry-title {
+
+            a {
+                font-size: 1em !important;
+                line-height: 1.25 !important;
+            }
+        }
+    }
 }
