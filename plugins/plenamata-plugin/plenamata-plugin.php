@@ -4,7 +4,7 @@
  *
  * Plugin Name:         Plenamata Plugin
  * Description:         The plugin adds information about the games to the site posts.
- * Version:             0.6.5
+ * Version:             0.7.0
  * Requires at least:   4.9
  * Requires PHP:        5.6
  * Author:              hacklab/
