@@ -228,13 +228,6 @@ body.home {
                 max-width: 400px;
             }
 
-            .columns-2 {
-
-                .post-thumbnail {
-                    max-width: 100%;
-                }
-            }
-
             // Wrapper of the each article
             .entry-wrapper {
                 display: flex;
@@ -282,6 +275,16 @@ body.home {
                     line-height: size(16);
                     opacity: .5;
                     order: 3;
+                }
+            }
+        }
+
+        &.columns-2 {
+
+            article {
+
+                .post-thumbnail {
+                    max-width: 100%;
                 }
             }
         }
