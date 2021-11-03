@@ -204,7 +204,7 @@ body.home {
                     font-weight: normal !important;
                     margin-bottom: size(15);
                     margin-top: size(15);
-                    opacity: .5;
+                    opacity: 0.5;
                 }
             }
 
@@ -270,10 +270,9 @@ body.home {
                 }
 
                 .entry-meta {
-                    color: #0A0A0A;
+                    color: #888;
                     font-size: 14px;
                     line-height: size(16);
-                    opacity: .5;
                     order: 3;
                 }
             }
