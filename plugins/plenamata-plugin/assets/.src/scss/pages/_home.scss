@@ -44,7 +44,7 @@ body.home {
             padding-left: 45px;
         }
 
-        .wp-block-columns:first-child {
+        .wp-block-columns {
             @include small {
                 margin-top: -80px;
             }
