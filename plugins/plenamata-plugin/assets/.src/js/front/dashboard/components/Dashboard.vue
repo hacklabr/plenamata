@@ -282,10 +282,11 @@
                         this.jeomap.map.flyTo({ center: [+municipality.long, +municipality.lat], zoom: 7 })
                     } else if (estado) {
                         const state = this.states[estado]
-                        //alert( estado );
 
                         this.jeomap.map.setFilter('uf-brasil', ['==', ['get', 'UF_05'], this.filters[ 'estado' ] ]);
                         this.jeomap.map.flyTo({ center: [state.long, state.lat], zoom: state.zoom || JeoMap.getArg('initial_zoom') })
+                        this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'visible')
+
                     } else if (ti) {
                         const point = this.data.tis.find(item => item.code == ti)
                         this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
@@ -294,6 +295,7 @@
                         this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
                     } else {
                         /* All Brasil */
+                        this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                         this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
                     }
                 }
