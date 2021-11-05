@@ -100,7 +100,7 @@
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
     import { capitalize, getAreaKm2, getTrees, localeSortBy } from '../../utils'
     import { fetchConservationUnits, fetchDeterData, fetchIndigenousLands, fetchLastDate, fetchMunicipalities, fetchNews, fetchUniqueNews } from '../../utils/api'
-    import { firstValue, shortDate } from '../../utils/filters'
+    import { firstValue, shortDate, stateCodeByName } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
     import { __ } from '../../dashboard/plugins/i18n'
 
@@ -282,6 +282,9 @@
                         this.jeomap.map.flyTo({ center: [+municipality.long, +municipality.lat], zoom: 7 })
                     } else if (estado) {
                         const state = this.states[estado]
+                        //alert( estado );
+
+                        this.jeomap.map.setFilter('uf-brasil', ['==', ['get', 'UF_05'], this.filters[ 'estado' ] ]);
                         this.jeomap.map.flyTo({ center: [state.long, state.lat], zoom: state.zoom || JeoMap.getArg('initial_zoom') })
                     } else if (ti) {
                         const point = this.data.tis.find(item => item.code == ti)
@@ -340,7 +343,15 @@
                     return;
                 }
                 this.news.unshift( news );
+                //console.log( news.meta._related_point[0]._geocode_region_level_2 )
+                const newsState = stateCodeByName( news.meta._related_point[0]._geocode_region_level_2 );
 
+                if ( newsState ) {
+                    this.jeomap.map.setFilter('uf-brasil', ['==', ['get', 'UF_05'], newsState ])
+                    this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'visible')
+                } else {
+                    this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
+                }
                 if ( typeof callback === 'function' ) {
                     callback( news )
                 }
@@ -370,6 +381,17 @@
                 setTimeout(() => {
                     scrollIntoView(newsElem)
                     newsElem.classList.add('selected')
+                    console.log( this.news );
+                    const selectedNews = this.news.find( post => post.id == postId )
+                    const newsState = stateCodeByName( selectedNews.meta._related_point[0]._geocode_region_level_2 );
+
+                    if ( newsState ) {
+                        this.jeomap.map.setFilter('uf-brasil', ['==', ['get', 'UF_05'], newsState ]);
+                        this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'visible')
+                    } else {
+                        this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
+                    }
+
                 }, 900)
             },
             setMapObject () {
@@ -389,7 +411,6 @@
 					this.jeomap.map.touchZoomRotate.disable()
 					this.jeomap.map.dragRotate.disable()
                 }
-
             },
             setMapEvents () {
                 this.jeomap.map.on('click', 'unclustered-points', (e) => {
@@ -399,6 +420,10 @@
                     //console.log( e.detail );
                     this.openNews( e.detail.id )
                     
+                })
+                this.jeomap.map.on( 'load', (map) => {
+                    // hide all states
+                    this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                 })
 
             },

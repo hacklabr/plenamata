@@ -15,7 +15,7 @@
 
 <script>
     import { __ } from '../plugins/i18n'
-    import { longDate, shortDate } from '../../utils/filters'
+    import { longDate, shortDate, stateCodeByName } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
 
 
@@ -60,6 +60,15 @@
                         zoom: 6
                     });
                     let html = '<article class="popup popup-wmt"><div class="popup__date">' + this.shortDate(post.date) + '</div><h2><a href="' + post.link + '">' + post.title.rendered + '</a></h2></article>'
+
+                    const newsState = stateCodeByName( post.meta._related_point[0]._geocode_region_level_2 );
+
+                    if ( newsState ) {
+                        window.dashboardJeoMap.map.setFilter('uf-brasil', ['==', ['get', 'UF_05'], newsState ]);
+                        window.dashboardJeoMap.map.setLayoutProperty('uf-brasil', 'visibility', 'visible')
+                    } else {
+                        window.dashboardJeoMap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
+                    }
 
                     setTimeout( () => {
                         let mapPopUp = new mapboxgl.Popup()
