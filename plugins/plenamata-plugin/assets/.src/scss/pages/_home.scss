@@ -162,6 +162,12 @@ body.home {
                 }
             }
 
+            .rec-col-especial {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+
             .wp-block-image {
 
                 figcaption {
@@ -186,9 +192,7 @@ body.home {
             }
 
             .wp-block-buttons {
-                @include mobile {
-                    margin-bottom: 0;
-                }
+                margin: 0;
             }
 
             h3 {
@@ -210,11 +214,11 @@ body.home {
             }
 
             p {
+                margin: 0;
+
                 @include mobile {
                     font-size: size(14) !important;
                     line-height: size(24);
-                    margin-bottom: size(15);
-                    margin-top: size(15);
                 }
             }
         }
