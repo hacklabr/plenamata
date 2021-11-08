@@ -59,15 +59,25 @@ body:not(.home){
 
 .title-latest-articles {
 	grid-template-columns: 55px auto !important;
-}
 
-.title-latest-articles .wp-block-media-text__content {
-	padding-left: 30px;
-}
+    .wp-block-media-text__content {
+        padding-left: 30px;
 
-.title-latest-articles .wp-block-media-text__content h2 {
-	font-size: 32px;
-	font-weight: 400 !important;
+        h2 {
+            font-size: 32px;
+            font-weight: 400 !important;
+        }
+    }
+
+    .wp-block-media-text__media {
+
+        img {
+
+            @include small {
+                width: 40px;
+            }
+        }
+    }
 }
 
 .b-t-l-8 {
