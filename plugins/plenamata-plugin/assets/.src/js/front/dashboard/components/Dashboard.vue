@@ -240,6 +240,11 @@
                     this.filters.estado = ''
                     this.filters.municipio = ''
                     this.filters.uc = ''
+                    
+                    let tiSelected = this.data.tis.find( ti => ti.code == this.filters.ti )
+                    this.jeomap.map.setFilter('tis-brasil', ['==', ['get', 'terrai_cod'], parseInt( this.filters.ti ) ])
+                    this.jeomap.map.flyTo({ center: [tiSelected.long, tiSelected.lat], zoom: 12 })
+                    this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'visible')
                 }
             },
             'filters.uc' () {
@@ -247,6 +252,7 @@
                     this.filters.estado = ''
                     this.filters.municipio = ''
                     this.filters.ti = ''
+
                 }
             },
         },
@@ -296,6 +302,8 @@
                     } else {
                         /* All Brasil */
                         this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
+                        this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
+                        
                         this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
                     }
                 }
@@ -345,7 +353,6 @@
                     return;
                 }
                 this.news.unshift( news );
-                //console.log( news.meta._related_point[0]._geocode_region_level_2 )
                 const newsState = stateCodeByName( news.meta._related_point[0]._geocode_region_level_2 );
 
                 if ( newsState ) {
@@ -383,7 +390,6 @@
                 setTimeout(() => {
                     scrollIntoView(newsElem)
                     newsElem.classList.add('selected')
-                    console.log( this.news );
                     const selectedNews = this.news.find( post => post.id == postId )
                     const newsState = stateCodeByName( selectedNews.meta._related_point[0]._geocode_region_level_2 );
 
@@ -419,13 +425,13 @@
                     this.openNews( e.features[0].properties.id )
                 })
                 document.body.addEventListener( 'jeo-open-spiderifier-pin', (e) => {
-                    //console.log( e.detail );
                     this.openNews( e.detail.id )
                     
                 })
                 this.jeomap.map.on( 'load', (map) => {
                     // hide all states
                     this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
+                    this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
                 })
 
             },
