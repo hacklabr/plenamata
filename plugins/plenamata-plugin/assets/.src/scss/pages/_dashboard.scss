@@ -62,16 +62,6 @@
             }
         }
     }
-
-    &.is-sticky {
-
-        .jeomap {
-
-            @include tablet-up {
-                min-height: 100vh;
-            }
-        }
-    }
 }
 
 .dashboard {
@@ -261,7 +251,7 @@
         @include tablet-up {
             height: 100vh;
             position: sticky;
-            top: 0;
+            top: 68px;
         }
     }
     &__loadmore {
