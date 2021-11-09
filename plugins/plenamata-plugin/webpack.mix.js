@@ -30,9 +30,8 @@ mix
 mix
 	.copyWatched( assetsDir + '/img/**/*.{jpg,jpeg,png,gif,svg}', distDir + '/img', { base: assetsDir + '/img' } );
 
-mix.webpackConfig({
+mix.webpackConfig(webpack => ({
 	...defaultConfig,
-    devtool: 'inline-source-map',
 	entry: { },
     module: {},
     output: {
@@ -41,7 +40,14 @@ mix.webpackConfig({
         path: path.resolve( __dirname, distDir + '/' ),
         publicPath: distDir,
     },
+    plugins: [
+        ...defaultConfig.plugins,
+        new webpack.EnvironmentPlugin({
+            NODE_ENV: 'production',
+            VUE_ENV: 'browser',
+        }),
+    ],
     resolve: {
-        alias: { 'vue$': 'vue/dist/vue.runtime.js' },
+        alias: { 'vue$': 'vue/dist/vue.runtime.esm.js' },
     },
-});
+}));
