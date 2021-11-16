@@ -10,10 +10,10 @@
 get_header();
 ?>
 	<?php if ( is_author() ): ?>
-		<header class="page-header author"> 
+		<header class="page-header author">
             <div class="breadcrumb">
-                    <a href="<?= site_url(); ?>">Home</a> /
-                    <a href="#">Colunistas</a> /
+                    <a href="<?= site_url(); ?>"><?= __( 'Home', 'iande' ) ?></a> /
+                    <a href="#"><?= __( 'Columnists', 'iande' ) ?></a> /
             </div>
 			<div class="author-main-content">
 				<?php
