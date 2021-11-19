@@ -79,7 +79,7 @@
             text-align: right;
         }
 
-        a {
+        a:any-link {
             color: $c_purple;
         }
     }

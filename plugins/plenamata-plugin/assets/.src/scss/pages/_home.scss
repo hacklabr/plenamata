@@ -23,7 +23,7 @@ body.home {
             position: relative;
             z-index: 2;
 
-            a {
+            a:any-link {
                 color: $c_purple;
                 font-family: 'Archivo';
                 font-size: size(14) !important;
