@@ -38,7 +38,7 @@ body.single-post{
             margin-bottom: 48px;
             margin-top: 16px;
 
-            a{
+            a:any-link {
                 color: var(--secondary);
                 font-weight: bold;
                 text-transform: capitalize;
@@ -52,7 +52,7 @@ body.single-post{
            }
 
             .entry-content {
-                a {
+                a:any-link {
                     color: var(--secondary);
 
                     &:active, &:hover {
@@ -82,7 +82,7 @@ body.single-post{
            }
 
            .tags-links{
-               a{
+               a:any-link {
                    color: var(--secondary);
                    background-color: rgb(82, 48, 150, 0.1);
                }

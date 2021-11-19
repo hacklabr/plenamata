@@ -7,7 +7,7 @@
         }
 
         flex-direction: column;
-        
+
         .page-title::before {
             display: none;
         }
@@ -23,17 +23,17 @@
             font-weight: bold;
             text-transform: capitalize;
 
-            a{
+            a:any-link {
                 color: var(--secondary);
             }
         }
         .author-main-content {
             align-items: center;
-            .page-title { 
-                display: none !important; 
+            .page-title {
+                display: none !important;
             }
         }
-        
+
         img {
             width: 189px;
             height: 189px;
@@ -48,12 +48,12 @@
             @include mobile {
                 width: 100%;
             }
-          
+
             .post {
                 @include mobile {
                     flex-direction: column !important;
                 }
-                &.has-post-thumbnail{                    
+                &.has-post-thumbnail{
                     &:not(:first-child){
                         .post-thumbnail {
                             @include tablet-up {
@@ -84,12 +84,12 @@
 
                 .cat-links {
                     margin-bottom: 16px!important;
-                   
-                    
+
+
                     a:nth-of-type(1), .custom-separator{
                         display: none;
                     }
-                   
+
                     a{
                         font-style: normal;
                         font-weight: bold;
@@ -115,7 +115,7 @@
                 .entry-meta {
                     margin: 0;
                     padding: 8px 0;
-                    
+
                     .entry-data {
                         font-style: normal;
                         font-weight: normal;
@@ -142,7 +142,7 @@
                 }
 
             }
-            
+
             .pagination{
                 border-width: 1px;
             }
@@ -187,7 +187,7 @@
     margin-top: 48px;
     .post{
         border: none !important;
-        a{
+        a:any-link {
             display: flex;
             font-weight: bold;
             flex-direction: row;

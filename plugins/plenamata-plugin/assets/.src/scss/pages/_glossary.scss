@@ -72,7 +72,7 @@
         @media screen and (max-width: size(1024)) {
             grid-template-columns: 1fr;
             padding: 0 size(8);
-        } 
+        }
 
         nav {
             h2 {
@@ -95,7 +95,7 @@
                     list-style: none;
                     margin: 0;
 
-                    a {
+                    a:any-link {
                         display: block;
                         font-style: normal;
                         font-weight: normal;
@@ -177,7 +177,7 @@
         p {
             margin: 0;
             margin-top: size(24);
-            a {
+            a:any-link {
                 color: var(--secondary);
                 text-decoration: underline !important;
                 font-weight: 700;
