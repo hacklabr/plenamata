@@ -93,9 +93,13 @@ body.single-post{
                padding-bottom: 40px;
            }
 
-           .author-bio .author-bio-text .author-bio-header .accent-header{
-               color: var(--secondary);
-               text-transform: capitalize;
+           .author-bio .author-bio-text .author-bio-header {
+               align-items: center;
+
+                .accent-header{
+                    color: var(--secondary);
+                    text-transform: capitalize;
+                }
            }
 
            .toggable-comments-area{
