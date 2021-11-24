@@ -13,7 +13,7 @@ get_header();
 		<header class="page-header author">
             <div class="breadcrumb">
                     <a href="<?= site_url(); ?>"><?= __( 'Home', 'iande' ) ?></a> /
-                    <a href="#"><?= __( 'Columnists', 'iande' ) ?></a> /
+                    <a href="<?= get_category_link( get_category_by_slug( 'opinion' ) ) ?>"><?= __( 'Columnists', 'iande' ) ?></a> /
             </div>
 			<div class="author-main-content">
 				<?php
