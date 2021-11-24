@@ -86,7 +86,7 @@ $urlTweetShare = urldecode(get_the_title() . ' ' . get_the_permalink() . $twitte
 		</button>
 
 		<header id="masthead" class="site-header hide-header-search" [class]="searchVisible ? 'show-header-search site-header ' : 'hide-header-search site-header'">
-		
+
 			<div id="header-search" class="tablet-down-search" [aria-expanded]="searchVisible ? 'true' : 'false'" aria-expanded="false">
 				<div class="wrapper">
 					<div class="content-limiter">
