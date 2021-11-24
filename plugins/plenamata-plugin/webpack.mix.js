@@ -25,7 +25,8 @@ mix
     .js( assetsDir + '/js/front/blocks/estimatives-area.js', 'js/estimatives-area.js' )
 
 mix
-    .react( assetsDir + '/js/admin/blocks/index.js', 'js/admin/blocks.js' );
+    .react( assetsDir + '/js/admin/blocks/index.js', 'js/admin/blocks.js' )
+    .react( assetsDir + '/js/admin/formats/index.js', 'js/admin/formats.js'  );
 
 mix
 	.copyWatched( assetsDir + '/img/**/*.{jpg,jpeg,png,gif,svg}', distDir + '/img', { base: assetsDir + '/img' } );

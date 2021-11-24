@@ -1,0 +1,15 @@
+.glossary-tooltip {
+    background-color: #F7F7F7;
+    border-radius: 5px;
+    display: inline-block;
+    padding: 0 5px;
+
+    &:after {
+        color: #888;
+        content: '\f348';
+        display: inline-block;
+        font-family: dashicons;
+        font-size: 0.75em;
+        padding-left: 3px;
+    }
+}

@@ -33,7 +33,8 @@ class Blocks {
         remove_action( 'init', 'register_block_core_latest_posts', 10 );
         require_once PLENAMATA_PLUGIN_PATH . 'blocks/latest-posts.php';
 
-		add_action( 'init', [ $this, 'register_blocks' ] );
+		add_action( 'enqueue_block_editor_assets', [ $this, 'register_blocks' ] );
+        add_action( 'enqueue_block_editor_assets', [ $this, 'register_text_formats' ] );
 	}
 
     public function filters(): void {
@@ -50,10 +51,8 @@ class Blocks {
 
     /**
 	 * Register the JavaScript for the admin blocks.
-	 *
-	 * @since 0.1.0
-	 *
-	 * @param string $hook_suffix The current admin page.
+     *
+     * @return void
 	 */
     public function register_blocks(): void {
         wp_register_script(
@@ -284,5 +283,22 @@ class Blocks {
 
         return $output;
 
+    }
+
+    /**
+	 * Register the JavaScript for the admin text formats.
+     *
+     * @return void
+	 */
+    public function register_text_formats(): void {
+        wp_register_script(
+            'plenamata-plugin-formats',
+			PLENAMATA_PLUGIN_URL . 'assets/build/js/admin/formats.js',
+            [ 'wp-blocks', 'wp-i18n', 'wp-rich-text' ],
+			Plugin::VERSION,
+			false
+		);
+
+        wp_enqueue_script( 'plenamata-plugin-formats' );
     }
 }
