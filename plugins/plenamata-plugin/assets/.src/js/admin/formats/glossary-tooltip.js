@@ -3,7 +3,7 @@ import { Modal, SelectControl } from '@wordpress/components'
 import { useSelect } from '@wordpress/data'
 import { useState } from '@wordpress/element'
 import { __ } from '@wordpress/i18n'
-import { applyFormat, getActiveFormat, registerFormatType, removeFormat } from '@wordpress/rich-text'
+import { getActiveFormat, registerFormatType, removeFormat, toggleFormat } from '@wordpress/rich-text'
 
 const FORMAT_NAME = 'plenamata/glossary-tooltip'
 
@@ -13,6 +13,19 @@ function fetchVerbetes (select) {
         orderby: 'title',
         per_page: -1,
     })
+}
+
+function findVerbete (value, glossary) {
+    if (!value || !glossary) {
+        return -1
+    }
+    const selection = value.text.slice(value.start, value.end).toLowerCase()
+    for (const verbete of glossary) {
+        if (verbete.title.raw.toLowerCase() === selection) {
+            return verbete.id
+        }
+    }
+    return -1
 }
 
 function verbeteOptions (glossary) {
@@ -44,8 +57,16 @@ registerFormatType(FORMAT_NAME, {
                 isActive={ isActive }
                 title={ __('Glossary tooltip', 'plenamata') }
                 onClick={ () => {
-                    const activeFormat = getActiveFormat(value, FORMAT_NAME)
-                    if (activeFormat) {
+                    const verbeteId = findVerbete(value, glossary)
+                    if (verbeteId > 0) {
+                        try {
+                            onChange(toggleFormat(value, { type: FORMAT_NAME, attributes: { verbeteId } }))
+                        } catch (err) {
+                            console.error(err)
+                            setAddingTooltip(true)
+                            setValue(value)
+                        }
+                    } else if (getActiveFormat(value, FORMAT_NAME)) {
                         onChange(removeFormat(value, FORMAT_NAME))
                     } else {
                         setAddingTooltip(true)
@@ -65,7 +86,7 @@ registerFormatType(FORMAT_NAME, {
                             label={ __('Select verbete:', 'plenamata') }
                             options={ verbeteOptions(glossary) }
                             onChange={ (verbeteId) => {
-                                onChange(applyFormat(currentValue, { type: FORMAT_NAME, attributes: { verbeteId } }))
+                                onChange(toggleFormat(currentValue, { type: FORMAT_NAME, attributes: { verbeteId } }))
                                 setAddingTooltip(false)
                             } }
                         />
