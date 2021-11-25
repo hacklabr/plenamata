@@ -17,7 +17,7 @@ export class GlossaryTooltips {
             verbetesIds.add(tooltip.dataset.verbeteId)
         }
 
-        const res = await window.fetch(`${restUrl}wp/v2/verbete?include=${[...verbetesIds].join(',')}&fields=excerpt,id,link,title`)
+        const res = await window.fetch(`${restUrl}wp/v2/verbete?include=${[...verbetesIds].join(',')}&fields=excerpt,id,title`)
         const verbetes = await res.json()
 
         for (const verbete of verbetes) {
@@ -25,30 +25,28 @@ export class GlossaryTooltips {
             template.id = `tooltip-template-${verbete.id}`
             template.classList.add('glossary-tooltip__tooltip')
             template.innerHTML = `
-                <h2><a href=${verbete.link} target="_blank">${verbete.title.rendered}</a></h2>
+                <h2>${verbete.title.rendered}</h2>
                 ${verbete.excerpt.rendered}
                 <div class="glossary-tooltip__arrow" data-popper-arrow></div>`
             body.append(template)
         }
 
-        for (const destination of tooltips) {
-            this.initializeTooltip(destination, document.querySelector(`#tooltip-template-${destination.dataset.verbeteId}`))
+        for (const target of tooltips) {
+            const tooltip = document.querySelector(`#tooltip-template-${target.dataset.verbeteId}`)
+            this.initializeTooltip(target, tooltip)
         }
 
         console.log('Glossary tooltips were started')
     }
 
-    initializeTooltip (source, tooltip) {
-        console.log(source, tooltip)
-
-        const popper = createPopper(source, tooltip, {
+    initializeTooltip (target, tooltip) {
+        const popper = createPopper(target, tooltip, {
             modifiers: [
                 { name: 'offset', options: { offset: [0, 8] } },
             ],
         })
 
         const show = () => {
-            console.log('show')
             tooltip.setAttribute('data-show', '')
             popper.setOptions((options) => ({
                 ...options,
@@ -61,7 +59,6 @@ export class GlossaryTooltips {
         }
 
         const hide = () => {
-            console.log('hide')
             tooltip.removeAttribute('data-show')
             popper.setOptions((options) => ({
                 ...options,
@@ -72,10 +69,9 @@ export class GlossaryTooltips {
             }))
         }
 
-        const showEvents = ['mouseenter', 'focus']
-        const hideEvents = ['mouseleave', 'blur']
-
-        showEvents.forEach((event) => source.addEventListener(event, show))
-        hideEvents.forEach((event) => source.addEventListener(event, hide))
+        target.addEventListener('blur', hide)
+        target.addEventListener('focus', show)
+        target.addEventListener('mouseenter', show)
+        target.addEventListener('mouseleave', hide)
     }
 }
