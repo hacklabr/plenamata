@@ -1,19 +1,9 @@
 .glossary-tooltip {
-
-    &, &::after {
-        text-decoration: underline;
-        text-decoration-color: $c_red;
-        text-decoration-style: dotted;
-        text-decoration-thickness: 3px;
-    }
-
-    &::after {
-        color: $c_red;
-        content: '\f473';
-        display: inline-block;
-        font-family: dashicons;
-        font-size: 0.75em;
-    }
+    background-color: rgba($c_purple, 0.1);
+    border: 1px solid $c_purple;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 0 size(4);
 }
 
 .select-glossary-tooltip {

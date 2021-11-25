@@ -1,5 +1,7 @@
 import { createPopper } from '@popperjs/core'
+import clickOutside from 'click-outside'
 
+const i18n = window.PlenamataPlugin.i18n.__
 const restUrl = window.PlenamataPlugin.restUrl
 
 export class GlossaryTooltips {
@@ -17,7 +19,7 @@ export class GlossaryTooltips {
             verbetesIds.add(tooltip.dataset.verbeteId)
         }
 
-        const res = await window.fetch(`${restUrl}wp/v2/verbete?include=${[...verbetesIds].join(',')}&fields=excerpt,id,title`)
+        const res = await window.fetch(`${restUrl}wp/v2/verbete?include=${[...verbetesIds].join(',')}&fields=excerpt,id,link`)
         const verbetes = await res.json()
 
         for (const verbete of verbetes) {
@@ -25,9 +27,11 @@ export class GlossaryTooltips {
             template.id = `tooltip-template-${verbete.id}`
             template.classList.add('glossary-tooltip__tooltip')
             template.innerHTML = `
-                <h2>${verbete.title.rendered}</h2>
+                <div class="glossary-tooltip__close">
+                    <button type="button" aria-label="${i18n.close}"><i class="fas fa-times-circle"></i></button>
+                </div>
                 ${verbete.excerpt.rendered}
-                <div class="glossary-tooltip__arrow" data-popper-arrow></div>`
+                <a href=${verbete.link} target="_blank">${i18n.seeOnGlossary}</a>`
             body.append(template)
         }
 
@@ -40,11 +44,15 @@ export class GlossaryTooltips {
     }
 
     initializeTooltip (target, tooltip) {
+        const closeButton = tooltip.querySelector('.glossary-tooltip__close button')
+
         const popper = createPopper(target, tooltip, {
             modifiers: [
                 { name: 'offset', options: { offset: [0, 8] } },
             ],
         })
+
+        let unbindClickEvent
 
         const show = () => {
             tooltip.setAttribute('data-show', '')
@@ -56,6 +64,10 @@ export class GlossaryTooltips {
                 ],
             }))
             popper.update()
+
+            window.setTimeout(() => {
+                unbindClickEvent = clickOutside(tooltip, hide)
+            }, 100)
         }
 
         const hide = () => {
@@ -67,11 +79,10 @@ export class GlossaryTooltips {
                     { name: 'eventListeners', enabled: false },
                 ],
             }))
+            unbindClickEvent()
         }
 
-        target.addEventListener('blur', hide)
-        target.addEventListener('focus', show)
-        target.addEventListener('mouseenter', show)
-        target.addEventListener('mouseleave', hide)
+        closeButton.addEventListener('click', hide)
+        target.addEventListener('click', show)
     }
 }

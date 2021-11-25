@@ -1,66 +1,48 @@
 .glossary-tooltip {
-    display: inline;
-    text-decoration: underline;
-    text-decoration-color: $c_red;
-    text-decoration-style: dotted;
-    text-decoration-thickness: 3px;
-
-    &__arrow {
-
-        &, &::before {
-            background: inherit;
-            height: 8px;
-            position: absolute;
-            width: 8px;
-        }
-
-        & {
-            visibility: hidden;
-        }
-
-        &::before {
-            content: '';
-            transform: rotate(45deg);
-            visibility: visible;
-        }
-    }
+    background-color: rgba($c_purple, 0.1);
+    border: 1px solid $c_purple;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 0 size(4);
 
     &__tooltip {
-        background: $c_pink;
-        border-radius: 5px;
+        background: $c_purple;
+        border-radius: 3px;
+        color: white;
         display: none;
         max-width: size(600);
-        padding: 15px;
-
-        h2 {
-            color: $c_red;
-            font-size: size(24);
-            margin: 0 0 size(8);
-        }
+        padding: 20px;
 
         p {
             line-height: 1.5;
-            margin: 0;
+            margin-top: 0;
+        }
+
+        a {
+            color: inherit;
+            font-weight: bold;
+            font-size: size(18);
+            text-decoration: underline !important;
         }
 
         &[data-show] {
             display: block;
         }
+    }
 
-        &[data-popper-placement^='top'] > .glossary-tooltip__arrow {
-            bottom: -4px;
-        }
+    &__close {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: size(8);
 
-        &[data-popper-placement^='bottom'] > .glossary-tooltip__arrow {
-            top: -4px;
-        }
+        button {
+            margin: 0;
+            padding: 0;
+            text-align: end;
 
-        &[data-popper-placement^='left'] > .glossary-tooltip__arrow {
-            right: -4px;
-        }
-
-        &[data-popper-placement^='right'] > .glossary-tooltip__arrow {
-            left: -4px;
+            i {
+                font-size: size(16);
+            }
         }
     }
 }

@@ -151,6 +151,12 @@ class Front {
             'plenamata-plugin',
             'PlenamataPlugin',
             [
+                'i18n' => [
+                    '__' => [
+                        'close' => __( 'Close', 'plenamata' ),
+                        'seeOnGlossary' => __( 'See term on glossary', 'plenamata' ),
+                    ]
+                ],
                 'restUrl' => get_rest_url(),
             ],
         );
