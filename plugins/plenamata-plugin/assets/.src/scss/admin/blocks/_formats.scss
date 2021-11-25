@@ -1,16 +1,19 @@
 .glossary-tooltip {
-    background-color: #F7F7F7;
-    border-radius: 5px;
-    display: inline-block;
-    padding: 0 5px;
+    text-decoration: underline;
+    text-decoration-color: $c_red;
+    text-decoration-style: solid;
+    text-decoration-thickness: 3px;
 
     &:after {
-        color: #888;
+        color: $c_red;
         content: '\f473';
         display: inline-block;
         font-family: dashicons;
         font-size: 0.75em;
-        padding-left: 3px;
+        text-decoration: underline;
+        text-decoration-color: $c_red;
+        text-decoration-style: solid;
+        text-decoration-thickness: 3px;
     }
 }
 

@@ -147,6 +147,14 @@ class Front {
 			true
 		);
 
+        wp_localize_script(
+            'plenamata-plugin',
+            'PlenamataPlugin',
+            [
+                'restUrl' => get_rest_url(),
+            ],
+        );
+
         wp_register_script( 'luxon', 'https://unpkg.com/luxon@2/build/global/luxon.min.js', [], false, true );
 
         wp_register_script(

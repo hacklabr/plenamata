@@ -1,0 +1,70 @@
+.glossary-tooltip {
+    display: inline;
+    text-decoration: underline;
+    text-decoration-color: $c_red;
+    text-decoration-style: solid;
+    text-decoration-thickness: 3px;
+
+    &__arrow {
+
+        &, &::before {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: inherit;
+        }
+
+        & {
+            visibility: hidden;
+        }
+
+        &::before {
+            visibility: visible;
+            content: '';
+            transform: rotate(45deg);
+        }
+    }
+
+    &__tooltip {
+        background: $c_pink;
+        border-radius: 5px;
+        display: none;
+        max-width: size(600);
+        padding: 15px;
+
+        h2 {
+            color: $c_red;
+            font-size: size(24);
+            margin: 0 0 size(8);
+
+            a {
+                color: inherit;
+            }
+        }
+
+        p {
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        &[data-show] {
+            display: block;
+        }
+
+        &[data-popper-placement^='top'] > .glossary-tooltip__arrow {
+            bottom: -4px;
+        }
+
+        &[data-popper-placement^='bottom'] > .glossary-tooltip__arrow {
+            top: -4px;
+        }
+
+        &[data-popper-placement^='left'] > .glossary-tooltip__arrow {
+            right: -4px;
+        }
+
+        &[data-popper-placement^='right'] > .glossary-tooltip__arrow {
+            left: -4px;
+        }
+    }
+}
