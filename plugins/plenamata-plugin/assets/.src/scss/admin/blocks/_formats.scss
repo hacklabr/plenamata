@@ -1,19 +1,18 @@
 .glossary-tooltip {
-    text-decoration: underline;
-    text-decoration-color: $c_red;
-    text-decoration-style: solid;
-    text-decoration-thickness: 3px;
 
-    &:after {
+    &, &::after {
+        text-decoration: underline;
+        text-decoration-color: $c_red;
+        text-decoration-style: dotted;
+        text-decoration-thickness: 3px;
+    }
+
+    &::after {
         color: $c_red;
         content: '\f473';
         display: inline-block;
         font-family: dashicons;
         font-size: 0.75em;
-        text-decoration: underline;
-        text-decoration-color: $c_red;
-        text-decoration-style: solid;
-        text-decoration-thickness: 3px;
     }
 }
 
