@@ -15,26 +15,17 @@ function fetchVerbetes (select) {
     })
 }
 
-function findVerbete (value, glossary) {
-    if (!value || !glossary) {
-        return -1
-    }
-    const selection = value.text.slice(value.start, value.end).toLowerCase()
-    for (const verbete of glossary) {
-        if (verbete.title.raw.toLowerCase() === selection) {
-            return verbete.id
-        }
-    }
-    return -1
-}
-
 function verbeteOptions (glossary) {
     if (!glossary) {
         return []
     }
-    return glossary.map((verbete) => {
+    const options = glossary.map((verbete) => {
         return { label: verbete.title.raw, value: verbete.id }
     })
+    return [
+        { label: __('Select a verbete', 'plenamata'), value: null },
+        ...options,
+    ]
 }
 
 registerFormatType(FORMAT_NAME, {
@@ -57,16 +48,7 @@ registerFormatType(FORMAT_NAME, {
                 isActive={ isActive }
                 title={ __('Glossary tooltip', 'plenamata') }
                 onClick={ () => {
-                    const verbeteId = findVerbete(value, glossary)
-                    if (verbeteId > 0) {
-                        try {
-                            onChange(toggleFormat(value, { type: FORMAT_NAME, attributes: { verbeteId } }))
-                        } catch (err) {
-                            console.error(err)
-                            setAddingTooltip(true)
-                            setValue(value)
-                        }
-                    } else if (getActiveFormat(value, FORMAT_NAME)) {
+                    if (getActiveFormat(value, FORMAT_NAME)) {
                         onChange(removeFormat(value, FORMAT_NAME))
                     } else {
                         setAddingTooltip(true)
@@ -86,8 +68,10 @@ registerFormatType(FORMAT_NAME, {
                             label={ __('Select verbete:', 'plenamata') }
                             options={ verbeteOptions(glossary) }
                             onChange={ (verbeteId) => {
-                                onChange(toggleFormat(currentValue, { type: FORMAT_NAME, attributes: { verbeteId } }))
                                 setAddingTooltip(false)
+                                if (verbeteId) {
+                                    onChange(toggleFormat(currentValue, { type: FORMAT_NAME, attributes: { verbeteId } }))
+                                }
                             } }
                         />
                     </div>
