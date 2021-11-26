@@ -1,4 +1,4 @@
-import { createPopper } from '@popperjs/core'
+import { createPopper } from '@popperjs/core/lib'
 import clickOutside from 'click-outside'
 
 const i18n = window.PlenamataPlugin.i18n.__
@@ -11,7 +11,7 @@ export class GlossaryTooltips {
     }
 
     async init () {
-        const body = document.body
+        const anchor = this.createAnchor()
         const tooltips = document.querySelectorAll('.glossary-tooltip[data-verbete-id]')
         const verbetesIds = new Set()
 
@@ -23,16 +23,8 @@ export class GlossaryTooltips {
         const verbetes = await res.json()
 
         for (const verbete of verbetes) {
-            const template = document.createElement('div')
-            template.id = `tooltip-template-${verbete.id}`
-            template.classList.add('glossary-tooltip__tooltip')
-            template.innerHTML = `
-                <div class="glossary-tooltip__close">
-                    <button type="button" aria-label="${i18n.close}"><i class="fas fa-times-circle"></i></button>
-                </div>
-                ${verbete.excerpt.rendered}
-                <a href=${verbete.link} target="_blank">${i18n.seeOnGlossary}</a>`
-            body.append(template)
+            const tooltipTemplate = this.createTooltipTemplate(verbete)
+            anchor.append(tooltipTemplate)
         }
 
         for (const target of tooltips) {
@@ -41,6 +33,25 @@ export class GlossaryTooltips {
         }
 
         console.log('Glossary tooltips were started')
+    }
+
+    createAnchor () {
+        const anchor = document.createElement('div')
+        document.body.append(anchor)
+        return anchor
+    }
+
+    createTooltipTemplate (verbete) {
+        const template = document.createElement('div')
+        template.id = `tooltip-template-${verbete.id}`
+        template.classList.add('glossary-tooltip__tooltip')
+        template.innerHTML = `
+            <div class="glossary-tooltip__close">
+                <button type="button" aria-label="${i18n.close}"><i class="fas fa-times-circle"></i></button>
+            </div>
+            ${verbete.excerpt.rendered}
+            <a href=${verbete.link} target="_blank">${i18n.seeOnGlossary}</a>`
+        return template
     }
 
     initializeTooltip (target, tooltip) {
@@ -52,7 +63,7 @@ export class GlossaryTooltips {
             ],
         })
 
-        let unbindClickEvent
+        let unbindClickOutside
 
         const show = () => {
             tooltip.setAttribute('data-show', '')
@@ -66,7 +77,7 @@ export class GlossaryTooltips {
             popper.update()
 
             window.setTimeout(() => {
-                unbindClickEvent = clickOutside(tooltip, hide)
+                unbindClickOutside = clickOutside(tooltip, hide)
             }, 100)
         }
 
@@ -79,7 +90,7 @@ export class GlossaryTooltips {
                     { name: 'eventListeners', enabled: false },
                 ],
             }))
-            unbindClickEvent()
+            unbindClickOutside()
         }
 
         closeButton.addEventListener('click', hide)
