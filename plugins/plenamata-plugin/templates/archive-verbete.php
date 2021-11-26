@@ -1,5 +1,10 @@
 <?php
     $sections = get_terms( [ 'taxonomy' => 'secao', 'hide_empty' => false ] );
+    $faq_schema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => [],
+    ];
     get_header();
 ?>
 
@@ -54,6 +59,17 @@
 
                 <div class="glossary__entries">
                 <?php foreach ( $entries as $entry ): ?>
+                    <?php
+                        $faq_schema['mainEntity'][] = [
+                            '@type' => 'Question',
+                            'name' => sprintf( __( 'What is %s?', 'plenamata' ), $entry->post_title ),
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => $entry->post_excerpt,
+                                'url' => get_permalink( $entry->ID ),
+                            ],
+                        ];
+                    ?>
                     <details class="glossary__entry">
                         <summary>
                             <?= $entry->post_title ?>
@@ -75,4 +91,5 @@
         </main>
             </div>
 
+    <script type="application/ld+json"><?= json_encode($faq_schema) ?></script>
     <?php get_footer();?>
