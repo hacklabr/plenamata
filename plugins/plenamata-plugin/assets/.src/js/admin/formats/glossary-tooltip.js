@@ -15,6 +15,19 @@ function fetchVerbetes (select) {
     })
 }
 
+function findVerbete (value, glossary) {
+    if (!value || !glossary) {
+        return null
+    }
+    const selection = value.text.slice(value.start, value.end).toLowerCase()
+    for (const verbete of glossary) {
+        if (verbete.title.raw.toLowerCase() === selection) {
+            return String(verbete.id)
+        }
+    }
+    return null
+}
+
 function verbeteOptions (glossary) {
     if (!glossary) {
         return []
@@ -48,7 +61,10 @@ registerFormatType(FORMAT_NAME, {
                 isActive={ isActive }
                 title={ __('Glossary tooltip', 'plenamata') }
                 onClick={ () => {
-                    if (getActiveFormat(value, FORMAT_NAME)) {
+                    const verbeteId = findVerbete(value, glossary)
+                    if (verbeteId) {
+                        onChange(toggleFormat(value, { type: FORMAT_NAME, attributes: { verbeteId } }))
+                    } else if (getActiveFormat(value, FORMAT_NAME)) {
                         onChange(removeFormat(value, FORMAT_NAME))
                     } else {
                         setAddingTooltip(true)
