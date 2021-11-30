@@ -62,7 +62,7 @@
                     <?php
                         $faq_schema['mainEntity'][] = [
                             '@type' => 'Question',
-                            'name' => sprintf( __( 'What is %s?', 'plenamata' ), $entry->post_title ),
+                            'name' => sprintf( __( 'What does %s mean?', 'plenamata' ), $entry->post_title ),
                             'acceptedAnswer' => [
                                 '@type' => 'Answer',
                                 'text' => $entry->post_excerpt,
