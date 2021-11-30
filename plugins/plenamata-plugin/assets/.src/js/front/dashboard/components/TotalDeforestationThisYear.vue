@@ -6,7 +6,6 @@
         <template #measure>
             <p>
                 {{ sprintf(__('Total deforested area in %s (until last week)', 'plenamata'), year) }}
-                <span v-if="filters.estado">{{ __('on state', 'plenamata') }}</span>
             </p>
             <DashboardMeasure :number="area">
                 <template #unit>

@@ -1,7 +1,7 @@
 <template>
     <DashboardPanel type="measure">
         <template #title>
-            {{ __('Area deforested last week', 'plenamata') }}
+            {{ __('Area deforested last week in the selected territory', 'plenamata') }}
         </template>
         <template #measure>
             <DashboardMeasure icon="area-icon.svg" :number="area">

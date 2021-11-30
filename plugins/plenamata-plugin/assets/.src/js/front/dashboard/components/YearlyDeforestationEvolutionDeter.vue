@@ -1,7 +1,7 @@
 <template>
     <DashboardPanel type="chart">
         <template #title>
-            {{ __('Yearly deforestation alerts (DETER)', 'plenamata') }}
+            {{ __('Yearly deforestation alerts in the selected territory (DETER)', 'plenamata') }}
         </template>
         <template #filters>
             <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
