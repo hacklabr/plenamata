@@ -33,7 +33,7 @@ class Blocks {
         remove_action( 'init', 'register_block_core_latest_posts', 10 );
         require_once PLENAMATA_PLUGIN_PATH . 'blocks/latest-posts.php';
 
-		add_action( 'enqueue_block_editor_assets', [ $this, 'register_blocks' ] );
+		add_action( 'init', [ $this, 'register_blocks' ] );
         add_action( 'enqueue_block_editor_assets', [ $this, 'register_text_formats' ] );
 	}
 
