@@ -7,16 +7,21 @@
  * @package Newspack
  */
 
+$frontpage = get_post( get_option( 'page_for_posts' ) );
+
 get_header();
 ?>
     <section id="primary" class="content-area custom-archive">
         <header class="page-header">
             <span>
-                <?php the_archive_title( '<h1 class="page-title article-section-title category-header">', '</h1>' ); ?>
+                <?php if ( is_archive() ): ?>
+                    <?php the_archive_title( '<h1 class="page-title article-section-title category-header">', '</h1>' ); ?>
+                <?php elseif ( is_home() ): ?>
+                    <h1 class="page-title article-section-title category-header"><?= $frontpage->post_title ?></h1>
+                <?php endif; ?>
             </span>
 
         </header><!-- .page-header -->
-
 
         <?php do_action( 'before_archive_posts' ); ?>
 
@@ -25,6 +30,10 @@ get_header();
         <?php if ( '' !== get_the_archive_description() ) : ?>
             <div class="taxonomy-description">
                 <?php echo wp_kses_post( wpautop( get_the_archive_description() ) ); ?>
+            </div>
+        <?php elseif ( is_home() ): ?>
+            <div class="taxonomy-description">
+                <p><?= __( 'Content on deforestation in the Amazon, with the curatorship of news stories, studies, special reports, opinion articles, and good initiatives, which aim at contributing to the preservation and ending deforestation in the region.', 'plenamata' ) ?></p>
             </div>
         <?php endif; ?>
 

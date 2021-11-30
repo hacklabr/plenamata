@@ -49,6 +49,7 @@ class Front {
         add_filter( 'document_title_parts', [ $this, 'custom_titles' ], 10, 1 );
         add_filter( 'page_template', [ $this, 'page_templates' ], 10, 1 );
         add_filter( 'single_template', [ $this, 'single_templates' ], 10, 1 );
+        add_filter( 'template_include', [$this, 'frontpage_template'], 10, 1);
 
         // add template file for search after mobile menu
         add_filter( 'wp_nav_menu', [ $this, 'search_mobile'], 50, 2 );
@@ -349,6 +350,13 @@ class Front {
         wp_register_script( 'layer-type-mapbox', JEO_BASEURL . '/includes/layer-types/mapbox.js', [ 'jeo-layer' ], JEO_VERSION );
 
 		wp_register_script( 'jeo-legend', JEO_BASEURL . '/js/build/JeoLegend.js', [ 'mapboxgl-loader' ], JEO_VERSION );
+    }
+
+    public function frontpage_template (string $template): string {
+        if ( is_home() ) {
+            return PLENAMATA_PLUGIN_PATH . 'templates/archive.php';
+        }
+        return $template;
     }
 
     public function archive_templates( string $template ): string {
