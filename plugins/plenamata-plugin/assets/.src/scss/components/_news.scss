@@ -20,6 +20,26 @@ article.type-post {
                 }
             }
         }
+
+        .external-link {
+            color: $c_purple !important;
+            font-weight: bold;
+            order: 999;
+            padding: 0 0 0 15px;
+
+            // Overriding FontAwesome icon hardcoded by Newspack
+            .fas.fa-external-link-alt {
+                background-image: asset-url('img/external-source-icon.svg');
+                background-position: center;
+                height: 1em;
+                margin-right: size(4);
+                width: 1em;
+
+                &::before, &::after {
+                    content: '';
+                }
+            }
+        }
     }
 
     .widget-boas & {
