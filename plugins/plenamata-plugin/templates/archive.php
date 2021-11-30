@@ -34,6 +34,17 @@ get_header();
         <?php elseif ( is_home() ): ?>
             <div class="taxonomy-description">
                 <p><?= __( 'Content on deforestation in the Amazon, with the curatorship of news stories, studies, special reports, opinion articles, and good initiatives, which aim at contributing to the preservation and ending deforestation in the region.', 'plenamata' ) ?></p>
+
+                <ul class="categories-list">
+                <?php $categories = get_categories(); ?>
+                <?php foreach ( $categories as $category ): ?>
+                    <li>
+                        <a href="<?= get_category_link( $category->term_id ) ?>">
+                            <?= $category->name ?>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
             </div>
         <?php endif; ?>
 
