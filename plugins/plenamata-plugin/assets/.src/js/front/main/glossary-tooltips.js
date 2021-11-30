@@ -19,17 +19,19 @@ export class GlossaryTooltips {
             verbetesIds.add(tooltip.dataset.verbeteId)
         }
 
-        const res = await window.fetch(`${restUrl}wp/v2/verbete?include=${[...verbetesIds].join(',')}&fields=excerpt,id,link`)
-        const verbetes = await res.json()
+        if (verbetesIds.size > 0) {
+            const res = await window.fetch(`${restUrl}wp/v2/verbete?include=${[...verbetesIds].join(',')}&fields=excerpt,id,link`)
+            const verbetes = await res.json()
 
-        for (const verbete of verbetes) {
-            const tooltipTemplate = this.createTooltipTemplate(verbete)
-            anchor.append(tooltipTemplate)
-        }
+            for (const verbete of verbetes) {
+                const tooltipTemplate = this.createTooltipTemplate(verbete)
+                anchor.append(tooltipTemplate)
+            }
 
-        for (const target of tooltips) {
-            const tooltip = document.querySelector(`#tooltip-template-${target.dataset.verbeteId}`)
-            this.initializeTooltip(target, tooltip)
+            for (const target of tooltips) {
+                const tooltip = document.querySelector(`#tooltip-template-${target.dataset.verbeteId}`)
+                this.initializeTooltip(target, tooltip)
+            }
         }
 
         console.log('Glossary tooltips were started')
