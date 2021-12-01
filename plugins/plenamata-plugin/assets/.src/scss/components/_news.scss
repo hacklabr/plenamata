@@ -1,6 +1,12 @@
 article.type-post {
 
     .entry-meta {
+        display: flex;
+        flex-wrap: wrap;
+
+        & > * {
+            margin-right: 15px;
+        }
 
         img {
             border-radius: 50%;
@@ -25,7 +31,7 @@ article.type-post {
             color: $c_purple !important;
             font-weight: bold;
             order: 999;
-            padding: 0 0 0 15px;
+            padding: 0;
 
             // Overriding FontAwesome icon hardcoded by Newspack
             .fas.fa-external-link-alt {
