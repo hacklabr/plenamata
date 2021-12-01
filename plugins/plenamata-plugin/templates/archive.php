@@ -7,7 +7,7 @@
  * @package Newspack
  */
 
-$frontpage = get_post( get_option( 'page_for_posts' ) );
+$newspage = get_post( get_option( 'page_for_posts' ) );
 
 get_header();
 ?>
@@ -17,7 +17,7 @@ get_header();
                 <?php if ( is_archive() ): ?>
                     <?php the_archive_title( '<h1 class="page-title article-section-title category-header">', '</h1>' ); ?>
                 <?php elseif ( is_home() ): ?>
-                    <h1 class="page-title article-section-title category-header"><?= $frontpage->post_title ?></h1>
+                    <h1 class="page-title article-section-title category-header"><?= $newspage->post_title ?></h1>
                 <?php endif; ?>
             </span>
 
@@ -33,8 +33,7 @@ get_header();
             </div>
         <?php elseif ( is_home() ): ?>
             <div class="taxonomy-description">
-                <p><?= __( 'Content on deforestation in the Amazon, with the curatorship of news stories, studies, special reports, opinion articles, and good initiatives, which aim at contributing to the preservation and ending deforestation in the region.', 'plenamata' ) ?></p>
-
+                <p><?= $newspage->post_content ?></p>
                 <ul class="categories-list">
                 <?php $categories = get_categories(); ?>
                 <?php foreach ( $categories as $category ): ?>
