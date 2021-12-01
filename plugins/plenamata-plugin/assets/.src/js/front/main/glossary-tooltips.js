@@ -51,6 +51,10 @@ export class GlossaryTooltips {
             <div class="glossary-tooltip__close">
                 <button type="button" aria-label="${i18n.close}"><i class="fas fa-times-circle"></i></button>
             </div>
+            ${verbete.plenamata_thumbnail
+                ? `<img class="glossary-tooltip__thumbnail" src="${verbete.plenamata_thumbnail}">`
+                : ''
+            }
             ${verbete.excerpt.rendered}
             <a href=${verbete.link} target="_blank">${i18n.seeOnGlossary}</a>`
         return template
@@ -68,6 +72,7 @@ export class GlossaryTooltips {
         let unbindClickOutside
 
         const show = () => {
+            target.classList.add('-show')
             tooltip.setAttribute('data-show', '')
             popper.setOptions((options) => ({
                 ...options,
@@ -84,6 +89,7 @@ export class GlossaryTooltips {
         }
 
         const hide = () => {
+            target.classList.remove('-show')
             tooltip.removeAttribute('data-show')
             popper.setOptions((options) => ({
                 ...options,

@@ -44,6 +44,11 @@ class RestApi {
             'update_callback' => null,
             'schema' => null,
         ] );
+        register_rest_field( 'verbete', 'plenamata_thumbnail', [
+            'get_callback' => [ $this, 'add_thumbnail_to_response' ],
+            'update_callback' => null,
+            'schema' => null,
+        ] );
     }
 
     /**

@@ -1,27 +1,33 @@
 .glossary-tooltip {
-    background-color: rgba($c_purple, 0.1);
-    border: 1px solid $c_purple;
+    background-color: rgba($c_purple, 0.15);
+    border: 1px solid transparent;
     border-radius: 3px;
     display: inline-block;
     padding: 0 size(4);
+
+    &.-show {
+        border-color: $c_purple;
+    }
 
     &__tooltip {
         background: $c_purple;
         border-radius: 3px;
         color: white;
         display: none;
-        max-width: size(600);
-        padding: 20px;
+        font-size: size(16);
+        max-width: size(300);
+        padding: 16px;
+        z-index: 10;
 
         p {
-            line-height: 1.5;
+            font-size: inherit !important;
+            line-height: 1.25;
             margin-top: 0;
         }
 
         a {
             color: inherit;
             font-weight: bold;
-            font-size: size(18);
             text-decoration: underline !important;
         }
 
@@ -31,18 +37,22 @@
     }
 
     &__close {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: size(8);
+        position: absolute;
+        right: size(4);
+        top: size(-4);
 
         button {
             margin: 0;
             padding: 0;
-            text-align: end;
 
             i {
                 font-size: size(16);
             }
         }
+    }
+
+    &__thumbnail {
+        max-width: 100%;
+        margin-bottom: size(16);
     }
 }
