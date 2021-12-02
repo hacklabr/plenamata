@@ -86,7 +86,7 @@
                     flex-direction: column !important;
                 }
                 &.has-post-thumbnail{
-                    &:not(:first-child){
+                    &:not(:first-of-type){
                         .post-thumbnail {
                             @include tablet-up {
                                 max-width: 45% !important;
