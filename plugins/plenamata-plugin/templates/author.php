@@ -11,8 +11,8 @@ get_header();
 ?>
     <header class="page-header author">
         <div class="breadcrumb">
-                <a href="<?= site_url(); ?>"><?= __( 'Home', 'plenamata' ) ?></a> /
-                <a href="<?= get_category_link( get_category_by_slug( 'opinion' ) ) ?>"><?= __( 'Columnists', 'plenamata' ) ?></a> /
+            <a href="<?= site_url(); ?>"><?= __( 'Home', 'plenamata' ) ?></a> /
+            <a href="<?= get_category_link( get_category_by_slug( 'opinion' ) ) ?>"><?= __( 'Columnists', 'plenamata' ) ?></a> /
         </div>
         <div class="author-main-content">
             <?php

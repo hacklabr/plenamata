@@ -13,6 +13,12 @@ get_header();
 ?>
     <section id="primary" class="content-area custom-archive">
         <header class="page-header">
+            <?php if ( is_category() ): ?>
+                <div class="breadcrumb">
+                    <a href="<?= site_url(); ?>"><?= __( 'Home', 'plenamata' ) ?></a> /
+                    <a href="<?= get_post_type_archive_link( 'post' ) ?>"><?= __( 'News', 'plenamata' ) ?></a> /
+                </div>
+            <?php endif; ?>
             <span>
                 <?php if ( is_archive() ): ?>
                     <?php the_archive_title( '<h1 class="page-title article-section-title category-header">', '</h1>' ); ?>

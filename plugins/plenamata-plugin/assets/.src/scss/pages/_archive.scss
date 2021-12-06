@@ -2,10 +2,6 @@
 
     // cabeçalho do autor
     .page-header {
-        &.author{
-            background-color: #F5F1EE;
-        }
-
         flex-direction: column;
 
         .page-title::before {
@@ -17,9 +13,7 @@
         }
 
         .breadcrumb{
-            max-width: 90%;
-            width: 1200px;
-            margin: 32px auto;
+            margin: size(20) auto;
             font-weight: bold;
             text-transform: capitalize;
 
@@ -27,6 +21,7 @@
                 color: var(--secondary);
             }
         }
+
         .author-main-content {
             align-items: center;
             .page-title {
@@ -37,6 +32,16 @@
         img {
             width: 189px;
             height: 189px;
+        }
+
+        &.author{
+            background-color: #F5F1EE;
+
+            .breadcrumb {
+                margin: size(32) auto;
+                max-width: 90%;
+                width: 1200px;
+            }
         }
     }
 
