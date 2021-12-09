@@ -10,9 +10,9 @@
     }
 
     &__tooltip {
-        background: $c_purple;
+        background: $c_lighter;
         border-radius: 3px;
-        color: white;
+        color: $c_text;
         display: none;
         font-size: size(16);
         max-width: size(300);
@@ -26,7 +26,7 @@
         }
 
         a {
-            color: inherit;
+            color: $c_purple;
             font-weight: bold;
             text-decoration: underline !important;
         }
@@ -42,10 +42,12 @@
         top: size(-4);
 
         button {
+            background: transparent;
             margin: 0;
             padding: 0;
 
             i {
+                color: $c_purple;
                 font-size: size(16);
             }
         }
