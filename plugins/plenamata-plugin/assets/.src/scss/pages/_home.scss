@@ -37,6 +37,10 @@ body.home {
                 min-height: 200px;
             }
         }
+
+        .wp-block-button__link.has-secondary-background-color {
+            background-color: var(--secondary);
+        }
     }
 
     .home-intro-cards {
