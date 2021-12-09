@@ -142,6 +142,19 @@
         justify-content: space-between;
     }
 
+    &__subtitle {
+
+        &::before {
+            content: '—';
+            display: inline-block;
+            margin: 0 1ch;
+        }
+
+        @include small {
+            display: none;
+        }
+    }
+
     &__filter-toggle {
         display: none;
 

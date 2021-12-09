@@ -3,7 +3,7 @@
         <header class="dashboard__header">
             <div class="container">
                 <div class="dashboard__title">
-                    <h1>{{ __('Forestry Dashboard', 'plenamata') }}</h1>
+                    <h1>{{ __('Forestry Dashboard', 'plenamata') }}<span class="dashboard__subtitle">{{ __('Legal Amazon', 'plenamata') }}</span></h1>
                     <div class="dashboard__filter-toggle" :class="{ '-on': showFilters }">
                         <a href="javascript:void(0)" @click="toggleFilters" @keypress.enter="toggleFilters">{{ _x('Filter', 'verb', 'plenamata') }}</a>
                     </div>
@@ -240,7 +240,7 @@
                     this.filters.estado = ''
                     this.filters.municipio = ''
                     this.filters.uc = ''
-                    
+
                     let tiSelected = this.data.tis.find( ti => ti.code == this.filters.ti )
                     this.jeomap.map.setFilter('tis-brasil', ['==', ['get', 'terrai_cod'], parseInt( this.filters.ti ) ])
                     this.jeomap.map.flyTo({ center: [tiSelected.long, tiSelected.lat], zoom: 12 })
@@ -303,7 +303,7 @@
                         /* All Brasil */
                         this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                         this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
-                        
+
                         this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
                     }
                 }
@@ -426,7 +426,7 @@
                 })
                 document.body.addEventListener( 'jeo-open-spiderifier-pin', (e) => {
                     this.openNews( e.detail.id )
-                    
+
                 })
                 this.jeomap.map.on( 'load', (map) => {
                     // hide all states
