@@ -14,9 +14,14 @@ get_header();
     <section id="primary" class="content-area custom-archive">
         <header class="page-header">
             <?php if ( is_category() ): ?>
+                <?php $category = get_category( get_query_var( 'cat' ) ); ?>
                 <div class="breadcrumb">
                     <a href="<?= site_url(); ?>"><?= __( 'Home', 'plenamata' ) ?></a> /
                     <a href="<?= get_post_type_archive_link( 'post' ) ?>"><?= __( 'News', 'plenamata' ) ?></a> /
+                    <?php if ( $category->parent > 0 ): ?>
+                        <?php $parent = get_category( $category->parent ); ?>
+                        <a href="<?= get_category_link( $parent->term_id ) ?>"><?= $parent->name ?></a> /
+                    <?php endif; ?>
                 </div>
             <?php endif; ?>
             <span>
@@ -33,24 +38,43 @@ get_header();
 
         <main id="main" class="site-main">
 
-        <?php if ( '' !== get_the_archive_description() ) : ?>
-            <div class="taxonomy-description">
-                <?php echo wp_kses_post( wpautop( get_the_archive_description() ) ); ?>
-            </div>
-        <?php elseif ( is_home() ): ?>
+        <?php if ( is_home() ): ?>
             <div class="taxonomy-description">
                 <p><?= $newspage->post_content ?></p>
-                <ul class="categories-list">
+            </div>
+            <ul class="categories-list">
                 <?php $categories = get_categories(); ?>
-                <?php foreach ( $categories as $category ): ?>
-                    <li>
-                        <a href="<?= get_category_link( $category->term_id ) ?>">
-                            <?= $category->name ?>
-                        </a>
-                    </li>
+                <?php foreach ( $categories as $cat ): ?>
+                    <?php if ( $cat->parent === 0 ): ?>
+                        <li>
+                            <a href="<?= get_category_link( $cat->term_id ) ?>">
+                                <?= $cat->name ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </ul>
-            </div>
+        <?php else: ?>
+            <?php if ( '' !== get_the_archive_description() ) : ?>
+                <div class="taxonomy-description">
+                    <?php echo wp_kses_post( wpautop( get_the_archive_description() ) ); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ( is_category() ): ?>
+                <?php $categories = get_categories( [ 'parent' => $category->term_id ] ); ?>
+                <?php if ( count( $categories ) > 0 ): ?>
+                    <ul class="categories-list">
+                        <?php foreach ( $categories as $cat ): ?>
+                            <li>
+                                <a href="<?= get_category_link( $cat->term_id ) ?>">
+                                    <?= $cat->name ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            <?php endif; ?>
         <?php endif; ?>
 
         <?php

@@ -60,7 +60,7 @@
         display: flex;
         flex-wrap: wrap;
         list-style: none;
-        margin: 0;
+        margin: 0 0 size(20);
         padding: 0;
 
         li {
@@ -75,6 +75,10 @@
                 padding: 16px 24px;
             }
         }
+    }
+
+    .taxonomy-description + .categories-list {
+        margin-top: size(-16);
     }
 
     #primary.content-area {
