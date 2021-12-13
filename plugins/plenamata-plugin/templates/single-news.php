@@ -12,9 +12,10 @@ get_header( 'single' );
 the_post(); ?>
 
 	<?php
-    $category = get_the_category()[0];
+    $categories = get_the_category();
+    $category = $categories[0];
 	$is_opinion = ($category->slug == "_newspack_opinion" || $category->slug == 'opiniao' || $category->slug == 'opinion') ? true : false;
-	$is_initiative = ($category->slug == 'boas-iniciativas' || $category->slug == 'good-initiatives') ? true : false;
+    $is_initiative = !empty(array_filter($categories, fn($item) => $item->slug === 'boas-iniciativas' || $item->slug === 'good-initiatives'));
 
     if ($is_opinion): ?>
 			<div class="opinion-header">
