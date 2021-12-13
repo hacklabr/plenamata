@@ -14,8 +14,18 @@ the_post(); ?>
 	<?php
     $categories = get_the_category();
     $category = $categories[0];
+    $subcategories = [];
+
+    foreach ($categories as $cat) {
+        if ($cat->parent === 0) {
+            $category = $cat;
+        } else {
+            $subcategories[] = $cat;
+        }
+    }
+
 	$is_opinion = ($category->slug == "_newspack_opinion" || $category->slug == 'opiniao' || $category->slug == 'opinion') ? true : false;
-    $is_initiative = !empty(array_filter($categories, fn($item) => $item->slug === 'boas-iniciativas' || $item->slug === 'good-initiatives'));
+    $is_initiative = ($category->slug === 'boas-iniciativas' || $category->slug === 'good-initiatives') ? true : false;
 
     if ($is_opinion): ?>
 			<div class="opinion-header">
@@ -35,7 +45,15 @@ the_post(); ?>
             <div>
                 <div class="initiative-header__category">
                     <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/macaw-eye.svg" alt="">
-                    <span><?= __('Good Initiatives', 'plenamata') ?></span>
+                    <a href="<?= get_category_link(get_category_by_slug('good-initiatives')) ?>">
+                        <?= __('Good Initiatives', 'plenamata') ?>
+                    </a>
+                    <?php if (!empty($subcategories)): ?>
+                        <span>/</span>
+                        <a href="<?= get_category_link($subcategories[0]->cat_ID) ?>">
+                            <?= $subcategories[0]->name ?>
+                        </a>
+                    <?php endif; ?>
                 </div>
                 <h1 class="initiative-header__title"><?= wp_kses_post(get_the_title()) ?></h1>
             </div>

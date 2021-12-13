@@ -41,13 +41,14 @@
 
         img {
             height: size(40);
+            margin-right: size(14);
         }
 
-        span {
+        a, span {
             color: white;
             font-size: size(14);
             font-weight: bold;
-            margin-left: size(14);
+            margin-left: 1ch;
             text-transform: uppercase;
         }
     }
