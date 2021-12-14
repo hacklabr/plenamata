@@ -18,6 +18,9 @@ export function humanNumber (number) {
 }
 
 export function roundNumber (number) {
+    if (Math.abs(number) < 1) {
+        return numberLocale.format(number)
+    }
     return numberLocale.format(Math.round(number))
 }
 
