@@ -275,7 +275,7 @@ class Front {
                 'Trees cut down in %s in the selected territory' => __( 'Trees cut down in %s in the selected territory', 'plenamata' ),
                 'trees cut sown so far' => __( 'trees cut down so far', 'plenamata' ),
                 'trees per day' => __( 'trees per day', 'plenamata' ),
-                'Unit' => __( 'Unit', 'plenamatmarkera' ),
+                'Unit' => __( 'Unit', 'plenamata' ),
                 'Week %s' => __( 'Week %s', 'plenamata' ),
                 'Weekly' => __( 'Weekly', 'plenamata' ),
                 'Weekly and monthly data are from %s.' => __( 'Weekly and monthly data are from %s.', 'plenamata' ),
