@@ -155,7 +155,7 @@ class Front {
                 'i18n' => [
                     '__' => [
                         'close' => __( 'Close', 'plenamata' ),
-                        'seeOnGlossary' => __( 'See term on glossary', 'plenamata' ),
+                        'seeMore' => __( 'See more', 'plenamata' ),
                     ]
                 ],
                 'restUrl' => get_rest_url(),

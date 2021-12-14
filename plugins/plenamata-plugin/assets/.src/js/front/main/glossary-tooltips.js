@@ -56,7 +56,7 @@ export class GlossaryTooltips {
                 : ''
             }
             ${verbete.excerpt.rendered}
-            <a href=${verbete.link} target="_blank">${i18n.seeOnGlossary}</a>`
+            <a href=${verbete.link} target="_blank">${i18n.seeMore}</a>`
         return template
     }
 
