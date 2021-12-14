@@ -252,6 +252,7 @@ class Front {
                 'Indigenous Land' => __( 'Indigenous Land', 'plenamata' ),
                 'km²' => __( 'km²', 'plenamata' ),
                 'km² per day' => __( 'km² per day', 'plenamata' ),
+                'Legal Amazon' => __( 'Legal Amazon', 'plenamata' ),
                 'Load more' => __( 'Load more', 'plenamata' ),
                 'Loading...' => __( 'Loading...', 'plenamata' ),
                 'Monthly' => __( 'Monthly', 'plenamata' ),
