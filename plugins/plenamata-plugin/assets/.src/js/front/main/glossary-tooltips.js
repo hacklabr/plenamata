@@ -3,8 +3,6 @@ import { computePosition, flip, offset, shift } from '@floating-ui/dom'
 const i18n = window.PlenamataPlugin.i18n.__
 const restUrl = window.PlenamataPlugin.restUrl
 
-const OFFSET = 8
-
 export class GlossaryTooltips {
 
     constructor () {
@@ -70,7 +68,7 @@ export class GlossaryTooltips {
             target.classList.add('-show')
             tooltip.classList.add('-show')
             const { x, y } = await computePosition(target, tooltip, {
-                middleware: [flip(), offset(OFFSET), shift()],
+                middleware: [flip(), offset(8), shift()],
             })
             tooltip.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`
         }
@@ -85,7 +83,7 @@ export class GlossaryTooltips {
                 if (!mouseOnTooltip) {
                     hide()
                 }
-            }, 100)
+            }, 200)
         }
 
         closeButton.addEventListener('click', () => {
@@ -109,12 +107,10 @@ export class GlossaryTooltips {
     }
 
     onEnter (element, callback) {
-        element.addEventListener('pointerenter', callback)
-        element.addEventListener('touchstart', callback)
+        element.addEventListener('mouseenter', callback, { passive: true })
     }
 
     onLeave (element, callback) {
-        element.addEventListener('pointerleave', callback)
-        element.addEventListener('touchend', callback)
+        element.addEventListener('mouseleave', callback, { passive: true })
     }
 }
