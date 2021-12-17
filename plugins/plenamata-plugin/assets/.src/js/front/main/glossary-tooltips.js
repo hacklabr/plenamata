@@ -78,22 +78,34 @@ export class GlossaryTooltips {
         const hide = () => {
             target.classList.remove('-show')
             tooltip.classList.remove('-show')
-            mouseOnTooltip = false
         }
 
-        closeButton.addEventListener('click', hide)
-        this.onEnter(target, show)
-        this.onLeave(target, () => {
+        const maybeHide = () => {
             window.setTimeout(() => {
                 if (!mouseOnTooltip) {
                     hide()
                 }
-            }, 150)
+            }, 100)
+        }
+
+        closeButton.addEventListener('click', () => {
+            hide()
+        })
+        this.onEnter(target, () => {
+            mouseOnTooltip = true
+            show()
+        })
+        this.onLeave(target, () => {
+            mouseOnTooltip = false
+            maybeHide()
         })
         this.onEnter(tooltip, () => {
             mouseOnTooltip = true
         })
-        this.onLeave(tooltip, hide)
+        this.onLeave(tooltip, () => {
+            mouseOnTooltip = false
+            maybeHide()
+        })
     }
 
     onEnter (element, callback) {
