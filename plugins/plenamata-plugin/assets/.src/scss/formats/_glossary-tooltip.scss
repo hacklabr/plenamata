@@ -15,8 +15,11 @@
         color: $c_text;
         display: none;
         font-size: size(16);
+        left: 0;
         max-width: size(300);
         padding: 16px;
+        position: absolute;
+        top: 0;
         z-index: 10;
 
         p {
@@ -31,7 +34,7 @@
             text-decoration: underline !important;
         }
 
-        &[data-show] {
+        &.-show {
             display: block;
         }
     }

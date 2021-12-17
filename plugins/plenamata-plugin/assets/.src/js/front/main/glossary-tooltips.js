@@ -1,8 +1,9 @@
-import { createPopper } from '@popperjs/core/lib'
-import clickOutside from 'click-outside'
+import { computePosition, flip, offset, shift } from '@floating-ui/dom'
 
 const i18n = window.PlenamataPlugin.i18n.__
 const restUrl = window.PlenamataPlugin.restUrl
+
+const OFFSET = 8
 
 export class GlossaryTooltips {
 
@@ -63,45 +64,45 @@ export class GlossaryTooltips {
     initializeTooltip (target, tooltip) {
         const closeButton = tooltip.querySelector('.glossary-tooltip__close button')
 
-        const popper = createPopper(target, tooltip, {
-            modifiers: [
-                { name: 'offset', options: { offset: [0, 8] } },
-            ],
-        })
+        let mouseOnTooltip = false
 
-        let unbindClickOutside
-
-        const show = () => {
+        const show = async () => {
             target.classList.add('-show')
-            tooltip.setAttribute('data-show', '')
-            popper.setOptions((options) => ({
-                ...options,
-                modifiers: [
-                    ...options.modifiers,
-                    { name: 'eventListeners', enabled: true },
-                ],
-            }))
-            popper.update()
-
-            window.setTimeout(() => {
-                unbindClickOutside = clickOutside(tooltip, hide)
-            }, 100)
+            tooltip.classList.add('-show')
+            const { x, y } = await computePosition(target, tooltip, {
+                middleware: [flip(), offset(OFFSET), shift()],
+            })
+            tooltip.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`
         }
 
         const hide = () => {
             target.classList.remove('-show')
-            tooltip.removeAttribute('data-show')
-            popper.setOptions((options) => ({
-                ...options,
-                modifiers: [
-                    ...options.modifiers,
-                    { name: 'eventListeners', enabled: false },
-                ],
-            }))
-            unbindClickOutside()
+            tooltip.classList.remove('-show')
+            mouseOnTooltip = false
         }
 
         closeButton.addEventListener('click', hide)
-        target.addEventListener('click', show)
+        this.onEnter(target, show)
+        this.onLeave(target, () => {
+            window.setTimeout(() => {
+                if (!mouseOnTooltip) {
+                    hide()
+                }
+            }, 150)
+        })
+        this.onEnter(tooltip, () => {
+            mouseOnTooltip = true
+        })
+        this.onLeave(tooltip, hide)
+    }
+
+    onEnter (element, callback) {
+        element.addEventListener('pointerenter', callback)
+        element.addEventListener('touchstart', callback)
+    }
+
+    onLeave (element, callback) {
+        element.addEventListener('pointerleave', callback)
+        element.addEventListener('touchend', callback)
     }
 }
