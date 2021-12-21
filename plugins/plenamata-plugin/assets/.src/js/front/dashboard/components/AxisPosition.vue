@@ -1,5 +1,5 @@
 <template>
-    <svg class="dashboard__axis-position" preserveAspectRatio="none" :viewBox="viewBox" xmlns="http://www.w3.org/2000/svg">
+    <svg class="dashboard__axis-position" preserveAspectRatio="none" viewBox="0 0 100% 8" xmlns="http://www.w3.org/2000/svg">
         <rect x="0" y="0" rx="4" ry="4" height="8" width="100%"/>
         <rect :x="x" y="0" rx="4" ry="4" height="8" :width="width"/>
     </svg>
@@ -17,9 +17,6 @@
         computed: {
             step () {
                 return 100 / Math.max(this.max - this.min, 1)
-            },
-            viewBox () {
-                return `0 0 100% 8`
             },
             width () {
                 return `${100 * ((this.end - this.start) / (this.max - this.min))}%`
