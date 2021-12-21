@@ -50,9 +50,8 @@
             HasScrollableChart,
         ],
         props: {
+            date: { type: DateTime, required: true },
             filters: { type: Object, required: true },
-            lastUpdate: { type: Object, required: true },
-            now: { type: DateTime, required: true },
             source: { type: String, default: 'prodes' },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
@@ -151,14 +150,13 @@
                 }
             },
             dateInterval () {
-                const lastSync = DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' })
                 if (this.source === 'deter') {
                     const start = DateTime.fromObject({ day: 1, month: 1, year: this.year })
-                    const end = DateTime.min(DateTime.fromObject({ day: 31, month: 12, year: this.year }), lastSync)
+                    const end = DateTime.min(DateTime.fromObject({ day: 31, month: 12, year: this.year }), this.date)
                     return { start, end }
                 } else {
                     const start = DateTime.fromObject({ day: 1, month: 8, year: this.yearModel })
-                    const end = DateTime.min(DateTime.fromObject({ day: 31, month: 7, year: this.yearModel + 1 }), lastSync)
+                    const end = DateTime.min(DateTime.fromObject({ day: 31, month: 7, year: this.yearModel + 1 }), this.date)
                     return { start, end }
                 }
             },
@@ -166,10 +164,10 @@
                 return JSON.stringify({ ...this.filters, source: this.source, year: this.year })
             },
             maxYear () {
-                if (this.source === 'deter' || this.now.month >= 8) {
-                    return this.now.year
+                if (this.source === 'deter' || this.date.month >= 8) {
+                    return this.date.year
                 } else {
-                    return this.now.year - 1
+                    return this.date.year - 1
                 }
             },
             range () {

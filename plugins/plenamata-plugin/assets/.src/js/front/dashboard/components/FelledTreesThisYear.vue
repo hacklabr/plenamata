@@ -33,7 +33,7 @@
             DashboardPanel,
         },
         props: {
-            lastUpdate: { type: Object, required: true },
+            date: { type: Object, required: true },
             minutes: { type: Number, required: true },
             trees: { type: Number, required: true },
             year: { type: Number, required: true },
@@ -46,7 +46,7 @@
         },
         computed: {
             newTrees () {
-                const elapsedTime = Interval.fromDateTimes(DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' }), DateTime.now())
+                const elapsedTime = Interval.fromDateTimes(this.date, DateTime.now())
                 return elapsedTime.count('seconds') * this.treesDelta
             },
             treesDelta () {

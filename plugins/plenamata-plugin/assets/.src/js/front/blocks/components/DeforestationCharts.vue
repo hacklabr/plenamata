@@ -1,31 +1,33 @@
 <template>
     <div class="deforestation-charts">
-        <fieldset class="deforestation-charts__toggle">
-            <label :class="{ active: view === 'year' }">
-                <input type="radio" name="charts-view" value="year" v-model="view">
-                <span>{{ __('Yearly', 'plenamata') }}</span>
-            </label>
-            <label :class="{ active: view === 'month' }">
-                <input type="radio" name="charts-view" value="month" v-model="view">
-                <span>{{ __('Monthly', 'plenamata') }}</span>
-            </label>
-            <label :class="{ active: view === 'week' }">
-                <input type="radio" name="charts-view" value="week" v-model="view">
-                <span>{{ __('Weekly', 'plenamata') }}</span>
-            </label>
-        </fieldset>
-        <div class="deforestation-charts__chart">
-            <keep-alive>
-                <YearlyDeforestationChart key="year" v-if="view === 'year'"/>
-                <MonthlyDeforestationChart key="month" v-if="view === 'month'"/>
-                <WeeklyDeforestationChart key="week" v-if="view === 'week'"/>
-            </keep-alive>
-        </div>
-        <p class="deforestation-charts__source">
-            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
-            {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), previousMonth) }}
-            {{ sprintf(__('Weekly and monthly data are from %s.', 'plenamata'), year) }}
-        </p>
+        <template v-if="lastUpdate">
+            <fieldset class="deforestation-charts__toggle">
+                <label :class="{ active: view === 'year' }">
+                    <input type="radio" name="charts-view" value="year" v-model="view">
+                    <span>{{ __('Yearly', 'plenamata') }}</span>
+                </label>
+                <label :class="{ active: view === 'month' }">
+                    <input type="radio" name="charts-view" value="month" v-model="view">
+                    <span>{{ __('Monthly', 'plenamata') }}</span>
+                </label>
+                <label :class="{ active: view === 'week' }">
+                    <input type="radio" name="charts-view" value="week" v-model="view">
+                    <span>{{ __('Weekly', 'plenamata') }}</span>
+                </label>
+            </fieldset>
+            <div class="deforestation-charts__chart">
+                <keep-alive>
+                    <YearlyDeforestationChart key="year" :date="date" v-if="view === 'year'"/>
+                    <MonthlyDeforestationChart key="month" :date="date" v-if="view === 'month'"/>
+                    <WeeklyDeforestationChart key="week" :date="date" v-if="view === 'week'"/>
+                </keep-alive>
+            </div>
+            <p class="deforestation-charts__source">
+                {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
+                {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), previousMonth) }}
+                {{ sprintf(__('Weekly and monthly data are from %s.', 'plenamata'), year) }}
+            </p>
+        </template>
     </div>
 </template>
 
@@ -68,18 +70,18 @@
             }
         },
         computed: {
+            date () {
+                return DateTime.fromISO(this.lastUpdate.deter_last_date)
+            },
             previousMonth () {
-                const month = DateTime.fromISO(this.lastUpdate.deter_last_date).month
+                const month = this.date.month
                 return months[month]
             },
             updated () {
-                const today = DateTime.now().toISODate()
-
-                const deterDate = DateTime.fromISO(this.lastUpdate.deter_last_date || today)
-                const syncDate = DateTime.fromISO(this.lastUpdate.last_sync || today)
+                const syncDate = DateTime.fromISO(this.lastUpdate.last_sync)
 
                 return {
-                    deter: shortDate(deterDate.toJSDate()).replaceAll('/', '.'),
+                    deter: shortDate(this.date.toJSDate()).replaceAll('/', '.'),
                     sync: shortDate(syncDate.toJSDate()).replaceAll('/', '.'),
                 }
             },

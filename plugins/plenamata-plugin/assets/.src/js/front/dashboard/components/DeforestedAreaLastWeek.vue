@@ -39,8 +39,8 @@
             DashboardPanel,
         },
         props: {
+            date: { type: DateTime, required: true },
             filters: { type: Object, required: true },
-            lastUpdate: { type: Object, required: true },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
         },
@@ -81,10 +81,9 @@
         methods: {
             roundNumber,
             async fetchData () {
-                const endDate = this.lastUpdate.deter_last_date
-                const startDate = DateTime.fromISO(this.lastUpdate.deter_last_date).minus({ weeks: 1 })
+                const startDate = this.date.minus({ weeks: 1 })
 
-                const data = await fetchDeterData({ ...this.filters, data1: startDate.toISODate(), data2: endDate })
+                const data = await fetchDeterData({ ...this.filters, data1: startDate.toISODate(), data2: this.date.toISODate() })
                 this.lastWeek = firstValue(data)
             },
         },

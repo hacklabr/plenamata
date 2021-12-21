@@ -53,20 +53,13 @@
             DashboardPanel,
         },
         props: {
+            date: { type: DateTime, required: true },
             filters: { type: Object, required: true },
-            lastUpdate: { type: Object, required: true },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
         },
         data () {
-            const end = DateTime.now()
-            const start = end.startOf('year')
-
             return {
-                date: {
-                    start,
-                    end,
-                },
                 data: [],
             }
         },
@@ -117,7 +110,8 @@
                 }
             },
             intervals () {
-                const { start, end } = this.date
+                const start = this.date.startOf('year')
+                const end = this.date
 
                 const intervals = [[start, end]]
                 for (let i = 1; i < 5; i++) {
@@ -126,7 +120,7 @@
                 return intervals
             },
             previousMonth () {
-                const month = DateTime.fromISO(this.lastUpdate.deter_last_date).month
+                const month = this.date.month
                 return months[month]
             },
             unitModel: vModel('unit'),

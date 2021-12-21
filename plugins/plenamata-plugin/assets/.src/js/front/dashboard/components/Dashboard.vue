@@ -58,21 +58,21 @@
                     </label>
                 </fieldset>
 
-                <div class="dashboard__panels" v-if="view === 'data'">
-                    <FelledTreesThisYear :lastUpdate="lastUpdate" :minutes="minutes" :trees="trees" :year="date.year" v-if="lastUpdate"/>
-                    <TotalDeforestationThisYear :areaKm2="areaKm2" :filters="filters" :now="date.now" :unit.sync="unit" :updated="updated" :year="date.year"/>
-                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="date.year"/>
-                    <DeforestedAreaLastWeek :filters="filters" :lastUpdate="lastUpdate" :unit.sync="unit" :updated="updated" v-if="lastUpdate"/>
-                    <WeeklyDeforestationEvolution :filters="filters" :lastUpdate="lastUpdate" :now="date.now" :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="year" v-if="lastUpdate"/>
-                    <MonthlyDeforestationEvolution :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated"/>
-                    <YearlyDeforestationEvolutionDeter :filters="filters" :lastUpdate="lastUpdate" :unit.sync="unit" :updated="updated" v-if="lastUpdate"/>
-                    <YearlyDeforestationEvolutionProdes :filters="filters" :unit.sync="unit" :year="date.year"/>
+                <div class="dashboard__panels" v-if="view === 'data' && lastUpdate">
+                    <FelledTreesThisYear :date="date" :minutes="minutes" :trees="trees" :year="year"/>
+                    <TotalDeforestationThisYear :areaKm2="areaKm2" :date="date" :filters="filters" :unit.sync="unit" :updated="updated" :year="year"/>
+                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="year"/>
+                    <DeforestedAreaLastWeek :date="date" :filters="filters" :unit.sync="unit" :updated="updated"/>
+                    <WeeklyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="year"/>
+                    <MonthlyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated"/>
+                    <YearlyDeforestationEvolutionDeter :date="date" :filters="filters" :unit.sync="unit" :updated="updated"/>
+                    <YearlyDeforestationEvolutionProdes :filters="filters" :unit.sync="unit" :year="year"/>
                 </div>
 
                 <div class="dashboard__news" v-else-if="view === 'news'">
                     <DashboardNewsCard v-for="post of news" :key="post.id" :post="post"/>
                     <p v-if="news.length === 0">{{ __('No news to be shown.', 'plenamata') }}</p>
-                    <a href="#" class="dashboard__loadmore" @click="loadMore($event)" v-if="currentFetchNewsPage < wpApiTotalPages ">
+                    <a href="#" class="dashboard__loadmore" @click="loadMore($event)" v-if="currentFetchNewsPage < wpApiTotalPages">
                         {{ loadMoreText }}
                     </a>
                 </div>
@@ -119,20 +119,11 @@
             YearlyDeforestationEvolutionProdes,
         },
         data () {
-            const now = DateTime.now()
-            const startOfYear = now.startOf('year')
-            const year = now.year
-
             return {
                 data: {
                     municipalities: [],
                     ucs: [],
                     tis: [],
-                },
-                date: {
-                    now,
-                    startOfYear,
-                    year,
                 },
                 filters: {
                     estado: '',
@@ -148,7 +139,7 @@
                 thisYear: null,
                 unit: 'ha',
                 view: 'data',
-                year,
+                year: DateTime.now().year,
                 currentFetchNewsPage: 1,
                 wpApiTotalPages: 999999,
                 loadMoreText: __( 'Load more', 'plenamata' )
@@ -161,13 +152,23 @@
                 }
                 return getAreaKm2(this.thisYear)
             },
+            date () {
+                if (!this.lastUpdate) {
+                    return null
+                }
+                return DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' })
+            },
             days () {
-                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' }) : this.date.now
-                return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('days')
+                return Interval.fromDateTimes(this.date.startOf('year'), this.date).count('days')
             },
             minutes () {
-                const lastDay = this.lastUpdate ? DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' }) : this.date.now
-                return Interval.fromDateTimes(this.date.startOfYear, lastDay).count('minutes')
+                return Interval.fromDateTimes(this.date.startOf('year'), this.date).count('minutes')
+            },
+            startOfYear () {
+                if (!this.date) {
+                    return null
+                }
+                return this.date.startOf('year')
             },
             states () {
                 return {
@@ -199,18 +200,15 @@
                     .sort(localeSortBy(uc => uc.uc))
             },
             updated () {
-                const today = DateTime.now().toISODate()
-
                 return {
-                    deter: shortDate(DateTime.fromISO(this.lastUpdate?.deter_last_date || today).toJSDate()).replaceAll('/', '.'),
-                    sync: shortDate(DateTime.fromISO(this.lastUpdate?.last_sync || today).toJSDate()).replaceAll('/', '.'),
+                    deter: shortDate(this.date.toJSDate()).replaceAll('/', '.'),
+                    sync: shortDate(DateTime.fromISO(this.lastUpdate?.last_sync).toJSDate()).replaceAll('/', '.'),
                 }
             },
         },
         watch: {
             filters: {
                 handler: 'fetchData',
-                immediate: true,
                 deep: true,
             },
             'filters.estado': {
@@ -264,6 +262,8 @@
             ])
             this.data = { municipalities: [], tis, ucs }
             this.lastUpdate = lastUpdate
+            this.year = Number(lastUpdate.deter_last_date.slice(0, 4))
+            this.fetchData()
         },
         mounted () {
             const mapEl = document.querySelector('.jeomap')
@@ -318,13 +318,11 @@
             },
             clearSelectedNews,
             async fetchData () {
-                const { now, startOfYear } = this.date
-
-                const monthAgo = now.minus({ months: 1 })
-                const twoMonthsAgo = now.minus({ months: 2 })
+                const monthAgo = this.date.minus({ months: 1 })
+                const twoMonthsAgo = this.date.minus({ months: 2 })
 
                 const [thisYear, lastMonth] = await Promise.all([
-                    fetchDeterData({ ...this.filters, data1: startOfYear.toISODate(), data2: now.toISODate() }),
+                    fetchDeterData({ ...this.filters, data1: this.startOfYear.toISODate(), data2: this.date.toISODate() }),
                     fetchDeterData({ ...this.filters, data1: twoMonthsAgo.toISODate(), data2: monthAgo.toISODate() }),
                 ])
                 this.thisYear = firstValue(thisYear)
@@ -435,11 +433,10 @@
                 })
 
             },
-            loadMore( e ) {
-                e.preventDefault();
-
-                let nextPage = this.currentFetchNewsPage + 1;
-                this.fetchNewsByPage( this.filters.estado, nextPage );
+            loadMore (e) {
+                e.preventDefault()
+                const nextPage = this.currentFetchNewsPage + 1
+                this.fetchNewsByPage(this.filters.estado, nextPage)
             },
             toggleFilters () {
                 this.showFilters = !this.showFilters

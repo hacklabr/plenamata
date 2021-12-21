@@ -64,20 +64,14 @@
             HasScrollableChart,
         ],
         props: {
+            date: { type: DateTime, required: true },
             filters: { type: Object, required: true },
             source: { type: String, default: 'prodes' },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
         },
         data () {
-            const start = DateTime.now().minus({ years: 5 }).startOf('year')
-            const end = DateTime.now()
-
             return {
-                date: {
-                    start,
-                    end,
-                },
                 data: [],
             }
         },
@@ -177,18 +171,24 @@
                     ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                     : [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7]
 
-                const maxMonth = this.date.end.minus({ months: 1 }).month
+                const maxMonth = this.period.end.minus({ months: 1 }).month
                 const index = months.findIndex((i) => i === maxMonth)
                 return months.slice(0, index + 1)
+            },
+            period () {
+                return {
+                    start: this.date.minus({ years: 5 }).startOf('year'),
+                    end: this.date,
+                }
             },
             sourceModel: vModel('source'),
             startDate () {
                 if (this.source === 'deter') {
-                    return this.date.start
-                } else if (this.date.start.month < 8) {
-                    return this.date.end.minus({ years: 5 }).set({ month: 8 })
+                    return this.period.start
+                } else if (this.period.start.month < 8) {
+                    return this.period.end.minus({ years: 5 }).set({ month: 8 })
                 } else {
-                    return this.date.end.minus({ years: 4 }).set({ month: 8 })
+                    return this.period.end.minus({ years: 4 }).set({ month: 8 })
                 }
             },
             unitModel: vModel('unit'),
@@ -201,7 +201,7 @@
         },
         methods: {
             async fetchData () {
-                const data = await fetchDeterData({ ...this.filters, data1: this.startDate.toISODate(), data2: this.date.end.toISODate(), group_by: 'mes' })
+                const data = await fetchDeterData({ ...this.filters, data1: this.startDate.toISODate(), data2: this.period.end.toISODate(), group_by: 'mes' })
                 this.data = data
             },
         },

@@ -32,6 +32,9 @@
         components: {
             BarChart,
         },
+        props: {
+            date: { type: DateTime, required: true },
+        },
         data () {
             return {
                 data: [],
@@ -75,7 +78,7 @@
             },
         },
         async created () {
-            let baseDate = DateTime.now()
+            let baseDate = this.date
             let start = baseDate.startOf('year')
             let end = baseDate
 

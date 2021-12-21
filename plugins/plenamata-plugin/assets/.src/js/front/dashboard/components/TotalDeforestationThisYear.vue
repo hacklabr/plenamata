@@ -48,8 +48,8 @@
         },
         props: {
             areaKm2: { type: Number, required: true },
+            date: { type: DateTime, required: true },
             filters: { type: Object, default: '' },
-            now: { type: DateTime, required: true },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
             year: { type: Number, required: true },
@@ -90,7 +90,7 @@
         },
         methods: {
             async fetchData () {
-                const lastYear = this.now.minus({ years: 1 })
+                const lastYear = this.date.minus({ years: 1 })
                 const startOfYear = lastYear.startOf('year')
 
                 const data = await fetchDeterData({ ...this.filters, data1: startOfYear.toISODate(), data2: lastYear.toISODate() })
