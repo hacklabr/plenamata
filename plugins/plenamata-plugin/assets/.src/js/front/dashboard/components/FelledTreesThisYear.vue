@@ -45,8 +45,14 @@
             }
         },
         computed: {
+            confirmedTrees () {
+                const now = DateTime.now()
+                return (this.date.year === now.year) ? this.trees : 0
+            },
             newTrees () {
-                const elapsedTime = Interval.fromDateTimes(this.date, DateTime.now())
+                const now = DateTime.now()
+                const startDate = (this.date.year === now.year) ? this.date : now.startOf('year')
+                const elapsedTime = Interval.fromDateTimes(startDate, now)
                 return elapsedTime.count('seconds') * this.treesDelta
             },
             treesDelta () {
@@ -64,7 +70,7 @@
         },
         methods: {
             recalculateTrees () {
-                this.internalTrees = this.trees + this.newTrees
+                this.internalTrees = this.confirmedTrees + this.newTrees
 
                 if (this.interval) {
                     window.clearInterval(this.interval)

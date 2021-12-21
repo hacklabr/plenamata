@@ -44,6 +44,10 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
             const treesPerSecond = treesThisYear / daysThisYear.count('seconds')
 
             let treeCount = treesThisYear + (elapsedTime.count('seconds') * treesPerSecond)
+            if (lastDate.year !== now.year) {
+                treeCount = Interval.fromDateTimes(startOfYear, now).count('seconds') * treesPerSecond
+            }
+
             el.textContent = roundNumber(treeCount)
 
             setInterval(() => {
