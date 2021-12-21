@@ -7,16 +7,13 @@ import { roundNumber, shortDate } from '../utils/filters'
 const { DateTime, Interval } = window.luxon
 
 document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
-    const now = DateTime.now()
-    const startOfYear = now.startOf('year')
-
-    const [updated, thisYear] = await Promise.all([
-        fetchLastDate(),
-        fetchDeterData({ data1: startOfYear.toISODate(), data2: now.toISODate() }),
-    ])
-
+    const updated = await fetchLastDate()
     const lastSync = DateTime.fromISO(updated.last_sync, { zone: 'utc' })
     const lastDate = DateTime.fromISO(updated.deter_last_date, { zone: 'utc' })
+
+    const now = DateTime.now()
+    const startOfYear = lastDate.startOf('year')
+    const thisYear = await fetchDeterData({ data1: startOfYear.toISODate(), data2: updated.last_sync })
 
     const daysThisYear = Interval.fromDateTimes(startOfYear, lastDate)
     const elapsedTime = Interval.fromDateTimes(lastDate, now)

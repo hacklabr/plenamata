@@ -86,7 +86,7 @@
                 }
             },
             year () {
-                return this.lastUpdate.deter_last_date?.slice(0, 4)
+                return this.date.year
             },
         },
         async created () {
