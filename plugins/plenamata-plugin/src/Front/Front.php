@@ -168,7 +168,7 @@ class Front {
             'estimatives-area-front-end',
             PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
             [ 'luxon' ],
-            false,
+			Plugin::VERSION,
             true
         );
 
@@ -181,7 +181,7 @@ class Front {
             'deforestation-charts-front-end',
             PLENAMATA_PLUGIN_URL . 'assets/build/js/deforestation-charts.js',
             [ 'luxon' ],
-            false,
+			Plugin::VERSION,
             true
         );
 
