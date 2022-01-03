@@ -59,7 +59,7 @@
                 </fieldset>
 
                 <div class="dashboard__panels" v-if="view === 'data' && lastUpdate">
-                    <FelledTreesThisYear :date="date" :minutes="minutes" :trees="trees" :year="year"/>
+                    <FelledTreesThisYear :date="date" :minutes="minutes" :seconds="seconds" :trees="trees" :year="year"/>
                     <TotalDeforestationThisYear :areaKm2="areaKm2" :date="date" :filters="filters" :unit.sync="unit" :updated="updated" :year="year"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="year"/>
                     <DeforestedAreaLastWeek :date="date" :filters="filters" :unit.sync="unit" :updated="updated"/>
@@ -159,10 +159,16 @@
                 return DateTime.fromISO(this.lastUpdate.deter_last_date, { zone: 'utc' })
             },
             days () {
-                return Interval.fromDateTimes(this.date.startOf('year'), this.date).count('days')
+                return this.daysThisYear.count('days')
+            },
+            daysThisYear () {
+                return Interval.fromDateTimes(this.date.startOf('year'), this.date)
             },
             minutes () {
-                return Interval.fromDateTimes(this.date.startOf('year'), this.date).count('minutes')
+                return this.daysThisYear.count('minutes')
+            },
+            seconds () {
+                return this.daysThisYear.count('seconds')
             },
             startOfYear () {
                 if (!this.date) {

@@ -13,12 +13,11 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
 
     const now = DateTime.now()
     const startOfYear = lastDate.startOf('year')
-    const thisYear = await fetchDeterData({ data1: startOfYear.toISODate(), data2: updated.last_sync })
+    const thisYear = await fetchDeterData({ data1: startOfYear.toISODate(), data2: updated.deter_last_date })
 
     const daysThisYear = Interval.fromDateTimes(startOfYear, lastDate)
-    const elapsedTime = Interval.fromDateTimes(lastDate, now)
 
-    const lastWeek = await fetchDeterData({ data1: lastDate.minus({ weeks: 1 }).toISODate(), data2: lastDate.toISODate() })
+    const lastWeek = await fetchDeterData({ data1: lastDate.minus({ weeks: 1 }).toISODate(), data2: updated.deter_last_date })
 
 	document.querySelectorAll('[data-deter]').forEach((el) => {
         const deterLabel = el.dataset.deter
@@ -43,17 +42,18 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
             const treesThisYear = Number(thisYear[0].num_arvores)
             const treesPerSecond = treesThisYear / daysThisYear.count('seconds')
 
-            let treeCount = treesThisYear + (elapsedTime.count('seconds') * treesPerSecond)
-            if (lastDate.year !== now.year) {
-                treeCount = Interval.fromDateTimes(startOfYear, now).count('seconds') * treesPerSecond
-            }
+            const endDate = (lastDate.year === now.year) ? now : lastDate.endOf('year')
+            const elapsedTime = Interval.fromDateTimes(lastDate, endDate)
 
+            let treeCount = treesThisYear + (elapsedTime.count('seconds') * treesPerSecond)
             el.textContent = roundNumber(treeCount)
 
-            setInterval(() => {
-                treeCount += treesPerSecond
-                el.textContent = roundNumber(treeCount)
-            }, 1000)
+            if (lastDate.year === now.year) {
+                setInterval(() => {
+                    treeCount += treesPerSecond
+                    el.textContent = roundNumber(treeCount)
+                }, 1000)
+            }
         }
         else if (deterLabel === 'treesPerDay') {
             const treesPerDay = Number(thisYear[0].num_arvores) / daysThisYear.count('days')

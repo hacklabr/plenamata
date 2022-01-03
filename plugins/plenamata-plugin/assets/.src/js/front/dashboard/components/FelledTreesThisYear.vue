@@ -35,6 +35,7 @@
         props: {
             date: { type: Object, required: true },
             minutes: { type: Number, required: true },
+            seconds: { type: Number, required: true },
             trees: { type: Number, required: true },
             year: { type: Number, required: true },
         },
@@ -45,21 +46,17 @@
             }
         },
         computed: {
-            confirmedTrees () {
-                const now = DateTime.now()
-                return (this.date.year === now.year) ? this.trees : 0
-            },
             newTrees () {
                 const now = DateTime.now()
-                const startDate = (this.date.year === now.year) ? this.date : now.startOf('year')
-                const elapsedTime = Interval.fromDateTimes(startDate, now)
-                return elapsedTime.count('seconds') * this.treesDelta
-            },
-            treesDelta () {
-                return this.treesPerMinute / 60
+                const endDate = (this.date.year === now.year) ? now : this.date.endOf('year')
+                const elapsedTime = Interval.fromDateTimes(this.date, endDate)
+                return elapsedTime.count('seconds') * this.treesPerSecond
             },
             treesPerMinute () {
                 return this.trees / this.minutes
+            },
+            treesPerSecond () {
+                return this.trees / this.seconds
             },
         },
         watch: {
@@ -70,15 +67,18 @@
         },
         methods: {
             recalculateTrees () {
-                this.internalTrees = this.confirmedTrees + this.newTrees
+                this.internalTrees = this.trees + this.newTrees
 
                 if (this.interval) {
                     window.clearInterval(this.interval)
                 }
 
-                this.interval = window.setInterval(() => {
-                    this.internalTrees += this.treesDelta
-                }, 1000)
+                const now = DateTime.now()
+                if (this.date.year === now.year) {
+                    this.interval = window.setInterval(() => {
+                        this.internalTrees += this.treesPerSecond
+                    }, 1000)
+                }
             },
             roundNumber,
         },
