@@ -38,7 +38,7 @@ class Plugin {
 	 *
 	 * @since 0.1.0
 	 */
-	const VERSION = '0.9.5';
+	const VERSION = '0.9.6';
 
 	/**
 	 * Plugin constructor.
