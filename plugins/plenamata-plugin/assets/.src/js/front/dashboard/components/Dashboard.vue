@@ -207,8 +207,8 @@
             },
             updated () {
                 return {
-                    deter: shortDate(this.date.toJSDate()).replaceAll('/', '.'),
-                    sync: shortDate(DateTime.fromISO(this.lastUpdate?.last_sync).toJSDate()).replaceAll('/', '.'),
+                    deter: shortDate(this.lastUpdate?.deter_last_date).replaceAll('/', '.'),
+                    sync: shortDate(this.lastUpdate?.last_sync).replaceAll('/', '.'),
                 }
             },
         },

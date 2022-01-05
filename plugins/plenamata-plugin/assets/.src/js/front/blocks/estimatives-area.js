@@ -35,7 +35,7 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
             el.textContent = roundNumber(hectaresThisYear)
         }
         else if (deterLabel === 'sourcesLastWeek') {
-            const sourcesLastWeek = sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), shortDate(lastSync.toJSDate()), shortDate(lastDate.toJSDate()))
+            const sourcesLastWeek = sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), shortDate(updated.last_sync), shortDate(updated.deter_last_date))
             el.textContent = sourcesLastWeek
         }
         else if (deterLabel === 'treesEstimative') {

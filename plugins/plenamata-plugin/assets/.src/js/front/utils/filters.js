@@ -1,8 +1,8 @@
 const locale = window.PlenamataDashboard.language || 'en'
 
-const longDateLocale = new Intl.DateTimeFormat(locale, { dateStyle: 'long' })
+const longDateLocale = new Intl.DateTimeFormat(locale, { dateStyle: 'long', timeZone: 'UTC' })
 const numberLocale = new Intl.NumberFormat(locale, {  maximumFractionDigits: 2 })
-const shortDateLocale = new Intl.DateTimeFormat(locale, { dateStyle: 'short' })
+const shortDateLocale = new Intl.DateTimeFormat(locale, { dateStyle: 'short', timeZone: 'UTC' })
 
 export function firstValue (value) {
     return Array.isArray(value) ? value[0] : value
