@@ -68,7 +68,7 @@
 
             const intervals = [[baseStart, baseEnd]]
             for (let i = 1; i < 5; i++) {
-                intervals.unshift([baseStart.minus({ years: i }), baseEnd.minus({ years: i })])
+                intervals.unshift([baseStart.minus({ years: i }), baseEnd.minus({ years: i }).endOf('year')])
             }
 
             const data = await Promise.all(intervals.map(([start, end]) => {
