@@ -79,6 +79,7 @@
                 }
 
                 &:last-child {
+                    display: none; // temporarily hidden
                     max-width: size(125);
                 }
             }
