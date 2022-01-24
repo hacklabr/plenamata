@@ -150,3 +150,15 @@ function plenamata_newspack_posted_by() {
 	endif;
 }
 
+function fpa_fix_paragraphs() {
+	if ( is_single() || is_singular() ) {
+		global $post;
+		if ( ! get_post_meta( $post->ID, 'fpa_fix_paragraphs', true ) ) {
+			$fixed_content = wpautop($post->post_content);
+			wp_update_post( array( 'ID' => $post->ID, 'post_content' => $fixed_content ) );
+			add_post_meta( $post->ID, 'fpa_fix_paragraphs', true, true );
+			$post->post_content = $fixed_content;
+		}
+	}
+}
+add_action( 'init', 'fpa_fix_paragraphs', 10 );
