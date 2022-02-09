@@ -44,6 +44,7 @@ class Blocks {
     public function custom_page_templates( array $templates ): array {
         $templates[ 'template-about.php' ] = __( 'About', 'plenamata' );
         $templates[ 'template-dashboard.php' ] = __( 'Dashboard', 'plenamata' );
+        $templates[ 'template-headings.php' ] = __( 'Page with headings index', 'plenamata' );
         $templates[ 'template-scoreboard.php' ] = __( 'Real-time Scoreboard', 'plenamata' );
 
         return $templates;

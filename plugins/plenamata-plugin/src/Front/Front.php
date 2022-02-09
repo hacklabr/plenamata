@@ -185,7 +185,9 @@ class Front {
             true
         );
 
-        if ( get_page_template_slug() === 'template-about.php' ) {
+        $template_slug = get_page_template_slug();
+
+        if ( $template_slug === 'template-about.php' || $template_slug === 'template-headings.php' ) {
             wp_enqueue_script(
                 'plenamata-about-page',
                 PLENAMATA_PLUGIN_URL . 'assets/build/js/about-page.js',
@@ -195,7 +197,7 @@ class Front {
             );
         }
 
-        if ( get_page_template_slug() === 'template-dashboard.php' ) {
+        if ( $template_slug === 'template-dashboard.php' ) {
             $this->register_jeo_assets();
 
             wp_enqueue_script(
@@ -214,7 +216,7 @@ class Front {
             ] );
         }
 
-        if ( get_page_template_slug() === 'template-scoreboard.php' ) {
+        if ( $template_slug === 'template-scoreboard.php' ) {
             wp_enqueue_script( 'estimatives-area-front-end' );
         }
 	}
@@ -373,11 +375,15 @@ class Front {
     }
 
     public function page_templates ( string $template ): string {
-        if ( get_page_template_slug() === 'template-about.php' ) {
+        $template_slug = get_page_template_slug();
+
+        if ( $template_slug === 'template-about.php' ) {
             $template = PLENAMATA_PLUGIN_PATH . 'templates/template-about.php';
-        } elseif ( get_page_template_slug() === 'template-dashboard.php' ) {
+        } elseif ( $template_slug === 'template-dashboard.php' ) {
             $template = PLENAMATA_PLUGIN_PATH . 'templates/template-dashboard.php';
-        } elseif ( get_page_template_slug() === 'template-scoreboard.php' ) {
+        } elseif ( $template_slug === 'template-headings.php' ) {
+            $template = PLENAMATA_PLUGIN_PATH . 'templates/template-headings.php';
+        } elseif ( $template_slug === 'template-scoreboard.php' ) {
             $template = PLENAMATA_PLUGIN_PATH . 'templates/template-scoreboard.php';
         }
 
