@@ -27,7 +27,7 @@
                         <label for="select-municipios">{{ __('Indigenous Land', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.ti">
                             <option value="">{{ __('All ILs', 'plenamata') }}</option>
-                            <option v-for="(ti, i) of tis" :key="`${ti.code}-${i}`" :value="String(ti.code)">{{ ti.ti }}</option>
+                            <option v-for="ti of tis" :key="`${ti.code} ${ti.ti}`" :value="String(ti.code)">{{ ti.ti }}</option>
                         </select>
                     </div>
                     <div>
