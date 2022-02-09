@@ -23,13 +23,10 @@
 </template>
 
 <script>
-    import { DateTime } from 'luxon'
-
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
     import { getAreaKm2, getTrees } from '../../utils'
-    import { fetchDeterData } from '../../utils/api'
-    import { firstValue, roundNumber } from '../../utils/filters'
+    import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
     export default {
@@ -39,15 +36,9 @@
             DashboardPanel,
         },
         props: {
-            date: { type: DateTime, required: true },
-            filters: { type: Object, required: true },
+            lastWeek: { type: Object, default: null },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
-        },
-        data () {
-            return {
-                lastWeek: null,
-            }
         },
         computed: {
             area () {
@@ -58,34 +49,15 @@
                 }
             },
             areaKm2 () {
-                if (!this.lastWeek) {
-                    return 0
-                }
                 return getAreaKm2(this.lastWeek)
             },
             trees () {
-                if (!this.lastWeek) {
-                    return 0
-                }
                 return getTrees(this.lastWeek)
             },
             unitModel: vModel('unit'),
         },
-        watch: {
-            filters: {
-                handler: 'fetchData',
-                immediate: true,
-                deep: true,
-            },
-        },
         methods: {
             roundNumber,
-            async fetchData () {
-                const startDate = this.date.minus({ weeks: 1 })
-
-                const data = await fetchDeterData({ ...this.filters, data1: startDate.toISODate(), data2: this.date.toISODate() })
-                this.lastWeek = firstValue(data)
-            },
         },
     }
 </script>

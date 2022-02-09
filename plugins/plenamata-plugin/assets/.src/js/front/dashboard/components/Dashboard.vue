@@ -59,10 +59,10 @@
                 </fieldset>
 
                 <div class="dashboard__panels" v-if="view === 'data' && lastUpdate">
-                    <FelledTreesThisYear :date="date" :minutes="minutes" :seconds="seconds" :trees="trees" :year="year"/>
+                    <FelledTreesThisYear :date="date" :lastWeek="lastWeek" :minutes="minutes" :trees="trees" :year="year"/>
                     <TotalDeforestationThisYear :areaKm2="areaKm2" :date="date" :filters="filters" :unit.sync="unit" :updated="updated" :year="year"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="year"/>
-                    <DeforestedAreaLastWeek :date="date" :filters="filters" :unit.sync="unit" :updated="updated"/>
+                    <DeforestedAreaLastWeek :lastWeek="lastWeek" :unit.sync="unit" :updated="updated"/>
                     <WeeklyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="year"/>
                     <MonthlyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated"/>
                     <YearlyDeforestationEvolutionDeter :date="date" :filters="filters" :unit.sync="unit" :updated="updated"/>
@@ -131,8 +131,8 @@
                     ti: '',
                     uc: '',
                 },
-                lastMonth: null,
                 lastUpdate: null,
+                lastWeek: null,
                 news: [],
                 showFilters: false,
                 source: 'deter',
@@ -166,9 +166,6 @@
             },
             minutes () {
                 return this.daysThisYear.count('minutes')
-            },
-            seconds () {
-                return this.daysThisYear.count('seconds')
             },
             startOfYear () {
                 if (!this.date) {
@@ -324,15 +321,14 @@
             },
             clearSelectedNews,
             async fetchData () {
-                const monthAgo = this.date.minus({ months: 1 })
-                const twoMonthsAgo = this.date.minus({ months: 2 })
+                const weekAgo = this.date.minus({ weeks: 1 })
 
-                const [thisYear, lastMonth] = await Promise.all([
+                const [thisYear, lastWeek] = await Promise.all([
                     fetchDeterData({ ...this.filters, data1: this.startOfYear.toISODate(), data2: this.date.toISODate() }),
-                    fetchDeterData({ ...this.filters, data1: twoMonthsAgo.toISODate(), data2: monthAgo.toISODate() }),
+                    fetchDeterData({ ...this.filters, data1: weekAgo.toISODate(), data2: this.date.toISODate() }),
                 ])
                 this.thisYear = firstValue(thisYear)
-                this.lastMonth = firstValue(lastMonth)
+                this.lastWeek = firstValue(lastWeek)
                 this.centerMap()
             },
             async fetchNews (state = '') {
