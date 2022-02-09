@@ -29,8 +29,8 @@
                     </a-->
                 </div>
                 <div class="each-item">
-                    <a href="/politica-de-privacidade/">
-                        <?php _e( 'Privacy Policy', 'plenamata' );?>
+                    <a href="<?= get_privacy_policy_url() ?>">
+                        <?php _e( 'Privacy Statement', 'plenamata' );?>
                     </a>
                 </div>
             </div>
@@ -44,60 +44,38 @@
 <?php if ( is_post_type_archive( 'verbete' ) ) : ?>
 
 <script>
-
-        $(function(){            
-
-            
+        $(function(){
             $("#filtro-glossario").keyup(function(){
-                let texto = $(this).val(); 
-
+                let texto = $(this).val();
 
                 let itensHidden = [];
                 let totalItens = [];
-                let ids = $('main').find('h2');//pegando todas as tags h2 filho de main  
-                
-                
-            
+                let ids = $('main').find('h2');//pegando todas as tags h2 filho de main
+
                 $("summary").each(function(){
                     resultado = $(this).text().toUpperCase().indexOf(' '+texto.toUpperCase());
-                    
+
                     if(resultado < 0) {
                         $(this).fadeOut().parent().addClass("hide-verbete");
-                        
                     }else {
                         $(this).fadeIn().parent().removeClass("hide-verbete");
                     }
 
                     for (let i = 0; i< ids.length; i++) {
-    
                         totalItens[i] = $('#'+ids[i].id).siblings('.glossary__entries').children().length;
                         itensHidden[i] = $('#'+ids[i].id).siblings('.glossary__entries').find('.hide-verbete').length;
-                        
+
                         if(itensHidden[i] == totalItens[i]){
                             $('#'+ids[i].id).fadeOut();
                         }
                         else{
                             $('#'+ids[i].id).fadeIn();
                         }
-                        
-                    }                   
-                    
+                    }
+
                 });
-                
-                console.log('total '+totalItens);
-                console.log('hidden '+itensHidden);
-
-
-
-
-                
-
-
             });
-
         });
-
-
 </script>
 
 <?php endif; ?>
