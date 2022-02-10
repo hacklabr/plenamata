@@ -70,8 +70,29 @@
         }
 
         .image-info-wrapper {
+            border-radius: 14px;
             margin-bottom: size(16);
             margin-right: size(16);
+            max-width: calc(100% - #{size(32)});
+        }
+
+        .image-meta {
+            flex-wrap: wrap;
+
+            p {
+                font-size: size(16) !important;
+                line-height: 1.25;
+                margin: size(8) 0;
+                width: 100%;
+
+                &:empty {
+                    display: none;
+                }
+            }
+        }
+
+        .image-description-toggle {
+            align-self: flex-end;
         }
     }
 }

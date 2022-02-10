@@ -64,6 +64,7 @@ the_post(); ?>
                         <div class="image-info-wrapper">
                             <div class="image-meta">
                                 <?php if (class_exists('Newspack_Image_Credits')): ?>
+                                    <p class="description"><?= get_the_post_thumbnail_caption() ?></p>
                                     <?php $image_meta = Newspack_Image_Credits::get_media_credit(get_post_thumbnail_id()); ?>
                                     <?php if (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])): ?>
                                         <a href="<?= $image_meta['credit_url'] ?>">
