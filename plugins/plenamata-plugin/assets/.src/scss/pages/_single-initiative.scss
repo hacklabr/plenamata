@@ -59,10 +59,19 @@
     }
 
     &__thumbnail {
-        img {
+
+        .image-wrapper, img {
             height: 100%;
-            object-fit: cover;
             width: 100%;
+        }
+
+        img {
+            object-fit: cover;
+        }
+
+        .image-info-wrapper {
+            margin-bottom: size(16);
+            margin-right: size(16);
         }
     }
 }
