@@ -98,7 +98,7 @@
     import WeeklyDeforestationEvolution from './WeeklyDeforestationEvolution.vue'
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
-    import { capitalize, getAreaKm2, getTrees, localeSortBy } from '../../utils'
+    import { capitalize, getAreaKm2, getTrees, localeSortBy, wait } from '../../utils'
     import { fetchConservationUnits, fetchDeterData, fetchIndigenousLands, fetchLastDate, fetchMunicipalities, fetchNews, fetchUniqueNews } from '../../utils/api'
     import { firstValue, shortDate, stateCodeByName } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
@@ -267,6 +267,7 @@
             this.lastUpdate = lastUpdate
             this.year = Number(lastUpdate.deter_last_date.slice(0, 4))
             this.fetchData()
+            this.addLayerDates()
         },
         mounted () {
             const mapEl = document.querySelector('.jeomap')
@@ -278,6 +279,19 @@
             this.setMapObject()
         },
         methods: {
+            addLayerDates () {
+                const mapEl = this.$refs.map.lastChild
+                wait(() => mapEl.querySelector('.map-content-layers-list'),
+                    (layersList) => {
+                        const anchor = layersList.querySelector('p:last-of-type')
+                        const firsrDate = shortDate(this.lastUpdate.deter_first_date)
+                        const lastDate = shortDate(this.lastUpdate.deter_last_date)
+                        const text = `Os dados desta camada englobam os alertas detectados no período entre ${firsrDate} e ${lastDate}, verificados desde a última atualização do Prodes.`
+                        anchor.parentNode.insertBefore(document.createElement('br'), anchor)
+                        anchor.parentNode.insertBefore(new Text(text), anchor)
+                    }
+                )
+            },
             capitalize,
             centerMap () {
                 const mapEl = this.$refs.map.lastChild
