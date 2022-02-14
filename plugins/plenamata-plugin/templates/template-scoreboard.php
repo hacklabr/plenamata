@@ -21,7 +21,7 @@
 
         <div class="realtime-scoreboard__primary">
             <div data-deter="treesEstimative"><?= __('Loading...', 'plenamata') ?></div>
-            <div><?= __('trees cut down so far', 'plenamata') ?></div>
+            <div><?= __('estimates of trees cut down so far', 'plenamata') ?></div>
         </div>
 
         <div>

@@ -115,7 +115,7 @@
 
                 const intervals = [[start, end]]
                 for (let i = 1; i < 5; i++) {
-                    intervals.unshift([start.minus({ years: i }), end.minus({ years: i })])
+                    intervals.unshift([start.minus({ years: i }), end.minus({ years: i }).endOf('year')])
                 }
                 return intervals
             },

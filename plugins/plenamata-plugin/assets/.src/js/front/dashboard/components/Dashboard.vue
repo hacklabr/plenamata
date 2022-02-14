@@ -302,8 +302,14 @@
                     } else if (uc) {
                         const point = this.data.ucs.find(item => item.code == uc)
                         this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
+                        this.jeomap.map.setFilter('ucs-brasil', ['==', ['get', 'id'], Number( uc ) ]);
+                        this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'visible')
                     } else {
                         /* All Brasil */
+                        if ( this.jeomap.map === undefined || ! this.jeomap.map.isStyleLoaded() ) {
+                            return;
+                        }
+                        this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
                         this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                         this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
 
@@ -377,20 +383,21 @@
                 this.view = 'news'
                 let newsElem = document.querySelector(`[data-id="${postId}"]`)
                 if (newsElem == null) {
-                    // if element no exists, load it!
+                    // if no element exists, load it!
                     this.fetchUniqueNews( postId, () => {
-                        setTimeout(() => {
+                        this.$nextTick(() => {
                             let newsElem = document.querySelector(`[data-id="${postId}"]`)
                             scrollIntoView(newsElem)
                             newsElem.classList.add('selected')
-                        }, 900)
+                        });
                     } )
                     return
                 }
-                setTimeout(() => {
+                this.$nextTick(() => {
                     scrollIntoView(newsElem)
                     newsElem.classList.add('selected')
                     const selectedNews = this.news.find( post => post.id == postId )
+                    console.log( selectedNews.meta._related_point[0]._geocode_region_level_2 );
                     const newsState = stateCodeByName( selectedNews.meta._related_point[0]._geocode_region_level_2 );
 
                     if ( newsState ) {
@@ -400,7 +407,7 @@
                         this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                     }
 
-                }, 900)
+                })
             },
             setMapObject () {
                 let mapEl = document.querySelector('.jeomap')
@@ -432,6 +439,7 @@
                     // hide all states
                     this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                     this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
+                    this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
                 })
 
             },

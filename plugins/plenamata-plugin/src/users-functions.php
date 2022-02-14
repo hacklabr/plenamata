@@ -149,4 +149,3 @@ function plenamata_newspack_posted_by() {
 
 	endif;
 }
-
