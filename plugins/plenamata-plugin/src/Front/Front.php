@@ -270,6 +270,7 @@ class Front {
                 'Source: PRODES/INPE.' => __( 'Source: PRODES/INPE.', 'plenamata' ),
                 'Sources: DETER/INPE and MapBiomas' =>  __( 'Sources: DETER/INPE and MapBiomas', 'plenamata' ),
                 'State' => __( 'State', 'plenamata' ),
+                'The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES.' => __('The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES.', 'plenamata'),
                 'The figures represent deforestation for each year up to %s.' => __( 'The figures represent deforestation for each year up to %s.', 'plenamata' ),
                 'Timeframe' => __( 'Timeframe', 'plenamata' ),
                 'Total deforestation in %s in the selected territory' => __( 'Total deforestation in %s in the selected territory', 'plenamata' ),
