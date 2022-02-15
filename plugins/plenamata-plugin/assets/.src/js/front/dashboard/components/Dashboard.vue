@@ -286,7 +286,7 @@
                         const anchor = layersList.querySelector('p:last-of-type')
                         const firsrDate = shortDate(this.lastUpdate.deter_first_date)
                         const lastDate = shortDate(this.lastUpdate.deter_last_date)
-                        const text = sprintf(__('The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES/', 'plenamata'), firsrDate, lastDate)
+                        const text = sprintf(__('The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES.', 'plenamata'), firsrDate, lastDate)
                         anchor.parentNode.insertBefore(document.createElement('br'), anchor)
                         anchor.parentNode.insertBefore(new Text(text), anchor)
                     }
