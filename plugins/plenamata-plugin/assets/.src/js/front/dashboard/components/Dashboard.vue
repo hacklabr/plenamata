@@ -245,10 +245,6 @@
                     this.filters.municipio = ''
                     this.filters.uc = ''
 
-                    let tiSelected = this.data.tis.find( ti => ti.code == this.filters.ti )
-                    this.jeomap.map.setFilter('tis-brasil', ['==', ['get', 'terrai_cod'], parseInt( this.filters.ti ) ])
-                    this.jeomap.map.flyTo({ center: [tiSelected.long, tiSelected.lat], zoom: 12 })
-                    this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'visible')
                 }
             },
             'filters.uc' () {
@@ -300,8 +296,12 @@
                         this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'visible')
 
                     } else if (ti) {
-                        const point = this.data.tis.find(item => item.code == ti)
-                        this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
+                        let tiSelected = this.data.tis.find( ti => ti.code == this.filters.ti )
+                        this.jeomap.map.setFilter('tis-brasil', ['==', ['get', 'terrai_cod'], parseInt( this.filters.ti ) ])
+                        this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'visible')
+
+                        this.jeomap.map.flyTo({ center: [+tiSelected.long, +tiSelected.lat], zoom: 7 })
+                        this.jeomap.map.moveLayer( 'tis-brasil' );
                     } else if (uc) {
                         const point = this.data.ucs.find(item => item.code == uc)
                         this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
