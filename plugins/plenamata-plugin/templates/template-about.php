@@ -27,6 +27,11 @@ $contact = get_post($contact);
                 </a>
             </li>
             <li class="about__nav-anchor">
+                <a href="<?= get_privacy_policy_url() ?>">
+                    <?= __('Privacy Statement', 'plenamata') ?>
+                </a>
+            </li>
+            <li class="about__nav-anchor">
                 <a href="<?= get_permalink($contact) ?>">
                     <?= $contact->post_title ?>
                 </a>

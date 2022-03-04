@@ -24,6 +24,7 @@
 
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
+    import { getTrees } from '../../utils'
     import { roundNumber } from '../../utils/filters'
 
     export default {
@@ -34,8 +35,8 @@
         },
         props: {
             date: { type: Object, required: true },
+            lastWeek: { type: Object, default: null },
             minutes: { type: Number, required: true },
-            seconds: { type: Number, required: true },
             trees: { type: Number, required: true },
             year: { type: Number, required: true },
         },
@@ -50,13 +51,13 @@
                 const now = DateTime.now()
                 const endDate = (this.date.year === now.year) ? now : this.date.endOf('year')
                 const elapsedTime = Interval.fromDateTimes(this.date, endDate)
-                return elapsedTime.count('seconds') * this.treesPerSecond
+                return elapsedTime.count('seconds') * this.treesPerSecondLastWeek
             },
             treesPerMinute () {
                 return this.trees / this.minutes
             },
-            treesPerSecond () {
-                return this.trees / this.seconds
+            treesPerSecondLastWeek () {
+                return getTrees(this.lastWeek) / 604800
             },
         },
         watch: {
@@ -76,7 +77,7 @@
                 const now = DateTime.now()
                 if (this.date.year === now.year) {
                     this.interval = window.setInterval(() => {
-                        this.internalTrees += this.treesPerSecond
+                        this.internalTrees += this.treesPerSecondLastWeek
                     }, 1000)
                 }
             },

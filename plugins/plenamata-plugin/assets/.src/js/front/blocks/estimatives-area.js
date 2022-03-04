@@ -8,7 +8,6 @@ const { DateTime, Interval } = window.luxon
 
 document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
     const updated = await fetchLastDate()
-    const lastSync = DateTime.fromISO(updated.last_sync, { zone: 'utc' })
     const lastDate = DateTime.fromISO(updated.deter_last_date, { zone: 'utc' })
 
     const now = DateTime.now()
@@ -40,17 +39,16 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
         }
         else if (deterLabel === 'treesEstimative') {
             const treesThisYear = Number(thisYear[0].num_arvores)
-            const treesPerSecond = treesThisYear / daysThisYear.count('seconds')
-
+            const treesPerSecondLastWeek = Number(lastWeek[0].num_arvores) / 604800
             const endDate = (lastDate.year === now.year) ? now : lastDate.endOf('year')
             const elapsedTime = Interval.fromDateTimes(lastDate, endDate)
 
-            let treeCount = treesThisYear + (elapsedTime.count('seconds') * treesPerSecond)
+            let treeCount = treesThisYear + (elapsedTime.count('seconds') * treesPerSecondLastWeek)
             el.textContent = roundNumber(treeCount)
 
             if (lastDate.year === now.year) {
                 setInterval(() => {
-                    treeCount += treesPerSecond
+                    treeCount += treesPerSecondLastWeek
                     el.textContent = roundNumber(treeCount)
                 }, 1000)
             }

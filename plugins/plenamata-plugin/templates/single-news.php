@@ -57,8 +57,36 @@ the_post(); ?>
                 </div>
                 <h1 class="initiative-header__title"><?= wp_kses_post(get_the_title()) ?></h1>
             </div>
-            <div class="initiative-header__thumbnail">
-                <?php the_post_thumbnail() ?>
+            <div class="initiative-header__thumbnail credited-image-block">
+                <div class="image-wrapper">
+                    <?php the_post_thumbnail() ?>
+                    <?php if ((class_exists('Newspack_Image_Credits') && !empty(Newspack_Image_Credits::get_media_credit(get_post_thumbnail_id())['credit'])) || !empty(get_post(get_post_thumbnail_id())->post_content)): ?>
+                        <div class="image-info-wrapper">
+                            <div class="image-meta">
+                                <?php if (class_exists('Newspack_Image_Credits')): ?>
+                                    <p class="description"><?= get_the_post_thumbnail_caption() ?></p>
+                                    <?php $image_meta = Newspack_Image_Credits::get_media_credit(get_post_thumbnail_id()); ?>
+                                    <?php if (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])): ?>
+                                        <a href="<?= $image_meta['credit_url'] ?>">
+                                    <?php endif; ?>
+                                    <span class="credit">
+                                        <?= $image_meta['credit'] ?>
+                                        <?php if (isset($image_meta['organization']) && !empty($image_meta['organization'])): ?>
+                                            / <?= $image_meta['organization'] ?>
+                                        <?php endif; ?>
+                                    </span>
+                                    <?php if (isset($image_meta['credit_url']) && !empty($image_meta['credit_url'])): ?>
+                                        </a>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            </div>
+                            <span class="image-description-toggle">
+                                <i class="fas fa-camera"></i>
+                                <i class="fas fa-times"></i>
+                            </span>
+                        </div>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
 	<?php endif; ?>

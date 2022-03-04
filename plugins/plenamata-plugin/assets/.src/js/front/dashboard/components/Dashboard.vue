@@ -27,7 +27,7 @@
                         <label for="select-municipios">{{ __('Indigenous Land', 'plenamata') }}</label>
                         <select id="select-municipios" name="select-municipios" v-model="filters.ti">
                             <option value="">{{ __('All ILs', 'plenamata') }}</option>
-                            <option v-for="ti of tis" :key="ti.code" :value="String(ti.code)">{{ ti.ti }}</option>
+                            <option v-for="ti of tis" :key="`${ti.code} ${ti.ti}`" :value="String(ti.code)">{{ ti.ti }}</option>
                         </select>
                     </div>
                     <div>
@@ -59,10 +59,10 @@
                 </fieldset>
 
                 <div class="dashboard__panels" v-if="view === 'data' && lastUpdate">
-                    <FelledTreesThisYear :date="date" :minutes="minutes" :seconds="seconds" :trees="trees" :year="year"/>
+                    <FelledTreesThisYear :date="date" :lastWeek="lastWeek" :minutes="minutes" :trees="trees" :year="year"/>
                     <TotalDeforestationThisYear :areaKm2="areaKm2" :date="date" :filters="filters" :unit.sync="unit" :updated="updated" :year="year"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="year"/>
-                    <DeforestedAreaLastWeek :date="date" :filters="filters" :unit.sync="unit" :updated="updated"/>
+                    <DeforestedAreaLastWeek :lastWeek="lastWeek" :unit.sync="unit" :updated="updated"/>
                     <WeeklyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="year"/>
                     <MonthlyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated"/>
                     <YearlyDeforestationEvolutionDeter :date="date" :filters="filters" :unit.sync="unit" :updated="updated"/>
@@ -98,11 +98,11 @@
     import WeeklyDeforestationEvolution from './WeeklyDeforestationEvolution.vue'
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
-    import { capitalize, getAreaKm2, getTrees, localeSortBy } from '../../utils'
+    import { capitalize, getAreaKm2, getTrees, localeSortBy, wait } from '../../utils'
     import { fetchConservationUnits, fetchDeterData, fetchIndigenousLands, fetchLastDate, fetchMunicipalities, fetchNews, fetchUniqueNews } from '../../utils/api'
     import { firstValue, shortDate, stateCodeByName } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
-    import { __ } from '../../dashboard/plugins/i18n'
+    import { sprintf, __ } from '../../dashboard/plugins/i18n'
 
 
     export default {
@@ -131,8 +131,8 @@
                     ti: '',
                     uc: '',
                 },
-                lastMonth: null,
                 lastUpdate: null,
+                lastWeek: null,
                 news: [],
                 showFilters: false,
                 source: 'deter',
@@ -166,9 +166,6 @@
             },
             minutes () {
                 return this.daysThisYear.count('minutes')
-            },
-            seconds () {
-                return this.daysThisYear.count('seconds')
             },
             startOfYear () {
                 if (!this.date) {
@@ -266,6 +263,7 @@
             this.lastUpdate = lastUpdate
             this.year = Number(lastUpdate.deter_last_date.slice(0, 4))
             this.fetchData()
+            this.addLayerDates()
         },
         mounted () {
             const mapEl = document.querySelector('.jeomap')
@@ -277,6 +275,19 @@
             this.setMapObject()
         },
         methods: {
+            addLayerDates () {
+                const mapEl = this.$refs.map.lastChild
+                wait(() => mapEl.querySelector('.map-content-layers-list'),
+                    (layersList) => {
+                        const anchor = layersList.querySelector('p:last-of-type')
+                        const firsrDate = shortDate(this.lastUpdate.deter_first_date)
+                        const lastDate = shortDate(this.lastUpdate.deter_last_date)
+                        const text = sprintf(__('The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES.', 'plenamata'), firsrDate, lastDate)
+                        anchor.parentNode.insertBefore(document.createElement('br'), anchor)
+                        anchor.parentNode.insertBefore(new Text(text), anchor)
+                    }
+                )
+            },
             capitalize,
             centerMap () {
                 const mapEl = this.$refs.map.lastChild
@@ -330,15 +341,14 @@
             },
             clearSelectedNews,
             async fetchData () {
-                const monthAgo = this.date.minus({ months: 1 })
-                const twoMonthsAgo = this.date.minus({ months: 2 })
+                const weekAgo = this.date.minus({ weeks: 1 })
 
-                const [thisYear, lastMonth] = await Promise.all([
+                const [thisYear, lastWeek] = await Promise.all([
                     fetchDeterData({ ...this.filters, data1: this.startOfYear.toISODate(), data2: this.date.toISODate() }),
-                    fetchDeterData({ ...this.filters, data1: twoMonthsAgo.toISODate(), data2: monthAgo.toISODate() }),
+                    fetchDeterData({ ...this.filters, data1: weekAgo.toISODate(), data2: this.date.toISODate() }),
                 ])
                 this.thisYear = firstValue(thisYear)
-                this.lastMonth = firstValue(lastMonth)
+                this.lastWeek = firstValue(lastWeek)
                 this.centerMap()
             },
             async fetchNews (state = '') {
