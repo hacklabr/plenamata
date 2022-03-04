@@ -312,7 +312,6 @@
                         this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'visible')
 
                         this.jeomap.map.flyTo({ center: [+tiSelected.long, +tiSelected.lat], zoom: 7 })
-                        this.jeomap.map.moveLayer( 'tis-brasil' );
                     } else if (uc) {
                         const point = this.data.ucs.find(item => item.code == uc)
                         this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
