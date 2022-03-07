@@ -4,7 +4,7 @@
             <img v-if="post.plenamata_thumbnail" :src="post.plenamata_thumbnail" alt="">
         </div>
         <div>
-            <h2><a :href="post.link">{{ post.title.rendered }}</a></h2>
+            <h2><a :href="post.link" v-html="post.title.rendered"/></h2>
             <div>
                 <span class="dashboard-news__date">{{ longDate(post.date) }}</span>
                 <span class="dashboard-news__source" v-if="externalSource"><img :src="`${$dashboard.pluginUrl}assets/build/img/external-source-icon.svg`" alt=""> {{ externalSource }}</span>

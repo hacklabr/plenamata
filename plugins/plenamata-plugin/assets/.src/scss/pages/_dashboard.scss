@@ -381,6 +381,10 @@
         a {
             color: $c_text;
         }
+
+        strong {
+            font-weight: inherit;
+        }
     }
 
     &__image {
