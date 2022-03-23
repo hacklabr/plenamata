@@ -24,6 +24,14 @@ the_post(); ?>
         }
     }
 
+    $primary_category = get_post_meta(get_the_ID(), '_yoast_wpseo_primary_category', true);
+    $primary_category = empty($primary_category) ? null : get_category($primary_category);
+
+    $subcategory = $subcategories[0];
+    if (!empty($primary_category) && $category->cat_ID !== $primary_category->cat_ID) {
+        $subcategory = $primary_category;
+    }
+
 	$is_opinion = ($category->slug == "_newspack_opinion" || $category->slug == 'opiniao' || $category->slug == 'opinion') ? true : false;
     $is_initiative = ($category->slug === 'boas-iniciativas' || $category->slug === 'good-initiatives') ? true : false;
 
@@ -48,10 +56,10 @@ the_post(); ?>
                     <a href="<?= get_category_link(get_category_by_slug('good-initiatives')) ?>">
                         <?= __('Good Initiatives', 'plenamata') ?>
                     </a>
-                    <?php if (!empty($subcategories)): ?>
+                    <?php if (!empty($subcategory)): ?>
                         <span>/</span>
-                        <a href="<?= get_category_link($subcategories[0]->cat_ID) ?>">
-                            <?= $subcategories[0]->name ?>
+                        <a href="<?= get_category_link($subcategory->cat_ID) ?>">
+                            <?= $subcategory->name ?>
                         </a>
                     <?php endif; ?>
                 </div>
