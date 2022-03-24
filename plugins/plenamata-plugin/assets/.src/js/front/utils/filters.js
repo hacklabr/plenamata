@@ -19,7 +19,8 @@ export function humanNumber (number) {
 
 export function roundNumber (number) {
     if (Math.abs(number) < 1) {
-        return numberLocale.format(number)
+        const roundedNumber = number.format(number)
+        return roundedNumber === '-0' ? '0' : roundedNumber
     }
     return numberLocale.format(Math.round(number))
 }
