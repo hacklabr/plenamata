@@ -17,7 +17,7 @@
             </DashboardMeasure>
         </template>
         <template #meaning>
-            <template v-if="increase > 0">
+            <template v-if="increase >= 0">
                 {{ sprintf(__('%s%% increase compared to last year', 'plenamata'), roundNumber(increase)) }}
             </template>
             <template v-else>
