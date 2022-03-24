@@ -40,7 +40,7 @@
 
         <footer class="realtime-scoreboard__footer">
             <div class="realtime-scoreboard__source">
-                <p><?= __('Sources: DETER/INPE and MapBiomas', 'plenamata') ?></p>
+                <p><?= __('Sources: INPE and MapBiomas', 'plenamata') ?></p>
             </div>
 
             <div class="realtime-scoreboard__logo">
