@@ -14,9 +14,12 @@ export class Main {
 		console.log('Main was started');
         // sticky menu
         this.sticky_menu();
-        
-        //hide main menu ul when modal search is active
+
+        // hide main menu ul when modal search is active
         this.hide_menu_items_on_search();
+
+        // toggle cookie management in mobile
+        this.toggle_cookie_banner();
 	}
     sticky_menu() {
         function isScrolledIntoView() {
@@ -26,7 +29,7 @@ export class Main {
                 return false;
             }
         }
-        
+
         const sticky_element = document.querySelector('header.site-header');
         let prev_status = false;
         document.addEventListener('scroll', (e) => {
@@ -39,27 +42,37 @@ export class Main {
                 prev_status = current_visibility;
             }
         });
-          
+
     }
 
     hide_menu_items_on_search() {
-       
+
         let main_menu = document.getElementById('site-navigation');
         let search_btn = document.getElementsByClassName('search-toggle')[0];
         let search_icon = document.getElementsByClassName('search-icon')[0];
         let masthead = document.getElementById('masthead');
 
         search_btn.addEventListener('click', function(){
-            
+
             let is_search_icon_active = window.getComputedStyle(search_icon).getPropertyValue('display');
-            
+
             main_menu.style.display = (is_search_icon_active == 'none') ? 'block' : 'none';
-            
+
             masthead.classList.toggle('bg-primary');
             document.getElementsByTagName("BODY")[0].classList.toggle('freeze');
 
         }, false);
 
+    }
+
+    toggle_cookie_banner () {
+        const buttons = document.querySelectorAll('.cmplz-toggle-config');
+
+        buttons.forEach((button) => {
+            button.addEventListener('click', () => {
+                document.querySelector('.cmplz-manage-consent').click();
+            });
+        });
     }
 
 }

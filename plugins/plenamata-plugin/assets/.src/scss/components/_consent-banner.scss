@@ -4,3 +4,16 @@
         transform: translateY(-60px);
     }
 }
+
+button.cmplz-toggle-config {
+    background-color: transparent;
+    display: none;
+    font-size: 21px;
+    font-weight: normal;
+    margin: 25px 0 2px 25px;
+    padding: 0;
+
+    @media screen and (max-width: 1024px) {
+        display: block;
+    }
+}

@@ -21,7 +21,7 @@ function plenamata_colunista_role() {
         'edit_categories'           => true,
         'delete_categories'         => true,
         'assign_categories'         => true,
-        'manage_terms'              => true,    
+        'manage_terms'              => true,
         );
 
     $saved_caps = get_option( 'plenamata_colunista_role_created', false );
@@ -32,11 +32,11 @@ function plenamata_colunista_role() {
     // Add role
     add_role( 'colunista', 'Colunista', $caps );
     update_option( 'plenamata_colunista_role_created', $caps, true );
-    
+
 }
 add_action( 'init', 'plenamata_colunista_role', 10 );
 function plenamata_secao_capabilities($args, $taxonomy, $object_type){
-	
+
 	if($taxonomy !== 'secao' && $taxonomy !== 'category' ) {
         return $args;
     }
@@ -148,4 +148,12 @@ function plenamata_newspack_posted_by() {
 		);
 
 	endif;
+}
+
+function plenamata_cookie_banner_toggler () {
+?>
+    <button class="cmplz-toggle-config">
+        <?= __('Manage cookies', 'plenamata') ?>
+    </button>
+<?php
 }
