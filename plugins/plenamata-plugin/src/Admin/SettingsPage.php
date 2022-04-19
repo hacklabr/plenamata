@@ -125,6 +125,22 @@ class SettingsPage {
                 ],
             );
         }
+
+        foreach ($active_languages as $key => $language) {
+            $field_id = 'plenamata_estimate_explainer_' . $key;
+
+            add_settings_field(
+                $field_id,
+                sprintf( __( 'Estimate explainer - %s', 'plenamata' ), $language[ 'translated_name' ] ),
+                [ $this, 'settings_input_cb' ],
+                'plenamata-plugin',
+                'plenamata_dashboard',
+                [
+                    'label_for' => $field_id,
+                    'type' => 'text',
+                ],
+            );
+        }
     }
 
     public function rename_menu_entries(): void {

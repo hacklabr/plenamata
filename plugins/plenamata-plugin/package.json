@@ -23,6 +23,7 @@
         "chart.js": "^3.5.1",
         "chartjs-plugin-zoom": "^1.1.1",
         "color": "^3.2.1",
+        "floating-vue": "^1.0.0-beta.17",
         "luxon": "^2.0.2",
         "vue": "^2.6.11",
         "vue-chart-3": "^0.5.7"

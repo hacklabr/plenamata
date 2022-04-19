@@ -4,7 +4,7 @@
             <img :src="`${$dashboard.pluginUrl}assets/build/img/${icon}`">
         </span>
         <span class="dashboard-panel__number">{{ formattedNumber }}</span>
-        <span class="dashboard-panel__unit"><slot name="unit"/></span>
+        <span class="dashboard-panel__unit"><slot name="unit"/> <slot name="tooltip"/></span>
     </div>
 </template>
 

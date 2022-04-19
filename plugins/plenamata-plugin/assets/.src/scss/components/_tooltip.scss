@@ -1,0 +1,19 @@
+@import '~floating-vue/dist/style.css';
+
+.v-popper {
+    display: inline-block;
+
+    img {
+        height: 1em;
+        width: 1em;
+    }
+
+    &__inner {
+        line-height: 1;
+        padding: size(5) size(10);
+
+        a {
+            color: var(--secondary);
+        }
+    }
+}

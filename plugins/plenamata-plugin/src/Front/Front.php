@@ -139,6 +139,7 @@ class Front {
 	 */
 	public function enqueue_scripts(): void {
         $dashboard_i18n = $this->get_dashboard_i18n();
+        $language = apply_filters( 'wpml_current_language', NULL );
 
 		wp_enqueue_script(
 			'plenamata-plugin',
@@ -174,7 +175,7 @@ class Front {
 
         wp_localize_script( 'estimatives-area-front-end', 'PlenamataDashboard', [
             'i18n' => $dashboard_i18n,
-            'language' => apply_filters( 'wpml_current_language', NULL ),
+            'language' => $language,
         ] );
 
         wp_register_script(
@@ -209,8 +210,9 @@ class Front {
             );
 
             wp_localize_script( 'plenamata-dashboard', 'PlenamataDashboard', [
+                'explainerUrl' => $this->get_explainer_link( $language ),
                 'i18n' => $dashboard_i18n,
-                'language' => apply_filters( 'wpml_current_language', NULL ),
+                'language' => $language,
                 'pluginUrl' => PLENAMATA_PLUGIN_URL,
                 'restUrl' => get_rest_url(),
             ] );
@@ -264,6 +266,7 @@ class Front {
                 'No news to be shown.' => __( 'No news to be shown', 'plenamata' ),
                 'Period' => __( 'Period', 'plenamata' ),
                 'Period: %s' => __( 'Period: %s', 'plenamata' ),
+                'See more' => __( 'See more', 'plenamata' ),
                 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.' => __( 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata' ),
                 'Source: MapBiomas based on average daily deforestation detected by INPE in %s.' => __( 'Source: MapBiomas based on average daily deforestation detected by INPE in %s.', 'plenamata' ),
                 'Source: MapBiomas based on DETER/INPE data.' => __( 'Source: MapBiomas based on DETER/INPE data.', 'plenamata' ),
@@ -279,6 +282,7 @@ class Front {
                 'Estimates of trees cut down in %s in the selected territory' => __( 'Estimates of trees cut down in %s in the selected territory', 'plenamata' ),
                 'estimates of trees cut down so far' => __( 'estimates of trees cut down so far', 'plenamata' ),
                 'trees per day' => __( 'trees per day', 'plenamata' ),
+                'Understand the calculus' => __( 'Understand the calculus', 'plenamata' ),
                 'Unit' => __( 'Unit', 'plenamata' ),
                 'Week %s' => __( 'Week %s', 'plenamata' ),
                 'Weekly' => __( 'Weekly', 'plenamata' ),
@@ -310,6 +314,19 @@ class Front {
         ];
     }
 
+    /**
+     * Retrieve the link for estimate explainer
+     */
+    public function get_explainer_link (string $language) {
+        $options = get_option( 'plenamata_options', [] );
+        $explainer_id = $options[ 'plenamata_estimate_explainer_' . $language ];
+
+        if ( empty( $explainer_id ) ) {
+            return null;
+        } else {
+            return get_post_permalink( $explainer_id) ;
+        }
+    }
 
     /**
      * Register JEO scripts.
