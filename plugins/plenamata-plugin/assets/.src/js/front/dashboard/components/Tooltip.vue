@@ -1,5 +1,5 @@
 <template>
-    <VTooltip theme="dropdown">
+    <VTooltip placement="top" theme="dropdown" :triggers="['click', 'focus']">
         <img :src="`${$dashboard.pluginUrl}assets/build/img/info-circle-icon.svg`" :alt="alt">
         <template #popper>
             <slot/>
