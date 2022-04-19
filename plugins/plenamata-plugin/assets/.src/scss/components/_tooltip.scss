@@ -16,4 +16,8 @@
             color: var(--secondary);
         }
     }
+
+    .home & {
+        margin-left: 1ch;
+    }
 }

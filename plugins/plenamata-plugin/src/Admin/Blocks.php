@@ -233,7 +233,7 @@ class Blocks {
 
                     <div class="number">
                         <span data-deter="treesEstimative"><?= __('Loading...', 'plenamata') ?></span>
-                        <span><?= __("real-time estimate", "plenamata") ?></span>
+                        <span><?= __("real-time estimate", "plenamata") ?><span class="vue-estimate-tooltip"></span></span>
                     </div>
                 </div>
 

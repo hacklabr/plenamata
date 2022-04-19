@@ -48,12 +48,12 @@
                 <fieldset class="dashboard__tabs">
                     <label class="dashboard__tab" :class="{ active: view === 'data' }" id="dashboard-tab-data">
                         <input type="radio" name="dashboard-tabs" ref="tabDataRadio" value="data" v-model="view">
-                        <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-chart-icon.svg`" alt="">
+                        <img :src="`${$plenamata.pluginUrl}assets/build/img/dashboard-chart-icon.svg`" alt="">
                         {{ __('Data', 'plenamata') }}
                     </label>
                     <label class="dashboard__tab" :class="{ active: view === 'news' }" id="dashboard-tab-news">
                         <input type="radio" name="dashboard-tabs" ref="tabNewsRadio" value="news" v-model="view">
-                        <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-newspaper-icon.svg`" alt="">
+                        <img :src="`${$plenamata.pluginUrl}assets/build/img/dashboard-newspaper-icon.svg`" alt="">
                         {{ __('News', 'plenamata') }}
                     </label>
                 </fieldset>

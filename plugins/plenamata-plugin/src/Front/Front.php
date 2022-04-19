@@ -159,6 +159,7 @@ class Front {
                         'seeMore' => __( 'See more', 'plenamata' ),
                     ]
                 ],
+                'pluginUrl' => PLENAMATA_PLUGIN_URL,
                 'restUrl' => get_rest_url(),
             ],
         );
