@@ -1,7 +1,7 @@
 <template>
     <svg class="dashboard__axis-position" v-show="shown" preserveAspectRatio="none" viewBox="0 0 100% 8" xmlns="http://www.w3.org/2000/svg">
-        <rect ref="bar" x="0" y="0" rx="5" ry="5" height="10" width="100%"/>
-        <rect :x="x" y="0" rx="5" ry="5" height="10" :width="width"/>
+        <rect x="0" y="0" rx="5" ry="5" height="10" width="100%"/>
+        <rect ref="scroll" :x="x" y="0" rx="5" ry="5" height="10" :width="width"/>
     </svg>
 </template>
 
@@ -35,20 +35,19 @@
             },
         },
         mounted () {
-            const scroll = this.$refs.bar
-
-            const hammer = new Hammer.Manager(scroll, {
+            const hammer = new Hammer.Manager(this.$refs.scroll, {
                 recognizers: [
                     [Hammer.Pan, { direction: Hammer.DIRECTION_HORIZONTAL }],
                 ],
             })
 
+            let deltaX = 0
             hammer.on('pan', (event) => {
-                if (this.chart) {
-                    const width = scroll.width.baseVal.value
-                    const deltaX = (-event.deltaX / (width / this.window))
-                    this.chart.chartInstance.pan({ x: deltaX, y: 0 })
-                }
+                this.chart.chartInstance.pan({ x: deltaX - event.deltaX, y: 0 })
+                deltaX = event.deltaX
+            })
+            hammer.on('panend', () => {
+                deltaX = 0
             })
         },
     }
