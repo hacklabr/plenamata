@@ -14,8 +14,8 @@
             </select>
         </template>
         <template #chart>
-            <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
-            <AxisPosition :start="scrollPosition.start" :end="scrollPosition.end" :max="datasets[0].data.length - 1"/>
+            <BarChart ref="chart" :chartData="chartData" :height="300" :options="chartOptions"/>
+            <AxisPosition :chart="$refs.chart" :start="scrollPosition.start" :end="scrollPosition.end" :max="datasets[0].data.length - 1"/>
         </template>
         <template #footer>
             {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
