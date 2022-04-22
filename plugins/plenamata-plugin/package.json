@@ -24,6 +24,7 @@
         "chartjs-plugin-zoom": "^1.1.1",
         "color": "^3.2.1",
         "floating-vue": "^1.0.0-beta.17",
+        "hammerjs": "^2.0.8",
         "luxon": "^2.0.2",
         "vue": "^2.6.11",
         "vue-chart-3": "^0.5.7"

@@ -46,11 +46,16 @@ export function sortBy (fn, asc = true) {
 }
 
 export function wait (condition, callback, ms = 500) {
-    let interval = window.setInterval(() => {
-        const result = condition()
-        if (result) {
-            window.clearInterval(interval)
-            callback(result)
-        }
-    }, ms)
+    let result = condition()
+    if (result) {
+        callback(result)
+    } else {
+        const interval = window.setInterval(() => {
+            result = condition()
+            if (result) {
+                window.clearInterval(interval)
+                callback(result)
+            }
+        }, ms)
+    }
 }
