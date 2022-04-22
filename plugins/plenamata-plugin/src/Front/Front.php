@@ -140,6 +140,7 @@ class Front {
 	public function enqueue_scripts(): void {
         $dashboard_i18n = $this->get_dashboard_i18n();
         $language = apply_filters( 'wpml_current_language', NULL );
+        $explainer_link = $this->get_explainer_link( $language );
 
 		wp_enqueue_script(
 			'plenamata-plugin',
@@ -175,6 +176,7 @@ class Front {
         );
 
         wp_localize_script( 'estimatives-area-front-end', 'PlenamataDashboard', [
+            'explainerUrl' => $explainer_link,
             'i18n' => $dashboard_i18n,
             'language' => $language,
         ] );
@@ -211,7 +213,7 @@ class Front {
             );
 
             wp_localize_script( 'plenamata-dashboard', 'PlenamataDashboard', [
-                'explainerUrl' => $this->get_explainer_link( $language ),
+                'explainerUrl' => $explainer_link,
                 'i18n' => $dashboard_i18n,
                 'language' => $language,
                 'pluginUrl' => PLENAMATA_PLUGIN_URL,
