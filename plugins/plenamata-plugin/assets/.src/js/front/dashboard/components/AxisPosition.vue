@@ -1,7 +1,7 @@
 <template>
     <svg class="dashboard__axis-position" v-show="shown" preserveAspectRatio="none" viewBox="0 0 100% 8" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0" y="0" rx="5" ry="5" height="10" width="100%"/>
-        <rect ref="scroll" :x="x" y="0" rx="5" ry="5" height="10" :width="width"/>
+        <rect ref="scroll" x="0" y="0" rx="5" ry="5" height="10" width="100%"/>
+        <rect :x="x" y="0" rx="5" ry="5" height="10" :width="width"/>
     </svg>
 </template>
 
