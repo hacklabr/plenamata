@@ -1,6 +1,6 @@
-.cmplz-bottom-right {
+.cmplz-cookie-banner {
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
         transform: translateY(-60px);
     }
 }
@@ -13,7 +13,7 @@ button.cmplz-toggle-config {
     margin: 25px 0 2px 25px;
     padding: 0;
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
         display: block;
     }
 }
