@@ -7,13 +7,15 @@
 
 button.cmplz-toggle-config {
     background-color: transparent;
-    display: none;
+    display: none !important;
     font-size: 21px;
     font-weight: normal;
     margin: 25px 0 2px 25px;
     padding: 0;
 
+    /*
     @media screen and (max-width: 768px) {
         display: block;
     }
+    */
 }
