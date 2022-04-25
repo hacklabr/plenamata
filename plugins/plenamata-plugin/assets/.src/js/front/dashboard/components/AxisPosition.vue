@@ -43,8 +43,13 @@
 
             let deltaX = 0
             hammer.on('pan', (event) => {
-                this.chart.chartInstance.pan({ x: deltaX - event.deltaX, y: 0 })
-                deltaX = event.deltaX
+                if (event.pointertype === 'touch') {
+                    this.chart.chartInstance.pan({ x: event.deltaX - deltaX, y: 0 })
+                    deltaX = -event.deltaX
+                } else {
+                    this.chart.chartInstance.pan({ x: deltaX - event.deltaX, y: 0 })
+                    deltaX = event.deltaX
+                }
             })
             hammer.on('panend', () => {
                 deltaX = 0
