@@ -7,16 +7,6 @@ export default {
             },
         }
     },
-    computed: {
-        scrollPosition () {
-            if (this.scroll.start === 0 && this.scroll.end === 0) {
-                const { min, max} = this.chartOptions.scales.x
-                return { start: min, end: max }
-            } else {
-                return { ...this.scroll }
-            }
-        },
-    },
     methods: {
         onChartPan ({ chart }) {
             const { min, max } = chart.scales.x

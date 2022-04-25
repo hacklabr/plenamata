@@ -249,6 +249,7 @@ class Front {
                 'Conservation Unit' => __( 'Conservation Unit', 'plenamata' ),
                 'Data' => __( 'Data', 'plenamata' ),
                 'Deforestation rate in %s in the selected territory' => __( 'Deforestation rate in %s in the selected territory', 'plenamata' ),
+                'Drag to see more' => __( 'Drag to see more', 'plenamata' ),
                 'during DETER year' => __( 'during DETER year', 'plenamata' ),
                 'during PRODES year' => __( 'during PRODES year', 'plenamata' ),
                 'estimated average of %s trees per minute' => __( 'estimated average of %s trees per minute', 'plenamata'),

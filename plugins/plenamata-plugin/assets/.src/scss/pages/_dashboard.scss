@@ -237,19 +237,31 @@
         padding: 0 size(16);
     }
 
-    &__axis-position {
-        height: 10px;
-        width: 100%;
+    &__scroll-guard {
+        position: relative;
 
-        rect:nth-of-type(1) {
-            border-radius: 10px;
-            fill: #F1F1F1;
-        }
+        &-tag {
+            align-items: center;
+            display: flex;
+            height: 60%;
+            left: 0; right: 0; top: 0;
+            justify-content: center;
+            position: absolute;
+            width: 100%;
 
-        rect:nth-of-type(2) {
-            border-radius: 10px;
-            fill: #C1C1C1;
-            pointer-events: none;
+            & > span {
+                align-items: center;
+                background: rgba($c_purple, 0.8);
+                border-radius: 1em;
+                color: white;
+                display: flex;
+                padding: 5px 1em;
+                pointer-events: none;
+
+                svg {
+                    margin-right: 1ch;
+                }
+            }
         }
     }
 
