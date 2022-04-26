@@ -1,4 +1,7 @@
 header.site-header {
+    a[href="#cookies"] {
+        display:none;
+    }
     transition:200ms ease all;
     @include desktop {
         width: 100%;
@@ -21,8 +24,12 @@ header.site-header {
             background:$c_text;
 
         }
+        a[href="#cookies"] {
+            display:block;
+        }
 
     }
+
     .mobile-menu-toggle {
         color:rgba(0,0,0,0);
         svg {
