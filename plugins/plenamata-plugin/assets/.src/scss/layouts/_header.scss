@@ -1,5 +1,5 @@
 header.site-header {
-    a[href="#cookies"] {
+    a[href="#cookies-consent"] {
         display:none;
     }
     transition:200ms ease all;
@@ -24,7 +24,7 @@ header.site-header {
             background:$c_text;
 
         }
-        a[href="#cookies"] {
+        a[href="#cookies-consent"] {
             display:block;
         }
 
