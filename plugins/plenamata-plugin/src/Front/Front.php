@@ -179,6 +179,7 @@ class Front {
             'explainerUrl' => $explainer_link,
             'i18n' => $dashboard_i18n,
             'language' => $language,
+            'opt' => get_option( 'plenamata_options', [] ),
         ] );
 
         wp_register_script(
@@ -323,12 +324,12 @@ class Front {
      */
     public function get_explainer_link (string $language) {
         $options = get_option( 'plenamata_options', [] );
-        $explainer_id = $options[ 'plenamata_estimate_explainer_' . $language ];
+        $explainer_link = $options[ 'plenamata_estimate_explainer_' . $language ];
 
-        if ( empty( $explainer_id ) ) {
+        if ( empty( $explainer_link ) ) {
             return null;
         } else {
-            return get_post_permalink( $explainer_id) ;
+            return $explainer_link;
         }
     }
 
