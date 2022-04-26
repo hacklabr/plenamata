@@ -7,7 +7,7 @@
             <h2><a :href="post.link" v-html="post.title.rendered"/></h2>
             <div>
                 <span class="dashboard-news__date">{{ longDate(post.date) }}</span>
-                <span class="dashboard-news__source" v-if="externalSource"><img :src="`${$dashboard.pluginUrl}assets/build/img/external-source-icon.svg`" alt=""> {{ externalSource }}</span>
+                <span class="dashboard-news__source" v-if="externalSource"><img :src="`${$plenamata.pluginUrl}assets/build/img/external-source-icon.svg`" alt=""> {{ externalSource }}</span>
             </div>
         </div>
     </article>

@@ -1,5 +1,6 @@
 import { Chart, BarController, BarElement, CategoryScale, Legend, LinearScale, Tooltip } from 'chart.js'
 import ZoomPlugin from 'chartjs-plugin-zoom'
+import FloatingVue from 'floating-vue'
 import Vue from 'vue'
 
 import DashboardApp from './components/Dashboard.vue'
@@ -11,6 +12,7 @@ export class Dashboard {
     constructor() {
         Chart.register(BarController, BarElement, CategoryScale, Legend, LinearScale, Tooltip, ZoomPlugin)
 
+        Vue.use(FloatingVue)
         Vue.use(Globals)
         Vue.use(I18n)
 

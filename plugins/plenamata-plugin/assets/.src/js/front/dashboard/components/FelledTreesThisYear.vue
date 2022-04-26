@@ -5,8 +5,15 @@
         </template>
         <template #measure>
             <DashboardMeasure icon="tree-icon.svg" :number="internalTrees">
+                <template #tooltip>
+                    <Tooltip :alt="__('Understand the calculus', 'plenamata')">
+                        <a :href="$dashboard.explainerUrl" target="_blank">
+                            {{ __('Understand the calculus', 'plenamata') }}
+                        </a>
+                    </Tooltip>
+                </template>
                 <template #unit>
-                    {{ __( 'trees', 'plenamata' ) }}
+                    {{ __('trees', 'plenamata') }}
                 </template>
             </DashboardMeasure>
         </template>
@@ -24,6 +31,7 @@
 
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
+    import Tooltip from './Tooltip.vue'
     import { getTrees } from '../../utils'
     import { roundNumber } from '../../utils/filters'
 
@@ -32,6 +40,7 @@
         components: {
             DashboardMeasure,
             DashboardPanel,
+            Tooltip,
         },
         props: {
             date: { type: Object, required: true },

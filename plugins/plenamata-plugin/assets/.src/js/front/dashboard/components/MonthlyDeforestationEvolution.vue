@@ -14,8 +14,9 @@
             </select>
         </template>
         <template #chart>
-            <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
-            <AxisPosition :start="scrollPosition.start" :end="scrollPosition.end" :max="datasets[0].data.length - 1"/>
+            <ScrollGuard>
+                <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
+            </ScrollGuard>
         </template>
         <template #footer>
             {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
@@ -28,8 +29,8 @@
     import { DateTime } from 'luxon'
     import { BarChart } from 'vue-chart-3'
 
-    import AxisPosition from './AxisPosition.vue'
     import DashboardPanel from './DashboardPanel.vue'
+    import ScrollGuard from './ScrollGuard.vue'
     import HasScrollableChart from '../mixins/HasScrollableChart'
     import { __, _x, sprintf } from '../plugins/i18n'
     import { getAreaKm2 } from '../../utils'
@@ -56,9 +57,9 @@
     export default {
         name: 'MonthlyDeforestationEvolution',
         components: {
-            AxisPosition,
             BarChart,
             DashboardPanel,
+            ScrollGuard,
         },
         mixins: [
             HasScrollableChart,

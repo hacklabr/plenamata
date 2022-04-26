@@ -48,12 +48,12 @@
                 <fieldset class="dashboard__tabs">
                     <label class="dashboard__tab" :class="{ active: view === 'data' }" id="dashboard-tab-data">
                         <input type="radio" name="dashboard-tabs" ref="tabDataRadio" value="data" v-model="view">
-                        <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-chart-icon.svg`" alt="">
+                        <img :src="`${$plenamata.pluginUrl}assets/build/img/dashboard-chart-icon.svg`" alt="">
                         {{ __('Data', 'plenamata') }}
                     </label>
                     <label class="dashboard__tab" :class="{ active: view === 'news' }" id="dashboard-tab-news">
                         <input type="radio" name="dashboard-tabs" ref="tabNewsRadio" value="news" v-model="view">
-                        <img :src="`${$dashboard.pluginUrl}assets/build/img/dashboard-newspaper-icon.svg`" alt="">
+                        <img :src="`${$plenamata.pluginUrl}assets/build/img/dashboard-newspaper-icon.svg`" alt="">
                         {{ __('News', 'plenamata') }}
                     </label>
                 </fieldset>
@@ -104,7 +104,6 @@
     import { clearSelectedNews } from '../../utils/mapInteractions'
     import { sprintf, __ } from '../../dashboard/plugins/i18n'
 
-
     export default {
         name: 'Dashboard',
         components: {
@@ -142,7 +141,7 @@
                 year: DateTime.now().year,
                 currentFetchNewsPage: 1,
                 wpApiTotalPages: 999999,
-                loadMoreText: __( 'Load more', 'plenamata' )
+                loadMoreText: __('Load more', 'plenamata')
             }
         },
         computed: {
@@ -187,9 +186,7 @@
                 }
             },
             tis () {
-                return this.data.tis
-                    .slice(0)
-                    .sort(localeSortBy(ti => ti.ti))
+                return this.data.tis.slice(0).sort(localeSortBy(ti => ti.ti))
             },
             trees () {
                 if (!this.thisYear) {
@@ -198,9 +195,7 @@
                 return getTrees(this.thisYear)
             },
             ucs () {
-                return this.data.ucs
-                    .slice(0)
-                    .sort(localeSortBy(uc => uc.uc))
+                return this.data.ucs.slice(0).sort(localeSortBy(uc => uc.uc))
             },
             updated () {
                 return {
@@ -211,29 +206,48 @@
         },
         watch: {
             filters: {
-                handler: 'fetchData',
+                handler () {
+                    this.fetchData()
+
+                    if (!this.filters.estado && !this.filters.municipio && !this.filters.ti && !this.filters.uc) {
+                        wait(() => this.jeomap.map?.isStyleLoaded(), () => {
+                            this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
+                            this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
+                            this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
+                            this.flyTo({ lat: this.jeomap.getArg('center_lat'), long: this.jeomap.getArg('center_lon'), zoom: this.jeomap.getArg('initial_zoom') })
+                        })
+                    }
+                },
                 deep: true,
             },
-            'filters.estado': {
-                async handler () {
-                    this.filters.municipio = ''
+            async 'filters.estado' () {
+                this.filters.municipio = ''
 
-                    if (this.filters.estado) {
-                        this.data.municipalities = await fetchMunicipalities(this.filters.estado)
-                        this.filters.ti = ''
-                        this.filters.uc = ''
-                    } else {
-                        this.data.municipalities = []
-                    }
+                if (this.filters.estado) {
+                    this.data.municipalities = await fetchMunicipalities(this.filters.estado)
+                    this.filters.ti = ''
+                    this.filters.uc = ''
+                    this.jeomap?.map.setFilter('uf-brasil', ['==', ['get', 'UF_05'], this.filters.estado])
+                    this.jeomap?.map.setLayoutProperty('uf-brasil', 'visibility', 'visible')
+                    const { lat, long, zoom } = this.states[this.filters.estado]
+                    this.flyTo({ lat, long, zoom: zoom || JeoMap.getArg('initial_zoom') })
+                } else {
+                    this.data.municipalities = []
+                    this.jeomap?.map.setFilter('uf-brasil', null)
+                    this.jeomap?.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
+                }
 
-                    await this.fetchNews(this.filters.estado)
-                },
-                immediate: true,
+                await this.fetchNews(this.filters.estado)
             },
             'filters.municipio' () {
                 if (this.filters.municipio) {
                     this.filters.ti = ''
                     this.filters.uc = ''
+                    const { lat, long } = this.data.municipalities.find(municipality => municipality.mun_geo_cod === this.filters.municipio)
+                    this.flyTo({ lat, long })
+                } else if (this.filters.estado) {
+                    const { lat, long, zoom } = this.states[this.filters.estado]
+                    this.flyTo({ lat, long, zoom: zoom || JeoMap.getArg('initial_zoom') })
                 }
             },
             'filters.ti' () {
@@ -241,7 +255,13 @@
                     this.filters.estado = ''
                     this.filters.municipio = ''
                     this.filters.uc = ''
-
+                    this.jeomap.map.setFilter('tis-brasil', ['==', ['get', 'terrai_cod'], +this.filters.ti])
+                    this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'visible')
+                    const { lat, long } = this.data.tis.find(item => item.code == this.filters.ti)
+                    this.flyTo({ lat, long })
+                } else {
+                    this.jeomap.map.setFilter('tis-brasil', null)
+                    this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
                 }
             },
             'filters.uc' () {
@@ -249,7 +269,13 @@
                     this.filters.estado = ''
                     this.filters.municipio = ''
                     this.filters.ti = ''
-
+                    this.jeomap.map.setFilter('ucs-brasil', ['==', ['get', 'id'], +this.filters.uc])
+                    this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'visible')
+                    const { lat, long } = this.data.ucs.find(item => item.code == this.filters.uc)
+                    this.flyTo({ lat, long })
+                } else {
+                    this.jeomap.map.setFilter('ucs-brasil', null)
+                    this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
                 }
             },
         },
@@ -262,7 +288,8 @@
             this.data = { municipalities: [], tis, ucs }
             this.lastUpdate = lastUpdate
             this.year = Number(lastUpdate.deter_last_date.slice(0, 4))
-            this.fetchData()
+            await this.fetchData()
+            this.fetchNews()
             this.addLayerDates()
         },
         mounted () {
@@ -277,59 +304,16 @@
         methods: {
             addLayerDates () {
                 const mapEl = this.$refs.map.lastChild
-                wait(() => mapEl.querySelector('.map-content-layers-list'),
-                    (layersList) => {
-                        const anchor = layersList.querySelector('p:last-of-type')
-                        const firsrDate = shortDate(this.lastUpdate.deter_first_date)
-                        const lastDate = shortDate(this.lastUpdate.deter_last_date)
-                        const text = sprintf(__('The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES.', 'plenamata'), firsrDate, lastDate)
-                        anchor.parentNode.insertBefore(document.createElement('br'), anchor)
-                        anchor.parentNode.insertBefore(new Text(text), anchor)
-                    }
-                )
+                wait(() => mapEl.querySelector('.map-content-layers-list'), (layersList) => {
+                    const anchor = layersList.querySelector('p:last-of-type')
+                    const firsrDate = shortDate(this.lastUpdate.deter_first_date)
+                    const lastDate = shortDate(this.lastUpdate.deter_last_date)
+                    const text = sprintf(__('The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES.', 'plenamata'), firsrDate, lastDate)
+                    anchor.parentNode.insertBefore(document.createElement('br'), anchor)
+                    anchor.parentNode.insertBefore(new Text(text), anchor)
+                })
             },
             capitalize,
-            centerMap () {
-                const mapEl = this.$refs.map.lastChild
-                this.setMapObject()
-
-                const { municipio, estado, ti, uc } = this.filters
-
-                if (mapEl) {
-                    if (municipio) {
-                        const municipality = this.data.municipalities.find(municipality => municipality.mun_geo_cod === municipio)
-                        this.jeomap.map.flyTo({ center: [+municipality.long, +municipality.lat], zoom: 7 })
-                    } else if (estado) {
-                        const state = this.states[estado]
-
-                        this.jeomap.map.setFilter('uf-brasil', ['==', ['get', 'UF_05'], this.filters[ 'estado' ] ]);
-                        this.jeomap.map.flyTo({ center: [state.long, state.lat], zoom: state.zoom || JeoMap.getArg('initial_zoom') })
-                        this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'visible')
-
-                    } else if (ti) {
-                        let tiSelected = this.data.tis.find( ti => ti.code == this.filters.ti )
-                        this.jeomap.map.setFilter('tis-brasil', ['==', ['get', 'terrai_cod'], parseInt( this.filters.ti ) ])
-                        this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'visible')
-
-                        this.jeomap.map.flyTo({ center: [+tiSelected.long, +tiSelected.lat], zoom: 7 })
-                    } else if (uc) {
-                        const point = this.data.ucs.find(item => item.code == uc)
-                        this.jeomap.map.flyTo({ center: [+point.long, +point.lat], zoom: 7 })
-                        this.jeomap.map.setFilter('ucs-brasil', ['==', ['get', 'id'], Number( uc ) ]);
-                        this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'visible')
-                    } else {
-                        /* All Brasil */
-                        if ( this.jeomap.map === undefined || ! this.jeomap.map.isStyleLoaded() ) {
-                            return;
-                        }
-                        this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
-                        this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
-                        this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
-
-                        this.jeomap.map.flyTo({ center: [this.jeomap.getArg('center_lon'), this.jeomap.getArg('center_lat')], zoom: this.jeomap.getArg('initial_zoom') })
-                    }
-                }
-            },
             clearFilters () {
                 this.filters = {
                     estado: '',
@@ -348,7 +332,7 @@
                 ])
                 this.thisYear = firstValue(thisYear)
                 this.lastWeek = firstValue(lastWeek)
-                this.centerMap()
+                this.setMapObject()
             },
             async fetchNews (state = '') {
                 const news = await fetchNews(state)
@@ -356,38 +340,42 @@
                 this.currentFetchNewsPage = 1
                 this.updateWPTotalPages()
             },
-
             async fetchNewsByPage (state = '', pageNum = 1) {
-                this.loadMoreText = __( 'Loading...', 'plenamata' )
+                this.loadMoreText = __('Loading...', 'plenamata')
                 const news = await fetchNews(state, pageNum)
                 this.news = this.news = [...this.news, ...news]
                 this.currentFetchNewsPage = pageNum
                 this.updateWPTotalPages()
-                this.loadMoreText = __( 'Load more', 'plenamata' )
+                this.loadMoreText = __('Load more', 'plenamata')
             },
             async fetchUniqueNews (postId, callback) {
                 let news = await fetchUniqueNews(postId)
-                let found = this.news.find( element => element.id === postId )
-                if ( found ) {
-                    return;
+                let found = this.news.find(element => element.id === postId)
+                if (found) {
+                    return
                 }
-                this.news.unshift( news );
-                const newsState = stateCodeByName( news.meta._related_point[0]._geocode_region_level_2 );
+                this.news.unshift(news)
+                const newsState = stateCodeByName(news.meta._related_point[0]._geocode_region_level_2)
 
-                if ( newsState ) {
+                if (newsState) {
                     this.jeomap.map.setFilter('uf-brasil', ['==', ['get', 'UF_05'], newsState ])
                     this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'visible')
                 } else {
                     this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                 }
-                if ( typeof callback === 'function' ) {
-                    callback( news )
+                if (typeof callback === 'function') {
+                    callback(news)
                 }
             },
+            flyTo ({ lat, long, zoom = 7 }) {
+                wait(() => this.jeomap?.map, () => {
+                    this.jeomap.map.flyTo({ center: [+long, +lat], zoom: +zoom })
+                })
+            },
             updateWPTotalPages () {
-                if (window.lastGetRequestHeader && typeof window.lastGetRequestHeader.get == 'function' ) {
-                    if ( window.lastGetRequestHeader.get('X-WP-TotalPages') ) {
-                        this.wpApiTotalPages = parseInt( window.lastGetRequestHeader.get('X-WP-TotalPages') )
+                if (window.lastGetRequestHeader && typeof window.lastGetRequestHeader.get == 'function') {
+                    if (window.lastGetRequestHeader.get('X-WP-TotalPages')) {
+                        this.wpApiTotalPages = parseInt(window.lastGetRequestHeader.get('X-WP-TotalPages'))
                     }
                 }
             },
@@ -397,24 +385,24 @@
                 let newsElem = document.querySelector(`[data-id="${postId}"]`)
                 if (newsElem == null) {
                     // if no element exists, load it!
-                    this.fetchUniqueNews( postId, () => {
+                    this.fetchUniqueNews(postId, () => {
                         this.$nextTick(() => {
                             let newsElem = document.querySelector(`[data-id="${postId}"]`)
                             scrollIntoView(newsElem)
                             newsElem.classList.add('selected')
-                        });
-                    } )
+                        })
+                    })
                     return
                 }
                 this.$nextTick(() => {
                     scrollIntoView(newsElem)
                     newsElem.classList.add('selected')
-                    const selectedNews = this.news.find( post => post.id == postId )
-                    console.log( selectedNews.meta._related_point[0]._geocode_region_level_2 );
-                    const newsState = stateCodeByName( selectedNews.meta._related_point[0]._geocode_region_level_2 );
+                    const selectedNews = this.news.find(post => post.id == postId)
+                    console.log(selectedNews.meta._related_point[0]._geocode_region_level_2)
+                    const newsState = stateCodeByName(selectedNews.meta._related_point[0]._geocode_region_level_2)
 
-                    if ( newsState ) {
-                        this.jeomap.map.setFilter('uf-brasil', ['==', ['get', 'UF_05'], newsState ]);
+                    if (newsState) {
+                        this.jeomap.map.setFilter('uf-brasil', ['==', ['get', 'UF_05'], newsState])
                         this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'visible')
                     } else {
                         this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
@@ -423,12 +411,12 @@
                 })
             },
             setMapObject () {
-                let mapEl = document.querySelector('.jeomap')
-                let uuid = mapEl.dataset['uui_id']
+                const mapEl = document.querySelector('.jeomap')
+                const uuid = mapEl.dataset['uui_id']
                 this.jeomap = window.jeomaps[uuid]
                 window.dashboardJeoMap = this.jeomap
 
-				if ( window.innerWidth >= 900 ) {
+				if (window.innerWidth >= 900) {
 					this.jeomap.map.scrollZoom.enable()
                     this.jeomap.map.dragPan.enable()
 					this.jeomap.map.touchZoomRotate.enable()
@@ -442,13 +430,13 @@
             },
             setMapEvents () {
                 this.jeomap.map.on('click', 'unclustered-points', (e) => {
-                    this.openNews( e.features[0].properties.id )
+                    this.openNews(e.features[0].properties.id)
                 })
-                document.body.addEventListener( 'jeo-open-spiderifier-pin', (e) => {
-                    this.openNews( e.detail.id )
+                document.body.addEventListener('jeo-open-spiderifier-pin', (e) => {
+                    this.openNews(e.detail.id)
 
                 })
-                this.jeomap.map.on( 'load', (map) => {
+                this.jeomap.map.on('load', (map) => {
                     // hide all states
                     this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                     this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
