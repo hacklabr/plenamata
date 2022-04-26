@@ -4,7 +4,7 @@
             {{ __('Area deforested last week in the selected territory', 'plenamata') }}
         </template>
         <template #measure>
-            <DashboardMeasure icon="area-icon.svg" :number="humanNumber(area)">
+            <DashboardMeasure icon="area-icon.svg" :number="area">
                 <template #unit>
                     <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
                         <option value="ha">{{ __('hectares', 'plenamata') }}</option>
@@ -26,7 +26,7 @@
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
     import { getAreaKm2, getTrees } from '../../utils'
-    import { humanNumber, roundNumber } from '../../utils/filters'
+    import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
     export default {
@@ -57,7 +57,6 @@
             unitModel: vModel('unit'),
         },
         methods: {
-            humanNumber,
             roundNumber,
         },
     }
