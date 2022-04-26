@@ -149,11 +149,3 @@ function plenamata_newspack_posted_by() {
 
 	endif;
 }
-
-function plenamata_cookie_banner_toggler () {
-?>
-    <button class="cmplz-toggle-config">
-        <?= __('Manage cookies', 'plenamata') ?>
-    </button>
-<?php
-}

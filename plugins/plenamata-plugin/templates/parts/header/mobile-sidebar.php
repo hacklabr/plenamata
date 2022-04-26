@@ -21,9 +21,7 @@ if (newspack_is_amp()) : ?>
 		<?php
 
 		newspack_primary_menu();
-
-        plenamata_cookie_banner_toggler();
-
+		
 		$button_url = get_theme_mod('discovery_button_link');
 
 		if (!empty($button_url)) : ?>
