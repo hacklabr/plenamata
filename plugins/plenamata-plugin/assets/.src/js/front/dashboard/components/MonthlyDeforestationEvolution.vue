@@ -14,7 +14,7 @@
             </select>
         </template>
         <template #chart>
-            <ScrollGuard>
+            <ScrollGuard :scrolled="scrolled">
                 <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
             </ScrollGuard>
         </template>
