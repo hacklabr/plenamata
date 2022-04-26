@@ -66,11 +66,12 @@ export class Main {
     }
 
     toggle_cookie_banner () {
-        const buttons = document.querySelectorAll('.cmplz-toggle-config');
-
+        const buttons = document.querySelectorAll("a[href='#cookies-consent']");
         buttons.forEach((button) => {
             button.addEventListener('click', () => {
-                document.querySelector('.cmplz-manage-consent').click();
+                const buttonCokkie = document.querySelector('.cmplz-manage-consent');
+                document.querySelector("button.mobile-menu-toggle").click()
+                buttonCokkie.click();
             });
         });
     }
