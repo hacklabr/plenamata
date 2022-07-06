@@ -43,24 +43,36 @@
             Tooltip,
         },
         props: {
-            date: { type: Object, required: true },
             lastWeek: { type: Object, default: null },
             minutes: { type: Number, required: true },
             trees: { type: Number, required: true },
-            year: { type: Number, required: true },
         },
         data () {
             return {
                 internalTrees: 0,
                 interval: null,
+                now: DateTime.now().year,
             }
         },
         computed: {
+            lastFriday () {
+                const now = DateTime.now()
+                const lastFriday = DateTime.fromObject({ weekday: 5, hour: 12 })
+
+                if (now < lastFriday) {
+                    return lastFriday.minus({ week: 1 })
+                } else {
+                    return lastFriday
+                }
+            },
             newTrees () {
                 const now = DateTime.now()
-                const endDate = (this.date.year === now.year) ? now : this.date.endOf('year')
-                const elapsedTime = Interval.fromDateTimes(this.date, endDate)
+                const startDate = (this.lastFriday.year === now.year) ? this.lastFriday : now.startOf('year')
+                const elapsedTime = Interval.fromDateTimes(startDate, now)
                 return elapsedTime.count('seconds') * this.treesPerSecondLastWeek
+            },
+            previousTrees () {
+                return this.trees - getTrees(this.lastWeek)
             },
             treesPerMinute () {
                 return this.trees / this.minutes
@@ -77,18 +89,15 @@
         },
         methods: {
             recalculateTrees () {
-                this.internalTrees = this.trees + this.newTrees
+                this.internalTrees = this.previousTrees + this.newTrees
 
                 if (this.interval) {
                     window.clearInterval(this.interval)
                 }
 
-                const now = DateTime.now()
-                if (this.date.year === now.year) {
-                    this.interval = window.setInterval(() => {
-                        this.internalTrees += this.treesPerSecondLastWeek
-                    }, 1000)
-                }
+                this.interval = window.setInterval(() => {
+                    this.internalTrees += this.treesPerSecondLastWeek
+                }, 1000)
             },
             roundNumber,
         },
