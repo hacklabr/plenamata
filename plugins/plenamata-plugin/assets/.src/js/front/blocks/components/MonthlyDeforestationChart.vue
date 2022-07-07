@@ -1,9 +1,9 @@
 <template>
-    <BarChart :chartData="chartData" :height="200" :options="chartOptions"/>
+    <Bar :chartData="chartData" :chartOptions="chartOptions" :height="200"/>
 </template>
 
 <script>
-    import { BarChart } from 'vue-chart-3'
+    import { Bar } from 'vue-chartjs'
 
     import { __, _x, sprintf } from '../../dashboard/plugins/i18n'
     import { getAreaKm2 } from '../../utils'
@@ -30,7 +30,7 @@
     export default {
         name: 'MonthlyDeforestationChart',
         components: {
-            BarChart,
+            Bar,
         },
         props: {
             date: { type: DateTime, required: true },

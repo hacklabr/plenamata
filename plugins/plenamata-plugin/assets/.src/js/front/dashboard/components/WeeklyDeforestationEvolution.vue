@@ -18,7 +18,7 @@
         </template>
         <template #chart>
             <ScrollGuard :scrolled="scrolled">
-                <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
+                <Bar :chartData="chartData" :chartOptions="chartOptions" :height="300"/>
             </ScrollGuard>
         </template>
         <template #footer>
@@ -29,7 +29,7 @@
 
 <script>
     import { DateTime } from 'luxon'
-    import { BarChart } from 'vue-chart-3'
+    import { Bar } from 'vue-chartjs'
 
     import DashboardPanel from './DashboardPanel.vue'
     import ScrollGuard from './ScrollGuard.vue'
@@ -43,7 +43,7 @@
     export default {
         name: 'WeeklyDeforestationEvolution',
         components: {
-            BarChart,
+            Bar,
             DashboardPanel,
             ScrollGuard,
         },

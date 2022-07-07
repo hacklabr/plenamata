@@ -10,7 +10,7 @@
             </select>
         </template>
         <template #chart>
-            <BarChart :chartData="chartData" :height="300" :options="chartOptions"/>
+            <Bar :chartData="chartData" :chartOptions="chartOptions" :height="300"/>
         </template>
         <template #footer>
             {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
@@ -21,7 +21,7 @@
 
 <script>
     import { DateTime } from 'luxon'
-    import { BarChart } from 'vue-chart-3'
+    import { Bar } from 'vue-chartjs'
 
     import DashboardPanel from './DashboardPanel.vue'
     import { __, _x, sprintf } from '../plugins/i18n'
@@ -49,7 +49,7 @@
     export default {
         name: 'YearlyDeforestationEvolutionDeter',
         components: {
-            BarChart,
+            Bar,
             DashboardPanel,
         },
         props: {
