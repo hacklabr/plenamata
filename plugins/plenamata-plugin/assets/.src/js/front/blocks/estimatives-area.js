@@ -50,12 +50,17 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
             const startDate = (lastFriday.year === now.year) ? lastFriday : now.startOf('year')
             const elapsedTime = Interval.fromDateTimes(startDate, now)
 
+            const divergencePoint = DateTime.fromObject({ year: 2022, month: 7, day: 7, hour: 16 })
+            const divergentElapsedTime = now.diff(divergencePoint, 'seconds').seconds
+            let divergentTreeCount = 272_800_000 + (divergentElapsedTime * 5.25)
+
             let treeCount = (treesThisYear - treesLastWeek) + (elapsedTime.count('seconds') * treesPerSecondLastWeek)
-            el.textContent = roundNumber(treeCount)
+            el.textContent = roundNumber(Math.max(treeCount, divergentTreeCount))
 
             setInterval(() => {
                 treeCount += treesPerSecondLastWeek
-                el.textContent = roundNumber(treeCount)
+                divergentTreeCount += 5.25
+                el.textContent = roundNumber(Math.max(treeCount, divergentTreeCount))
             }, 1000)
         }
         else if (deterLabel === 'treesPerDay') {
