@@ -39,19 +39,24 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
         }
         else if (deterLabel === 'treesEstimative') {
             const treesThisYear = Number(thisYear[0].num_arvores)
-            const treesPerSecondLastWeek = Number(lastWeek[0].num_arvores) / 604800
-            const endDate = (lastDate.year === now.year) ? now : lastDate.endOf('year')
-            const elapsedTime = Interval.fromDateTimes(lastDate, endDate)
+            const treesLastWeek = Number(lastWeek[0].num_arvores)
+            const treesPerSecondLastWeek = treesLastWeek / 604800
 
-            let treeCount = treesThisYear + (elapsedTime.count('seconds') * treesPerSecondLastWeek)
+            let lastFriday = DateTime.fromObject({ weekday: 5, hour: 12 })
+            if (now < lastFriday) {
+                lastFriday = lastFriday.minus({ week: 1 })
+            }
+
+            const startDate = (lastFriday.year === now.year) ? lastFriday : now.startOf('year')
+            const elapsedTime = Interval.fromDateTimes(startDate, now)
+
+            let treeCount = (treesThisYear - treesLastWeek) + (elapsedTime.count('seconds') * treesPerSecondLastWeek)
             el.textContent = roundNumber(treeCount)
 
-            if (lastDate.year === now.year) {
-                setInterval(() => {
-                    treeCount += treesPerSecondLastWeek
-                    el.textContent = roundNumber(treeCount)
-                }, 1000)
-            }
+            setInterval(() => {
+                treeCount += treesPerSecondLastWeek
+                el.textContent = roundNumber(treeCount)
+            }, 1000)
         }
         else if (deterLabel === 'treesPerDay') {
             const treesPerDay = Number(thisYear[0].num_arvores) / daysThisYear.count('days')
