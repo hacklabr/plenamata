@@ -51,7 +51,7 @@
             return {
                 internalTrees: 0,
                 interval: null,
-                now: DateTime.now().year,
+                year: DateTime.now().year,
             }
         },
         computed: {
