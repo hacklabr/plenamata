@@ -60,14 +60,14 @@
                 return Math.max(this.internalTrees, this.internalDivergenceTrees)
             },
             divergencePoint () {
-                return DateTime.fromObject({ year: 2022, month: 7, day: 7, hour: 16 })
+                return DateTime.fromObject({ year: 2022, month: 7, day: 8, hour: 19 })
             },
             divergenceSpeed () {
-                return 5.25
+                return 1.5
             },
             divergenceTrees () {
                 const now = DateTime.now()
-                return 272_800_000 + (now.diff(this.divergencePoint, 'seconds').seconds * this.divergenceSpeed)
+                return 273_310_000 + (now.diff(this.divergencePoint, 'seconds').seconds * this.divergenceSpeed)
             },
             lastFriday () {
                 const now = DateTime.now()
