@@ -16,7 +16,7 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
 
     const daysThisYear = Interval.fromDateTimes(startOfYear, lastDate)
 
-    const lastWeek = await fetchDeterData({ data1: lastDate.minus({ weeks: 1 }).toISODate(), data2: updated.deter_last_date })
+    const lastWeek = await fetchDeterData({ data1: lastDate.minus({ days: 6 }).toISODate(), data2: updated.deter_last_date })
 
 	document.querySelectorAll('[data-deter]').forEach((el) => {
         const deterLabel = el.dataset.deter
@@ -44,23 +44,18 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
 
             let lastFriday = DateTime.fromObject({ weekday: 5, hour: 12 })
             if (now < lastFriday) {
-                lastFriday = lastFriday.minus({ week: 1 })
+                lastFriday = lastFriday.minus({ weeks: 1 })
             }
 
             const startDate = (lastFriday.year === now.year) ? lastFriday : now.startOf('year')
             const elapsedTime = Interval.fromDateTimes(startDate, now)
 
-            const divergencePoint = DateTime.fromObject({ year: 2022, month: 7, day: 8, hour: 19 })
-            const divergentElapsedTime = now.diff(divergencePoint, 'seconds').seconds
-            let divergentTreeCount = 273_310_000 + (divergentElapsedTime * 1.5)
-
             let treeCount = (treesThisYear - treesLastWeek) + (elapsedTime.count('seconds') * treesPerSecondLastWeek)
-            el.textContent = roundNumber(Math.max(treeCount, divergentTreeCount))
+            el.textContent = roundNumber(treeCount)
 
             setInterval(() => {
                 treeCount += treesPerSecondLastWeek
-                divergentTreeCount += 1.5
-                el.textContent = roundNumber(Math.max(treeCount, divergentTreeCount))
+                el.textContent = roundNumber(treeCount)
             }, 1000)
         }
         else if (deterLabel === 'treesPerDay') {

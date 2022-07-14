@@ -4,7 +4,7 @@
             {{ sprintf(__('Estimates of trees cut down in %s in the selected territory', 'plenamata'), year) }}
         </template>
         <template #measure>
-            <DashboardMeasure icon="tree-icon.svg" :number="displayedTrees">
+            <DashboardMeasure icon="tree-icon.svg" :number="internalTrees">
                 <template #tooltip>
                     <Tooltip :alt="__('Understand the calculus', 'plenamata')">
                         <a :href="$dashboard.explainerUrl" target="_blank">
@@ -49,32 +49,18 @@
         },
         data () {
             return {
-                internalDivergenceTrees: 0,
                 internalTrees: 0,
                 interval: null,
                 year: DateTime.now().year,
             }
         },
         computed: {
-            displayedTrees () {
-                return Math.max(this.internalTrees, this.internalDivergenceTrees)
-            },
-            divergencePoint () {
-                return DateTime.fromObject({ year: 2022, month: 7, day: 8, hour: 19 })
-            },
-            divergenceSpeed () {
-                return 1.5
-            },
-            divergenceTrees () {
-                const now = DateTime.now()
-                return 273_310_000 + (now.diff(this.divergencePoint, 'seconds').seconds * this.divergenceSpeed)
-            },
             lastFriday () {
                 const now = DateTime.now()
                 const lastFriday = DateTime.fromObject({ weekday: 5, hour: 12 })
 
                 if (now < lastFriday) {
-                    return lastFriday.minus({ week: 1 })
+                    return lastFriday.minus({ weeks: 1 })
                 } else {
                     return lastFriday
                 }
@@ -104,7 +90,6 @@
         methods: {
             recalculateTrees () {
                 this.internalTrees = this.previousTrees + this.newTrees
-                this.internalDivergenceTrees = this.divergenceTrees
 
                 if (this.interval) {
                     window.clearInterval(this.interval)
@@ -112,7 +97,6 @@
 
                 this.interval = window.setInterval(() => {
                     this.internalTrees += this.treesPerSecondLastWeek
-                    this.internalDivergenceTrees += this.divergenceSpeed
                 }, 1000)
             },
             roundNumber,
