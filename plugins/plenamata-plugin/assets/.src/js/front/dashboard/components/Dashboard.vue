@@ -63,7 +63,7 @@
                     <TotalDeforestationThisYear :areaKm2="areaKm2" :date="date" :filters="filters" :unit.sync="unit" :updated="updated" :year="year"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="year"/>
                     <DeforestedAreaLastWeek :lastWeek="lastWeek" :unit.sync="unit" :updated="updated"/>
-                    <WeeklyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="year"/>
+                    <WeeklyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated" :year="year"/>
                     <MonthlyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated"/>
                     <YearlyDeforestationEvolutionDeter :date="date" :filters="filters" :unit.sync="unit" :updated="updated"/>
                     <YearlyDeforestationEvolutionProdes :filters="filters" :unit.sync="unit" :year="year"/>
@@ -324,7 +324,7 @@
             },
             clearSelectedNews,
             async fetchData () {
-                const weekAgo = this.date.minus({ weeks: 1 })
+                const weekAgo = this.date.minus({ days: 6 })
 
                 const [thisYear, lastWeek] = await Promise.all([
                     fetchDeterData({ ...this.filters, data1: this.startOfYear.toISODate(), data2: this.date.toISODate() }),

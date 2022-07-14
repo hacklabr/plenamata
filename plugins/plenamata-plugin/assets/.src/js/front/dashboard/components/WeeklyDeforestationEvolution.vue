@@ -61,6 +61,7 @@
         data () {
             return {
                 data: [],
+                internalYear: DateTime.now().year,
             }
         },
         computed: {
@@ -152,8 +153,8 @@
             },
             dateInterval () {
                 if (this.source === 'deter') {
-                    const start = DateTime.fromObject({ day: 1, month: 1, year: this.year })
-                    const end = DateTime.min(DateTime.fromObject({ day: 31, month: 12, year: this.year }), this.date)
+                    const start = DateTime.fromObject({ day: 1, month: 1, year: this.internalYear })
+                    const end = DateTime.min(DateTime.fromObject({ day: 31, month: 12, year: this.internalYear }), this.date)
                     return { start, end }
                 } else {
                     const start = DateTime.fromObject({ day: 1, month: 8, year: this.yearModel })
@@ -162,7 +163,7 @@
                 }
             },
             filterKey () {
-                return JSON.stringify({ ...this.filters, source: this.source, year: this.year })
+                return JSON.stringify({ ...this.filters, source: this.source, year: this.internalYear })
             },
             maxYear () {
                 if (this.source === 'deter' || this.date.month >= 8) {
@@ -182,16 +183,22 @@
             unitModel: vModel('unit'),
             yearModel: {
                 get () {
-                    return this.year > this.maxYear ? this.maxYear : this.year
+                    return this.internalYear > this.maxYear ? this.maxYear : this.internalYear
                 },
                 set (value) {
-                    this.$emit('update:year', value)
+                    this.internalYear = value
                 }
             },
         },
         watch: {
             filterKey: {
                 handler: 'fetchData',
+                immediate: true,
+            },
+            year: {
+                handler (year) {
+                    this.internalYear = year
+                },
                 immediate: true,
             },
         },
