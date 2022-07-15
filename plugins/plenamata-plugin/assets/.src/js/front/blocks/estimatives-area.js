@@ -42,7 +42,7 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
             const treesLastWeek = Number(lastWeek[0].num_arvores)
             const treesPerSecondLastWeek = treesLastWeek / 604800
 
-            let lastFriday = DateTime.fromObject({ weekday: 5, hour: 12 })
+            let lastFriday = DateTime.fromObject({ weekday: 5, hour: 3 })
             if (now < lastFriday) {
                 lastFriday = lastFriday.minus({ weeks: 1 })
             }

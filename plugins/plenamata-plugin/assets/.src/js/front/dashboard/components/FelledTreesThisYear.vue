@@ -57,7 +57,7 @@
         computed: {
             lastFriday () {
                 const now = DateTime.now()
-                const lastFriday = DateTime.fromObject({ weekday: 5, hour: 12 })
+                const lastFriday = DateTime.fromObject({ weekday: 5, hour: 3 })
 
                 if (now < lastFriday) {
                     return lastFriday.minus({ weeks: 1 })
