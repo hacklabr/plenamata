@@ -12,8 +12,8 @@ async function get (url, cacheable = true, saveHeaders = false ) {
         if (cacheable) {
             cache.set(url, data)
         }
-        if ( saveHeaders ) {
-            window.lastGetRequestHeader = req.headers;
+        if (saveHeaders) {
+            window.lastGetRequestHeader = req.headers
         }
         return data
     } catch (err) {

@@ -2,6 +2,7 @@ import { sprintf } from '@wordpress/i18n'
 
 import { __ } from '../dashboard/plugins/i18n'
 import { fetchDeterData, fetchLastDate } from '../utils/api'
+import { getEstimateDeforestation } from '../utils/estimates'
 import { roundNumber, shortDate } from '../utils/filters'
 
 const { DateTime, Interval } = window.luxon
@@ -18,7 +19,7 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
 
     const lastWeek = await fetchDeterData({ data1: lastDate.minus({ days: 6 }).toISODate(), data2: updated.deter_last_date })
 
-	document.querySelectorAll('[data-deter]').forEach((el) => {
+	document.querySelectorAll('[data-deter]').forEach(async (el) => {
         const deterLabel = el.dataset.deter
 
         if (deterLabel === 'hectaresLastWeek') {
@@ -38,23 +39,13 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
             el.textContent = sourcesLastWeek
         }
         else if (deterLabel === 'treesEstimative') {
-            const treesThisYear = Number(thisYear[0].num_arvores)
-            const treesLastWeek = Number(lastWeek[0].num_arvores)
-            const treesPerSecondLastWeek = treesLastWeek / 604800
+            const { trees, treesPerSecond } = await getEstimateDeforestation({}, { DateTime, Interval })
 
-            let lastFriday = DateTime.fromObject({ weekday: 5, hour: 3 })
-            if (now < lastFriday) {
-                lastFriday = lastFriday.minus({ weeks: 1 })
-            }
-
-            const startDate = (lastFriday.year === now.year) ? lastFriday : now.startOf('year')
-            const elapsedTime = Interval.fromDateTimes(startDate, now)
-
-            let treeCount = (treesThisYear - treesLastWeek) + (elapsedTime.count('seconds') * treesPerSecondLastWeek)
+            let treeCount = trees
             el.textContent = roundNumber(treeCount)
 
             setInterval(() => {
-                treeCount += treesPerSecondLastWeek
+                treeCount += treesPerSecond
                 el.textContent = roundNumber(treeCount)
             }, 1000)
         }

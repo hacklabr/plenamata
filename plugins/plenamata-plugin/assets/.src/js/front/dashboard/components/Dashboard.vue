@@ -59,7 +59,7 @@
                 </fieldset>
 
                 <div class="dashboard__panels" v-if="view === 'data' && lastUpdate">
-                    <FelledTreesThisYear :lastWeek="lastWeek" :minutes="minutes" :trees="trees"/>
+                    <FelledTreesThisYear :filters="filters" :minutes="minutes" :trees="trees"/>
                     <TotalDeforestationThisYear :areaKm2="areaKm2" :date="date" :filters="filters" :unit.sync="unit" :updated="updated" :year="year"/>
                     <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="year"/>
                     <DeforestedAreaLastWeek :lastWeek="lastWeek" :unit.sync="unit" :updated="updated"/>

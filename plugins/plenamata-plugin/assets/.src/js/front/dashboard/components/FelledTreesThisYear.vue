@@ -32,8 +32,8 @@
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
     import Tooltip from './Tooltip.vue'
-    import { getTrees } from '../../utils'
     import { roundNumber } from '../../utils/filters'
+    import { getEstimateDeforestation } from '../../utils/estimates'
 
     export default {
         name: 'FelledTreesThisYear',
@@ -43,7 +43,7 @@
             Tooltip,
         },
         props: {
-            lastWeek: { type: Object, default: null },
+            filters: { type: Object, required: true },
             minutes: { type: Number, required: true },
             trees: { type: Number, required: true },
         },
@@ -55,48 +55,29 @@
             }
         },
         computed: {
-            lastFriday () {
-                const now = DateTime.now()
-                const lastFriday = DateTime.fromObject({ weekday: 5, hour: 3 })
-
-                if (now < lastFriday) {
-                    return lastFriday.minus({ weeks: 1 })
-                } else {
-                    return lastFriday
-                }
-            },
-            newTrees () {
-                const now = DateTime.now()
-                const startDate = (this.lastFriday.year === now.year) ? this.lastFriday : now.startOf('year')
-                const elapsedTime = Interval.fromDateTimes(startDate, now)
-                return elapsedTime.count('seconds') * this.treesPerSecondLastWeek
-            },
-            previousTrees () {
-                return this.trees - getTrees(this.lastWeek)
-            },
             treesPerMinute () {
                 return this.trees / this.minutes
             },
-            treesPerSecondLastWeek () {
-                return getTrees(this.lastWeek) / 604800
-            },
         },
         watch: {
-            trees: {
+            filters: {
                 handler: 'recalculateTrees',
+                deep: true,
                 immediate: true,
             },
         },
         methods: {
-            recalculateTrees () {
-                this.internalTrees = this.previousTrees + this.newTrees
+            async recalculateTrees () {
+                const { trees, treesPerSecond, year } = await getEstimateDeforestation(this.filters, { DateTime, Interval })
+                this.internalTrees = trees
+                this.year = year
 
                 if (this.interval) {
                     window.clearInterval(this.interval)
                 }
 
                 this.interval = window.setInterval(() => {
-                    this.internalTrees += this.treesPerSecondLastWeek
+                    this.internalTrees += treesPerSecond
                 }, 1000)
             },
             roundNumber,
