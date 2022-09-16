@@ -2,7 +2,6 @@
 /**
  * PlenamataPlugin Bootstrap class
  *
- * @since   0.1.0
  * @link    hacklab.com.br
  * @license GPLv2 or later
  * @package PlenamataPlugin
@@ -29,16 +28,12 @@ class Plugin {
 
 	/**
 	 * Plugin slug
-	 *
-	 * @since 0.1.0
 	 */
 	const SLUG = 'plenamata-plugin';
 	/**
 	 * Plugin version
-	 *
-	 * @since 0.1.0
 	 */
-	const VERSION = '0.11.6';
+	const VERSION = '0.12.0';
 
 	/**
 	 * Plugin constructor.
@@ -48,8 +43,6 @@ class Plugin {
 
 	/**
 	 * Run plugin
-	 *
-	 * @since 0.1.0
 	 *
 	 * @throws Exception Object doesn't exist.
 	 */
@@ -61,8 +54,6 @@ class Plugin {
 
 	/**
 	 * Run admin part
-	 *
-	 * @since 0.1.0
 	 */
 	private function run_admin(): void {
         $blocks = new Blocks();
@@ -80,8 +71,6 @@ class Plugin {
 
 	/**
 	 * Run frontend part
-	 *
-	 * @since 0.1.0
 	 */
 	private function run_front(): void {
         $blocks = new Blocks();
