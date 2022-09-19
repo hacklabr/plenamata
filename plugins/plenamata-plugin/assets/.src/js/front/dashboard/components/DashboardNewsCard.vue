@@ -3,21 +3,25 @@
         <div class="dashboard-news__image">
             <img v-if="post.plenamata_thumbnail" :src="post.plenamata_thumbnail" alt="">
         </div>
-        <div>
-            <h2><a :href="post.link" v-html="post.title.rendered"/></h2>
-            <div>
-                <span class="dashboard-news__date">{{ longDate(post.date) }}</span>
-                <span class="dashboard-news__source" v-if="externalSource"><img :src="`${$plenamata.pluginUrl}assets/build/img/external-source-icon.svg`" alt=""> {{ externalSource }}</span>
+        <div class="texts">
+            <span class="author-date">
+                <span class="dashboard-news__author">Por <strong>{{ getAuthor() }}</strong></span>
+                <span class="dashboard-news__date">{{ shortDate(post.date) }}</span>
+            </span>
+            <h2><a :href="post.link" :target="externalSource ? '_blank' : '_self'" v-html="post.title.rendered"/></h2>
+            <div v-if="externalSource" class="dashboard-news__source">
+                <span>{{ externalSource }}</span>
+                <img :src="`${$plenamata.pluginUrl}assets/build/img/external-source-icon.svg`" alt=" ">
             </div>
         </div>
     </article>
 </template>
 
 <script>
+
     import { __ } from '../plugins/i18n'
     import { longDate, shortDate, stateCodeByName } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
-
 
     export default {
         name: 'DashboardNewsCard',
@@ -42,6 +46,9 @@
             longDate,
             shortDate,
             clearSelectedNews,
+            getAuthor(){
+                return this.post._embedded.author[0].name;
+            },
             openPin( post, e ) {
 
                 let newsElem = document.querySelector( '[data-id="' + post.id + '"]' );
@@ -52,14 +59,19 @@
                     newsElem.classList.add( 'selected' );
                 }
 
-
                 if( post.meta && post.meta._related_point && post.meta._related_point[0] ) {
 
                     window.dashboardJeoMap.map.flyTo({
                         center: [post.meta._related_point[0]._geocode_lon, post.meta._related_point[0]._geocode_lat],
                         zoom: 6
                     });
-                    let html = '<article class="popup popup-wmt"><div class="popup__date">' + this.shortDate(post.date) + '</div><h2><a href="' + post.link + '">' + post.title.rendered + '</a></h2></article>'
+
+                    const 
+                        external = post.meta?.['external-source-link'],
+                        url = external ? external : post.link,
+                        target = external ? ' target="_blank"' : ''
+                    ;
+                    let html = '<article class="popup popup-wmt"><div class="popup__date">' + this.shortDate(post.date) + '</div><h2><a href="' + url + '"' + target + '>' + post.title.rendered + '</a></h2></article>'
 
                     const newsState = stateCodeByName( post.meta._related_point[0]._geocode_region_level_2 );
 

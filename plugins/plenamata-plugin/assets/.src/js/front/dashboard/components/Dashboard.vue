@@ -2,53 +2,105 @@
     <div class="dashboard">
         <header class="dashboard__header">
             <div class="container">
-                <div class="dashboard__title">
-                    <h1>{{ __('Forestry Dashboard', 'plenamata') }}<span class="dashboard__subtitle">{{ __('Legal Amazon', 'plenamata') }}</span></h1>
-                    <div class="dashboard__filter-toggle" :class="{ '-on': showFilters }">
-                        <a href="javascript:void(0)" @click="toggleFilters" @keypress.enter="toggleFilters">{{ _x('Filter', 'verb', 'plenamata') }}</a>
-                    </div>
+                <div class="dashboard__filter-toggle" :class="{ '-on': showFilters }">
+                    <em><strong>{{ __( 'Monitor da floresta', 'plenamata' ) }}</strong> <span>-</span> {{ __( 'Amazônia Legal', 'plenamata' ) }}</em>
+                    <button type="button" class="clean green" @click="openFilters" @keypress.enter="openFilters"><span>{{ _x('Filtrar', 'plenamata') }}</span></button>
                 </div>
                 <form :class="{ '-hidden': !showFilters }">
-                    <div>
-                        <label for="select-estados">{{ __('State', 'plenamata') }}</label>
-                        <select id="select-estados" name="select-estados" v-model="filters.estado">
-                            <option value="">{{ __('All states', 'plenamata') }}</option>
-                            <option v-for="state of states" :key="state.uf" :value="state.uf">{{ state.name }}</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="select-municipios">{{ __('Municipality', 'plenamata') }}</label>
-                        <select id="select-municipios" name="select-municipios" v-model="filters.municipio" :disabled="!filters.estado">
-                            <option value="">{{ __('All municipalities', 'plenamata') }}</option>
-                            <option v-for="municipality of data.municipalities" :key="municipality.mun_geo_cod" :value="municipality.mun_geo_cod">{{ municipality.municipio }}</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="select-municipios">{{ __('Indigenous Land', 'plenamata') }}</label>
-                        <select id="select-municipios" name="select-municipios" v-model="filters.ti">
-                            <option value="">{{ __('All ILs', 'plenamata') }}</option>
-                            <option v-for="ti of tis" :key="`${ti.code} ${ti.ti}`" :value="String(ti.code)">{{ ti.ti }}</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="select-municipios">{{ __('Conservation Unit', 'plenamata') }}</label>
-                        <select id="select-municipios" name="select-municipios" v-model="filters.uc">
-                            <option value="">{{ __('All CUs', 'plenamata') }}</option>
-                            <option v-for="uc of ucs" :key="uc.code" :value="String(uc.code)">{{ capitalize(uc.uc) }}</option>
-                        </select>
-                    </div>
-
-                    <a href="javascript:void(0)" @click="clearFilters" @keypress.enter="clearFilters">{{ __('Clear filters', 'plenamata') }}</a>
+                    <header>
+                        <em>{{ __( 'Filtrar por', 'plenamata' ) }}:</em>
+                        <button type="button" class="close" title="Fechar" @click="closeFilters" @keypress.enter="closeFilters"></button>
+                    </header>
+                    <span class="fields">
+                        <Dropdown 
+                            id="select-estados" 
+                            keyId="uf" 
+                            keyLabel="name"
+                            icon="map-states"
+                            :title="__('All states', 'plenamata')"
+                            :options="states" 
+                            :placeholder="__('All states', 'plenamata' )" 
+                            :value="filters.estado" 
+                            :value.sync="filters.estado" 
+                            :activeField="activeField"
+                            :activeField.sync="activeField"
+                        />
+                        <Dropdown 
+                            id="select-municipios" 
+                            keyId="mun_geo_cod" 
+                            keyLabel="municipio" 
+                            icon="map-cities"
+                            :title="__('All municipalities', 'plenamata')"
+                            :options="data.municipalities" 
+                            :placeholder="__('All municipalities', 'plenamata' )" 
+                            :value="filters.municipio" 
+                            :value.sync="filters.municipio"
+                            :locked="filters.estado === ''"
+                            :activeField="activeField"
+                            :activeField.sync="activeField"
+                        />
+                        <Dropdown 
+                            id="select-land" 
+                            keyId="code" 
+                            keyLabel="ti" 
+                            icon="lands"
+                            :title="__('Indigenous Land', 'plenamata')"
+                            :options="tis" 
+                            :placeholder="__('All ILs', 'plenamata' )" 
+                            :value="filters.ti" 
+                            :value.sync="filters.ti"
+                            :activeField="activeField"
+                            :activeField.sync="activeField"
+                        />
+                        <Dropdown 
+                            id="select-unit" 
+                            keyId="code" 
+                            keyLabel="uc" 
+                            icon="units"
+                            :options="ucs" 
+                            :placeholder="__('All CUs', 'plenamata' )" 
+                            :value="filters.uc" 
+                            :title="__('Conservation Unit', 'plenamata')"
+                            :value.sync="filters.uc"
+                            :activeField="activeField"
+                            :activeField.sync="activeField"
+                        />
+                        <Dropdown 
+                            id="select-year"
+                            keyId="key" 
+                            keyLabel="label"
+                            icon="period"
+                            :title="__('Select period', 'plenamata')"
+                            :options="range"
+                            :placeholder="__('All periods', 'plenamata' )" 
+                            :value="filters.year" 
+                            :value.sync="filters.year"
+                            :activeField="activeField"
+                            :activeField.sync="activeField"
+                        />
+                    </span>
+                    <span class="controls">
+                        <span></span>
+                        <!-- <button type="button" class="apply" :title="__('Aplicar filtro', 'plenamata')">{{__('Apply filters', 'plenamata')}}</button> -->
+                        <a href="javascript:void(0)" class="clear" @click="clearFilters" @keypress.enter="clearFilters">
+                            <span>
+                                <i></i>
+                                <strong>{{ __('Clear filters', 'plenamata') }}</strong>
+                            </span>
+                        </a>
+                   </span>
                 </form>
             </div>
         </header>
 
-        <main>
+        <main class="dashboard__main-data">
+            
             <div class="container">
+            
                 <fieldset class="dashboard__tabs">
                     <label class="dashboard__tab" :class="{ active: view === 'data' }" id="dashboard-tab-data">
                         <input type="radio" name="dashboard-tabs" ref="tabDataRadio" value="data" v-model="view">
-                        <img :src="`${$plenamata.pluginUrl}assets/build/img/dashboard-chart-icon.svg`" alt="">
+                        <img :src="`${$plenamata.pluginUrl}assets/build/img/icon-data.svg`" alt="">
                         {{ __('Data', 'plenamata') }}
                     </label>
                     <label class="dashboard__tab" :class="{ active: view === 'news' }" id="dashboard-tab-news">
@@ -59,24 +111,101 @@
                 </fieldset>
 
                 <div class="dashboard__panels" v-if="view === 'data' && lastUpdate">
-                    <FelledTreesThisYear :filters="filters" :minutes="minutes" :trees="trees"/>
-                    <TotalDeforestationThisYear :areaKm2="areaKm2" :date="date" :filters="filters" :unit.sync="unit" :updated="updated" :year="year"/>
-                    <DeforestationSpeedThisYear :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="year"/>
-                    <DeforestedAreaLastWeek :lastWeek="lastWeek" :unit.sync="unit" :updated="updated"/>
-                    <WeeklyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated" :year="year"/>
-                    <MonthlyDeforestationEvolution :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated"/>
-                    <YearlyDeforestationEvolutionDeter :date="date" :filters="filters" :unit.sync="unit" :updated="updated"/>
-                    <YearlyDeforestationEvolutionProdes :filters="filters" :unit.sync="unit" :year="year"/>
+
+                    <header>
+                        <em><strong>{{ __( 'Forestry Dashboard', 'plenamata' ) }}</strong> - {{ __( 'Legal Amazon', 'plenamata' ) }}</em>
+                        <p>{{ sprintf(__( 'Estimates of trees cut down in %s', 'plenamata' ), year )}}</p>
+                    </header>
+                    
+                    <div v-if="this.getYear() === actualYear" class="squareds-items">
+                        <FelledTreesThisYear 
+                            :lastWeek="lastWeek" 
+                            :minutes="minutes" 
+                            :trees="trees"
+                            :opened="opened"
+                            :opened.sync="opened"
+                        />
+                        <TotalDeforestationThisYear 
+                            :areaKm2="areaKm2" 
+                            :date="date" 
+                            :filters="filters" 
+                            :unit.sync="unit" 
+                            :updated="updated" 
+                            :year="year"
+                            :activeField="activeField"
+                            :activeField.sync="activeField"
+                        />
+                        <DeforestationSpeedThisYear 
+                            :areaKm2="areaKm2" 
+                            :days="days" 
+                            :minutes="minutes" 
+                            :trees="trees" 
+                            :unit.sync="unit" 
+                            :year="year"
+                            :activeField="activeField"
+                            :activeField.sync="activeField"
+                        />
+                        <DeforestedAreaLastWeek 
+                            :lastWeek="lastWeek" 
+                            :unit.sync="unit"
+                            :updated="updated"
+                            :activeField="activeField"
+                            :activeField.sync="activeField"
+                        />
+                    </div>
+
+                    <DeforestationCharts />
+
+                    <WeeklyDeforestationEvolution 
+                        :date="date" 
+                        :filters="filters" 
+                        :source.sync="source" 
+                        :unit.sync="unit" 
+                        :updated="updated" 
+                        :year.sync="this.filters.year"
+                        :activeField="activeField"
+                        :activeField.sync="activeField"
+                    />
+                    
+                    <MonthlyDeforestationEvolution 
+                        :date="date" 
+                        :filters="filters" 
+                        :source.sync="source" 
+                        :unit.sync="unit" 
+                        :updated="updated"
+                        :activeField="activeField"
+                        :activeField.sync="activeField"
+                    />
+                    <YearlyDeforestationEvolutionDeter 
+                        :date="date" 
+                        :filters="filters" 
+                        :unit.sync="unit" 
+                        :updated="updated"
+                        :activeField="activeField"
+                        :activeField.sync="activeField"
+                    />
+                    <YearlyDeforestationEvolutionProdes 
+                        :filters="filters" 
+                        :unit.sync="unit" 
+                        :year="year"
+                        :activeField="activeField"
+                        :activeField.sync="activeField"
+                    />
+               
                 </div>
 
                 <div class="dashboard__news" v-else-if="view === 'news'">
+                    
                     <DashboardNewsCard v-for="post of news" :key="post.id" :post="post"/>
                     <p v-if="news.length === 0">{{ __('No news to be shown.', 'plenamata') }}</p>
                     <a href="#" class="dashboard__loadmore" @click="loadMore($event)" v-if="currentFetchNewsPage < wpApiTotalPages">
                         {{ loadMoreText }}
                     </a>
+                
                 </div>
+            
             </div>
+        
         </main>
 
         <div class="dashboard__map" v-once>
@@ -86,9 +215,14 @@
 </template>
 
 <script>
+
+    //v-on:setOpened="setOpened"
+
     import { DateTime, Interval } from 'luxon'
     import scrollIntoView from 'scroll-into-view'
 
+    import Dropdown from './Dropdown.vue'
+    import DeforestationCharts from '../../blocks/components/DeforestationCharts.vue'
     import DashboardNewsCard from './DashboardNewsCard.vue'
     import DeforestationSpeedThisYear from './DeforestationSpeedThisYear.vue'
     import DeforestedAreaLastWeek from './DeforestedAreaLastWeek.vue'
@@ -107,6 +241,8 @@
     export default {
         name: 'Dashboard',
         components: {
+            Dropdown,
+            DeforestationCharts,
             DashboardNewsCard,
             DeforestationSpeedThisYear,
             DeforestedAreaLastWeek,
@@ -129,7 +265,10 @@
                     municipio: '',
                     ti: '',
                     uc: '',
+                    year: '',
                 },
+                activeField : '',
+                opened : '',
                 lastUpdate: null,
                 lastWeek: null,
                 news: [],
@@ -139,6 +278,7 @@
                 unit: 'ha',
                 view: 'data',
                 year: DateTime.now().year,
+                actualYear: DateTime.now().year,
                 currentFetchNewsPage: 1,
                 wpApiTotalPages: 999999,
                 loadMoreText: __('Load more', 'plenamata')
@@ -185,6 +325,14 @@
                     TO: { uf: 'TO', name: 'Tocantins', lat: -10.18, long: -48.33, zoom: 5 },
                 }
             },
+            range() {
+                let maxYear = new Date().getFullYear();
+                let years = {}
+                for( let year = 2016; year <= maxYear; year++ ){
+                    years[ year ] = { key: year, label: year };
+                }
+                return years
+            },
             tis () {
                 return this.data.tis.slice(0).sort(localeSortBy(ti => ti.ti))
             },
@@ -207,6 +355,9 @@
         watch: {
             filters: {
                 handler () {
+
+                    this.closeFilters();
+
                     this.fetchData()
 
                     if (!this.filters.estado && !this.filters.municipio && !this.filters.ti && !this.filters.uc) {
@@ -277,7 +428,7 @@
                     this.jeomap.map.setFilter('ucs-brasil', null)
                     this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
                 }
-            },
+            }
         },
         async created () {
             const [lastUpdate, tis, ucs] = await Promise.all([
@@ -302,6 +453,14 @@
             this.setMapObject()
         },
         methods: {
+            // Open floater field
+            setAactiveField( field_id ){
+                this.activeField = field_id;
+            },
+            getYear(){
+                const year = this.filters.year === '' ? this.actualYear : this.filters.year;
+                return year;
+            },
             addLayerDates () {
                 const mapEl = this.$refs.map.lastChild
                 wait(() => mapEl.querySelector('.map-content-layers-list'), (layersList) => {
@@ -315,12 +474,20 @@
             },
             capitalize,
             clearFilters () {
+
+                this.closeFilters();
+
+                // Close drops
+                this.activeField = '';
+
                 this.filters = {
                     estado: '',
                     municipio: '',
                     ti: '',
                     uc: '',
+                    year: this.actualYear,
                 }
+            
             },
             clearSelectedNews,
             async fetchData () {
@@ -341,12 +508,12 @@
                 this.updateWPTotalPages()
             },
             async fetchNewsByPage (state = '', pageNum = 1) {
-                this.loadMoreText = __('Loading...', 'plenamata')
+                this.loadMoreText = __('Carregando...', 'plenamata')
                 const news = await fetchNews(state, pageNum)
                 this.news = this.news = [...this.news, ...news]
                 this.currentFetchNewsPage = pageNum
                 this.updateWPTotalPages()
-                this.loadMoreText = __('Load more', 'plenamata')
+                this.loadMoreText = __('Ler mais', 'plenamata')
             },
             async fetchUniqueNews (postId, callback) {
                 let news = await fetchUniqueNews(postId)
@@ -380,8 +547,10 @@
                 }
             },
             openNews (postId) {
+
                 this.clearSelectedNews()
                 this.view = 'news'
+                
                 let newsElem = document.querySelector(`[data-id="${postId}"]`)
                 if (newsElem == null) {
                     // if no element exists, load it!
@@ -398,7 +567,6 @@
                     scrollIntoView(newsElem)
                     newsElem.classList.add('selected')
                     const selectedNews = this.news.find(post => post.id == postId)
-                    console.log(selectedNews.meta._related_point[0]._geocode_region_level_2)
                     const newsState = stateCodeByName(selectedNews.meta._related_point[0]._geocode_region_level_2)
 
                     if (newsState) {
@@ -411,37 +579,50 @@
                 })
             },
             setMapObject () {
+                
                 const mapEl = document.querySelector('.jeomap')
                 const uuid = mapEl.dataset['uui_id']
-                this.jeomap = window.jeomaps[uuid]
-                window.dashboardJeoMap = this.jeomap
+                
+                if( window.jeomaps !== undefined ){
 
-				if (window.innerWidth >= 900) {
-					this.jeomap.map.scrollZoom.enable()
-                    this.jeomap.map.dragPan.enable()
-					this.jeomap.map.touchZoomRotate.enable()
-					this.jeomap.map.dragRotate.enable()
-				} else {
-                    this.jeomap.map.scrollZoom.disable()
-                    this.jeomap.map.dragPan.disable()
-					this.jeomap.map.touchZoomRotate.disable()
-					this.jeomap.map.dragRotate.disable()
+                    this.jeomap = window.jeomaps[uuid]
+                    window.dashboardJeoMap = this.jeomap
+
+                    if( window.innerWidth >= 900 ){
+                        this.jeomap.map.scrollZoom.enable()
+                        this.jeomap.map.dragPan.enable()
+                        this.jeomap.map.touchZoomRotate.enable()
+                        this.jeomap.map.dragRotate.enable()
+                    } 
+                    else {
+                        this.jeomap.map.scrollZoom.disable()
+                        this.jeomap.map.dragPan.disable()
+                        this.jeomap.map.touchZoomRotate.disable()
+                        this.jeomap.map.dragRotate.disable()
+                    }
+                
                 }
+
             },
             setMapEvents () {
-                this.jeomap.map.on('click', 'unclustered-points', (e) => {
-                    this.openNews(e.features[0].properties.id)
-                })
+
+                if( this.jeomap !== undefined ){
+
+                    this.jeomap.map.on('click', 'unclustered-points', (e) => {
+                        this.openNews(e.features[0].properties.id)
+                    })
+                    this.jeomap.map.on('load', (map) => {
+                        // hide all states
+                        this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
+                        this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
+                        this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
+                    });
+
+                }
+                
                 document.body.addEventListener('jeo-open-spiderifier-pin', (e) => {
                     this.openNews(e.detail.id)
-
-                })
-                this.jeomap.map.on('load', (map) => {
-                    // hide all states
-                    this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
-                    this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
-                    this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
-                })
+                });
 
             },
             loadMore (e) {
@@ -451,6 +632,12 @@
             },
             toggleFilters () {
                 this.showFilters = !this.showFilters
+            },
+            closeFilters(){
+                this.showFilters = false;
+            },
+            openFilters(){
+                this.showFilters = true;
             }
         },
     }

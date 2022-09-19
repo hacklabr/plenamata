@@ -1,33 +1,43 @@
 <template>
-    <div class="deforestation-charts">
-        <template v-if="lastUpdate">
-            <fieldset class="deforestation-charts__toggle">
-                <label :class="{ active: view === 'year' }">
-                    <input type="radio" name="charts-view" value="year" v-model="view">
-                    <span>{{ __('Yearly', 'plenamata') }}</span>
-                </label>
-                <label :class="{ active: view === 'month' }">
-                    <input type="radio" name="charts-view" value="month" v-model="view">
-                    <span>{{ __('Monthly', 'plenamata') }}</span>
-                </label>
-                <label :class="{ active: view === 'week' }">
-                    <input type="radio" name="charts-view" value="week" v-model="view">
-                    <span>{{ __('Weekly', 'plenamata') }}</span>
-                </label>
-            </fieldset>
-            <div class="deforestation-charts__chart">
-                <keep-alive>
-                    <YearlyDeforestationChart key="year" :date="date" v-if="view === 'year'"/>
-                    <MonthlyDeforestationChart key="month" :date="date" v-if="view === 'month'"/>
-                    <WeeklyDeforestationChart key="week" :date="date" v-if="view === 'week'"/>
-                </keep-alive>
-            </div>
-            <p class="deforestation-charts__source">
-                {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
-                {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), previousMonth) }}
-                {{ sprintf(__('Weekly and monthly data are from %s.', 'plenamata'), year) }}
-            </p>
-        </template>
+    <div class="dashboard-panel chart deforestation-charts">
+        <main> 
+            <header>
+                <h2>
+                    <strong>Evolução por período</strong>
+                    <span>(quilômetros quadrados desmatados)</span>
+                </h2>
+                <fieldset class="deforestation-charts__toggle">
+                    <label :class="{ active: view === 'year' }">
+                        <input type="radio" name="charts-view" value="year" v-model="view">
+                        <span>{{ __('Yearly', 'plenamata') }}</span>
+                    </label>
+                    <label :class="{ active: view === 'month' }">
+                        <input type="radio" name="charts-view" value="month" v-model="view">
+                        <span>{{ __('Monthly', 'plenamata') }}</span>
+                    </label>
+                    <label :class="{ active: view === 'week' }">
+                        <input type="radio" name="charts-view" value="week" v-model="view">
+                        <span>{{ __('Weekly', 'plenamata') }}</span>
+                    </label>
+                </fieldset>
+            </header>
+            <template v-if="lastUpdate">
+                <div class="deforestation-charts__chart">
+                    <keep-alive>
+                        <YearlyDeforestationChart key="year" :date="date" v-if="view === 'year'"/>
+                        <MonthlyDeforestationChart key="month" :date="date" v-if="view === 'month'"/>
+                        <WeeklyDeforestationChart key="week" :date="date" v-if="view === 'week'"/>
+                    </keep-alive>
+                </div>
+                <footer>
+                    <span class="source">
+                        {{__('Source', 'plenamata')}}: DETER/INPE • {{__('Latest Update', 'plenamata')}}: {{updated.sync}} {{__('with alerts detected until', 'plenamata')}} {{updated.deter}}.
+                        {{__('The figures represent deforestation for each year up to', 'plenamata')}} {{previousMonth}}.
+                        {{sprintf(__('Weekly and monthly data are from %s.', 'plenamata'), year )}}
+                    </span>
+                </footer>
+            </template>
+        </main>
     </div>
 </template>
 
@@ -77,7 +87,7 @@
                 const month = this.date.month
                 return months[month]
             },
-            updated () {
+            updated() {
                 return {
                     deter: shortDate(this.lastUpdate?.deter_last_date).replaceAll('/', '.'),
                     sync: shortDate(this.lastUpdate?.last_sync).replaceAll('/', '.'),
@@ -87,7 +97,7 @@
                 return this.date.year
             },
         },
-        async created () {
+        async created() {
             const lastUpdate =  await fetchLastDate()
             this.lastUpdate = lastUpdate
         },

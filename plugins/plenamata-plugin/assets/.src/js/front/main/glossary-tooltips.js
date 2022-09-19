@@ -10,34 +10,38 @@ export class GlossaryTooltips {
     }
 
     async init () {
+        
         const anchor = this.createAnchor()
         const tooltips = document.querySelectorAll('.glossary-tooltip[data-verbete-id]')
-        const verbetesIds = new Set()
+        const verbetesIds = new Set();
 
-        for (const tooltip of tooltips) {
+        for( const tooltip of tooltips ){
             verbetesIds.add(tooltip.dataset.verbeteId)
         }
 
-        if (verbetesIds.size > 0) {
+        if( verbetesIds.size > 0 ){
+
             const res = await window.fetch(`${restUrl}wp/v2/verbete?include=${[...verbetesIds].join(',')}&fields=excerpt,id,link`)
             const verbetes = await res.json()
 
-            for (const verbete of verbetes) {
-                const tooltipTemplate = this.createTooltipTemplate(verbete)
-                anchor.append(tooltipTemplate)
+            for( const verbete of verbetes ){
+                const tooltipTemplate = this.createTooltipTemplate( verbete );
+                anchor.append( tooltipTemplate )
             }
-
-            for (const target of tooltips) {
-                const tooltip = document.querySelector(`#tooltip-template-${target.dataset.verbeteId}`)
-                this.initializeTooltip(target, tooltip)
+            for( const target of tooltips ){
+                const tooltip = document.querySelector( '#tooltip-template-' + target.dataset.verbeteId );
+                this.initializeTooltip( target, tooltip );
             }
+        
         }
 
-        console.log('Glossary tooltips were started')
+        console.log( 'Glossary tooltips were started' );
+    
     }
 
     createAnchor () {
-        const anchor = document.createElement('div')
+        const anchor = document.createElement( 'div' );
+        anchor.classList.add( 'glossary-tooltips-wrapper' );
         document.body.append(anchor)
         return anchor
     }

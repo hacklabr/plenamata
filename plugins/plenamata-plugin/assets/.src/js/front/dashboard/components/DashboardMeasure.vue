@@ -1,10 +1,7 @@
 <template>
     <div class="dashboard-panel__measure">
-        <span class="dashboard-panel__icon" aria-hidden="true" v-if="icon">
-            <img :src="`${$plenamata.pluginUrl}assets/build/img/${icon}`">
-        </span>
         <span class="dashboard-panel__number">{{ formattedNumber }}</span>
-        <span class="dashboard-panel__unit"><slot name="unit"/> <slot name="tooltip"/></span>
+        <span class="dashboard-panel__unit" :class="unitClass"><slot name="unit"/></span>
     </div>
 </template>
 
@@ -16,6 +13,7 @@
         props: {
             icon: { type: String, default: '' },
             number: { type: [Number, String], required: true },
+            unitClass : { type: String, default: '' }
         },
         computed: {
             formattedNumber () {

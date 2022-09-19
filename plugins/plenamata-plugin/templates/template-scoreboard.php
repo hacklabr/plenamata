@@ -12,39 +12,45 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php wp_title() ?></title>
+    <title><?php wp_title(); ?></title>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+
+    <header>
+        
+    </header>
+
     <div class="realtime-scoreboard">
-        <h1><?= get_the_title() ?></h1>
+
+        <h1><?php echo get_the_title(); ?></h1>
 
         <div class="realtime-scoreboard__primary">
-            <div data-deter="treesEstimative"><?= __('Loading...', 'plenamata') ?></div>
-            <div><?= __('estimates of trees cut down so far', 'plenamata') ?></div>
+            <div data-deter="treesEstimative"><?php echo __( 'Loading...', 'plenamata' ); ?></div>
+            <div><?php echo __( 'estimates of trees cut down so far', 'plenamata' ) ?></div>
         </div>
 
         <div>
             <div class="realtime-scoreboard__secondary">
                 <div>
-                    <div data-deter="treesPerDay"><?= __('Loading...', 'plenamata') ?></div>
-                    <div><?= __('trees per day', 'plenamata') ?></div>
+                    <div data-deter="treesPerDay"><?php echo __('Loading...', 'plenamata'); ?></div>
+                    <div><?php echo __('trees per day', 'plenamata') ?></div>
                 </div>
 
                 <div>
-                    <div data-deter="hectaresPerDay"><?= __('Loading...', 'plenamata') ?></div>
-                    <div><?= __('hectares per day', 'plenamata') ?></div>
+                    <div data-deter="hectaresPerDay"><?php echo __('Loading...', 'plenamata'); ?></div>
+                    <div><?php echo __('hectares per day', 'plenamata') ?></div>
                 </div>
             </div>
         </div>
 
         <footer class="realtime-scoreboard__footer">
             <div class="realtime-scoreboard__source">
-                <p><?= __('Sources: INPE and MapBiomas', 'plenamata') ?></p>
+                <p><?php echo __('Sources: INPE and MapBiomas', 'plenamata'); ?></p>
             </div>
 
             <div class="realtime-scoreboard__logo">
-                <img src="<?= PLENAMATA_PLUGIN_URL ?>assets/build/img/logo-black-text.svg" alt="Plenamata">
+                <img src="<?php echo PLENAMATA_PLUGIN_URL ?>assets/build/img/logo-black-text.svg" alt="Plenamata">
             </div>
 
             <div class="realtime-scoreboard__link">
