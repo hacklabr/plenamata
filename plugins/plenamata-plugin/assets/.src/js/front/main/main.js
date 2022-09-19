@@ -13,10 +13,10 @@ export class Main {
 		// eslint-disable-next-line no-console
 		console.log('Main was started');
         // sticky menu
-        this.sticky_menu();
+        //this.sticky_menu();
 
         // hide main menu ul when modal search is active
-        this.hide_menu_items_on_search();
+        // this.hide_menu_items_on_search();
 
         // toggle cookie management in mobile
         this.toggle_cookie_banner();

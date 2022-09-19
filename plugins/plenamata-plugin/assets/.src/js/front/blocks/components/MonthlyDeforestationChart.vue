@@ -50,7 +50,7 @@
                     datasets: [
                         {
                             data: this.areas,
-                            backgroundColor: '#FF7373',
+                            backgroundColor: '#263F30',
                         },
                     ],
                 }
@@ -58,6 +58,9 @@
             chartOptions () {
                 return {
                     plugins: {
+                        legend: {
+                            display: false,
+                        },
                         tooltip: {
                             callbacks: {
                                 label: ({ raw }) => sprintf(__('%s km²', 'plenamata'), roundNumber(raw)),

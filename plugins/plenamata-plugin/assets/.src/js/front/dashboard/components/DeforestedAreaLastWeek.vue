@@ -1,44 +1,76 @@
 <template>
-    <DashboardPanel type="measure">
+    <DashboardPanel type="measure" icon="area.svg" icon2="relogio-small.svg">
+        <template #estimativa>{{__( 'Estimates for the year', 'plenamata' )}} {{actualYear}}</template>
         <template #title>
-            {{ __('Area deforested last week in the selected territory', 'plenamata') }}
+            <strong>{{ __('Area deforested', 'plenamata') }}</strong>
+            <span>{{ __('last week', 'plenamata') }}</span>
         </template>
         <template #measure>
-            <DashboardMeasure icon="area-icon.svg" :number="area">
+            <DashboardMeasure :number="area">
                 <template #unit>
-                    <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
-                        <option value="ha">{{ __('hectares', 'plenamata') }}</option>
-                        <option value="km2">{{ __('km²', 'plenamata') }}</option>
-                    </select>
+                    <Dropdown 
+                        id="unit-dalw" 
+                        keyId="key"
+                        keyLabel="label"
+                        triggerClass="clean small color--3"
+                        :options="options" 
+                        :value="unitModel" 
+                        :title="__( 'Unit', 'plenamata' )"
+                        :value.sync="unitModel"
+                        :activeField="fieldActive"
+                        :activeField.sync="fieldActive"
+                    />
                 </template>
             </DashboardMeasure>
         </template>
         <template #meaning>
-            {{ sprintf(__('estimated average of %s trees per minute', 'plenamata'), roundNumber(trees / 10080)) }}
+            <strong>{{roundNumber(trees / 10080)}}</strong>
+            <span>{{ __( 'trees/minute', 'plenamata' ) }}</span>
         </template>
-        <template #footer>
-            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
-        </template>
+        <template #source>
+            {{__('Source:')}}: DETER/INPE
+         </template>
     </DashboardPanel>
 </template>
 
 <script>
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
+    import Dropdown from './Dropdown.vue'
+    import { DateTime } from 'luxon'
     import { getAreaKm2, getTrees } from '../../utils'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
+    import { sprintf, __ } from '../plugins/i18n'
 
     export default {
         name: 'DeforestedAreaLastWeek',
         components: {
             DashboardMeasure,
             DashboardPanel,
+            Dropdown
         },
         props: {
             lastWeek: { type: Object, default: null },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
+            activeField: { type: [ String, Object ], default: '' }
+        },
+        data(){
+            return {
+                actualYear: DateTime.now().year,
+                options : {
+                    'ha' : {
+                        key : 'ha',
+                        label : __('hectares', 'plenamata')
+                    },
+                    'km2' : {
+                        key : 'km2',
+                        label : __('km²', 'plenamata')
+                    }
+                },
+                fieldActive : { type: String, defaul: '' },
+            }
         },
         computed: {
             area () {
@@ -55,6 +87,18 @@
                 return getTrees(this.lastWeek)
             },
             unitModel: vModel('unit'),
+        },
+        watch: {
+            fieldActive: {
+                handler( active ){
+                    this.$emit( 'update:activeField', active );
+                }
+            },
+            activeField: {
+                handler( active ){
+                    this.fieldActive = active;
+                }
+            }
         },
         methods: {
             roundNumber,

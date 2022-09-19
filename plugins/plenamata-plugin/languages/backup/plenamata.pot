@@ -1,0 +1,527 @@
+# Copyright (C) 2021 hacklab/
+# This file is distributed under the MIT.
+msgid ""
+msgstr ""
+"Project-Id-Version: Plenamata Plugin 0.3.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/plenamata-plugin\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2021-09-03T15:38:02+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.5.0\n"
+"X-Domain: plenamata\n"
+
+#. Plugin Name of the plugin
+#: src/Admin/SettingsPage.php:87
+msgid "Plenamata Plugin"
+msgstr ""
+
+#. Description of the plugin
+msgid "The plugin adds information about the games to the site posts."
+msgstr ""
+
+#. Author of the plugin
+msgid "hacklab/"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "hacklab.com.br"
+msgstr ""
+
+#: inc/authors_list_widget.php:15
+msgid "Authors List"
+msgstr ""
+
+#: inc/authors_list_widget.php:71
+msgid "show"
+msgstr ""
+
+#: inc/authors_list_widget.php:75
+msgid "Title:"
+msgstr ""
+
+#: plenamata-plugin.php:40
+msgid "The minimum version of PHP is <strong>7.2.5</strong>. Please update the PHP on your server and try again."
+msgstr ""
+
+#: src/Admin/Blocks.php:38
+#: templates/parts/header/mobile-sidebar.php:155
+msgid "Dashboard"
+msgstr ""
+
+#: src/Admin/Blocks.php:154
+msgid "real-time estimate"
+msgstr ""
+
+#: src/Admin/Blocks.php:167
+#: assets/build/js/dashboard.js:40581
+msgid "trees per day"
+msgstr ""
+
+#: src/Admin/Blocks.php:176
+#: assets/build/js/dashboard.js:40629
+msgid "hectares per day"
+msgstr ""
+
+#: src/Admin/Blocks.php:190
+msgid "alerts"
+msgstr ""
+
+#: src/Admin/Blocks.php:201
+#: assets/.src/js/admin/blocks/deforestation-info.js:55
+#: assets/build/js/admin/blocks.js:172
+#: assets/build/js/dashboard.js:40769
+#: assets/build/js/dashboard.js:41022
+#: assets/build/js/dashboard.js:41219
+#: assets/build/js/dashboard.js:41411
+#: assets/build/js/dashboard.js:41576
+#: assets/build/js/dashboard.js:41715
+msgid "hectares"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:86
+msgid "Plenamata Plugin Settings"
+msgstr ""
+
+#: src/Admin/SettingsPage.php:99
+#: templates/parts/header/mobile-sidebar.php:169
+#: templates/single-artigo.php:21
+#: templates/single-artigo.php:36
+msgid "Articles"
+msgstr ""
+
+#: src/Front/Front.php:63
+#: templates/archive-verbete.php:7
+#: templates/parts/header/mobile-sidebar.php:186
+#: templates/single-verbete.php:10
+msgid "Glossary"
+msgstr ""
+
+#: src/Front/Front.php:158
+msgid "Read more"
+msgstr ""
+
+#: src/users-functions.php:101
+msgid "By"
+msgstr ""
+
+#: src/users-functions.php:145
+msgid "by"
+msgstr ""
+
+#: templates/archive-verbete.php:8
+msgid "Termos técnicos, políticas públicas e iniciativas para chegar ao desmatamento zero e conservar a floresta explicados com um simples clique, via consulta rápida ou completa."
+msgstr ""
+
+#: templates/archive-verbete.php:11
+msgid "Search for a term"
+msgstr ""
+
+#: templates/archive-verbete.php:23
+#: templates/single-verbete.php:17
+#: templates/single-verbete.php:32
+msgid "Sections"
+msgstr ""
+
+#: templates/archive-verbete.php:65
+msgid "Acessar verbete completo"
+msgstr ""
+
+#: templates/archive.php:87
+msgid "ABOUT THE AUTHOR"
+msgstr ""
+
+#: templates/footer.php:24
+msgid "COPYRIGHT © %s PlenaMata"
+msgstr ""
+
+#: templates/footer.php:33
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/header-single.php:93
+msgid "What are you looking for?"
+msgstr ""
+
+#: templates/header.php:32
+#: templates/header.php:112
+#: templates/header.php:156
+msgid "Menu"
+msgstr ""
+
+#: templates/header.php:96
+#: templates/header.php:262
+#: templates/parts/header/mobile-sidebar.php:32
+msgid "Discovery"
+msgstr ""
+
+#: templates/header.php:306
+msgid "Close Search"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:47
+msgid "MORE"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:69
+msgid "Language"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:79
+msgid "Dark mode"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:95
+msgid "Type size"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:124
+msgid "Follow us"
+msgstr ""
+
+#: templates/parts/header/mobile-sidebar.php:197
+msgid "Share"
+msgstr ""
+
+#: templates/single-verbete.php:62
+msgid "Tags:"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:8
+#: assets/build/js/admin/blocks.js:110
+msgid "Deforestation Info"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:14
+#: assets/build/js/admin/blocks.js:117
+msgid "Desmatados na Amazônia nos últimos 07 dias."
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:23
+#: assets/build/js/admin/blocks.js:125
+msgid "Title"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:26
+#: assets/build/js/admin/blocks.js:132
+msgid "Type the box title"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:29
+#: assets/build/js/admin/blocks.js:134
+msgid "Count"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:34
+#: assets/build/js/admin/blocks.js:143
+msgid "Type the count"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:37
+#: assets/build/js/admin/blocks.js:145
+msgid "Source"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/deforestation-info.js:40
+#: assets/build/js/admin/blocks.js:152
+msgid "Type the source of data"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/verbete-subsection.js:8
+#: assets/build/js/admin/blocks.js:471
+msgid "Verbete subsection"
+msgstr ""
+
+#: assets/.src/js/admin/blocks/verbete-subsection.js:23
+#: assets/build/js/admin/blocks.js:488
+msgctxt "section"
+msgid "Title:"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:273
+msgid "Estimatives Area"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:279
+msgid "Desmatamento na Amazônia Brasileira"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:283
+msgid "Árvores derrubadas por desmatamento em 2021"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:287
+msgid "Média de desmatamento em 2021"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:291
+msgid "Desmatados 2021"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:295
+msgid "Estimativas detectadas e reportadas. Velocidades médias. | Fonte: MapBiomas. | Última atualização: 08.06.2021"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:349
+msgid "Type the heading text"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:357
+msgid "Type the before number title"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:362
+msgid "Base trees"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:367
+msgid "Base date"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:379
+msgid "Type the average title"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:385
+msgid "Trees per day"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:391
+msgid "Hectares per day"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:399
+msgid "Type the desforested title"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:405
+msgid "Warnings"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:411
+msgid "Hectares"
+msgstr ""
+
+#: assets/build/js/admin/blocks.js:421
+msgid "Type the final information"
+msgstr ""
+
+#: assets/build/js/dashboard.js:3970
+msgid "External link"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "January"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "February"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "March"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "April"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "May"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "June"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+#: assets/build/js/dashboard.js:41626
+msgctxt "month"
+msgid "July"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "August"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "September"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "October"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "November"
+msgstr ""
+
+#: assets/build/js/dashboard.js:4634
+msgctxt "month"
+msgid "December"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40051
+msgid "Forest Dashboard"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40056
+msgid "States"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40089
+msgid "All states"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40145
+msgid "Data"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40186
+msgid "News"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40339
+msgid "No news to be shown."
+msgstr ""
+
+#: assets/build/js/dashboard.js:40558
+msgid "Deforestation rate in %s"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40609
+#: assets/build/js/dashboard.js:40750
+#: assets/build/js/dashboard.js:41003
+#: assets/build/js/dashboard.js:41200
+#: assets/build/js/dashboard.js:41392
+#: assets/build/js/dashboard.js:41557
+#: assets/build/js/dashboard.js:41696
+msgid "Unit"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40634
+msgid "km² per day"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40656
+#: assets/build/js/dashboard.js:40795
+#: assets/build/js/dashboard.js:40913
+msgid "estimated average of %s trees per minute"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40676
+msgid "Source: MapBiomas based on DETER/INPE data."
+msgstr ""
+
+#: assets/build/js/dashboard.js:40721
+msgid "Area deforested last week"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40773
+#: assets/build/js/dashboard.js:41026
+#: assets/build/js/dashboard.js:41223
+#: assets/build/js/dashboard.js:41415
+#: assets/build/js/dashboard.js:41580
+#: assets/build/js/dashboard.js:41719
+msgid "km²"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40816
+#: assets/build/js/dashboard.js:41096
+#: assets/build/js/dashboard.js:41284
+#: assets/build/js/dashboard.js:41485
+#: assets/build/js/dashboard.js:41611
+msgid "Source: DETER/INPE • Latest Update: %s with alerts detected until %s."
+msgstr ""
+
+#: assets/build/js/dashboard.js:40866
+msgid "Estimated number of trees cut down in %s"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40892
+msgid "trees"
+msgstr ""
+
+#: assets/build/js/dashboard.js:40934
+msgid "Source: MapBiomas based on average daily deforestation detected by DETER in %s."
+msgstr ""
+
+#: assets/build/js/dashboard.js:40981
+msgid "Monthly deforestation rate"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41042
+#: assets/build/js/dashboard.js:41431
+msgid "Timeframe"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41061
+#: assets/build/js/dashboard.js:41450
+msgid "during DETER year"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41065
+#: assets/build/js/dashboard.js:41454
+msgid "during PRODES year"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41146
+msgid "Total deforestation in %s in the selected territory"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41168
+msgid "Total deforested area in %s (until last week)"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41178
+msgid "on state"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41247
+msgid "%s%% increase compared to last year"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41262
+msgid "%s%% decrease compared to last year"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41332
+msgid "Weekly deforestation rate"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41354
+msgid "Period"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41374
+msgid "Period: %s"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41534
+msgid "Yearly deforestation alerts (DETER)"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41622
+msgid "The figures represent deforestation for each year up to %s."
+msgstr ""
+
+#: assets/build/js/dashboard.js:41670
+msgid "Yearly consolidated deforestation rate (PRODES)"
+msgstr ""
+
+#: assets/build/js/dashboard.js:41748
+msgid "Source: PRODES/INPE."
+msgstr ""

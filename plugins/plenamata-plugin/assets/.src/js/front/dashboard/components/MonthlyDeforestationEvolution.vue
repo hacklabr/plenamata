@@ -1,24 +1,41 @@
 <template>
     <DashboardPanel type="chart">
         <template #title>
-            {{ __('Monthly deforestation rate in the selected territory', 'plenamata') }}
+            <strong>{{ __('Monthly deforestation rate', 'plenamata') }}</strong> 
+            <span>{{ __('in the selected territory', 'plenamata') }}</span>
         </template>
         <template #filters>
-            <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
-                <option value="ha">{{ __('hectares', 'plenamata') }}</option>
-                <option value="km2">{{ __('km²', 'plenamata') }}</option>
-            </select>
-            <select :aria-label="__('Timeframe', 'plenamata')" v-model="sourceModel">
-                <option value="deter">{{ __('during DETER year', 'plenamata') }}</option>
-                <option value="prodes">{{ __('during PRODES year', 'plenamata') }}</option>
-            </select>
+            <Dropdown 
+                id="unit-mdev" 
+                keyId="key"
+                keyLabel="label"
+                triggerClass="clean small color--3"
+                :options="units" 
+                :value="unitModel" 
+                :title="__('Unit', 'plenamata')"
+                :value.sync="unitModel"
+                :activeField="fieldActive"
+                :activeField.sync="fieldActive"
+            />
+            <Dropdown 
+                id="source-mdev" 
+                keyId="key"
+                keyLabel="label"
+                triggerClass="clean small color--3"
+                :options="sources" 
+                :value="sourceModel" 
+                :title="__('Timeframe', 'plenamata')"
+                :value.sync="sourceModel"
+                :activeField="fieldActive"
+                :activeField.sync="fieldActive"
+            />
         </template>
         <template #chart>
             <ScrollGuard :scrolled="scrolled">
-                <Bar :chartData="chartData" :chartOptions="chartOptions" :height="300"/>
+                <Bar :chartData="chartData" :chartOptions="chartOptions" :height="263"/>
             </ScrollGuard>
         </template>
-        <template #footer>
+        <template #source>
             {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
         </template>
     </DashboardPanel>
@@ -30,6 +47,7 @@
     import { Bar } from 'vue-chartjs'
 
     import DashboardPanel from './DashboardPanel.vue'
+    import Dropdown from './Dropdown.vue'
     import ScrollGuard from './ScrollGuard.vue'
     import HasScrollableChart from '../mixins/HasScrollableChart'
     import { __, _x, sprintf } from '../plugins/i18n'
@@ -57,8 +75,9 @@
     export default {
         name: 'MonthlyDeforestationEvolution',
         components: {
-            Bar,
             DashboardPanel,
+            Dropdown,
+            Bar,
             ScrollGuard,
         },
         mixins: [
@@ -70,10 +89,32 @@
             source: { type: String, default: 'prodes' },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
+            activeField: { type: [ String, Object ], default: '' }
         },
         data () {
             return {
                 data: [],
+                units: {
+                    'ha': {
+                        key : 'ha',
+                        label : __('hectares', 'plenamata')
+                    },
+                    'km2': {
+                        key : 'km2',
+                        label : __('km²', 'plenamata')
+                    }
+                },
+                sources: {
+                    'deter': {
+                        key : 'deter',
+                        label : __('during DETER year', 'plenamata')
+                    },
+                    'prodes': {
+                        key : 'prodes',
+                        label : __('during PRODES year', 'plenamata')
+                    }
+                },
+                fieldActive : { type: String, defaul: '' },
             }
         },
         computed: {
@@ -130,27 +171,34 @@
                 }
             },
             datasets () {
-                const color = Color('#FF7373')
+                const color = Color('#263F30')
                 const datasets = []
 
                 const startYear = this.startDate.year
                 for (let i = 1; i <= 5; i++ ) {
                     const referenceYear = startYear + i
 
+                    let backCol;
+                    if( i === 1 ) backCol = '#B4E8C9';
+                    else if( i === 2 ) backCol = '#82C79E';
+                    else if( i === 3 ) backCol = '#629A79';
+                    else if( i === 4 ) backCol = '#416951';
+                    else backCol = '#263F30';
+
                     const dataset = {
                         label: referenceYear,
                         data: this.months.map((month) => {
                             const year = this.source === 'prodes' && month < 8 ? referenceYear + 1 : referenceYear
-
                             return this.data.find((datum) => {
                                 return datum.month === month && datum.year === year
                             }) || {}
                         }),
-                        backgroundColor: color.lighten(0.4 - (0.08 * i)).string(),
+                        backgroundColor: backCol,
                         barThickness: 50,
                     }
 
                     datasets.push(dataset)
+                
                 }
 
                 return datasets
@@ -164,6 +212,10 @@
                 }))
             },
             months () {
+                if (this.data.length === 0) {
+                    return []
+                }
+
                 const months = this.source === 'deter'
                     ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                     : [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7]
@@ -195,6 +247,16 @@
                 handler: 'fetchData',
                 immediate: true,
             },
+            fieldActive: {
+                handler( active ){
+                    this.$emit( 'update:activeField', active );
+                }
+            },
+            activeField: {
+                handler( active ){
+                    this.fieldActive = active;
+                }
+            }
         },
         methods: {
             async fetchData () {
