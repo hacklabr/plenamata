@@ -1,0 +1,594 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2022-08-24 19:27-0300\n"
+"PO-Revision-Date: 2022-08-24 20:44-0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __;_e;_x\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: node_modules\n"
+"X-Poedit-SearchPathExcluded-1: vendor\n"
+"X-Poedit-SearchPathExcluded-2: vendor_prefixed\n"
+"X-Poedit-SearchPathExcluded-3: assets\n"
+
+#: blocks/latest-posts.php:128
+msgid "(no title)"
+msgstr "(sin título)"
+
+#: blocks/latest-posts.php:140
+#, php-format
+msgid "by %s"
+msgstr "por %s"
+
+#: blocks/latest-posts.php:164 blocks/latest-posts.php:179
+msgid "This content is password protected."
+msgstr "Este contenido está protegido con contraseña."
+
+#: inc/authors_list_widget.php:15
+msgid "Authors List"
+msgstr "Lista de Autores"
+
+#: plenamata-plugin.php:39
+msgid ""
+"The minimum version of PHP is <strong>7.2.5</strong>. Please update the PHP "
+"on your server and try again."
+msgstr ""
+"La versión mínima de PHP es <strong>7.2.5</strong>. Actualice PHP en su "
+"servidor y vuelva a intentarlo."
+
+#: src/Admin/Blocks.php:45 src/Admin/SettingsPage.php:106
+#: templates/parts/header/mobile-sidebar.php:152
+msgid "Dashboard"
+msgstr "Monitor"
+
+#: src/Admin/Blocks.php:46
+msgid "Page with headings index"
+msgstr "Página con índice de encabezados"
+
+#: src/Admin/Blocks.php:47
+msgid "Real-time Scoreboard"
+msgstr "Marcador en tiempo real"
+
+#: src/Admin/Blocks.php:72
+msgid "Contact information"
+msgstr "Información del contacto"
+
+#: src/Admin/Blocks.php:73
+msgid "from November 1st to 12th in Glasgow"
+msgstr "del 1 al 12 de noviembre en Glasgow"
+
+#: src/Admin/Blocks.php:74
+msgid "How to get involved"
+msgstr "Cómo participar"
+
+#: src/Admin/Blocks.php:75
+msgid "Name"
+msgstr "Nombre"
+
+#: src/Admin/Blocks.php:76
+msgid "Project website"
+msgstr "Sitio web del proyecto"
+
+#: src/Admin/Blocks.php:77
+msgid "Social media"
+msgstr "Redes sociales"
+
+#: src/Admin/Blocks.php:78
+msgid "The Initiative"
+msgstr "La iniciativa"
+
+#: src/Admin/Blocks.php:79
+msgid "Upload image"
+msgstr "La iniciativa"
+
+#: src/Admin/Blocks.php:80
+msgid "What is it"
+msgstr "Qué es"
+
+#: src/Admin/Blocks.php:81
+msgid "Where is it"
+msgstr "Dónde está"
+
+#: src/Admin/Blocks.php:82
+msgid "Who's involved"
+msgstr "Quien esta involucrado"
+
+#: src/Admin/Blocks.php:234 src/Front/Front.php:274
+#: templates/template-scoreboard.php:23 templates/template-scoreboard.php:30
+#: templates/template-scoreboard.php:35
+msgid "Loading..."
+msgstr "Cargando…"
+
+#: src/Admin/Blocks.php:235
+msgid "real-time estimate"
+msgstr "estimación en tiempo real"
+
+#: src/Admin/Blocks.php:246 src/Front/Front.php:296
+msgid "trees"
+msgstr "árboles"
+
+#: src/Admin/Blocks.php:252 src/Admin/Blocks.php:269 src/Front/Front.php:267
+msgid "hectares"
+msgstr "hectáreas"
+
+#: src/Admin/Blocks.php:263
+msgid "alerts"
+msgstr "alertas"
+
+#: src/Admin/SettingsPage.php:118
+#, php-format
+msgid "Map ID - %s"
+msgstr "Identificación del mapa - %s"
+
+#: src/Admin/SettingsPage.php:134
+#, php-format
+msgid "Estimate explainer - %s"
+msgstr "Explicación de estimación - %s"
+
+#: src/Admin/SettingsPage.php:148 src/Front/Front.php:278
+#: templates/archive.php:20 templates/parts/header/mobile-sidebar.php:166
+#: templates/single-news.php:94
+msgid "News"
+msgstr "Noticias"
+
+#: src/Front/Front.php:164
+msgid "Close"
+msgstr "Cerrar"
+
+#: src/Front/Front.php:165 src/Front/Front.php:283
+msgid "See more"
+msgstr "Ver más"
+
+#: src/Front/Front.php:243
+#, php-format
+msgid "%s%% decrease compared to last year"
+msgstr "%s%% - rápido que el año pasado "
+
+#: src/Front/Front.php:244
+#, php-format
+msgid "%s%% increase compared to last year"
+msgstr "%s%% + rápido que el año pasado "
+
+#: src/Front/Front.php:245
+#, php-format
+msgid "%s ha"
+msgstr "%s ha"
+
+#: src/Front/Front.php:246
+#, php-format
+msgid "%s km²"
+msgstr "%s km²"
+
+#: src/Front/Front.php:247
+msgid "All CUs"
+msgstr "Todas las UCs"
+
+#: src/Front/Front.php:248
+msgid "All ILs"
+msgstr "Todas las TIs"
+
+#: src/Front/Front.php:249
+msgid "All municipalities"
+msgstr "Todos los municipios"
+
+#: src/Front/Front.php:250
+msgid "All states"
+msgstr "Todos los estados"
+
+#: src/Front/Front.php:251
+msgid ""
+"Annual deforestation rate calculated for the period from August to July. For "
+"example, 2020 rate considers the timeframe from August 2019 to July 2020."
+msgstr ""
+"Tasa anual de deforestación calculada para el período de agosto a julio. Por "
+"ejemplo, la tasa de 2020 considera el período de agosto de 2019 a julio de "
+"2020."
+
+#: src/Front/Front.php:252
+msgid "Area deforested last week in the selected territory"
+msgstr "Evolución semanal de la deforestación en el territorio seleccionado"
+
+#: src/Front/Front.php:253
+msgid "Area deforested"
+msgstr "Área deforestada"
+
+#: src/Front/Front.php:254
+msgid "Area of deforestation alerts detected last week"
+msgstr "Evolución semanal de la deforestación en el territorio seleccionado"
+
+#: src/Front/Front.php:255
+msgid "Clear filters"
+msgstr "Limpiar filtros"
+
+#: src/Front/Front.php:256
+msgid "Conservation Unit"
+msgstr "Unidad de Conservación"
+
+#: src/Front/Front.php:257
+msgid "Data"
+msgstr "Datos"
+
+#: src/Front/Front.php:258 src/Front/Front.php:299
+msgid "in the selected territory"
+msgstr "en el territorio seleccionado"
+
+#: src/Front/Front.php:259
+#, php-format
+msgid "Deforestation rate in %s in the selected territory"
+msgstr "Evolución de la deforestación en %s en el territorio seleccionado"
+
+#: src/Front/Front.php:260
+msgid "Deforestation rate in"
+msgstr "Área Deforestada en"
+
+#: src/Front/Front.php:261
+msgid "Drag to see more"
+msgstr "Arrastra para ver más"
+
+#: src/Front/Front.php:262
+msgid "during DETER year"
+msgstr "durante el año DETER"
+
+#: src/Front/Front.php:263
+msgid "during PRODES year"
+msgstr "durante el año PRODES"
+
+#: src/Front/Front.php:264
+#, php-format
+msgid "estimated average of %s trees per minute"
+msgstr "promedio estimado de %s árboles por minuto"
+
+#: src/Front/Front.php:265
+msgid "External link"
+msgstr "Enlace externo"
+
+#: src/Front/Front.php:266
+msgid "Forestry Dashboard"
+msgstr "Monitor Forestal"
+
+#: src/Front/Front.php:268 templates/template-scoreboard.php:36
+msgid "hectares per day"
+msgstr "hectáreas/día"
+
+#: src/Front/Front.php:269
+msgid "Indigenous Land"
+msgstr "Tierra Indígena"
+
+#: src/Front/Front.php:270
+msgid "km²"
+msgstr "km²"
+
+#: src/Front/Front.php:271
+msgid "km² per day"
+msgstr "km² por dia"
+
+#: src/Front/Front.php:272
+msgid "Legal Amazon"
+msgstr "Amazonía legal"
+
+#: src/Front/Front.php:273
+msgid "Load more"
+msgstr "Cargar más"
+
+#: src/Front/Front.php:275
+msgid "Monthly"
+msgstr "Mensual"
+
+#: src/Front/Front.php:276
+msgid "Monthly deforestation rate in the selected territory"
+msgstr "Evolución mensual de la deforestación en el territorio seleccionado"
+
+#: src/Front/Front.php:277
+msgid "Municipality"
+msgstr "Municipio"
+
+#: src/Front/Front.php:279
+msgid "No news to be shown"
+msgstr "No hay noticias para mostrar"
+
+#: src/Front/Front.php:280
+msgid "Period"
+msgstr "Período"
+
+#: src/Front/Front.php:281
+#, php-format
+msgid "Period: %s"
+msgstr "Periodo: %s"
+
+#: src/Front/Front.php:282
+msgid "Select a state"
+msgstr "Selecciona un Estado"
+
+#: src/Front/Front.php:284
+msgid "Source"
+msgstr "Fuente"
+
+#: src/Front/Front.php:285
+#, php-format
+msgid "Source: DETER/INPE • Latest Update: %s with alerts detected until %s."
+msgstr ""
+"Fuente: DETER/INPE • Última Actualización: %s con las alertas detectadas "
+"hasta la %s."
+
+#: src/Front/Front.php:286
+#, php-format
+msgid ""
+"Source: MapBiomas based on average daily deforestation detected by INPE in "
+"%s."
+msgstr ""
+"Fuente: MapBiomas basado en el promedio diario de deforestación detectada "
+"por INPE in %s."
+
+#: src/Front/Front.php:287
+msgid "Source: MapBiomas based on DETER/INPE data."
+msgstr "Fuente: MapBiomas en base con los datos de DETER/INPE."
+
+#: src/Front/Front.php:288
+msgid "Source: PRODES/INPE."
+msgstr "Fuente: PRODES/INPE."
+
+#: src/Front/Front.php:289 templates/template-scoreboard.php:43
+msgid "Sources: INPE and MapBiomas"
+msgstr "Fuentes: INPE y MapBiomas"
+
+#: src/Front/Front.php:290
+msgid "State"
+msgstr "Estado"
+
+#: src/Front/Front.php:291
+#, php-format
+msgid ""
+"The data of this layer includes the alerts detected in the period between %s "
+"and %s, verified since the last update of PRODES."
+msgstr ""
+"Los datos de esta capa incluyen las alertas detectadas en el período "
+"comprendido entre %s y %s, verificadas desde la última actualización del "
+"PRODES."
+
+#: src/Front/Front.php:292
+#, php-format
+msgid "The figures represent deforestation for each year up to %s."
+msgstr "Las cifras representan la deforestación para cada año hasta %s."
+
+#: src/Front/Front.php:293
+msgid "Timeframe"
+msgstr "Periodo de tiempo"
+
+#: src/Front/Front.php:294
+#, php-format
+msgid "Total deforestation in %s in the selected territory"
+msgstr "Total de Deforestación en %s en el territorio seleccionado"
+
+#: src/Front/Front.php:295
+#, php-format
+msgid "Total deforested area in %s (until last week)"
+msgstr "Área Deforestada total en %s (hasta la última semana)"
+
+#: src/Front/Front.php:297
+#, php-format
+msgid "Estimates of trees cut down in %s"
+msgstr "Estimación de árboles talados en %s"
+
+#: src/Front/Front.php:298 templates/template-scoreboard.php:24
+msgid "estimates of trees cut down so far"
+msgstr "estimación de árboles talados hasta ahora"
+
+#: src/Front/Front.php:300 templates/template-scoreboard.php:31
+msgid "trees per day"
+msgstr "árboles por día"
+
+#: src/Front/Front.php:301
+msgid "Understand the calculus"
+msgstr "Entienda el cálculo"
+
+#: src/Front/Front.php:302
+msgid "Unit"
+msgstr "Unidad"
+
+#: src/Front/Front.php:303
+#, php-format
+msgid "Week %s"
+msgstr "Semana %s"
+
+#: src/Front/Front.php:304
+msgid "Weekly"
+msgstr "Semanalmente"
+
+#: src/Front/Front.php:305
+#, php-format
+msgid "Weekly and monthly data are from %s."
+msgstr "Los datos semanales y mensuales son de %s."
+
+#: src/Front/Front.php:306
+msgid "Weekly deforestation rate in the selected territory"
+msgstr "Evolución semanal de la deforestación en el territorio seleccionado"
+
+#: src/Front/Front.php:307
+msgid "Weekly deforestation rate"
+msgstr "Evolución semanal de la deforestación"
+
+#: src/Front/Front.php:308
+msgid "Yearly"
+msgstr "Anual"
+
+#: src/Front/Front.php:309
+msgid ""
+"Yearly consolidated deforestation rate in the selected territory (PRODES)"
+msgstr ""
+"Los datos reflejan la deforestación de cada año hasta en el territorio "
+"seleccionado (PRODES)"
+
+#: src/Front/Front.php:310
+msgid "Yearly consolidated deforestation rate"
+msgstr "Evolución de la deforestación consolidada anual"
+
+#: src/Front/Front.php:311
+msgid "Yearly deforestation alerts in the selected territory (DETER)"
+msgstr "Alertas anuales de deforestación en el territorio seleccionado (DETER)"
+
+#: src/Front/Front.php:312
+msgid "Yearly deforestation alerts"
+msgstr "Alertas anuales de deforestación"
+
+#: src/Front/Front.php:313
+msgid "Select a period"
+msgstr "Seleccione un período"
+
+#: src/Front/Front.php:314
+msgid "All periods"
+msgstr "Todos los periodos"
+
+#: src/Front/Front.php:315
+msgid "Apply filters"
+msgstr "Aplicar filtros"
+
+#: src/Front/Front.php:319
+msgid "January"
+msgstr "Enero"
+
+#: src/Front/Front.php:320
+msgid "February"
+msgstr "Febrero"
+
+#: src/Front/Front.php:321
+msgid "March"
+msgstr "Marzo"
+
+#: src/Front/Front.php:322
+msgid "April"
+msgstr "Abril"
+
+#: src/Front/Front.php:323
+msgid "May"
+msgstr "Mayo"
+
+#: src/Front/Front.php:324
+msgid "June"
+msgstr "Junio"
+
+#: src/Front/Front.php:325
+msgid "July"
+msgstr "Julio"
+
+#: src/Front/Front.php:326
+msgid "August"
+msgstr "Agosto"
+
+#: src/Front/Front.php:327
+msgid "September"
+msgstr "Septiembre"
+
+#: src/Front/Front.php:328
+msgid "October"
+msgstr "Octubre"
+
+#: src/Front/Front.php:329
+msgid "November"
+msgstr "Noviembre"
+
+#: src/Front/Front.php:330
+msgid "December"
+msgstr "Diciembre"
+
+#: src/Front/Front.php:333
+msgid "Filter"
+msgstr "Filtro"
+
+#: src/Front/Front.php:366
+msgid "Read more"
+msgstr "Leer mas"
+
+#: templates/archive.php:19 templates/author.php:14
+msgid "Home"
+msgstr "Comienzo"
+
+#: templates/author.php:15
+msgid "Columnists"
+msgstr "Columnistas"
+
+#: templates/author.php:86
+msgid "ABOUT THE AUTHOR"
+msgstr "SOBRE EL AUTOR"
+
+#: templates/footer.php:24
+#, php-format
+msgid "COPYRIGHT © %s PlenaMata"
+msgstr "COPYRIGHT © %s PlenaMata"
+
+#: templates/footer.php:33
+msgid "Privacy Statement"
+msgstr "Declaracion de privacidad"
+
+#: templates/header-single.php:83 templates/header.php:19
+msgid "Skip to content"
+msgstr "Saltar al contenido"
+
+#: templates/header-single.php:93
+msgid "What are you looking for?"
+msgstr "¿Qué estás buscando?"
+
+#: templates/header.php:95 templates/header.php:261
+#: templates/parts/header/mobile-sidebar.php:31
+msgid "Discovery"
+msgstr "Descubrir"
+
+#: templates/parts/content-single.php:28
+#, php-format
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "Continuar leyendo<span class=“screen-reader-text”> “%s”</span>"
+
+#: templates/parts/content-single.php:42
+msgid "Sorry, we said wrong"
+msgstr "Lo siento, dijimos mal"
+
+#: templates/parts/content-single.php:52
+msgid "Pages:"
+msgstr "Paginas:"
+
+#: templates/parts/content-single.php:65
+msgid "Access project page"
+msgstr "Acceder a la página del proyecto"
+
+#: templates/parts/header/mobile-sidebar.php:46
+msgid "MORE"
+msgstr "MÁS"
+
+#: templates/parts/header/mobile-sidebar.php:68
+msgid "Language"
+msgstr "Idioma"
+
+#: templates/parts/header/mobile-sidebar.php:78
+msgid "Dark mode"
+msgstr "Modo oscuro"
+
+#: templates/parts/header/mobile-sidebar.php:94
+msgid "Type size"
+msgstr "Tamaño de fuente"
+
+#: templates/parts/header/mobile-sidebar.php:123
+msgid "Follow us"
+msgstr "Síganos"
+
+#: templates/parts/header/mobile-sidebar.php:183
+msgid "Glossary"
+msgstr "Glosario"
+
+#: templates/parts/header/mobile-sidebar.php:194
+msgid "Share"
+msgstr "Compartir"
+
+#: templates/single-news.php:44
+msgid "Good Initiatives"
+msgstr "Buenas iniciativas"
+
+#: templates/template-headings.php:21
+msgid "Index"
+msgstr "Indice"

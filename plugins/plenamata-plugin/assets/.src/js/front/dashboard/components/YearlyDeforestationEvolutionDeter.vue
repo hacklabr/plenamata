@@ -1,20 +1,18 @@
 <template>
     <DashboardPanel type="chart">
         <template #title>
-            {{ __('Yearly deforestation alerts in the selected territory (DETER)', 'plenamata') }}
+            <strong>{{ __('Yearly deforestation alerts', 'plenamata') }}</strong>
+            <span>{{ __('in the selected territory', 'plenamata') }} (DETER)</span>
         </template>
         <template #filters>
-            <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
-                <option value="ha">{{ __('hectares', 'plenamata') }}</option>
-                <option value="km2">{{ __('km²', 'plenamata') }}</option>
-            </select>
+            <Dropdown id="unit-yded" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="units" :title="__('Unit', 'plenamata')" v-model="unitModel"/>
         </template>
         <template #chart>
             <Bar :chartData="chartData" :chartOptions="chartOptions" :height="300"/>
         </template>
-        <template #footer>
-            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
-            {{ sprintf(__('The figures represent deforestation for each year up to %s.', 'plenamata'), previousMonth) }}
+        <template #source>
+            {{ __('Source', 'plenamata') }}: DETER/INPE. {{ __('Latest Update', 'plenamata') }}: {{ updated.sync }} {{ __('with alerts detected until', 'plenamata') }} {{ updated.deter }}.
+            {{ __('The figures represent deforestation for each year up to', 'plenamata') }} {{ previousMonth }}.
         </template>
     </DashboardPanel>
 </template>
@@ -24,6 +22,7 @@
     import { Bar } from 'vue-chartjs'
 
     import DashboardPanel from './DashboardPanel.vue'
+    import Dropdown from './Dropdown.vue'
     import { __, _x, sprintf } from '../plugins/i18n'
     import { getAreaKm2 } from '../../utils'
     import { fetchDeterData } from '../../utils/api'
@@ -51,8 +50,10 @@
         components: {
             Bar,
             DashboardPanel,
+            Dropdown,
         },
         props: {
+            activeField: { type: [Object, String], default: '' },
             date: { type: DateTime, required: true },
             filters: { type: Object, required: true },
             unit: { type: String, default: 'ha' },
@@ -60,7 +61,18 @@
         },
         data () {
             return {
+                actualYear: DateTime.now().year,
                 data: [],
+                units: {
+                    'ha': {
+                        key : 'ha',
+                        label : __('hectares', 'plenamata')
+                    },
+                    'km2': {
+                        key : 'km2',
+                        label : __('km²', 'plenamata')
+                    }
+                },
             }
         },
         computed: {
@@ -83,7 +95,7 @@
                     datasets: [
                         {
                             data: this.areas,
-                            backgroundColor: '#FF7373',
+                            backgroundColor: '#263F30',
                         },
                     ],
                 }
@@ -109,6 +121,7 @@
                     },
                 }
             },
+            fieldModel: vModel('activeField'),
             intervals () {
                 const start = this.date.startOf('year')
                 const end = this.date

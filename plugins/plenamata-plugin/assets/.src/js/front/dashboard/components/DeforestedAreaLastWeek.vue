@@ -1,44 +1,65 @@
 <template>
-    <DashboardPanel type="measure">
+    <DashboardPanel type="measure" icon="area.svg" icon2="relogio-small.svg">
+        <template #reference>{{ __('Estimates for the year', 'plenamata') }} {{ actualYear }}</template>
         <template #title>
-            {{ __('Area deforested last week in the selected territory', 'plenamata') }}
+            <strong>{{ __('Area deforested', 'plenamata') }}</strong>
+            <span>{{ __('last week', 'plenamata') }}</span>
         </template>
         <template #measure>
-            <DashboardMeasure icon="area-icon.svg" :number="area">
+            <DashboardMeasure :number="area">
                 <template #unit>
-                    <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
-                        <option value="ha">{{ __('hectares', 'plenamata') }}</option>
-                        <option value="km2">{{ __('km²', 'plenamata') }}</option>
-                    </select>
+                    <Dropdown id="unit-dalw" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="options" :title="__('Unit', 'plenamata')" v-model="unitModel"/>
                 </template>
             </DashboardMeasure>
         </template>
         <template #meaning>
-            {{ sprintf(__('estimated average of %s trees per minute', 'plenamata'), roundNumber(trees / 10080)) }}
+            <strong>{{ roundNumber(trees / 10080) }}</strong>
+            <span>{{ __('trees/minute', 'plenamata') }}</span>
         </template>
-        <template #footer>
-            {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
-        </template>
+        <template #source>
+            {{ __('Source:', 'plenamata') }}: DETER/INPE
+         </template>
     </DashboardPanel>
 </template>
 
 <script>
+    import { DateTime } from 'luxon'
+
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
+    import Dropdown from './Dropdown.vue'
     import { getAreaKm2, getTrees } from '../../utils'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
+    import { __ } from '../plugins/i18n'
 
     export default {
         name: 'DeforestedAreaLastWeek',
         components: {
             DashboardMeasure,
             DashboardPanel,
+            Dropdown,
         },
         props: {
+            activeField: { type: [ String, Object ], default: '' },
             lastWeek: { type: Object, default: null },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
+        },
+        data () {
+            return {
+                actualYear: DateTime.now().year,
+                options : {
+                    'ha' : {
+                        key : 'ha',
+                        label : __('hectares', 'plenamata')
+                    },
+                    'km2' : {
+                        key : 'km2',
+                        label : __('km²', 'plenamata')
+                    }
+                },
+            }
         },
         computed: {
             area () {
@@ -51,6 +72,7 @@
             areaKm2 () {
                 return getAreaKm2(this.lastWeek)
             },
+            fieldModel: vModel('activeField'),
             trees () {
                 return getTrees(this.lastWeek)
             },

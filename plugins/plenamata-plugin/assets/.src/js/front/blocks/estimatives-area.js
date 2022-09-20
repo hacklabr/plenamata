@@ -11,7 +11,6 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
     const updated = await fetchLastDate()
     const lastDate = DateTime.fromISO(updated.deter_last_date, { zone: 'utc' })
 
-    const now = DateTime.now()
     const startOfYear = lastDate.startOf('year')
     const thisYear = await fetchDeterData({ data1: startOfYear.toISODate(), data2: updated.deter_last_date })
 
@@ -31,8 +30,15 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
             el.textContent = roundNumber(hectaresPerDay)
         }
         else if (deterLabel === 'hectaresThisYear') {
-            const hectaresThisYear = Number(thisYear[0].areamunkm) * 100
-            el.textContent = roundNumber(hectaresThisYear)
+            const { hectares, hectaresPerSecond } = await getEstimateDeforestation({}, { DateTime, Interval })
+
+            let hectaresCount = hectares
+            el.textContent = roundNumber(hectaresCount)
+
+            setInterval(() => {
+                hectaresCount += hectaresPerSecond
+                el.textContent = roundNumber(hectaresCount)
+            }, 1000)
         }
         else if (deterLabel === 'sourcesLastWeek') {
             const sourcesLastWeek = sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), shortDate(updated.last_sync), shortDate(updated.deter_last_date))

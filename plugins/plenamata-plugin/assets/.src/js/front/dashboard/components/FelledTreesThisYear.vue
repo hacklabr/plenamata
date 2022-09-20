@@ -1,28 +1,25 @@
 <template>
-    <DashboardPanel type="measure">
+    <DashboardPanel type="measure" icon="arvore.svg" icon2="relogio-small.svg">
+        <template #reference>{{ __('Estimates for the year', 'plenamata') }} {{ year }}</template>
         <template #title>
-            {{ sprintf(__('Estimates of trees cut down in %s in the selected territory', 'plenamata'), year) }}
+            <strong>{{ __('Trees cut down in', 'plenamata') }} {{ year }}</strong>
+            <span>{{ __('By deforestation', 'plenamata') }}</span>
+        </template>
+        <template #tooltip>
+            <Tooltip :alt="__('Understand the calculus', 'plenamata')">
+                <a :href="$dashboard.explainerUrl" target="_blank">
+                    {{ __('Understand the calculus', 'plenamata') }}
+                </a>
+            </Tooltip>
         </template>
         <template #measure>
-            <DashboardMeasure icon="tree-icon.svg" :number="internalTrees">
-                <template #tooltip>
-                    <Tooltip :alt="__('Understand the calculus', 'plenamata')">
-                        <a :href="$dashboard.explainerUrl" target="_blank">
-                            {{ __('Understand the calculus', 'plenamata') }}
-                        </a>
-                    </Tooltip>
-                </template>
-                <template #unit>
-                    {{ __('trees', 'plenamata') }}
-                </template>
-            </DashboardMeasure>
+            <DashboardMeasure :number="internalTrees"></DashboardMeasure>
         </template>
         <template #meaning>
-            {{ sprintf(__('estimated average of %s trees per minute', 'plenamata'), roundNumber(treesPerMinute)) }}
+            <strong>{{roundNumber(treesPerMinute)}}</strong>
+            <span>{{ __('trees/minute', 'plenamata') }}</span>
         </template>
-        <template #footer>
-            {{ sprintf(__('Source: MapBiomas based on average daily deforestation detected by INPE in %s.', 'plenamata'), year) }}
-        </template>
+        <template #source>{{ __('Source', 'plenamata') }}: MapBiomas</template>
     </DashboardPanel>
 </template>
 

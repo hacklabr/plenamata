@@ -1,25 +1,27 @@
 .glossary-tooltip {
-    background-color: rgba($c_purple, 0.15);
-    border: 1px solid transparent;
+    background-color: rgba( 199, 221, 139, 0.5 );
+    border: 0;
     border-radius: 3px;
     display: inline-block;
     padding: 0 size(4);
+    transition: all .3s ease-in-out;
 
     &.-show {
-        border-color: $c_purple;
+        background-color: rgba( 199, 221, 139, 0.8 );
     }
 
     &__tooltip {
-        background: $c_lighter;
-        border-radius: 3px;
-        color: $c_text;
+        position: absolute;
         display: none;
-        font-size: size(16);
+        top: 0;
         left: 0;
         max-width: size(300);
         padding: 16px;
-        position: absolute;
-        top: 0;
+        border-radius: 3px;
+        color: $c_text;
+        font-size: size(16);
+        background: rgb( 243, 247, 229 );
+        box-shadow: 0px 14px 24px rgba(26, 44, 49, 0.2);
         z-index: 10;
 
         p {
@@ -29,29 +31,33 @@
         }
 
         a {
-            color: $c_purple;
+            color: #263F30;
             font-weight: bold;
-            text-decoration: underline !important;
+            text-decoration: none;
         }
 
         &.-show {
-            display: block;
+            display: block !important;
         }
     }
 
     &__close {
         position: absolute;
-        right: size(4);
-        top: size(-4);
+        right: 4px;
+        top: 6px;
 
         button {
-            background: transparent;
-            margin: 0;
-            padding: 0;
+            background: transparent !important;
+            margin: 0 !important;
+            padding: 0 !important;
 
             i {
-                color: $c_purple;
-                font-size: size(16);
+                width: 30px;
+                height: 30px;
+                overflow: hidden;
+                text-indent: -9999vw;
+                background: asset-url('img/icon-close.svg') no-repeat center center;
+                background-size: 20px auto;
             }
         }
     }

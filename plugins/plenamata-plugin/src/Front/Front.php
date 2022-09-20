@@ -30,29 +30,14 @@ class Front {
 	public function hooks(): void {
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ], 50 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ], 50 );
-
-        //replace theme footer.php
-        add_action( 'get_footer', [ $this, 'get_footer' ], 10, 2 );
-
-        //
-        add_action( 'before_header', [ $this, 'replace_header'], 10 );
-        add_action( 'after_header', [ $this, 'replace_header_close'], 10 );
-
 	}
 
     /**
      * Register filters
      */
     public function filters(): void {
-        add_filter( 'archive_template', [ $this, 'archive_templates' ], 10, 1 );
-        add_filter( 'body_class', [ $this, 'body_class' ], 10, 1);
-        add_filter( 'document_title_parts', [ $this, 'custom_titles' ], 10, 1 );
-        add_filter( 'page_template', [ $this, 'page_templates' ], 10, 1 );
-        add_filter( 'single_template', [ $this, 'single_templates' ], 10, 1 );
-        add_filter( 'template_include', [$this, 'frontpage_template'], 10, 1);
 
-        // add template file for search after mobile menu
-        add_filter( 'wp_nav_menu', [ $this, 'search_mobile'], 50, 2 );
+        add_filter( 'page_template', [ $this, 'page_templates' ], 10, 1 );
 
         // change excer_length
         add_filter( 'excerpt_length', [ $this, 'excerpt_length' ], 50 );
@@ -73,7 +58,6 @@ class Front {
     public function jeo_change_js_image( $images ) {
         $images[ '/js/src/icons/news-marker' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/pin.png';
         $images[ '/js/src/icons/news-marker' ][ 'icon_size' ] = 0.3;
-
         $images[ '/js/src/icons/news' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/news-icon.png';
         $images[ '/js/src/icons/news' ][ 'icon_size' ] = 0.25;
         $images[ '/js/src/icons/news' ][ 'text_color' ] = '#FFFFFF';
@@ -88,31 +72,8 @@ class Front {
      * @return array
      */
     public function jeo_change_js_cluster( $cluster ) {
-        $cluster[ 'circle_color'] = '#523096';
+        $cluster[ 'circle_color'] = '#206837';
         return $cluster;
-    }
-
-    public function custom_titles( array $parts ): array {
-        if ( is_post_type_archive( 'verbete' ) ) {
-            $parts['title'] = __( 'Glossary', 'plenamata' );
-        }
-
-        return $parts;
-    }
-
-    /**
-     * Change body classes.
-     */
-    public function body_class( array $classes ): array {
-        global $post;
-
-        if ( is_post_type_archive( 'verbete' ) ) {
-            return array_merge( $classes, [ 'glossary' ] );
-        } else if ( is_singular( 'verbete' ) ) {
-            return array_merge( $classes, [ 'glossary', 'glossary-entry' ] );
-        }
-
-        return $classes;
     }
 
 	/**
@@ -192,7 +153,7 @@ class Front {
 
         $template_slug = get_page_template_slug();
 
-        if ( $template_slug === 'template-about.php' || $template_slug === 'template-headings.php' ) {
+        if ( $template_slug === 'template-headings.php' ) {
             wp_enqueue_script(
                 'plenamata-about-page',
                 PLENAMATA_PLUGIN_URL . 'assets/build/js/about-page.js',
@@ -239,53 +200,76 @@ class Front {
                 '%s%% increase compared to last year' => __( '%s%% increase compared to last year', 'plenamata' ),
                 '%s ha' => __( '%s ha', 'plenamata' ),
                 '%s km²' => __( '%s km²', 'plenamata' ),
+                '(deforested square kilometers' => __( '(deforested square kilometers)', 'plenamata' ),
                 'All CUs' => __( 'All CUs', 'plenamata' ),
                 'All ILs' => __( 'All ILs', 'plenamata' ),
                 'All municipalities' => __( 'All municipalities', 'plenamata' ),
                 'All states' => __( 'All states', 'plenamata' ),
+                'All periods' => __( 'All periods', 'plenamata' ),
                 'Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.' => __( 'Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata' ),
+                'Apply filters' => __( 'Apply filters', 'plenamata' ),
                 'Area deforested last week in the selected territory' => __( 'Area deforested last week in the selected territory', 'plenamata' ),
+                'Area deforested' => __( 'Area deforested', 'plenamata' ),
                 'Area of deforestation alerts detected last week' => __( 'Area of deforestation alerts detected last week', 'plenamata' ),
+                'By deforestation' => __( 'By deforestation', 'plenamata' ),
                 'Clear filters' => __( 'Clear filters', 'plenamata' ),
                 'Conservation Unit' => __( 'Conservation Unit', 'plenamata' ),
                 'Data' => __( 'Data', 'plenamata' ),
+                'Deforestation rate' => __( 'Deforestation rate', 'plenamata' ),
+                'Deforestation rate in' => __( 'Deforestation rate in', 'plenamata' ),
                 'Deforestation rate in %s in the selected territory' => __( 'Deforestation rate in %s in the selected territory', 'plenamata' ),
                 'Drag to see more' => __( 'Drag to see more', 'plenamata' ),
                 'during DETER year' => __( 'during DETER year', 'plenamata' ),
                 'during PRODES year' => __( 'during PRODES year', 'plenamata' ),
                 'estimated average of %s trees per minute' => __( 'estimated average of %s trees per minute', 'plenamata'),
+                'Estimates for the year' => __( 'Estimates for the year', 'plenamata' ),
+                'Estimates of trees cut down in %s' => __( 'Estimates of trees cut down in %s', 'plenamata' ),
+                'estimates of trees cut down so far' => __( 'estimates of trees cut down so far', 'plenamata' ),
+                'Evolution per period' => __( 'Evolution per period', 'plenamata' ),
                 'External link' => __( 'External link', 'plenamata' ),
+                'Faster than last year' => __( 'Faster than last year', 'plenamata' ),
                 'Forestry Dashboard' => __( 'Forestry Dashboard', 'plenamata' ),
                 'hectares' => __( 'hectares', 'plenamata' ),
-                'hectares per day' => __( 'hectares per day', 'plenamata' ),
+                'hectares/day' => __( 'hectares/day', 'plenamata' ),
                 'Indigenous Land' => __( 'Indigenous Land', 'plenamata' ),
+                'in the selected territory' => __( 'in the selected territory', 'plenamata' ),
                 'km²' => __( 'km²', 'plenamata' ),
-                'km² per day' => __( 'km² per day', 'plenamata' ),
+                'km²/day' => __( 'km²/day', 'plenamata' ),
+                'last week' => __( 'last week', 'plenamata' ),
+                'Latest Update' => __( 'Latest Update', 'plenamata' ),
                 'Legal Amazon' => __( 'Legal Amazon', 'plenamata' ),
                 'Load more' => __( 'Load more', 'plenamata' ),
                 'Loading...' => __( 'Loading...', 'plenamata' ),
                 'Monthly' => __( 'Monthly', 'plenamata' ),
+                'Monthly deforestation rate' => __( 'Monthly deforestation rate', 'plenamata' ),
                 'Monthly deforestation rate in the selected territory' => __( 'Monthly deforestation rate in the selected territory', 'plenamata' ),
                 'Municipality' => __( 'Municipality', 'plenamata' ),
                 'News' => __( 'News', 'plenamata' ),
                 'No news to be shown.' => __( 'No news to be shown', 'plenamata' ),
+                'per day' => __( 'per day', 'plenamata' ),
                 'Period' => __( 'Period', 'plenamata' ),
                 'Period: %s' => __( 'Period: %s', 'plenamata' ),
+                'Select a state' => __( 'Select a state', 'plenamata' ),
                 'See more' => __( 'See more', 'plenamata' ),
+                'Select period' => __( 'Select a period', 'plenamata' ),
+                'Source' => __( 'Source', 'plenamata' ),
                 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.' => __( 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata' ),
+                'Sources: INPE and MapBiomas' =>  __( 'Sources: INPE and MapBiomas', 'plenamata' ),
                 'Source: MapBiomas based on average daily deforestation detected by INPE in %s.' => __( 'Source: MapBiomas based on average daily deforestation detected by INPE in %s.', 'plenamata' ),
                 'Source: MapBiomas based on DETER/INPE data.' => __( 'Source: MapBiomas based on DETER/INPE data.', 'plenamata' ),
                 'Source: PRODES/INPE.' => __( 'Source: PRODES/INPE.', 'plenamata' ),
-                'Sources: INPE and MapBiomas' =>  __( 'Sources: INPE and MapBiomas', 'plenamata' ),
+                'Source: PRODES/INPE. Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.' => __( 'Source: PRODES/INPE. Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata' ),
                 'State' => __( 'State', 'plenamata' ),
                 'The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES.' => __('The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES.', 'plenamata'),
-                'The figures represent deforestation for each year up to %s.' => __( 'The figures represent deforestation for each year up to %s.', 'plenamata' ),
+                'The figures represent deforestation for each year up to' => __( 'The figures represent deforestation for each year up to', 'plenamata' ),
                 'Timeframe' => __( 'Timeframe', 'plenamata' ),
+                'Total deforestation' => __( 'Total deforestation', 'plenamata' ),
                 'Total deforestation in %s in the selected territory' => __( 'Total deforestation in %s in the selected territory', 'plenamata' ),
                 'Total deforested area in %s (until last week)' => __( 'Total deforested area in %s (until last week)', 'plenamata' ),
                 'trees' => __( 'trees', 'plenamata' ),
-                'Estimates of trees cut down in %s in the selected territory' => __( 'Estimates of trees cut down in %s in the selected territory', 'plenamata' ),
-                'estimates of trees cut down so far' => __( 'estimates of trees cut down so far', 'plenamata' ),
+                'Trees cut down in' => __( 'Trees cut down in', 'plenamata' ),
+                'trees/minute' => __( 'trees/minute', 'plenamata' ),
+                'trees per minute' => __( 'trees per minute', 'plenamata'),
                 'trees per day' => __( 'trees per day', 'plenamata' ),
                 'Understand the calculus' => __( 'Understand the calculus', 'plenamata' ),
                 'Unit' => __( 'Unit', 'plenamata' ),
@@ -293,8 +277,12 @@ class Front {
                 'Weekly' => __( 'Weekly', 'plenamata' ),
                 'Weekly and monthly data are from %s.' => __( 'Weekly and monthly data are from %s.', 'plenamata' ),
                 'Weekly deforestation rate in the selected territory' => __( 'Weekly deforestation rate in the selected territory', 'plenamata'),
+                'Weekly deforestation rate' => __( 'Weekly deforestation rate', 'plenamata'),
+                'with alerts detected until' => __( 'with alerts detected until', 'plenamata' ),
                 'Yearly' => __( 'Yearly', 'plenamata' ),
+                'Yearly consolidated deforestation rate' => __( 'Yearly consolidated deforestation rate', 'plenamata' ),
                 'Yearly consolidated deforestation rate in the selected territory (PRODES)' => __( 'Yearly consolidated deforestation rate in the selected territory (PRODES)', 'plenamata' ),
+                'Yearly deforestation alerts' => __( 'Yearly deforestation alerts', 'plenamata' ),
                 'Yearly deforestation alerts in the selected territory (DETER)' => __( 'Yearly deforestation alerts in the selected territory (DETER)', 'plenamata' ),
             ],
             '_x' => [
@@ -322,7 +310,7 @@ class Front {
     /**
      * Retrieve the link for estimate explainer
      */
-    public function get_explainer_link (string $language) {
+    public function get_explainer_link( string $language ){
         $options = get_option( 'plenamata_options', [] );
         $explainer_link = $options[ 'plenamata_estimate_explainer_' . $language ];
 
@@ -342,6 +330,7 @@ class Front {
         wp_register_script( 'mapboxgl-loader', JEO_BASEURL . '/js/build/mapboxglLoader.js', JEO_VERSION );
 
         wp_register_script( 'jeo-map', JEO_BASEURL . '/js/build/jeoMap.js', [ 'mapboxgl-loader', 'jquery', 'wp-element' ], JEO_VERSION, true );
+
         wp_localize_script( 'jeo-map', 'jeoMapVars', [
             'jsonUrl' => rest_url( 'wp/v2/' ),
             'string_read_more' => __( 'Read more', 'plenamata' ),
@@ -371,95 +360,23 @@ class Front {
             ] )
         ] );
 
-
         wp_register_script( 'jeo-layer', JEO_BASEURL . '/js/build/JeoLayer.js', [ 'mapboxgl-loader' ], JEO_VERSION );
         wp_register_script( 'layer-type-mapbox', JEO_BASEURL . '/includes/layer-types/mapbox.js', [ 'jeo-layer' ], JEO_VERSION );
-
 		wp_register_script( 'jeo-legend', JEO_BASEURL . '/js/build/JeoLegend.js', [ 'mapboxgl-loader' ], JEO_VERSION );
-    }
-
-    public function frontpage_template (string $template): string {
-        if ( is_home() ) {
-            return PLENAMATA_PLUGIN_PATH . 'templates/archive.php';
-        }
-        return $template;
-    }
-
-    public function archive_templates( string $template ): string {
-        global $wp_query;
-
-        if ( is_post_type_archive( 'verbete' ) ) {
-            return PLENAMATA_PLUGIN_PATH . 'templates/archive-verbete.php';
-        } else if ( is_author() ) {
-            return PLENAMATA_PLUGIN_PATH . 'templates/author.php';
-        } else {
-            return PLENAMATA_PLUGIN_PATH . 'templates/archive.php';
-        }
     }
 
     public function page_templates ( string $template ): string {
         $template_slug = get_page_template_slug();
 
-        if ( $template_slug === 'template-about.php' ) {
-            $template = PLENAMATA_PLUGIN_PATH . 'templates/template-about.php';
-        } elseif ( $template_slug === 'template-dashboard.php' ) {
+        // Dashboard page
+        if( $template_slug === 'template-dashboard.php' ):
             $template = PLENAMATA_PLUGIN_PATH . 'templates/template-dashboard.php';
-        } elseif ( $template_slug === 'template-headings.php' ) {
-            $template = PLENAMATA_PLUGIN_PATH . 'templates/template-headings.php';
-        } elseif ( $template_slug === 'template-scoreboard.php' ) {
+        // Scoreboard page
+        elseif( $template_slug === 'template-scoreboard.php' ):
             $template = PLENAMATA_PLUGIN_PATH . 'templates/template-scoreboard.php';
-        }
+        endif;
 
         return $template;
-    }
-
-    public function single_templates( string $template ): string {
-        global $post;
-
-		if ( $post->post_type === 'verbete' ) {
-			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-verbete.php';
-        }else if( $post->post_type === 'post'){
-			$template = PLENAMATA_PLUGIN_PATH . 'templates/single-news.php';
-		}
-
-        return $template;
-    }
-
-    /**
-     *
-     */
-    public function search_mobile( string $nav_menu_html, object $args ): string {
-        if ( 'primary-menu' != $args->theme_location ) {
-            return $nav_menu_html;
-        }
-        return $nav_menu_html . '<div class="mobile-search-form mobile-only">' . get_search_form( [ 'echo' => false]  ) . '</div>';
-    }
-
-    /**
-     * Replace Footer
-     */
-    public function get_footer( $name ) : void {
-        if ( $name && ! empty( $name ) && file_exists( PLENAMATA_PLUGIN_PATH . "templates/footer-{$name}.php") ) {
-            load_template( PLENAMATA_PLUGIN_PATH . "templates/footer-{$name}.php", true, array() );
-            exit;
-        }
-        if ( file_exists( PLENAMATA_PLUGIN_PATH . "templates/footer.php" ) ) {
-            load_template( PLENAMATA_PLUGIN_PATH . 'templates/footer.php', true, array() );
-            exit;
-        }
-    }
-
-    public function replace_header() : void {
-        ob_start();
-    }
-    public function replace_header_close() : void {
-        ob_end_clean();
-        if ( is_singular( 'post' ) && ! is_home() && ! is_front_page() ) {
-            require PLENAMATA_PLUGIN_PATH . 'templates/header-single.php';
-        } else {
-            require PLENAMATA_PLUGIN_PATH . 'templates/header.php';
-        }
-
     }
 
     /**

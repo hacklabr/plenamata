@@ -26,18 +26,18 @@ export class GlossaryTooltips {
                 const tooltipTemplate = this.createTooltipTemplate(verbete)
                 anchor.append(tooltipTemplate)
             }
-
             for (const target of tooltips) {
                 const tooltip = document.querySelector(`#tooltip-template-${target.dataset.verbeteId}`)
                 this.initializeTooltip(target, tooltip)
             }
         }
 
-        console.log('Glossary tooltips were started')
+        console.log( 'Glossary tooltips were started' )
     }
 
     createAnchor () {
         const anchor = document.createElement('div')
+        anchor.classList.add('glossary-tooltips-wrapper')
         document.body.append(anchor)
         return anchor
     }
