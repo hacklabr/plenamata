@@ -1,5 +1,5 @@
 import { fetchDeterData } from './api'
-import { getTrees } from './index'
+import { getAreaKm2, getTrees } from './index'
 
 export async function getEstimateDeforestation (filters, { DateTime, Interval }) {
     const now = DateTime.now()
@@ -21,12 +21,20 @@ export async function getEstimateDeforestation (filters, { DateTime, Interval })
     const treesLastWeek = getTrees(lastWeek[0])
     const treesPerSecondLastWeek = treesLastWeek / 604_800
 
+    const hectaresThisYear = getAreaKm2(thisYear[0]) * 100
+    const hectaresLastWeek = getAreaKm2(lastWeek[0]) * 100
+    const hectaresPerSecondLastWeek = hectaresLastWeek / 604_800
+
     const startDate = (lastFriday.year === now.year) ? lastFriday : now.startOf('year')
     const elapsedTime = Interval.fromDateTimes(startDate, now)
+    const elapsedSeconds = elapsedTime.count('seconds')
 
-    let treeCount = (treesThisYear - treesLastWeek) + (elapsedTime.count('seconds') * treesPerSecondLastWeek)
+    const treeCount = (treesThisYear - treesLastWeek) + (elapsedSeconds * treesPerSecondLastWeek)
+    const hectaresCount = (hectaresThisYear - hectaresLastWeek) + (elapsedSeconds * hectaresPerSecondLastWeek)
 
     return {
+        hectaresPerSecond: hectaresPerSecondLastWeek,
+        hectares: hectaresCount,
         treesPerSecond: treesPerSecondLastWeek,
         trees: treeCount,
         year: now.year,

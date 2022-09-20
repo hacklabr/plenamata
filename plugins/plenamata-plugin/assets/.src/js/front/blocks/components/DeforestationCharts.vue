@@ -1,10 +1,10 @@
 <template>
     <div class="dashboard-panel chart deforestation-charts">
-        <main> 
+        <main>
             <header>
                 <h2>
-                    <strong>Evolução por período</strong>
-                    <span>(quilômetros quadrados desmatados)</span>
+                    <strong>{{ __('Evolution per period', 'plenamata') }}</strong>
+                    <span>{{ __('(deforested square kilometers)', 'plenamata') }}</span>
                 </h2>
                 <fieldset class="deforestation-charts__toggle">
                     <label :class="{ active: view === 'year' }">
@@ -31,9 +31,9 @@
                 </div>
                 <footer>
                     <span class="source">
-                        {{__('Source', 'plenamata')}}: DETER/INPE • {{__('Latest Update', 'plenamata')}}: {{updated.sync}} {{__('with alerts detected until', 'plenamata')}} {{updated.deter}}.
-                        {{__('The figures represent deforestation for each year up to', 'plenamata')}} {{previousMonth}}.
-                        {{sprintf(__('Weekly and monthly data are from %s.', 'plenamata'), year )}}
+                        {{ __('Source', 'plenamata') }}: DETER/INPE • {{ __('Latest Update', 'plenamata') }}: {{ updated.sync }} {{ __('with alerts detected until', 'plenamata') }} {{ updated.deter }}.
+                        {{ __('The figures represent deforestation for each year up to', 'plenamata') }} {{ previousMonth }}.
+                        {{ sprintf(__('Weekly and monthly data are from %s.', 'plenamata'), year) }}
                     </span>
                 </footer>
             </template>
@@ -87,7 +87,7 @@
                 const month = this.date.month
                 return months[month]
             },
-            updated() {
+            updated () {
                 return {
                     deter: shortDate(this.lastUpdate?.deter_last_date).replaceAll('/', '.'),
                     sync: shortDate(this.lastUpdate?.last_sync).replaceAll('/', '.'),
@@ -97,7 +97,7 @@
                 return this.date.year
             },
         },
-        async created() {
+        async created () {
             const lastUpdate =  await fetchLastDate()
             this.lastUpdate = lastUpdate
         },

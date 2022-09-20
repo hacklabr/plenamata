@@ -1,34 +1,12 @@
 <template>
     <DashboardPanel type="chart">
         <template #title>
-            <strong>{{ __('Monthly deforestation rate', 'plenamata') }}</strong> 
+            <strong>{{ __('Monthly deforestation rate', 'plenamata') }}</strong>
             <span>{{ __('in the selected territory', 'plenamata') }}</span>
         </template>
         <template #filters>
-            <Dropdown 
-                id="unit-mdev" 
-                keyId="key"
-                keyLabel="label"
-                triggerClass="clean small color--3"
-                :options="units" 
-                :value="unitModel" 
-                :title="__('Unit', 'plenamata')"
-                :value.sync="unitModel"
-                :activeField="fieldActive"
-                :activeField.sync="fieldActive"
-            />
-            <Dropdown 
-                id="source-mdev" 
-                keyId="key"
-                keyLabel="label"
-                triggerClass="clean small color--3"
-                :options="sources" 
-                :value="sourceModel" 
-                :title="__('Timeframe', 'plenamata')"
-                :value.sync="sourceModel"
-                :activeField="fieldActive"
-                :activeField.sync="fieldActive"
-            />
+            <Dropdown id="unit-mdev" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="units" :title="__('Unit', 'plenamata')" v-model="unitModel"/>
+            <Dropdown id="source-mdev" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="sources" :title="__('Timeframe', 'plenamata')" v-model="sourceModel"/>
         </template>
         <template #chart>
             <ScrollGuard :scrolled="scrolled">
@@ -42,7 +20,6 @@
 </template>
 
 <script>
-    import Color from 'color'
     import { DateTime } from 'luxon'
     import { Bar } from 'vue-chartjs'
 
@@ -84,26 +61,16 @@
             HasScrollableChart,
         ],
         props: {
+            activeField: { type: [Object, String], default: '' },
             date: { type: DateTime, required: true },
             filters: { type: Object, required: true },
             source: { type: String, default: 'prodes' },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
-            activeField: { type: [ String, Object ], default: '' }
         },
         data () {
             return {
                 data: [],
-                units: {
-                    'ha': {
-                        key : 'ha',
-                        label : __('hectares', 'plenamata')
-                    },
-                    'km2': {
-                        key : 'km2',
-                        label : __('km²', 'plenamata')
-                    }
-                },
                 sources: {
                     'deter': {
                         key : 'deter',
@@ -114,7 +81,16 @@
                         label : __('during PRODES year', 'plenamata')
                     }
                 },
-                fieldActive : { type: String, defaul: '' },
+                units: {
+                    'ha': {
+                        key : 'ha',
+                        label : __('hectares', 'plenamata')
+                    },
+                    'km2': {
+                        key : 'km2',
+                        label : __('km²', 'plenamata')
+                    }
+                },
             }
         },
         computed: {
@@ -171,19 +147,13 @@
                 }
             },
             datasets () {
-                const color = Color('#263F30')
                 const datasets = []
 
-                const startYear = this.startDate.year
-                for (let i = 1; i <= 5; i++ ) {
-                    const referenceYear = startYear + i
+                const backgroundColors = ['#B4E8C9', '#82C79E', '#629A79', '#416951', '#263F30']
 
-                    let backCol;
-                    if( i === 1 ) backCol = '#B4E8C9';
-                    else if( i === 2 ) backCol = '#82C79E';
-                    else if( i === 3 ) backCol = '#629A79';
-                    else if( i === 4 ) backCol = '#416951';
-                    else backCol = '#263F30';
+                const startYear = this.startDate.year
+                for (let i = 1; i <= 5; i++) {
+                    const referenceYear = startYear + i
 
                     const dataset = {
                         label: referenceYear,
@@ -193,16 +163,15 @@
                                 return datum.month === month && datum.year === year
                             }) || {}
                         }),
-                        backgroundColor: backCol,
+                        backgroundColor: backgroundColors[i - 1],
                         barThickness: 50,
                     }
-
                     datasets.push(dataset)
-                
                 }
 
                 return datasets
             },
+            fieldModel: vModel('activeField'),
             filterKey () {
                 return JSON.stringify({ ...this.filters, source: this.source })
             },
@@ -247,16 +216,6 @@
                 handler: 'fetchData',
                 immediate: true,
             },
-            fieldActive: {
-                handler( active ){
-                    this.$emit( 'update:activeField', active );
-                }
-            },
-            activeField: {
-                handler( active ){
-                    this.fieldActive = active;
-                }
-            }
         },
         methods: {
             async fetchData () {

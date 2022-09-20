@@ -5,30 +5,8 @@
             <span>{{ __('in the selected territory', 'plenamata') }}</span>
         </template>
         <template #filters>
-            <Dropdown 
-                id="unit-wdev" 
-                keyId="key"
-                keyLabel="label"
-                triggerClass="clean small color--3"
-                :options="units" 
-                :value="unitModel" 
-                :title="__('Unit', 'plenamata')"
-                :value.sync="unitModel"
-                :activeField="fieldActive"
-                :activeField.sync="fieldActive"
-            />
-            <Dropdown 
-                id="source-wdev" 
-                keyId="key"
-                keyLabel="label"
-                triggerClass="clean small color--3"
-                :options="sources" 
-                :value="sourceModel" 
-                :title="__('Timeframe', 'plenamata')"
-                :value.sync="sourceModel"
-                :activeField="fieldActive"
-                :activeField.sync="fieldActive"
-            />
+            <Dropdown id="unit-wdev" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="units" :title="__('Unit', 'plenamata')" v-model="unitModel"/>
+            <Dropdown id="source-wdev" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="sources" :title="__('Timeframe', 'plenamata')" v-model="sourceModel"/>
         </template>
         <template #chart>
             <ScrollGuard :scrolled="scrolled">
@@ -36,7 +14,7 @@
             </ScrollGuard>
         </template>
         <template #source>
-            {{__('Source', 'planamata')}}: DETER/INPE. {{__( 'Latest Update', 'plenamata' )}}: {{updated.sync}} {{__('with alerts detected until', 'plenamata')}} {{updated.deter}}.
+            {{ __('Source', 'planamata') }}: DETER/INPE. {{ __('Latest Update', 'plenamata') }}: {{ updated.sync }} {{ __('with alerts detected until', 'plenamata') }} {{ updated.deter }}.
         </template>
     </DashboardPanel>
 </template>
@@ -58,30 +36,38 @@
     export default {
         name: 'WeeklyDeforestationEvolution',
         components: {
+            Bar,
             DashboardPanel,
             Dropdown,
-            Bar,
-            ScrollGuard
+            ScrollGuard,
         },
         mixins: [
             HasScrollableChart,
         ],
         props: {
+            activeField: { type: [Object, String], default: '' },
             date: { type: DateTime, required: true },
             filters: { type: Object, required: true },
             source: { type: String, default: 'prodes' },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
             year: { type: [ Number, String ], required: true },
-            opened : { type : [ Boolean, String ], default: '' },
-            activeField: { type: [ String, Object ], default: '' },
         },
         data () {
             return {
-                data: [],
-                internalYear: DateTime.now().year,
                 actualYear: DateTime.now().year,
-                fieldActive : { type: String, defaul: '' },
+                internalYear: DateTime.now().year,
+                data: [],
+                sources: {
+                    'deter': {
+                        key : 'deter',
+                        label : __('during DETER year', 'plenamata')
+                    },
+                    'prodes': {
+                        key : 'prodes',
+                        label : __('during PRODES year', 'plenamata')
+                    }
+                },
                 units: {
                     'ha': {
                         key : 'ha',
@@ -92,16 +78,6 @@
                         label : __('km²', 'plenamata')
                     }
                 },
-                sources: {
-                    'deter': {
-                        key : 'deter',
-                        label : __('during DETER year', 'plenamata')
-                    },
-                    'prodes': {
-                        key : 'prodes',
-                        label : __('during PRODES year', 'plenamata')
-                    }
-                }
             }
         },
         computed: {
@@ -192,21 +168,20 @@
                 }
             },
             dateInterval (){
-            
-                const year = this.getYear();
-            
-                if( this.source === 'deter' ){
+                const year = this.getYear()
+
+                if (this.source === 'deter') {
                     const start = DateTime.fromObject({ day: 1, month: 1, year: year })
                     const end = DateTime.min(DateTime.fromObject({ day: 31, month: 12, year: year }), this.date)
                     return { start, end }
-                } 
+                }
                 else {
                     const start = DateTime.fromObject({ day: 1, month: 8, year: year })
                     const end = DateTime.min(DateTime.fromObject({ day: 31, month: 7, year: year + 1 }), this.date)
                     return { start, end }
                 }
-            
             },
+            fieldModel: vModel('activeField'),
             filterKey () {
                 return JSON.stringify({ ...this.filters, source: this.source, year: this.getYear() })
             },
@@ -233,20 +208,10 @@
                 immediate: true,
             },
             year: {
-                handler( year ){
-                    this.internalYear = ( year === '' ? this.actualYear : year );
+                handler (year){
+                    this.internalYear = (year === '' ? this.actualYear : year)
                 },
                 immediate: true,
-            },
-            fieldActive: {
-                handler( active ){
-                    this.$emit( 'update:activeField', active );
-                }
-            },
-            activeField: {
-                handler( active ){
-                    this.fieldActive = active;
-                }
             },
         },
         methods: {
@@ -256,14 +221,14 @@
                 const data = await fetchDeterData({ ...this.filters, data1: start.toISODate(), data2: end.toISODate(), group_by: 'semana' })
                 this.data = data
             },
-            findAreaKm2( week, year ){
+            findAreaKm2 (week, year) {
                 const found = this.data.find((datum) => {
                     return datum.week === week && datum.year === year
                 })
                 return found ? getAreaKm2(found) : 0
             },
-            getYear(){
-                return ( this.internalYear === '' ) ? this.actualYear : this.internalYear;
+            getYear () {
+                return (this.internalYear === '') ? this.actualYear : this.internalYear
             }
         },
     }

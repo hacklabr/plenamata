@@ -1,7 +1,7 @@
 <template>
     <section class="dashboard-panel" :class="type">
         <main>
-            <em v-if="type=='measure'" class="estimativa"><slot name="estimativa"/></em> 
+            <em v-if="type=='measure'" class="estimativa"><slot name="reference"/></em>
             <header>
                 <span class="dashboard-panel__icon" aria-hidden="true" v-if="icon">
                     <img :src="`${$plenamata.pluginUrl}assets/build/img/${icon}`">
@@ -33,9 +33,9 @@
     export default {
         name: 'DashboardPanel',
         props: {
+            icon: { type: [Boolean, String], default: false },
+            icon2: { type: [Boolean, String], default: false },
             type: { type: String, default: 'measure' },
-            icon: { type: [ String, Boolean ], default: false },
-            icon2: { type: [ String, Boolean ], default: false }
         },
     }
 </script>

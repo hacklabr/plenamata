@@ -12,8 +12,8 @@ async function get (url, cacheable = true, saveHeaders = false ) {
         if (cacheable) {
             cache.set(url, data)
         }
-        if ( saveHeaders ) {
-            window.lastGetRequestHeader = req.headers;
+        if (saveHeaders) {
+            window.lastGetRequestHeader = req.headers
         }
         return data
     } catch (err) {
@@ -63,11 +63,7 @@ export async function fetchMunicipalities (uf) {
 }
 
 export async function fetchNews (state = '', pageNum = 1) {
-
-    console.info( "state" );
-    console.log( state );
-    
-    return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}&page=${pageNum}`, false, true )
+    return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}&page=${pageNum}`, false, true)
 }
 
 export async function fetchUniqueNews (postId) {

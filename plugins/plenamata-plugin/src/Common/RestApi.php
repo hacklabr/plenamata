@@ -58,7 +58,6 @@ class RestApi {
      * @return string The thumbnail URL
      */
     public function add_thumbnail_to_response( array $object ): string {
-        
         $image_sizes = wp_get_additional_image_sizes();
 
         if ( !empty( $image_sizes[ 'newspack-article-block-landscape-small' ] ) ) {
@@ -66,7 +65,6 @@ class RestApi {
         } else {
             return get_the_post_thumbnail_url( $object[ 'id' ], 'thumbnail' );
         }
-    
     }
 
     /**

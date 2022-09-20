@@ -1,25 +1,25 @@
 <template>
-    <div class="custom-drop free-label keep-drop-inside" :class="{ filled: value !== '', opened: activeField === id, locked: locked === true }" @click="toggle" @keypress.enter="toggle">
+    <div class="custom-drop free-label keep-drop-inside" :class="{ filled: value !== '', locked: disabled, opened: activeField === id }" @click="toggle" @keypress.enter="toggle">
         <em>
-            <button class="toggle" :class="triggerClass" type="button" tabindex="0" :disabled="locked === true">
+            <button class="toggle" :class="triggerClass" type="button" tabindex="0" :disabled="disabled">
                 <i :class="icon"></i>
-                <strong><span>{{getLabel()}}</span></strong>
+                <strong><span>{{ label }}</span></strong>
             </button>
         </em>
         <div class="custom-drop--options">
             <div>
-                <strong>{{placeholder}}</strong>
+                <strong>{{ placeholder }}</strong>
                 <button type="button" data-action="close">Fechar</button>
             </div>
             <div class="list-wrapper">
                 <ul>
                     <li v-if="value !== '' && placeholder">
                         <input type="radio" :id="id + '-all'" :name="id" value="" v-model="valueModel">
-                        <label :for="id + '-all'" :title="placeholder" @click="close" @keypress.enter="close">{{placeholder}}</label>
+                        <label :for="id + '-all'" :title="placeholder" @click="close" @keypress.enter="close">{{ placeholder }}</label>
                     </li>
-                    <li v-for="option of options">
+                    <li v-for="option of options" :key="getID(option)">
                         <input type="radio" :id="getID(option)" :name="id" :value="option[keyId]" v-model="valueModel">
-                        <label :for="getID(option)" :title="option[keyLabel]" @click="close" @keypress.enter="close">{{option[keyLabel]}}</label>
+                        <label :for="getID(option)" :title="option[keyLabel]" @click="close" @keypress.enter="close">{{ option[keyLabel] }}</label>
                     </li>
                 </ul>
             </div>
@@ -28,93 +28,68 @@
 </template>
 
 <script>
-
-    const { DateTime } = window.luxon
-
     import { vModel } from '../../utils/vue'
-    
+
     export default {
         name: 'Dropdown',
         props: {
-            id : { type: String, required: true },
-            options: { type: [ Object, Array ], required: true },
+            activeField: { default: '' },
+            disabled: { type: Boolean, default: false },
+            icon: { type: [Boolean, String], default: '' },
+            id: { type: String, required: true },
             keyId: { type: String, required: true },
             keyLabel: { type: String, required: true },
+            options: { type: [Array, Object], required: true },
+            placeholder: { type: [Boolean, String], default: false },
             triggerClass: { type: String, default: 'inline' },
-            icon: { type: [ String, Boolean ], default: '' },
-            placeholder : { type: [ String, Boolean ], default: false },
-            value : { type: [ String, Number, Boolean ], default: null },
-            title : { type: [ String, Boolean ], default: false },
-            locked : { type: Boolean, default: false },
-            activeField : { default: '' }
+            title: { type: [Boolean, String], default: false },
+            value: { type: [Boolean, Number, String], default: null },
         },
-        data () {
-            return {
-                html_id : '',
-                showFloater : false
-            }
-        },
-        methods : {
-            getID( option ){
-                return this.html_id = String( this.id ) + '-' + String( option[ this.keyId ] );
-            },
-            getLabel(){
-
-                // Empty value
-                if( this.value === '' ) return this.placeholder;
-
-                // Keys
-                const keys = 
-                    typeof( this.options ) === 'object' 
-                    ? Object.keys( this.options ) 
-                    : this.options.keys
-                ;
-
-                // Return label
-                let return_label = this.placeholder;
-                for( let ki = 0; ki < keys.length; ki++ ){
-                    const option = this.options[ keys[ ki ] ];
-                    if( option[ this.keyId ] === this.value ){
-                        return_label = option[ this.keyLabel ];
-                    }
-                }
-
-                return return_label;
-
-            },
-            getValue(){
-                if( this.value === '' ){
-                    return Object.keys(this.options)[0];
-                }
-                else {
-                    return this.value;
-                }
-            },
-            generateUID(){
-                // I generate the UID from two parts here 
-                // to ensure the random number provide enough bits.
-                var firstPart = (Math.random() * 46656) | 0;
-                var secondPart = (Math.random() * 46656) | 0;
-                firstPart = ( '000' + firstPart.toString(36)).slice(-3);
-                secondPart = ( '000' + secondPart.toString(36)).slice(-3);
-                return firstPart + secondPart;
-            },
-            toggle(){
-                this.$emit( 'update:activeField', ( this.activeField === this.id ? '' : this.id ) );
-            },
-            close(){
-                this.$emit( 'update:activeField', '' );
-            },
-            open(){
-                this.$emit( 'update:activeField', this.id );
-            },
+        model: {
+            prop: 'value',
+            event: 'update:value',
         },
         computed: {
+            label () {
+                if (this.value === '') {
+                    return this.placeholder
+                }
+
+                const keys = (typeof this.options === 'object') ? Object.keys(this.options) : this.options.keys
+
+                let returnLabel = this.placeholder
+                for (let i = 0; i < keys.length; i++) {
+                    const option = this.options[keys[i]]
+                    if (option[this.keyId] === this.value) {
+                        returnLabel = option[this.keyLabel]
+                    }
+                }
+                return returnLabel
+            },
             valueModel: vModel('value'),
-            previousMonth () {
-                const month = this.date.month
-                return months[month]
-            }
+        },
+        methods : {
+            close () {
+                this.$emit('update:activeField', '')
+            },
+            generateUID(){
+                // I generate the UID from two parts here
+                // to ensure the random number provide enough bits.
+                let firstPart = (Math.random() * 46656) | 0
+                let secondPart = (Math.random() * 46656) | 0
+                firstPart = ('000' + firstPart.toString(36)).slice(-3)
+                secondPart = ('000' + secondPart.toString(36)).slice(-3)
+                return firstPart + secondPart
+            },
+            getID (option) {
+                return `${this.id}-${option[this.keyId]}`
+            },
+            open () {
+                this.$emit('update:activeField', this.id)
+            },
+            toggle () {
+                this.$emit('update:activeField', (this.activeField === this.id ? '' : this.id))
+            },
         },
     }
 </script>

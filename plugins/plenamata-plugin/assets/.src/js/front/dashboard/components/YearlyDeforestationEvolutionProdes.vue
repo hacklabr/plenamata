@@ -5,24 +5,13 @@
             <span>{{ __('in the selected territory', 'plenamata') }} (PRODES)</span>
         </template>
         <template #filters>
-            <Dropdown 
-                id="unit-ydep" 
-                keyId="key"
-                keyLabel="label"
-                triggerClass="clean small color--3"
-                :options="units" 
-                :value="unitModel" 
-                :title="__('Unit', 'plenamata')"
-                :value.sync="unitModel"
-                :activeField="fieldActive"
-                :activeField.sync="fieldActive"
-            />
+            <Dropdown id="unit-ydep" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="units" :title="__('Unit', 'plenamata')" v-model="unitModel"/>
         </template>
         <template #chart>
             <Bar :chartData="chartData" :chartOptions="chartOptions" :height="300"/>
         </template>
         <template #source>
-            {{__( 'Source', 'plenamata' )}} PRODES/INPE. {{ __('Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata') }}<br>
+            {{ __('Source', 'plenamata') }} PRODES/INPE. {{ __('Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata') }}<br>
         </template>
     </DashboardPanel>
 </template>
@@ -43,13 +32,13 @@
         components: {
             Bar,
             DashboardPanel,
-            Dropdown
+            Dropdown,
         },
         props: {
+            activeField: { type: [Object, String], default: '' },
             filters: { type: Object, required: true },
             unit: { type: String, default: 'ha' },
             year: { type: Number, required: true },
-            activeField: { type: [ String, Object ], default: '' },
         },
         data () {
             return {
@@ -64,7 +53,6 @@
                         label : __('km²', 'plenamata')
                     }
                 },
-                fieldActive : { type: String, defaul: '' },
             }
         },
         computed: {
@@ -113,6 +101,7 @@
                     },
                 }
             },
+            fieldModel: vModel('activeField'),
             unitModel: vModel('unit'),
             years () {
                 if (this.data.length === 0) {
@@ -138,16 +127,6 @@
                 handler: 'fetchData',
                 immediate: true,
                 deep: true,
-            },
-            fieldActive: {
-                handler( active ){
-                    this.$emit( 'update:activeField', active );
-                }
-            },
-            activeField: {
-                handler( active ){
-                    this.fieldActive = active;
-                }
             },
         },
         methods: {

@@ -66,7 +66,6 @@
             },
         },
         async created () {
-
             const baseEnd = this.date
             const baseStart = baseEnd.startOf('year')
 
@@ -78,11 +77,7 @@
             const data = await Promise.all(intervals.map(([start, end]) => {
                 return fetchDeterData({ data1: start.toISODate(), data2: end.toISODate(), group_by: 'ano' })
             }))
-            
             this.data = data
-
-        
         },
-    
     }
 </script>

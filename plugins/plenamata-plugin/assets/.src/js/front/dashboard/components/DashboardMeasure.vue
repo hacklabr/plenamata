@@ -11,9 +11,8 @@
     export default {
         name: 'DashboardMeasure',
         props: {
-            icon: { type: String, default: '' },
             number: { type: [Number, String], required: true },
-            unitClass : { type: String, default: '' }
+            unitClass : { type: String, default: '' },
         },
         computed: {
             formattedNumber () {

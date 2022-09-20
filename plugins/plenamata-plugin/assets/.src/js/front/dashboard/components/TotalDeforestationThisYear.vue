@@ -1,29 +1,18 @@
 <template>
     <DashboardPanel type="measure" icon="arvore.svg" icon2="percent-small.svg">
-        <template #estimativa>{{__( 'Estimates for the year', 'plenamata' )}} {{actualYear}}</template>
+        <template #reference>{{ __('Estimates for the year', 'plenamata') }} {{ actualYear }}</template>
         <template #title>
-            <strong>{{__('Total deforestation', 'plenamata')}}</strong>
+            <strong>{{ __('Total deforestation', 'plenamata') }}</strong>
         </template>
         <template #measure>
             <DashboardMeasure :number="area">
                 <template #unit>
-                    <Dropdown 
-                        id="unit-tdty" 
-                        keyId="key" 
-                        keyLabel="label"
-                        triggerClass="clean small color--3"
-                        :options="options" 
-                        :title="__('Unit', 'plenamata')"
-                        :value="unitModel" 
-                        :value.sync="unitModel"
-                        :activeField="fieldActive"
-                        :activeField.sync="fieldActive"
-                    />
+                    <Dropdown id="unit-tdty" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="options" :title="__('Unit', 'plenamata')" v-model="unitModel"/>
                 </template>
             </DashboardMeasure>
         </template>
         <template #meaning>
-            <strong>{{roundNumber(increase)}}%</strong>
+            <strong>{{ roundNumber(increase) }}%</strong>
             <span class="small" :class="{ faster: increase >= 0, slower: increase <= 0 }">
                 <template v-if="increase >= 0">
                     {{ __('Faster than last year', 'plenamata') }}
@@ -47,34 +36,33 @@
     import { fetchDeterData } from '../../utils/api'
     import { firstValue, roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
-    import { sprintf, __ } from '../plugins/i18n'
+    import { __ } from '../plugins/i18n'
 
     export default {
         name: 'TotalDeforestationThisYear',
         components: {
             DashboardMeasure,
             DashboardPanel,
-            Dropdown
+            Dropdown,
         },
         props: {
+            activeField: { type: [Object, String], default: '' },
             areaKm2: { type: Number, required: true },
             date: { type: DateTime, required: true },
             filters: { type: Object, default: '' },
             unit: { type: String, default: 'ha' },
             updated: { type: Object, required: true },
             year: { type: Number, required: true },
-            activeField: { type: [ String, Object ], default: '' }
         },
         data () {
             return {
-                lastYear: null,
                 actualYear: DateTime.now().year,
-                fieldActive : { type: String, defaul: '' },
+                lastYear: null,
                 options: {
                     'ha' : {
                         key: 'ha',
                         label: __('hectares', 'plenamata')
-                    }, 
+                    },
                     'km2' : {
                         key: 'km2',
                         label: __('km²', 'plenamata')
@@ -82,8 +70,7 @@
                 },
             }
         },
-        computed: { 
-
+        computed: {
             area () {
                 if (this.unit === 'ha') {
                     return this.areaKm2 * 100
@@ -91,6 +78,7 @@
                     return this.areaKm2
                 }
             },
+            fieldModel: vModel('activeField'),
             increase () {
                 if (this.areaKm2 && this.previousAreaKm2) {
                     return 100 * ((this.areaKm2 / this.previousAreaKm2) - 1)
@@ -111,16 +99,6 @@
                 immediate: true,
                 deep: true,
             },
-            fieldActive: {
-                handler( active ){
-                    this.$emit( 'update:activeField', active );
-                }
-            },
-            activeField: {
-                handler( active ){
-                    this.fieldActive = active;
-                }
-            }
         },
         methods: {
             async fetchData () {

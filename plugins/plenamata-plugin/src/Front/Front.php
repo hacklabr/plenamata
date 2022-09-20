@@ -66,7 +66,7 @@ class Front {
         $images[ '/js/src/icons/news' ][ 'text_color' ] = '#FFFFFF';
 
         return $images;
-    
+
     }
 
     /**
@@ -205,35 +205,43 @@ class Front {
                 '%s%% increase compared to last year' => __( '%s%% increase compared to last year', 'plenamata' ),
                 '%s ha' => __( '%s ha', 'plenamata' ),
                 '%s km²' => __( '%s km²', 'plenamata' ),
+                '(deforested square kilometers' => __( '(deforested square kilometers)', 'plenamata' ),
                 'All CUs' => __( 'All CUs', 'plenamata' ),
                 'All ILs' => __( 'All ILs', 'plenamata' ),
                 'All municipalities' => __( 'All municipalities', 'plenamata' ),
                 'All states' => __( 'All states', 'plenamata' ),
-                'By deforestation' => __( 'By deforestation', 'plenamata' ),
-                'Faster than last year' => __( 'Faster than last year', 'plenamata' ),
-                'Deforestation rate' => __( 'Deforestation rate', 'plenamata' ),
+                'All periods' => __( 'All periods', 'plenamata' ),
                 'Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.' => __( 'Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata' ),
+                'Apply filters' => __( 'Apply filters', 'plenamata' ),
                 'Area deforested last week in the selected territory' => __( 'Area deforested last week in the selected territory', 'plenamata' ),
                 'Area deforested' => __( 'Area deforested', 'plenamata' ),
                 'Area of deforestation alerts detected last week' => __( 'Area of deforestation alerts detected last week', 'plenamata' ),
+                'By deforestation' => __( 'By deforestation', 'plenamata' ),
                 'Clear filters' => __( 'Clear filters', 'plenamata' ),
                 'Conservation Unit' => __( 'Conservation Unit', 'plenamata' ),
                 'Data' => __( 'Data', 'plenamata' ),
-                'in the selected territory' => __( 'in the selected territory', 'plenamata' ),
-                'Deforestation rate in %s in the selected territory' => __( 'Deforestation rate in %s in the selected territory', 'plenamata' ),
+                'Deforestation rate' => __( 'Deforestation rate', 'plenamata' ),
                 'Deforestation rate in' => __( 'Deforestation rate in', 'plenamata' ),
+                'Deforestation rate in %s in the selected territory' => __( 'Deforestation rate in %s in the selected territory', 'plenamata' ),
                 'Drag to see more' => __( 'Drag to see more', 'plenamata' ),
                 'during DETER year' => __( 'during DETER year', 'plenamata' ),
                 'during PRODES year' => __( 'during PRODES year', 'plenamata' ),
                 'estimated average of %s trees per minute' => __( 'estimated average of %s trees per minute', 'plenamata'),
-                'trees per minute' => __( 'trees per minute', 'plenamata'),
+                'Estimates for the year' => __( 'Estimates for the year', 'plenamata' ),
+                'Estimates of trees cut down in %s' => __( 'Estimates of trees cut down in %s', 'plenamata' ),
+                'estimates of trees cut down so far' => __( 'estimates of trees cut down so far', 'plenamata' ),
+                'Evolution per period' => __( 'Evolution per period', 'plenamata' ),
                 'External link' => __( 'External link', 'plenamata' ),
+                'Faster than last year' => __( 'Faster than last year', 'plenamata' ),
                 'Forestry Dashboard' => __( 'Forestry Dashboard', 'plenamata' ),
                 'hectares' => __( 'hectares', 'plenamata' ),
-                'hectares per day' => __( 'hectares per day', 'plenamata' ),
+                'hectares/day' => __( 'hectares/day', 'plenamata' ),
                 'Indigenous Land' => __( 'Indigenous Land', 'plenamata' ),
+                'in the selected territory' => __( 'in the selected territory', 'plenamata' ),
                 'km²' => __( 'km²', 'plenamata' ),
-                'km² per day' => __( 'km² per day', 'plenamata' ),
+                'km²/day' => __( 'km²/day', 'plenamata' ),
+                'last week' => __( 'last week', 'plenamata' ),
+                'Latest Update' => __( 'Latest Update', 'plenamata' ),
                 'Legal Amazon' => __( 'Legal Amazon', 'plenamata' ),
                 'Load more' => __( 'Load more', 'plenamata' ),
                 'Loading...' => __( 'Loading...', 'plenamata' ),
@@ -243,35 +251,30 @@ class Front {
                 'Municipality' => __( 'Municipality', 'plenamata' ),
                 'News' => __( 'News', 'plenamata' ),
                 'No news to be shown.' => __( 'No news to be shown', 'plenamata' ),
+                'per day' => __( 'per day', 'plenamata' ),
                 'Period' => __( 'Period', 'plenamata' ),
                 'Period: %s' => __( 'Period: %s', 'plenamata' ),
                 'Select a state' => __( 'Select a state', 'plenamata' ),
                 'See more' => __( 'See more', 'plenamata' ),
-                'Latest Update' => __( 'Latest Update', 'plenamata' ),
+                'Select period' => __( 'Select a period', 'plenamata' ),
                 'Source' => __( 'Source', 'plenamata' ),
                 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.' => __( 'Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata' ),
+                'Sources: INPE and MapBiomas' =>  __( 'Sources: INPE and MapBiomas', 'plenamata' ),
                 'Source: MapBiomas based on average daily deforestation detected by INPE in %s.' => __( 'Source: MapBiomas based on average daily deforestation detected by INPE in %s.', 'plenamata' ),
                 'Source: MapBiomas based on DETER/INPE data.' => __( 'Source: MapBiomas based on DETER/INPE data.', 'plenamata' ),
                 'Source: PRODES/INPE.' => __( 'Source: PRODES/INPE.', 'plenamata' ),
-                'Sources: INPE and MapBiomas' =>  __( 'Sources: INPE and MapBiomas', 'plenamata' ),
+                'Source: PRODES/INPE. Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.' => __( 'Source: PRODES/INPE. Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata' ),
                 'State' => __( 'State', 'plenamata' ),
                 'The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES.' => __('The data of this layer includes the alerts detected in the period between %s and %s, verified since the last update of PRODES.', 'plenamata'),
+                'The figures represent deforestation for each year up to' => __( 'The figures represent deforestation for each year up to', 'plenamata' ),
                 'Timeframe' => __( 'Timeframe', 'plenamata' ),
-                'Total deforestation in %s in the selected territory' => __( 'Total deforestation in %s in the selected territory', 'plenamata' ),
                 'Total deforestation' => __( 'Total deforestation', 'plenamata' ),
+                'Total deforestation in %s in the selected territory' => __( 'Total deforestation in %s in the selected territory', 'plenamata' ),
                 'Total deforested area in %s (until last week)' => __( 'Total deforested area in %s (until last week)', 'plenamata' ),
-                'per day' => __( 'per day', 'plenamata' ),
-                'last week' => __( 'last week', 'plenamata' ),
-                'km²/day' => __( 'km²/day', 'plenamata' ),
-                'hectares/day' => __( 'hectares/day', 'plenamata' ),
-                'trees/minute' => __( 'trees/minute', 'plenamata' ),
                 'trees' => __( 'trees', 'plenamata' ),
                 'Trees cut down in' => __( 'Trees cut down in', 'plenamata' ),
-                'Estimates for the year' => __( 'Estimates for the year', 'plenamata' ),
-                'Estimates of trees cut down in %s' => __( 'Estimates of trees cut down in %s', 'plenamata' ),
-                'estimates of trees cut down so far' => __( 'estimates of trees cut down so far', 'plenamata' ),
-                'with alerts detected until' => __( 'with alerts detected until', 'plenamata' ),
-                'in the selected territory' => __( 'in the selected territory', 'plenamata' ),
+                'trees/minute' => __( 'trees/minute', 'plenamata' ),
+                'trees per minute' => __( 'trees per minute', 'plenamata'),
                 'trees per day' => __( 'trees per day', 'plenamata' ),
                 'Understand the calculus' => __( 'Understand the calculus', 'plenamata' ),
                 'Unit' => __( 'Unit', 'plenamata' ),
@@ -280,16 +283,12 @@ class Front {
                 'Weekly and monthly data are from %s.' => __( 'Weekly and monthly data are from %s.', 'plenamata' ),
                 'Weekly deforestation rate in the selected territory' => __( 'Weekly deforestation rate in the selected territory', 'plenamata'),
                 'Weekly deforestation rate' => __( 'Weekly deforestation rate', 'plenamata'),
+                'with alerts detected until' => __( 'with alerts detected until', 'plenamata' ),
                 'Yearly' => __( 'Yearly', 'plenamata' ),
-                'Yearly consolidated deforestation rate in the selected territory (PRODES)' => __( 'Yearly consolidated deforestation rate in the selected territory (PRODES)', 'plenamata' ),
                 'Yearly consolidated deforestation rate' => __( 'Yearly consolidated deforestation rate', 'plenamata' ),
-                'Yearly deforestation alerts in the selected territory (DETER)' => __( 'Yearly deforestation alerts in the selected territory (DETER)', 'plenamata' ),
+                'Yearly consolidated deforestation rate in the selected territory (PRODES)' => __( 'Yearly consolidated deforestation rate in the selected territory (PRODES)', 'plenamata' ),
                 'Yearly deforestation alerts' => __( 'Yearly deforestation alerts', 'plenamata' ),
-                'Select period' => __( 'Select a period', 'plenamata' ),
-                'All periods' => __( 'All periods', 'plenamata' ),
-                'Apply filters' => __( 'Apply filters', 'plenamata' ),
-                'The figures represent deforestation for each year up to' => __( 'The figures represent deforestation for each year up to', 'plenamata' ),
-                'Source: PRODES/INPE. Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.' => __( 'Source: PRODES/INPE. Annual deforestation rate calculated for the period from August to July. For example, 2020 rate considers the timeframe from August 2019 to July 2020.', 'plenamata' ),
+                'Yearly deforestation alerts in the selected territory (DETER)' => __( 'Yearly deforestation alerts in the selected territory (DETER)', 'plenamata' ),
             ],
             '_x' => [
                 'months' => [
@@ -337,7 +336,7 @@ class Front {
         wp_register_script( 'mapboxgl-loader', JEO_BASEURL . '/js/build/mapboxglLoader.js', JEO_VERSION );
 
         wp_register_script( 'jeo-map', JEO_BASEURL . '/js/build/jeoMap.js', [ 'mapboxgl-loader', 'jquery', 'wp-element' ], JEO_VERSION, true );
-        
+
         wp_localize_script( 'jeo-map', 'jeoMapVars', [
             'jsonUrl' => rest_url( 'wp/v2/' ),
             'string_read_more' => __( 'Read more', 'plenamata' ),
@@ -370,11 +369,11 @@ class Front {
         wp_register_script( 'jeo-layer', JEO_BASEURL . '/js/build/JeoLayer.js', [ 'mapboxgl-loader' ], JEO_VERSION );
         wp_register_script( 'layer-type-mapbox', JEO_BASEURL . '/includes/layer-types/mapbox.js', [ 'jeo-layer' ], JEO_VERSION );
 		wp_register_script( 'jeo-legend', JEO_BASEURL . '/js/build/JeoLegend.js', [ 'mapboxgl-loader' ], JEO_VERSION );
-    
+
     }
 
     public function page_templates ( string $template ): string {
-        
+
         $template_slug = get_page_template_slug();
 
         // Dashboard page
