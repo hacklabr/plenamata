@@ -52,9 +52,9 @@
     export default {
         name: 'MonthlyDeforestationEvolution',
         components: {
+            Bar,
             DashboardPanel,
             Dropdown,
-            Bar,
             ScrollGuard,
         },
         mixins: [
