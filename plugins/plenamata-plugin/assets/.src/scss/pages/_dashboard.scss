@@ -12,16 +12,17 @@ body.page-template-template-dashboard {
     #page {
         overflow: inherit !important;
     }
+
     .site-content {
         margin-top:68px !important;
     }
+
     .jeomap {
 
         .popup h2 {
-            
             line-height: 16px;
             padding-right: 21px;
-            
+
             a {
                 display: block;
                 font-size: 13.8307px;
@@ -30,20 +31,16 @@ body.page-template-template-dashboard {
                 text-decoration: none;
                 color: #2A4A52;
             }
-        
         }
 
         .mapboxgl-popup {
-
             max-width:300px !important;
-            
-            &-content {
 
+            &-content {
                 width:300px;
                 border-radius:8px;
 
                 article {
-
                     display:flex;
                     flex-direction: column-reverse;
 
@@ -56,13 +53,10 @@ body.page-template-template-dashboard {
                         color: #1A2C31;
                         padding-top: size(10);
                     }
-
                 }
-
             }
 
             &-close-button {
-
                 padding: 0;
                 background-color: transparent;
                 filter: initial;
@@ -80,9 +74,7 @@ body.page-template-template-dashboard {
                     background: transparent no-repeat center center url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHZpZXdCb3g9IjAgMCAyMCAyMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGxpbmUgeTE9Ii0xIiB4Mj0iMjQuOTQ3MSIgeTI9Ii0xIiB0cmFuc2Zvcm09Im1hdHJpeCgwLjY5MjQxMSAwLjcyMTUwNCAtMC42OTI0MTEgMC43MjE1MDQgMSAyLjAwMDczKSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxsaW5lIHkxPSItMSIgeDI9IjI0Ljk0NzEiIHkyPSItMSIgdHJhbnNmb3JtPSJtYXRyaXgoMC42OTI0MTEgLTAuNzIxNTAzIDAuNjkyNDExIDAuNzIxNTA0IDIuMjg1NjQgMTkuOTk5NSkiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4K);
                     background-size: 12px auto;
                 }
-            
             }
-
         }
 
         .legend-container {
@@ -93,7 +85,6 @@ body.page-template-template-dashboard {
             }
 
             a.more-info-button {
-                
                 background-color: #263F30;
                 color: white;
                 padding: size(5);
@@ -111,7 +102,6 @@ body.page-template-template-dashboard {
 main .dashboard {
 
     > main {
-
         position: relative;
         background-color: rgba(123, 185, 179, 0.2);
         color: $c_text;
@@ -130,11 +120,10 @@ main .dashboard {
     &__main-data,
     &__header {
         width: 698px;
-        max-with: 698px;    
+        max-width: 698px;
     }
 
     &__header {
-
         position: relative;
         grid-column: 1;
         grid-row: 1;
@@ -144,14 +133,12 @@ main .dashboard {
         color: #1A2C31;
 
         form {
-
             position: relative;
             display: flex;
             align-items: flex-end;
             height: 110px;
 
             > header {
-
                 display: none;
                 justify-content: space-between;
                 align-items: center;
@@ -173,26 +160,21 @@ main .dashboard {
                     background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzYiIGhlaWdodD0iMzciIHZpZXdCb3g9IjAgMCAzNiAzNyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3QgeD0iOC4xNTc3MSIgeT0iMTAuMzI0MiIgd2lkdGg9IjEuOTIzMDgiIGhlaWdodD0iMjUiIHRyYW5zZm9ybT0icm90YXRlKC00NSA4LjE1NzcxIDEwLjMyNDIpIiBmaWxsPSIjMjYzRjMwIi8+CjxyZWN0IHg9IjkuNTIwMDIiIHk9IjI4LjAwMiIgd2lkdGg9IjEuOTIzMDgiIGhlaWdodD0iMjUiIHRyYW5zZm9ybT0icm90YXRlKC0xMzUgOS41MjAwMiAyOC4wMDIpIiBmaWxsPSIjMjYzRjMwIi8+Cjwvc3ZnPgo=);
                     background-size: contain;
                 }
-            
             }
 
             .fields {
-
                 display: flex;
                 height: 100%;
 
                 > .custom-drop {
-
                     flex: 1 1 0px;
                     width: 116px;
                     min-width: 116px;
                     height: 100%;
                 }
-            
             }
 
             .custom-drop {
-                
                 position: initial;
 
                 > em,
@@ -214,7 +196,6 @@ main .dashboard {
                     }
 
                     > i {
-
                         display: flex;
                         align-items: center;
                         justify-content: center;
@@ -250,11 +231,9 @@ main .dashboard {
                             height: 21px;
                             background-image: asset-url('img/icon-calendar.svg');
                         }
-                    
                     }
 
                     strong {
-
                         flex: 1;
                         position: relative;
                         display: inline-flex;
@@ -279,31 +258,26 @@ main .dashboard {
                             transform: rotate(45deg);
                             transition: all .4s ease-in-out;
                         }
-                    
                     }
-                
                 }
 
                 &.opened {
+
                     button.toggle {
                         background: rgb(243, 247, 229);
                     }
                 }
 
                 &.locked {
-
                     opacity: 0.3;
-                    
+
                     button.toggle {
                         cursor: default;
                     }
-                
                 }
-
             }
-            
-            .clear {
 
+            .clear {
                 display: block;
                 padding: 14px 17px;
                 text-decoration: none;
@@ -340,7 +314,6 @@ main .dashboard {
                     background: rgb(243, 247, 229);
                     border-color: rgb(243, 247, 229);
                 }
-            
             }
 
             button.apply {
@@ -348,14 +321,12 @@ main .dashboard {
                 margin-top: 33px;
                 background: #263F30;
             }
-
         }
 
         .controls {
             display: flex;
             justify-content: space-between;
         }
-
     }
 
     &__main-data {
@@ -383,7 +354,6 @@ main .dashboard {
     }
 
     &__filter-toggle {
-
         display: none;
         align-items: center;
         justify-content: space-between;
@@ -400,7 +370,6 @@ main .dashboard {
         }
 
         button {
-
             display: inline-flex;
             align-items: center;
             padding: 0 20px;
@@ -420,13 +389,10 @@ main .dashboard {
             &:hover {
                 background: transparent !important;
             }
-
         }
-
     }
 
     &__tabs {
-
         display: flex;
         width: auto;
         padding: 0 0 23px;
@@ -435,7 +401,6 @@ main .dashboard {
         border-bottom: 1px solid rgba(123, 185, 179, 0.6);
 
         label {
-
             flex: 1;
             display: flex;
             align-items: center;
@@ -461,7 +426,6 @@ main .dashboard {
             }
 
             &.active {
-
                 background-color: #263F30;
                 color: #FFFFFF;
                 cursor: default;
@@ -469,7 +433,6 @@ main .dashboard {
                 img {
                     filter: invert(100%) sepia(4%) saturate(17%) hue-rotate(118deg) brightness(105%) contrast(104%);
                 }
-            
             }
 
             img {
@@ -483,11 +446,9 @@ main .dashboard {
     }
 
     &__panels {
-
         padding: 0;
 
         > header {
-
             margin-bottom: 9px;
 
             > h2 {
@@ -498,7 +459,6 @@ main .dashboard {
             }
 
             > em {
-
                 font-size: 20px;
                 line-height: 23px;
                 text-transform: uppercase;
@@ -508,7 +468,6 @@ main .dashboard {
                 strong {
                     font-weight: 700;
                 }
-            
             }
 
             > p {
@@ -522,22 +481,17 @@ main .dashboard {
         }
 
         .squareds-items {
-
             display: flex;
             flex-wrap: wrap;
 
             > section {
-
                 width: calc( 50% - 10px );
 
                 &:nth-child(odd){
                     margin-right: 20px;
                 }
-            
             }
-        
         }
-    
     }
 
     &__news {
@@ -545,11 +499,9 @@ main .dashboard {
     }
 
     &__scroll-guard {
-
         position: relative;
 
         &-tag {
-
             align-items: center;
             display: flex;
             height: 60%;
@@ -559,7 +511,6 @@ main .dashboard {
             width: 100%;
 
             & > span {
-
                 align-items: center;
                 background: #c7dd8b;
                 color: #206837;
@@ -577,7 +528,6 @@ main .dashboard {
     }
 
     &__loadmore {
-
         display: block;
         width: 394px;
         height: 40px;
@@ -599,7 +549,6 @@ main .dashboard {
 }
 
 .dashboard-panel {
-
     display: flex;
     flex-direction: column;
     margin: 10px 0;
@@ -612,7 +561,6 @@ main .dashboard {
     }
 
     header {
-
         position: relative;
         padding-right: 28px;
 
@@ -621,24 +569,21 @@ main .dashboard {
             right: 0;
             top: 0;
         }
-
     }
 
     h2 {
-
         font-weight: normal;
         color: #1A2C31 !important;
 
         strong {
             font-weight: 700;
         }
-    
     }
 
     p {
         text-align: center;
     }
-    
+
     em.estimativa {
         display: block;
         font-style: normal;
@@ -652,31 +597,24 @@ main .dashboard {
     &.measure {
 
         h2 {
-
             height: 38px;
             margin: 23px 0 0;
             font-size: 18px;
             line-height: 21px;
 
-            strong,
-            span {
+            strong, span {
                 display: block;
             }
-
         }
-    
     }
 
     &.chart {
 
         h2 {
-
             font-size: 16px;
             line-height: 18px;
             text-transform: uppercase;
-
         }
-
     }
 
     &__icon {
@@ -686,7 +624,6 @@ main .dashboard {
     }
 
     &__measure {
-
         display: flex;
         justify-content: flex-start;
         align-items: flex-end;
@@ -695,7 +632,6 @@ main .dashboard {
         &:first-of-type {
             margin-top: 15px;
         }
-    
     }
 
     &__icon {
@@ -703,17 +639,15 @@ main .dashboard {
     }
 
     &__number {
-
         margin-right: 10px;
         font-weight: 700;
         font-size: 36px;
         line-height: 42px;
         color: #263F30;
-
     }
 
     &__unit {
-    
+
         .custom-drop {
             transform: translateY(-7px);
         }
@@ -723,15 +657,13 @@ main .dashboard {
             line-height: 14px;
             transform: translateY(-6px);
         }
-    
+
     }
 
     &__meaning {
-
         display: flex;
 
         > em {
-
             display: flex;
             align-items: flex-end;
             font-style: normal;
@@ -745,7 +677,6 @@ main .dashboard {
             }
 
             > span {
-
                 position: relative;
                 display: block;
                 margin-bottom: 6px;
@@ -761,8 +692,7 @@ main .dashboard {
                     top: 0;
                 }
 
-                &.faster,
-                &.slower {
+                &.faster, &.slower {
                     padding-left: 12px;
                 }
                 &.faster:before {
@@ -771,7 +701,7 @@ main .dashboard {
                 &.slower:before {
                     content: '-';
                 }
-                
+
                 &.small {
                     display: block;
                     max-width: 120px;
@@ -779,15 +709,11 @@ main .dashboard {
                     line-height: 14px;
                     letter-spacing: 0.02em;
                 }
-
             }
-
         }
-    
     }
 
     &__filters {
-
         display: flex;
         flex-wrap: wrap;
         align-items: center;
@@ -798,11 +724,9 @@ main .dashboard {
         .custom-drop:not(:last-child){
             margin-right: 10px;
         }
-
     }
 
     footer {
-
         background-color: #263F30;
         padding: 17px 15px 9px;
         color: #FFFFFF;
@@ -817,21 +741,17 @@ main .dashboard {
             font-size: 12px;
             line-height: 10px;
         }
-    
     }
 
     &.deforestation-rate {
-
         h2 {
             height: auto;
         }
-    
     }
 
     &.chart {
-        
-        footer {
 
+        footer {
             background: initial;
             padding-top: 0;
 
@@ -841,21 +761,11 @@ main .dashboard {
                 letter-spacing: 0.02em;
                 color: #263F30;
             }
-
         }
-
     }
-
-    &.deforestation-charts {
-
-
-
-    }
-
 }
 
 .dashboard-news {
-
     display: flex;
     margin-bottom: 25px;
     background: #FFFFFF;
@@ -872,7 +782,6 @@ main .dashboard {
     }
 
     h2 {
-
         font-weight: 700;
         font-size: 20px;
         line-height: 23px;
@@ -885,11 +794,9 @@ main .dashboard {
         strong {
             font-weight: 700;
         }
-    
     }
 
     &__image {
-
         width: 183px;
         min-width: 183px;
         min-height: 138px;
@@ -898,12 +805,10 @@ main .dashboard {
             width: 100%;
             height: 100%;
             object-fit: cover;
-
         }
-
     }
 
-    &__date, 
+    &__date,
     &__author,
     &__source {
         font-size: 12px;
@@ -911,7 +816,6 @@ main .dashboard {
     }
 
     &__source {
-
         display: flex;
         justify-content: flex-end;
         margin: 8px 0 0;
@@ -919,9 +823,7 @@ main .dashboard {
         img {
             margin-left: 4px;
         }
-    
     }
-
 }
 
 @media( min-width:551px ){
@@ -929,7 +831,6 @@ main .dashboard {
     .dashboard__header form {
 
         .custom-drop--options {
-
             margin-top: 0;
             left: 0;
             background: rgb(243, 247, 229);
@@ -940,15 +841,12 @@ main .dashboard {
                 overflow-y: auto;
                 overflow-x: hidden;
             }
-        
         }
-    
     }
-
 }
 
 @media( min-width: 1111px ){
-    
+
     body.page-template-template-dashboard {
         .jeomap {
             height: calc(100vh - 80px);
@@ -956,20 +854,17 @@ main .dashboard {
     }
 
     main .dashboard {
-
         display: grid;
         grid-template-columns: auto auto;
         grid-template-rows: auto 1fr;
 
         &__map {
-
             width: calc( 100vw - 698px );
             position: relative;
             grid-column: 2;
             grid-row: 1/span 2;
 
             > div {
-
                 position: fixed;
                 width: calc( 100vw - 698px );
                 height: calc( 100vh - 80px );
@@ -978,24 +873,18 @@ main .dashboard {
                     position: absolute;
                     bottom: 0;
                 }
-
             }
-        
         }
-
     }
-
 }
 
 @media( max-width: 1110px ){
 
     main .dashboard {
-
         display: flex;
         flex-direction: column;
 
         &__map {
-
             order: 1;
             height: 291px;
             width: 100vw;
@@ -1005,14 +894,14 @@ main .dashboard {
             }
 
         }
-        &__main-data, 
+        &__main-data,
         &__header {
             width: 100%;
         }
         &__header {
             order: 2;
         }
-        &__main-data{ 
+        &__main-data{
             order: 3;
         }
 
@@ -1049,7 +938,6 @@ main .dashboard {
         }
 
         &__header form {
-        
             position: fixed;
             top: 57px;
             left: 0;
@@ -1070,14 +958,12 @@ main .dashboard {
             }
 
             .fields {
-            
                 flex: 1;
                 display: block;
                 height: calc( 100vh - 104px );
                 overflow-y: auto;
-            
-                > .custom-drop {
 
+                > .custom-drop {
                     height: auto;
                     width: 100%;
                     height: auto;
@@ -1086,34 +972,27 @@ main .dashboard {
                     &:first-of-type {
                         margin-top: 0;
                     }
-
                 }
-            
             }
 
             .custom-drop {
 
                 button.toggle {
-
                     flex-direction: row;
                     padding: 7px 10px;
                     border: 1px solid rgba(123, 185, 179, 0.6);
 
                     i {
-
                         height: 25px;
 
                         &:after {
                             width: 25px;
                             height: 25px;
                         }
-                    
                     }
-
                 }
 
                 &--options {
-
                     position: initial;
                     top: initial;
                     height: 0;
@@ -1129,7 +1008,6 @@ main .dashboard {
                     .list-wrapper {
                         max-height: initial;
                     }
-                
                 }
 
                 &.opened {
@@ -1137,17 +1015,16 @@ main .dashboard {
                     button.toggle {
                         background: transparent;
                     }
-                
+
                     .custom-drop--options {
                         height: auto;
                     }
-                
-                }
-            
-            }
-            
-            a.clear {
 
+                }
+
+            }
+
+            a.clear {
                 width: auto;
                 height: 40px;
                 padding: 0;
@@ -1168,11 +1045,8 @@ main .dashboard {
             button.apply {
                 display: block;
             }
-        
         }
-
     }
-
 }
 
 @media( max-width: 566px ){
@@ -1180,7 +1054,6 @@ main .dashboard {
     main .dashboard {
 
         &__panels .squareds-items > section {
-
             width: 1009%;
 
             &:nth-child(2n+1){
@@ -1189,7 +1062,7 @@ main .dashboard {
         }
 
         &-news {
-        
+
             h2 {
                 font-size: 14px;
                 line-height: 16px;
@@ -1200,10 +1073,6 @@ main .dashboard {
                 font-size: 8px;
                 line-height: 10px;
             }
-        
         }
-
     }
-
 }
-

@@ -10,7 +10,6 @@ export class GlossaryTooltips {
     }
 
     async init () {
-
         const anchor = this.createAnchor()
         const tooltips = document.querySelectorAll('.glossary-tooltip[data-verbete-id]')
         const verbetesIds = new Set()
@@ -28,7 +27,7 @@ export class GlossaryTooltips {
                 anchor.append(tooltipTemplate)
             }
             for (const target of tooltips) {
-                const tooltip = document.querySelector('#tooltip-template-' + target.dataset.verbeteId)
+                const tooltip = document.querySelector(`#tooltip-template-${target.dataset.verbeteId}`)
                 this.initializeTooltip(target, tooltip)
             }
         }

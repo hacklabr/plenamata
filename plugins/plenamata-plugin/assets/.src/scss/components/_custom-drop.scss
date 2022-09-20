@@ -3,7 +3,6 @@
 }
 
 .custom-drop {
-
     display: block;
     position: relative;
 
@@ -14,7 +13,6 @@
     }
 
     > em {
-
         display: block;
         position: relative;
 
@@ -30,11 +28,9 @@
             cursor: pointer;
             display: none;
         }
-
     }
 
     button.toggle {
-
         display: block;
         position: relative;
         align-items: center;
@@ -74,7 +70,6 @@
         }
 
         &.small:not(.inline){
-
             padding-right: 22px;
 
             &:after {
@@ -135,8 +130,7 @@
 
     }
 
-    &.filled,
-    &.force-filled {
+    &.filled, &.force-filled {
         button.toggle:after {
             border-color: #0043C9;
         }
@@ -147,7 +141,6 @@
 .custom-drop {
 
     &--options {
-
         position: absolute;
         top: 100%;
         min-width: 100%;
@@ -157,11 +150,7 @@
         opacity: 0;
         transform: translateX(-200vw);
         z-index: 5;
-        transition:
-            opacity .4s ease-in-out,
-            margin .4s ease-in-out,
-            transform 1ms ease .4s
-        ;
+        transition: opacity .4s ease-in-out, margin .4s ease-in-out, transform 1ms ease .4s;
 
         & > div:first-of-type {
             display: none;
@@ -186,128 +175,9 @@
     }
 
     &.opened .custom-drop--options {
-        transition:
-            opacity .4s ease-in-out,
-            margin .4s ease-in-out
-        ;
+        transition: opacity .4s ease-in-out, margin .4s ease-in-out;
         opacity: 1;
         transform: translateX(0);
         margin-top: 0;
     }
-
 }
-
-// @media( max-width: 550px ){
-
-//     .custom-drop--options {
-
-//         display: flex;
-//         flex-direction: column;
-//         justify-content: flex-end;
-//         position: fixed;
-//         left: 0;
-//         bottom: 0;
-//         width: 100vw;
-//         height: 100vh;
-//         background: rgba( 0, 0, 0, 0 );
-//         z-index: 9999999999;
-//         transform: translateY(110vh);
-//         transition:
-//             background .2s ease-in-out,
-//             transform .4s ease-in-out .2s,
-//         ;
-
-//         ul {
-//             list-style: none;
-//             padding: 0;
-//             margin: 0;
-//             max-height: calc( 100vh - 55px );
-//             overflow-y: auto;
-//             overflow-x: hidden;
-//             background: #FAFAFA;
-//         }
-
-//         li:not(:first-of-type) {
-//             border-top: 1px solid rgba( 18, 26, 33, 0.1 );
-//         }
-
-//         > div {
-
-//             &:first-of-type {
-
-//                 position: relative;
-//                 min-height: 55px;
-//                 height: 55px;
-//                 padding: 15px 16px;
-//                 background: #FAFAFC;
-//                 border-bottom: 1px solid rgba( 0, 0, 0, 0.2 );
-
-//                 strong {
-//                     display: block;
-//                     font-size: 20px;
-//                     line-height: 24px;
-//                     text-align: center;
-//                     color: #3B4AFF;
-//                 }
-
-//                 button {
-//                     position: absolute;
-//                     top: 50%;
-//                     right: 9px;
-//                     width: 40px;
-//                     height: 40px;
-//                     overflow: hidden;
-//                     text-indent: -99999px;
-//                     background-repeat: no-repeat;
-//                     background-position: center center;
-//                     background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQiIGhlaWdodD0iMTQiIHZpZXdCb3g9IjAgMCAxNCAxNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTcuMDAwNzIgNS41ODU5OUwxMS45NTA3IDAuNjM1OTg2TDEzLjM2NDcgMi4wNDk5OUw4LjQxNDcyIDYuOTk5OTlMMTMuMzY0NyAxMS45NUwxMS45NTA3IDEzLjM2NEw3LjAwMDcyIDguNDEzOTlMMi4wNTA3MiAxMy4zNjRMMC42MzY3MTkgMTEuOTVMNS41ODY3MiA2Ljk5OTk5TDAuNjM2NzE5IDIuMDQ5OTlMMi4wNTA3MiAwLjYzNTk4Nkw3LjAwMDcyIDUuNTg1OTlaIiBmaWxsPSIjMDMwNTNEIi8+Cjwvc3ZnPgo=);
-//                     transform: translateY(-50%);
-//                 }
-
-//             }
-
-//         }
-
-//         label {
-
-//             padding-top: 15px;
-//             padding-bottom: 15px;
-//             font-size: 16px;
-//             line-height: 19px;
-//             color: #333333;
-//             transition: background .4s ease-in-out;
-
-//             &:hover {
-//                 background: #F0F6FE;
-//             }
-
-//             &:not(:first-of-type){
-//                 border-top: 1px solid rgba( 18, 26, 33, 0.1 );
-//             }
-
-//         }
-
-//         input {
-
-//             &:focus + label {
-//                 background: #F0F6FE;
-//             }
-//             &:checked + label {
-//                 background: #0043C9;
-//                 color: #FFFFFF;
-//             }
-
-//         }
-
-//         &.opened {
-//             transition:
-//                 transform .4s ease-in-out,
-//                 background .2s ease-in-out .4s
-//             ;
-//             transform: translateY(0);
-//             background: rgba( 0, 0, 0, 0.5 );
-//         }
-
-//     }
-
-// }

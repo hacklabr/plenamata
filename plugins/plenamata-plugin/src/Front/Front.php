@@ -28,10 +28,8 @@ class Front {
 	 * @since 0.1.0
 	 */
 	public function hooks(): void {
-
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_styles' ], 50 );
 		add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scripts' ], 50 );
-
 	}
 
     /**
@@ -58,7 +56,6 @@ class Front {
      * @return array
      */
     public function jeo_change_js_image( $images ) {
-
         $images[ '/js/src/icons/news-marker' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/pin.png';
         $images[ '/js/src/icons/news-marker' ][ 'icon_size' ] = 0.3;
         $images[ '/js/src/icons/news' ][ 'url'] = PLENAMATA_PLUGIN_URL . 'assets/.src/img/news-icon.png';
@@ -66,7 +63,6 @@ class Front {
         $images[ '/js/src/icons/news' ][ 'text_color' ] = '#FFFFFF';
 
         return $images;
-
     }
 
     /**
@@ -103,7 +99,6 @@ class Front {
 	 * @since 0.1.0
 	 */
 	public function enqueue_scripts(): void {
-
         $dashboard_i18n = $this->get_dashboard_i18n();
         $language = apply_filters( 'wpml_current_language', NULL );
         $explainer_link = $this->get_explainer_link( $language );
@@ -330,7 +325,6 @@ class Front {
      * Register JEO scripts.
      */
     private function register_jeo_assets(): void {
-
         wp_enqueue_style( 'mapboxgl', 'https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css', '1.4.1' );
 
         wp_register_script( 'mapboxgl-loader', JEO_BASEURL . '/js/build/mapboxglLoader.js', JEO_VERSION );
@@ -369,11 +363,9 @@ class Front {
         wp_register_script( 'jeo-layer', JEO_BASEURL . '/js/build/JeoLayer.js', [ 'mapboxgl-loader' ], JEO_VERSION );
         wp_register_script( 'layer-type-mapbox', JEO_BASEURL . '/includes/layer-types/mapbox.js', [ 'jeo-layer' ], JEO_VERSION );
 		wp_register_script( 'jeo-legend', JEO_BASEURL . '/js/build/JeoLegend.js', [ 'mapboxgl-loader' ], JEO_VERSION );
-
     }
 
     public function page_templates ( string $template ): string {
-
         $template_slug = get_page_template_slug();
 
         // Dashboard page
@@ -385,7 +377,6 @@ class Front {
         endif;
 
         return $template;
-
     }
 
     /**

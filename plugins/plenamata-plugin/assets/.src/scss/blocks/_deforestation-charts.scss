@@ -5,7 +5,6 @@
     padding: size(32);
 
     h3 {
-
         border-bottom: 1px solid $c_red;
         font-size: size(23);
         font-weight: 500 !important;
@@ -18,7 +17,6 @@
         }
 
         small {
-
             font-size: 75%;
 
             @include small {
@@ -34,18 +32,15 @@
 .deforestation-charts {
 
     header {
-
         display: flex;
         align-items: center;
         justify-content: space-between;
 
         h2 {
-
             color: #1A2C31;
             text-transform: none;
 
-            strong,
-            span {
+            strong, span {
                 display: block;
             }
 
@@ -62,13 +57,10 @@
                 line-height: 22px;
                 text-transform: none;
             }
-
         }
-    
     }
 
     &__toggle {
-
         border: none;
         display: flex;
         margin: 0;
@@ -76,7 +68,6 @@
         width: auto;
 
         label {
-
             width: 86px;
             height: 25px;
             line-height: 23px;
@@ -102,9 +93,7 @@
                 background-color: #7BB9B3;
                 cursor: default;
             }
-
         }
-
     }
 
     &__chart {
