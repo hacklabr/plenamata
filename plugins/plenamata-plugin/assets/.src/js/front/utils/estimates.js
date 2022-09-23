@@ -4,7 +4,7 @@ import { getAreaKm2, getTrees } from './index'
 export async function getEstimateDeforestation (filters, { DateTime, Interval }) {
     const now = DateTime.now()
 
-    let lastFriday = DateTime.fromObject({ weekday: 5, hour: 11, minute: 5 }) // Friday, 11:00 A.M.
+    let lastFriday = DateTime.fromObject({ weekday: 5, hour: 11 }) // Friday, 11:00 A.M.
     if (now < lastFriday) {
         lastFriday = lastFriday.minus({ weeks: 1 })
     }
