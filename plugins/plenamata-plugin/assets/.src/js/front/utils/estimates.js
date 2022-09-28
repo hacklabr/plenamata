@@ -4,7 +4,7 @@ import { getAreaKm2, getTrees } from './index'
 const CONVERGENCE_FACTOR = 0.1
 
 export async function getEstimateDeforestation (filters, { DateTime, Interval }) {
-    const now = DateTime.now()
+    let now = DateTime.now()
 
     let lastFriday = DateTime.fromObject({ weekday: 5, hour: 11 }) // Friday, 11:00 A.M.
     if (now < lastFriday) {
@@ -30,8 +30,10 @@ export async function getEstimateDeforestation (filters, { DateTime, Interval })
     const hectaresLastWeek = getAreaKm2(lastWeek[0]) * 100
     const hectaresPreviousWeek = getTrees(previousWeek[0])
 
+    now = DateTime.now()
     const startDate = (lastFriday.year === now.year) ? lastFriday : now.startOf('year')
     const elapsedTime = Interval.fromDateTimes(startDate, now)
+    const elapsedSeconds = elapsedTime.count('seconds')
 
     const treesPerSecond = (treesLastWeek || (treesPreviousWeek * CONVERGENCE_FACTOR)) / 604_800
     const hectaresPerSecond = (hectaresLastWeek || (hectaresPreviousWeek * CONVERGENCE_FACTOR)) / 604_800
@@ -43,8 +45,8 @@ export async function getEstimateDeforestation (filters, { DateTime, Interval })
      *     treesThisYearUntilPreviousWeek - 0 = treesThisYearUntilPreviousWeek
      * So we obtain the same start (treesThisYearUntilPreviousWeek) no matter if we have last week data
      */
-    const treeCount = (treesThisYear - treesLastWeek) + (elapsedTime.count('seconds') * treesPerSecond)
-    const hectaresCount = (hectaresThisYear - hectaresLastWeek) + (elapsedTime.count('seconds') * hectaresPerSecond)
+    const treeCount = (treesThisYear - treesLastWeek) + (elapsedSeconds * treesPerSecond)
+    const hectaresCount = (hectaresThisYear - hectaresLastWeek) + (elapsedSeconds * hectaresPerSecond)
 
     return {
         hectaresPerSecond,
