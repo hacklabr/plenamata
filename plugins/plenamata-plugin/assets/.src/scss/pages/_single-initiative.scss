@@ -1,10 +1,15 @@
 .initiative-header {
+    
     & > :first-child {
         align-items: center;
         background-color: $c_purple;
         display: flex;
         flex-direction: column;
         justify-content: center;
+    }
+
+    .credited-image-block {
+        margin-bottom: 0 !important;
     }
 
     @include tablet {

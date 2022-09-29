@@ -1,4 +1,5 @@
 .deforestation-charts-block {
+
     background-color: $c_lighter;
     border-radius: 8px;
     padding: size(32);
@@ -21,11 +22,43 @@
             @include small {
                 display: block;
             }
+
         }
+
     }
+
 }
 
 .deforestation-charts {
+
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h2 {
+            color: #1A2C31;
+            text-transform: none;
+
+            strong, span {
+                display: block;
+            }
+
+            strong {
+                font-weight: 700;
+                font-size: 16px;
+                line-height: 22px;
+                text-transform: uppercase;
+            }
+
+            span {
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 22px;
+                text-transform: none;
+            }
+        }
+    }
 
     &__toggle {
         border: none;
@@ -35,34 +68,30 @@
         width: auto;
 
         label {
-            align-items: center;
-            background-color: rgba($c_purple, 0.15);
-            border: 1px solid white;
-            color: $c_purple;
-            display: flex;
-            flex: 1;
-            justify-content: center;
+            width: 86px;
+            height: 25px;
+            line-height: 23px;
+            text-align: center;
+            border: 0.5px solid rgba(123, 185, 179, 0.8);
+            font-weight: 700;
+            font-size: 10px;
+            text-align: center;
+            letter-spacing: 0.02em;
+            color: #1A2C31;
+            transition: all .3s ease-in-out;
+            cursor: pointer;
 
-            &:first-of-type {
-                border-radius: 5px 0 0 5px;
-            }
-
-            &:last-of-type {
-                border-radius: 0 5px 5px 0;
-            }
-
-            &:hover {
-                background-color: rgba($c_purple, 0.3);
-            }
-
-            &.active {
-                background-color: $c_purple;
-                color: white;
-                font-weight: bold;
+            &:not(:last-child){
+                margin-right: -1px;
             }
 
             input {
                 display: none;
+            }
+
+            &.active {
+                background-color: #7BB9B3;
+                cursor: default;
             }
         }
     }

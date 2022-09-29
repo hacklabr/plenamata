@@ -1,0 +1,183 @@
+.custom-drop.inline button.toggle:after {
+    right: 0;
+}
+
+.custom-drop {
+    display: block;
+    position: relative;
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    > em {
+        display: block;
+        position: relative;
+
+        &:before {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+            cursor: pointer;
+            display: none;
+        }
+    }
+
+    button.toggle {
+        display: block;
+        position: relative;
+        align-items: center;
+        text-align: right;
+        color: #333333;
+        font-style: normal;
+        background: transparent;
+        border: 1px solid gba(123, 185, 179, 0.6);
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            right: 15px;
+            top: calc( 50% - 3.5px );
+            width: 5px;
+            height: 5px;
+            margin-left: 8px;
+            border: solid #111111;
+            border-width: 0 1px 1px 0;
+            transform: rotate(45deg);
+            transition: all .4s ease-in-out;
+        }
+
+        &:not(.inline){
+            padding-right: 36px;
+        }
+
+        &.inline {
+
+            padding-right: 24px;
+
+            &:after{
+                right: 0;
+            }
+
+        }
+
+        &.small:not(.inline){
+            padding-right: 22px;
+
+            &:after {
+                right: 7px;
+                width: 4px;
+                height: 4px;
+                top: calc( 50% - 2.5px );
+            }
+
+        }
+
+    }
+
+    &.inline button.toggle {
+
+        &:after {
+            right: 0;
+        }
+
+    }
+
+    label {
+        display: block;
+    }
+
+    &--options {
+
+        label {
+            display: block;
+            position: relative;
+            padding: 0 16px;
+        }
+
+        input {
+            display: none;
+        }
+
+    }
+
+    &.opened {
+
+        em:before {
+            display: block;
+        }
+
+        button.toggle {
+
+            &:after {
+                top: calc( 50% - 1.5px );
+                transform: rotate(225deg);
+            }
+
+            &.small:after {
+                top: calc( 50% - .5px );
+            }
+
+        }
+
+    }
+
+    &.filled, &.force-filled {
+        button.toggle:after {
+            border-color: #0043C9;
+        }
+    }
+
+}
+
+.custom-drop {
+
+    &--options {
+        position: absolute;
+        top: 100%;
+        min-width: 100%;
+        padding: 8px 0;
+        margin-top: -10px;
+        background: #f4f8e8;
+        opacity: 0;
+        transform: translateX(-200vw);
+        z-index: 5;
+        transition: opacity .4s ease-in-out, margin .4s ease-in-out, transform 1ms ease .4s;
+
+        & > div:first-of-type {
+            display: none;
+        }
+
+        label {
+            padding: 10px 15px;
+            font-size: 12px;
+            line-height: 14px;
+            white-space: nowrap;
+            color: #1a2c31;
+            cursor: pointer;
+            transition: color .4s ease-in-out;
+        }
+
+        input:checked + label {
+            background: #c7dd8b;
+            color: #206837;
+            cursor: default;
+        }
+
+    }
+
+    &.opened .custom-drop--options {
+        transition: opacity .4s ease-in-out, margin .4s ease-in-out;
+        opacity: 1;
+        transform: translateX(0);
+        margin-top: 0;
+    }
+}

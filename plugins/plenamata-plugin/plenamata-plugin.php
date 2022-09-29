@@ -3,8 +3,8 @@
  * Bootstrap file
  *
  * Plugin Name:         Plenamata Plugin
- * Description:         The plugin adds information about the games to the site posts.
- * Version:             0.11.7
+ * Description:         The plugin powers deforestation dashboards and more.
+ * Version:             0.13.1
  * Requires at least:   5.0
  * Requires PHP:        7.4
  * Author:              hacklab/

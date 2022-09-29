@@ -1,35 +1,36 @@
 <template>
-    <DashboardPanel type="measure">
+    <DashboardPanel type="measure" class="deforestation-rate" icon="relogio.svg" icon2="area-small.svg">
+        <template #reference>{{ __('Estimates for the year', 'plenamata') }} {{ actualYear }}</template>
         <template #title>
-            {{ sprintf(__('Deforestation rate in %s in the selected territory', 'plenamata'), year) }}
+            <strong>{{ __('Deforestation rate', 'plenamata') }}</strong>
         </template>
         <template #measure>
-            <DashboardMeasure icon="tree-icon.svg" :number="trees / days">
+            <DashboardMeasure unitClass="small" :number="trees / days">
                 <template #unit>
-                    {{ __('trees per day', 'plenamata') }}
+                    {{ __('trees', 'plenamata') }}<br>{{ __('per day', 'plenamata') }}
                 </template>
             </DashboardMeasure>
-            <DashboardMeasure icon="area-icon.svg" :number="area / days">
+            <DashboardMeasure :number="area/days">
                 <template #unit>
-                    <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
-                        <option value="ha">{{ __('hectares per day', 'plenamata') }}</option>
-                        <option value="km2">{{ __('km² per day', 'plenamata') }}</option>
-                    </select>
+                    <Dropdown id="unit-dsty" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="options" :title="__('Unit', 'plenamata')" v-model="unitModel"/>
                 </template>
             </DashboardMeasure>
         </template>
         <template #meaning>
-            {{ sprintf(__('estimated average of %s trees per minute', 'plenamata'), roundNumber(trees / minutes)) }}
+            <strong>{{ roundNumber(trees / minutes) }}</strong>
+            <span>{{ __('trees per minute', 'plenamata') }}</span>
         </template>
-        <template #footer>
-            {{ __('Source: MapBiomas based on DETER/INPE data.', 'plenamata') }}
-        </template>
+        <template #source>{{ __('Source', 'plenamata') }}: MapBiomas</template>
     </DashboardPanel>
 </template>
 
 <script>
+    import { DateTime } from 'luxon'
+
     import DashboardMeasure from './DashboardMeasure.vue'
     import DashboardPanel from './DashboardPanel.vue'
+    import Dropdown from './Dropdown.vue'
+    import { __ } from '../plugins/i18n'
     import { roundNumber } from '../../utils/filters'
     import { vModel } from '../../utils/vue'
 
@@ -38,14 +39,31 @@
         components: {
             DashboardMeasure,
             DashboardPanel,
+            Dropdown,
         },
         props: {
+            activeField: { type: [Object, String], default: '' },
             areaKm2: { type: Number, required: true },
             days: { type: Number, required: true },
             minutes: { type: Number, required: true },
-            unit: { type: String, default: 'ha' },
             trees: { type: Number, required: true },
+            unit: { type: String, default: 'ha' },
             year: { type: Number, required: true },
+        },
+        data () {
+            return {
+                actualYear: DateTime.now().year,
+                options: {
+                    'ha' : {
+                        key: 'ha',
+                        label: __('hectares/day', 'plenamata')
+                    },
+                    'km2' : {
+                        key: 'km2',
+                        label: __('km²/day', 'plenamata')
+                    }
+                },
+            }
         },
         computed: {
             area () {
@@ -55,6 +73,7 @@
                     return this.areaKm2
                 }
             },
+            fieldModel: vModel('activeField'),
             unitModel: vModel('unit'),
         },
         methods: {

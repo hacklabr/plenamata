@@ -5,10 +5,7 @@
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
  * @package Newspack
- */
-
-?>
-
+ */ ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<div class="entry-content">
 
@@ -69,8 +66,19 @@
 		</a>
 	<?php endif; ?>
 
-	<footer class="entry-footer">
-		<?php newspack_entry_footer(); ?>
+	<footer class="entry-footer"><?php 
+
+		$tags = wp_get_post_tags( get_the_ID() );
+		if( !empty( $tags ) ): ?>
+		<span class="tags-links">
+			<span>Tagged:</span><?php 
+			foreach( $tags as $tag ): ?>
+			<a href="<?php echo get_site_url( null, '?s=' . $tag->name ) ?>" rel="tag" title="<?php echo $tag->name; ?>"><?php echo $tag->name; ?></a><?php 
+			endforeach; ?>
+		</span> <?php 
+		endif; ?>
+
+		<?php //newspack_entry_footer(); ?>
 	</footer><!-- .entry-footer -->
 
 	<?php if ( ! is_singular( 'attachment' )  && get_post_meta(get_the_ID(), 'author-bio-display', true)) : ?>

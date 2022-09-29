@@ -1,35 +1,30 @@
 <template>
     <DashboardPanel type="chart">
         <template #title>
-            {{ __('Monthly deforestation rate in the selected territory', 'plenamata') }}
+            <strong>{{ __('Monthly deforestation rate', 'plenamata') }}</strong>
+            <span>{{ __('in the selected territory', 'plenamata') }}</span>
         </template>
         <template #filters>
-            <select :aria-label="__('Unit', 'plenamata')" v-model="unitModel">
-                <option value="ha">{{ __('hectares', 'plenamata') }}</option>
-                <option value="km2">{{ __('km²', 'plenamata') }}</option>
-            </select>
-            <select :aria-label="__('Timeframe', 'plenamata')" v-model="sourceModel">
-                <option value="deter">{{ __('during DETER year', 'plenamata') }}</option>
-                <option value="prodes">{{ __('during PRODES year', 'plenamata') }}</option>
-            </select>
+            <Dropdown id="unit-mdev" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="units" :title="__('Unit', 'plenamata')" v-model="unitModel"/>
+            <Dropdown id="source-mdev" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="sources" :title="__('Timeframe', 'plenamata')" v-model="sourceModel"/>
         </template>
         <template #chart>
             <ScrollGuard :scrolled="scrolled">
-                <Bar :chartData="chartData" :chartOptions="chartOptions" :height="300"/>
+                <Bar :chartData="chartData" :chartOptions="chartOptions" :height="263"/>
             </ScrollGuard>
         </template>
-        <template #footer>
+        <template #source>
             {{ sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), updated.sync, updated.deter) }}
         </template>
     </DashboardPanel>
 </template>
 
 <script>
-    import Color from 'color'
     import { DateTime } from 'luxon'
     import { Bar } from 'vue-chartjs'
 
     import DashboardPanel from './DashboardPanel.vue'
+    import Dropdown from './Dropdown.vue'
     import ScrollGuard from './ScrollGuard.vue'
     import HasScrollableChart from '../mixins/HasScrollableChart'
     import { __, _x, sprintf } from '../plugins/i18n'
@@ -59,12 +54,14 @@
         components: {
             Bar,
             DashboardPanel,
+            Dropdown,
             ScrollGuard,
         },
         mixins: [
             HasScrollableChart,
         ],
         props: {
+            activeField: { type: [Object, String], default: '' },
             date: { type: DateTime, required: true },
             filters: { type: Object, required: true },
             source: { type: String, default: 'prodes' },
@@ -74,6 +71,26 @@
         data () {
             return {
                 data: [],
+                sources: {
+                    'deter': {
+                        key : 'deter',
+                        label : __('during DETER year', 'plenamata')
+                    },
+                    'prodes': {
+                        key : 'prodes',
+                        label : __('during PRODES year', 'plenamata')
+                    }
+                },
+                units: {
+                    'ha': {
+                        key : 'ha',
+                        label : __('hectares', 'plenamata')
+                    },
+                    'km2': {
+                        key : 'km2',
+                        label : __('km²', 'plenamata')
+                    }
+                },
             }
         },
         computed: {
@@ -130,31 +147,31 @@
                 }
             },
             datasets () {
-                const color = Color('#FF7373')
                 const datasets = []
 
+                const backgroundColors = ['#B4E8C9', '#82C79E', '#629A79', '#416951', '#263F30']
+
                 const startYear = this.startDate.year
-                for (let i = 1; i <= 5; i++ ) {
+                for (let i = 1; i <= 5; i++) {
                     const referenceYear = startYear + i
 
                     const dataset = {
                         label: referenceYear,
                         data: this.months.map((month) => {
                             const year = this.source === 'prodes' && month < 8 ? referenceYear + 1 : referenceYear
-
                             return this.data.find((datum) => {
                                 return datum.month === month && datum.year === year
                             }) || {}
                         }),
-                        backgroundColor: color.lighten(0.4 - (0.08 * i)).string(),
+                        backgroundColor: backgroundColors[i - 1],
                         barThickness: 50,
                     }
-
                     datasets.push(dataset)
                 }
 
                 return datasets
             },
+            fieldModel: vModel('activeField'),
             filterKey () {
                 return JSON.stringify({ ...this.filters, source: this.source })
             },
@@ -164,6 +181,10 @@
                 }))
             },
             months () {
+                if (this.data.length === 0) {
+                    return []
+                }
+
                 const months = this.source === 'deter'
                     ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
                     : [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7]
