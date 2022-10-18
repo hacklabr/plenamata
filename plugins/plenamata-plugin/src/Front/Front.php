@@ -126,12 +126,10 @@ class Front {
             ],
         );
 
-        wp_register_script( 'luxon', 'https://unpkg.com/luxon@2/build/global/luxon.min.js', [], false, true );
-
         wp_register_script(
             'estimatives-area-front-end',
             PLENAMATA_PLUGIN_URL . 'assets/build/js/estimatives-area.js',
-            [ 'luxon' ],
+            [],
 			Plugin::VERSION,
             true
         );
@@ -146,7 +144,7 @@ class Front {
         wp_register_script(
             'deforestation-charts-front-end',
             PLENAMATA_PLUGIN_URL . 'assets/build/js/deforestation-charts.js',
-            [ 'luxon' ],
+            [],
 			Plugin::VERSION,
             true
         );

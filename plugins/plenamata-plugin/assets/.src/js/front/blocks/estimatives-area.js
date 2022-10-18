@@ -1,11 +1,10 @@
 import { sprintf } from '@wordpress/i18n'
+import { DateTime, Interval } from 'luxon'
 
 import { __ } from '../dashboard/plugins/i18n'
 import { fetchDeterData, fetchLastDate } from '../utils/api'
 import { getEstimateDeforestation } from '../utils/estimates'
 import { roundNumber, shortDate } from '../utils/filters'
-
-const { DateTime, Interval } = window.luxon
 
 document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
     const updated = await fetchLastDate()

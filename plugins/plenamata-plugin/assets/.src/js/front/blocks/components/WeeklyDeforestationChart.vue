@@ -3,14 +3,13 @@
 </template>
 
 <script>
+    import { DateTime } from 'luxon'
     import { Bar } from 'vue-chartjs'
 
     import { __, sprintf } from '../../dashboard/plugins/i18n'
     import { getAreaKm2 } from '../../utils'
     import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
-
-    const { DateTime } = window.luxon
 
     export default {
         name: 'WeeklyDeforestationChart',

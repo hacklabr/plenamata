@@ -3,6 +3,7 @@
 </template>
 
 <script>
+    import { DateTime } from 'luxon'
     import { Bar } from 'vue-chartjs'
 
     import { __, _x, sprintf } from '../../dashboard/plugins/i18n'
@@ -10,7 +11,6 @@
     import { fetchDeterData } from '../../utils/api'
     import { roundNumber } from '../../utils/filters'
 
-    const { DateTime } = window.luxon
     const months = [
         null,
         _x('January', 'months', 'plenamata'),

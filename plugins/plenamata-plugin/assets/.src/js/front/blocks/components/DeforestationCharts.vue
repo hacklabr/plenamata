@@ -42,6 +42,8 @@
 </template>
 
 <script>
+    import { DateTime } from 'luxon'
+
     import MonthlyDeforestationChart from './MonthlyDeforestationChart.vue'
     import WeeklyDeforestationChart from './WeeklyDeforestationChart.vue'
     import YearlyDeforestationChart from './YearlyDeforestationChart.vue'
@@ -49,7 +51,6 @@
     import { fetchLastDate } from '../../utils/api'
     import { shortDate } from '../../utils/filters'
 
-    const { DateTime } = window.luxon
     const months = [
         null,
         _x('January', 'months', 'plenamata'),
