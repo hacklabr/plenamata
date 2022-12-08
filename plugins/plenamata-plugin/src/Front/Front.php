@@ -308,15 +308,9 @@ class Front {
     /**
      * Retrieve the link for estimate explainer
      */
-    public function get_explainer_link( string $language ){
-        $options = get_option( 'plenamata_options', [] );
-        $explainer_link = $options[ 'plenamata_estimate_explainer_' . $language ];
-
-        if ( empty( $explainer_link ) ) {
-            return null;
-        } else {
-            return $explainer_link;
-        }
+    public function get_explainer_link() {
+        $explainer_post = get_posts([ 'post_type' => 'verbete', 'name' => 'contador-de-arvores-derrubadas' ]);
+        return get_permalink($explainer_post[0]->ID);
     }
 
     /**
