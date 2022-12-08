@@ -100,7 +100,7 @@
     import WeeklyDeforestationEvolution from './WeeklyDeforestationEvolution.vue'
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
     import YearlyDeforestationEvolutionProdes from './YearlyDeforestationEvolutionProdes.vue'
-    import { capitalize, getAreaKm2, getTrees, localeSortBy, wait } from '../../utils'
+    import { formatCUName, getAreaKm2, getTrees, localeSortBy, wait } from '../../utils'
     import { fetchConservationUnits, fetchDeterData, fetchIndigenousLands, fetchLastDate, fetchMunicipalities, fetchNews, fetchUniqueNews } from '../../utils/api'
     import { firstValue, shortDate, stateCodeByName } from '../../utils/filters'
     import { clearSelectedNews } from '../../utils/mapInteractions'
@@ -213,7 +213,7 @@
                 return getTrees(this.thisYear)
             },
             ucs () {
-                return this.data.ucs.slice(0).sort(localeSortBy(uc => uc.uc))
+                return this.data.ucs.map(({ uc: name, ...uc }) => ({ uc: formatCUName(name), ...uc })).sort(localeSortBy(uc => uc.uc))
             },
             updated () {
                 return {
@@ -331,7 +331,6 @@
                     anchor.parentNode.insertBefore(new Text(text), anchor)
                 })
             },
-            capitalize,
             clearFilters () {
                 this.closeFilters()
                 this.activeField = ''

@@ -1,7 +1,23 @@
-import _capitalize from 'capitalize-pt-br'
+const _replacements = [
+    [/[áa]rea de prote[çc][ãa]o ambiental/g, 'apa'],
+    [/área de relevante interesse ecológic[oa]/g, 'arie'],
+    ['estação ecológica', 'esec'],
+    ['floresta estadual de rendimento sustentado', 'fers'],
+    ['floresta estadual', 'fes'],
+    ['floresta nacional', 'flona'],
+    ['parque estadual', 'pe'],
+    ['parque nacional', 'pn'],
+    ['reserva biológica', 'rebio'],
+    [/reserva de desenvolvimento sustent[áa]vel/g, 'rds'],
+    ['reserva extrativista', 'resex'],
+]
 
-export function capitalize (phrase) {
-    return _capitalize(phrase)
+export function formatCUName (name) {
+    let formattedName = name.toLocaleLowerCase()
+    for (const [from, to] of _replacements) {
+        formattedName = formattedName.replaceAll(from, to)
+    }
+    return formattedName.toLocaleUpperCase()
 }
 
 export function getAreaKm2 (datum) {
