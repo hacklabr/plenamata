@@ -101,7 +101,7 @@ class Front {
 	public function enqueue_scripts(): void {
         $dashboard_i18n = $this->get_dashboard_i18n();
         $language = apply_filters( 'wpml_current_language', NULL );
-        $explainer_link = $this->get_explainer_link( $language );
+        $explainer_link = self::get_explainer_link();
 
 		wp_enqueue_script(
 			'plenamata-plugin',
@@ -308,7 +308,7 @@ class Front {
     /**
      * Retrieve the link for estimate explainer
      */
-    public function get_explainer_link() {
+    public static function get_explainer_link() {
         $explainer_post = get_posts([ 'post_type' => 'verbete', 'name' => 'contador-de-arvores-derrubadas' ]);
         return get_permalink($explainer_post[0]->ID);
     }
