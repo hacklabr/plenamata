@@ -456,20 +456,19 @@
                 }
             },
             setMapEvents () {
-                if (this.jeomap !== undefined) {
+                document.body.addEventListener('jeo-open-spiderifier-pin', (e) => {
+                    this.openNews(e.detail.id)
+                })
+
+                wait(() => this.jeomap?.map, () => {
                     this.jeomap.map.on('click', 'unclustered-points', (e) => {
                         this.openNews(e.features[0].properties.id)
                     })
-                    this.jeomap.map.on('load', (map) => {
-                        // hide all states
+                    wait(() => this.jeomap?.map?.isStyleLoaded(), () => {
+                        this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
                         this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                         this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
-                        this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
                     })
-                }
-
-                document.body.addEventListener('jeo-open-spiderifier-pin', (e) => {
-                    this.openNews(e.detail.id)
                 })
             },
 
