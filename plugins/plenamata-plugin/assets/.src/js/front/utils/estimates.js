@@ -1,10 +1,25 @@
-import { fetchDeterData } from './api'
+import { fetchDeterData, fetchLastDate } from './api'
 import { getAreaKm2, getTrees } from './index'
 
 const CONVERGENCE_FACTOR = 0.1
 
 export async function getEstimateDeforestation (filters, { DateTime, Interval }) {
     let now = DateTime.now()
+    const lastDate = await fetchLastDate()
+
+    // Return early if no data for current year is available
+    if (now.year !== lastDate.deter_last_date.slice(0, 4)) {
+        const workingYear = lastDate.deter_last_date.slice(0, 4)
+        const workingData = await fetchDeterData({ ...filters, data1: `${workingYear}-01-01`, data2: `${workingYear}-12-31` })
+
+        return {
+            hectaresPerSecond: 0,
+            hectares: getAreaKm2(workingData[0]) * 100,
+            treesPerSecond: 0,
+            trees: getTrees(workingData[0]),
+            year: Number(workingYear),
+        }
+    }
 
     let lastFriday = DateTime.fromObject({ weekday: 5, hour: 11 }) // Friday, 11:00 A.M.
     if (now < lastFriday) {

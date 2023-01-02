@@ -29,7 +29,7 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
             el.textContent = roundNumber(hectaresPerDay)
         }
         else if (deterLabel === 'hectaresThisYear') {
-            const { hectares, hectaresPerSecond } = await getEstimateDeforestation({}, { DateTime, Interval })
+            const { hectares, hectaresPerSecond, year } = await getEstimateDeforestation({}, { DateTime, Interval })
 
             let hectaresCount = hectares
             el.textContent = roundNumber(hectaresCount)
@@ -38,13 +38,17 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
                 hectaresCount += hectaresPerSecond
                 el.textContent = roundNumber(hectaresCount)
             }, 1000)
+
+            document.querySelectorAll('[data-deter="estimativeYear"]').forEach((yearEl) => {
+                yearEl.textContent = String(year)
+            })
         }
         else if (deterLabel === 'sourcesLastWeek') {
             const sourcesLastWeek = sprintf(__('Source: DETER/INPE • Latest Update: %s with alerts detected until %s.', 'plenamata'), shortDate(updated.last_sync), shortDate(updated.deter_last_date))
             el.textContent = sourcesLastWeek
         }
         else if (deterLabel === 'treesEstimative') {
-            const { trees, treesPerSecond } = await getEstimateDeforestation({}, { DateTime, Interval })
+            const { trees, treesPerSecond, year } = await getEstimateDeforestation({}, { DateTime, Interval })
 
             let treeCount = trees
             el.textContent = roundNumber(treeCount)
@@ -53,6 +57,10 @@ document.defaultView.document.addEventListener('DOMContentLoaded', async () => {
                 treeCount += treesPerSecond
                 el.textContent = roundNumber(treeCount)
             }, 1000)
+
+            document.querySelectorAll('[data-deter="estimativeYear"]').forEach((yearEl) => {
+                yearEl.textContent = String(year)
+            })
         }
         else if (deterLabel === 'treesPerDay') {
             const treesPerDay = Number(thisYear[0].num_arvores) / daysThisYear.count('days')

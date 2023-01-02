@@ -55,7 +55,7 @@
                         <p>{{ sprintf(__('Estimates of trees cut down in %s', 'plenamata'), year) }}</p>
                     </header>
 
-                    <div v-if="displayedYear === actualYear" class="squareds-items">
+                    <div v-if="displayedYear === actualYear && actualYear === date.year" class="squareds-items">
                         <FelledTreesThisYear :filters="filters" :minutes="minutes" :trees="trees"/>
                         <TotalDeforestationThisYear :activeField.sync="activeField" :areaKm2="areaKm2" :date="date" :filters="filters" :unit.sync="unit" :updated="updated" :year="year"/>
                         <DeforestationSpeedThisYear :activeField.sync="activeField" :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="year"/>
