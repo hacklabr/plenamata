@@ -364,12 +364,12 @@
                 this.updateWPTotalPages()
             },
             async fetchNewsByPage (state = '', pageNum = 1) {
-                this.loadMoreText = __('Carregando...', 'plenamata')
+                this.loadMoreText = __('Loading...', 'plenamata')
                 const news = await fetchNews(state, pageNum)
                 this.news = this.news = [...this.news, ...news]
                 this.currentFetchNewsPage = pageNum
                 this.updateWPTotalPages()
-                this.loadMoreText = __('Ler mais', 'plenamata')
+                this.loadMoreText = __('Load more', 'plenamata')
             },
             async fetchUniqueNews (postId, callback) {
                 let news = await fetchUniqueNews(postId)
