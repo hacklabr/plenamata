@@ -9,7 +9,7 @@
             <Dropdown id="source-wdev" keyId="key" keyLabel="label" triggerClass="clean small color--3" :activeField.sync="fieldModel" :options="sources" :title="__('Timeframe', 'plenamata')" v-model="sourceModel"/>
         </template>
         <template #chart>
-            <p class="dashboard-panel__not-available" v-if="data.length === 0">{{ __('Data not available.', 'plenamata') }}</p>
+            <p class="dashboard-panel__not-available" v-if="data.length === 0">{{ __('No data available.', 'plenamata') }}</p>
             <ScrollGuard :scrolled="scrolled" v-else>
                 <Bar :chartData="chartData" :chartOptions="chartOptions" :height="263"/>
             </ScrollGuard>
