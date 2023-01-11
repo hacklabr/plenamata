@@ -89,7 +89,7 @@
                 const sortedData = []
 
                 if (this.source === 'deter') {
-                    for (let i = 1; i <= end.weekNumber; i++) {
+                    for (let i = 1; i <= this.data.length; i++) {
                         sortedData.push(this.findAreaKm2(i, startYear))
                     }
                 } else {
