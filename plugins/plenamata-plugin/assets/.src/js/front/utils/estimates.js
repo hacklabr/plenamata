@@ -3,13 +3,23 @@ import { getAreaKm2, getTrees } from './index'
 
 const CONVERGENCE_FACTOR = 0.1
 
+export function getEstimateYear (lastDate, { DateTime }) {
+    const lastDt = DateTime.fromISO(lastDate)
+    const now = DateTime.now()
+    if (now.year === lastDt.year && lastDt.ordinal >= 8) {
+        return now.year
+    } else {
+        return now.year - 1
+    }
+}
+
 export async function getEstimateDeforestation (filters, { DateTime, Interval }) {
     let now = DateTime.now()
     const lastDate = await fetchLastDate()
+    const workingYear = getEstimateYear(lastDate.deter_last_date, { DateTime })
 
     // Return early if no data for current year is available
-    if (now.year !== lastDate.deter_last_date.slice(0, 4)) {
-        const workingYear = lastDate.deter_last_date.slice(0, 4)
+    if (now.year !== workingYear) {
         const workingData = await fetchDeterData({ ...filters, data1: `${workingYear}-01-01`, data2: `${workingYear}-12-31` })
 
         return {
@@ -17,7 +27,7 @@ export async function getEstimateDeforestation (filters, { DateTime, Interval })
             hectares: getAreaKm2(workingData[0]) * 100,
             treesPerSecond: 0,
             trees: getTrees(workingData[0]),
-            year: Number(workingYear),
+            year: workingYear,
         }
     }
 

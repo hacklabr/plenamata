@@ -55,7 +55,7 @@
                         <p>{{ sprintf(__('Estimates of trees cut down in %s', 'plenamata'), year) }}</p>
                     </header>
 
-                    <div v-if="displayedYear === actualYear && actualYear === date.year" class="squareds-items">
+                    <div v-if="displayedYear === actualYear && actualYear === estimateYear" class="squareds-items">
                         <FelledTreesThisYear :filters="filters" :minutes="minutes" :trees="trees"/>
                         <TotalDeforestationThisYear :activeField.sync="activeField" :areaKm2="areaKm2" :date="date" :filters="filters" :unit.sync="unit" :updated="updated" :year="year"/>
                         <DeforestationSpeedThisYear :activeField.sync="activeField" :areaKm2="areaKm2" :days="days" :minutes="minutes" :trees="trees" :unit.sync="unit" :year="year"/>
@@ -103,6 +103,7 @@
     import { formatCUName, getAreaKm2, getTrees, localeSortBy, wait } from '../../utils'
     import { fetchConservationUnits, fetchDeterData, fetchIndigenousLands, fetchLastDate, fetchMunicipalities, fetchNews, fetchUniqueNews } from '../../utils/api'
     import { firstValue, shortDate, stateCodeByName } from '../../utils/filters'
+    import { getEstimateYear } from '../../utils/estimates'
     import { clearSelectedNews } from '../../utils/mapInteractions'
     import { sprintf, __ } from '../../dashboard/plugins/i18n'
 
@@ -172,6 +173,12 @@
             },
             displayedYear () {
                 return (this.filters.year === '') ? this.actualYear : this.filters.year
+            },
+            estimateYear () {
+                if (!this.lastUpdate) {
+                    return null
+                }
+                return getEstimateYear(this.lastUpdate.deter_last_date, { DateTime })
             },
             minutes () {
                 return this.daysThisYear.count('minutes')
