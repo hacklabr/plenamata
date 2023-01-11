@@ -178,7 +178,7 @@
                 if (!this.lastUpdate) {
                     return null
                 }
-                return getEstimateYear(this.lastUpdate.deter_last_date, { DateTime })
+                return getEstimateYear(this.year, this.lastUpdate.deter_last_date, { DateTime })
             },
             minutes () {
                 return this.daysThisYear.count('minutes')
