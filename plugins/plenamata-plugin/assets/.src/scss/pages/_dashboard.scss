@@ -639,6 +639,11 @@ main .dashboard {
         align-self: center;
     }
 
+    &__not-available {
+        margin-top: -10px;
+        text-align: left !important;
+    }
+
     &__number {
         margin-right: 10px;
         font-weight: 700;

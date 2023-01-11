@@ -243,6 +243,7 @@ class Front {
                 'Monthly deforestation rate in the selected territory' => __( 'Monthly deforestation rate in the selected territory', 'plenamata' ),
                 'Municipality' => __( 'Municipality', 'plenamata' ),
                 'News' => __( 'News', 'plenamata' ),
+                'No data available.' => __( 'No data available.', 'plenamata' ),
                 'No news to be shown.' => __( 'No news to be shown', 'plenamata' ),
                 'per day' => __( 'per day', 'plenamata' ),
                 'Period' => __( 'Period', 'plenamata' ),
