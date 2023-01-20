@@ -60,10 +60,10 @@ class RestApi {
     public function add_thumbnail_to_response( array $object ): string {
         $image_sizes = wp_get_additional_image_sizes();
 
-        if ( !empty( $image_sizes[ 'newspack-article-block-landscape-small' ] ) ) {
-            return get_the_post_thumbnail_url( $object[ 'id' ], 'newspack-article-block-landscape-small' );
+        if ( !empty( $image_sizes[ 'newspack-article-block-uncropped' ] ) ) {
+            return get_the_post_thumbnail_url( $object[ 'id' ], 'newspack-article-block-uncropped' );
         } else {
-            return get_the_post_thumbnail_url( $object[ 'id' ], 'thumbnail' );
+            return get_the_post_thumbnail_url( $object[ 'id' ], 'full' );
         }
     }
 
