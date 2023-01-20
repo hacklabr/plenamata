@@ -4,7 +4,7 @@
  *
  * Plugin Name:         Plenamata Plugin
  * Description:         The plugin powers deforestation dashboards and more.
- * Version:             0.14.3
+ * Version:             0.14.4
  * Requires at least:   5.0
  * Requires PHP:        7.4
  * Author:              hacklab/
