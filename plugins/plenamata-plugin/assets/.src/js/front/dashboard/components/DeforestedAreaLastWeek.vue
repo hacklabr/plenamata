@@ -17,7 +17,7 @@
             <span>{{ __('trees/minute', 'plenamata') }}</span>
         </template>
         <template #source>
-            {{ __('Source:', 'plenamata') }}: DETER/INPE
+            {{ __('Source', 'plenamata') }}: DETER/INPE
          </template>
     </DashboardPanel>
 </template>
