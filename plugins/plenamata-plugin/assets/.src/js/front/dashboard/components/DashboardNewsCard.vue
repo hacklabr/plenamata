@@ -5,7 +5,7 @@
         </div>
         <div class="texts">
             <span class="author-date">
-                <span class="dashboard-news__author">Por <strong>{{ author }}</strong></span>
+                <span class="dashboard-news__author" v-html="author"/>
                 <span class="dashboard-news__date">{{ shortDate(post.date) }}</span>
             </span>
             <h2><a :href="post.link" :target="externalSource ? '_blank' : '_self'" v-html="post.title.rendered"/></h2>
@@ -30,7 +30,13 @@
         },
         computed: {
             author () {
-                return this.post._embedded.author[0].name
+                if (this.post.author_line) {
+                    return this.post.author_line
+                } else if (this.post._embedded.author?.[0]?.name) {
+                    return `${ __('By', 'plenamata') } <strong>${this.post._embedded.author[0].name}</strong>`
+                } else {
+                    return ''
+                }
             },
             externalSource () {
                 const link = this.post.meta?.['external-source-link']

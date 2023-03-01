@@ -209,6 +209,7 @@ class Front {
                 'Area deforested last week in the selected territory' => __( 'Area deforested last week in the selected territory', 'plenamata' ),
                 'Area deforested' => __( 'Area deforested', 'plenamata' ),
                 'Area of deforestation alerts detected last week' => __( 'Area of deforestation alerts detected last week', 'plenamata' ),
+                'By' => __( 'By', 'plenamata' ),
                 'By deforestation' => __( 'By deforestation', 'plenamata' ),
                 'Clear filters' => __( 'Clear filters', 'plenamata' ),
                 'Conservation Unit' => __( 'Conservation Unit', 'plenamata' ),

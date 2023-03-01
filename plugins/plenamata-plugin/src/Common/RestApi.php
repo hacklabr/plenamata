@@ -44,11 +44,32 @@ class RestApi {
             'update_callback' => null,
             'schema' => null,
         ] );
+        if( function_exists( 'plenamata_get_author' ) ) {
+            register_rest_field( 'post', 'author_line', [
+                'get_callback' => [ $this, 'add_author_line_to_response' ],
+                'update_callback' => null,
+                'schema' => null,
+            ] );
+        }
         register_rest_field( 'verbete', 'plenamata_thumbnail', [
             'get_callback' => [ $this, 'add_thumbnail_to_response' ],
             'update_callback' => null,
             'schema' => null,
         ] );
+    }
+
+    /**
+     * Add authorship line to RESP API response.
+     *
+     * @param array $object The pre-serialized post object
+     * @return string The authorship line
+     */
+    public function add_author_line_to_response( array $object ): string {
+        if ( function_exists( 'plenamata_get_author' ) ) {
+            return plenamata_get_author( $object[ 'id' ], __( 'By', 'plenamata' ), false, false );
+        } else {
+            return '';
+        }
     }
 
     /**
