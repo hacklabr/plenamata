@@ -2,11 +2,7 @@ article.type-post {
 
     .entry-meta {
         display: flex;
-        flex-wrap: wrap;
-
-        & > * {
-            margin-right: 15px;
-        }
+        flex-direction: column;
 
         img {
             border-radius: 50%;
