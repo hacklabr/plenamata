@@ -312,8 +312,8 @@ class Front {
      * Retrieve the link for estimate explainer
      */
     public static function get_explainer_link() {
-        $explainer_post = get_posts([ 'post_type' => 'verbete', 'name' => 'contador-de-arvores-derrubadas' ]);
-        return get_permalink($explainer_post[0]->ID);
+        $explainer_post = get_page_by_path('contador-de-arvores-derrubadas', OBJECT, 'verbete');
+        return get_permalink($explainer_post->ID);
     }
 
     /**
