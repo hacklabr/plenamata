@@ -1,4 +1,4 @@
-const BASE_URL = 'https://plenamata.solved.eco.br/api/'
+const BASE_URL = 'https://api.plenamata.eco/api/'
 const cache = new Map()
 
 async function get (url, cacheable = true, saveHeaders = false ) {
