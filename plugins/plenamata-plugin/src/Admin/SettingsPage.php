@@ -110,6 +110,19 @@ class SettingsPage {
 
         $active_languages = apply_filters( 'wpml_active_languages', NULL, [] );
 
+        add_settings_field(
+            'plenamata_dashboard_api_url',
+            __( 'API URL', 'plenamata' ),
+            [ $this, 'settings_input_cb' ],
+            'plenamata-plugin',
+            'plenamata_dashboard',
+            [
+                'label_for' => 'plenamata_dashboard_api_url',
+                'placeholder' => 'https://api.plenamata.eco/api/',
+                'type' => 'text',
+            ],
+        );
+
         foreach ($active_languages as $key => $language) {
             $field_id = 'plenamata_dashboard_map_' . $key;
 
@@ -121,6 +134,7 @@ class SettingsPage {
                 'plenamata_dashboard',
                 [
                     'label_for' => $field_id,
+                    'placeholder' => '99',
                     'type' => 'text',
                 ],
             );
@@ -140,6 +154,7 @@ class SettingsPage {
             id="<?= esc_attr( $key ) ?>"
             name="plenamata_options[<?= esc_attr( $key ) ?>]"
             type="<?= $args[ 'type' ] ?>"
+            placeholder="<?= $args['placeholder'] ?>"
             value="<?= isset( $options[ $key ] ) ? esc_attr( $options[ $key ] ) : '' ?>"
         >
         <?php

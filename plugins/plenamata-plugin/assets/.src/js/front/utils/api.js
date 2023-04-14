@@ -1,5 +1,6 @@
-const BASE_URL = 'https://api.plenamata.eco/api/'
 const cache = new Map()
+const deterApi = window.PlenamataDashboard.deterUrl
+const wpRestApi = window.PlenamataDashboard.restUrl
 
 async function get (url, cacheable = true, saveHeaders = false ) {
     if (cacheable && cache.has(url)) {
@@ -31,57 +32,57 @@ function searchParams (object) {
 }
 
 export async function fetchConservationUnits () {
-    return get(`${BASE_URL}deter/lista/uc`)
+    return get(`${deterApi}deter/lista/uc`)
 }
 
 export async function fetchDeterData ({ estado, municipio, ti, uc, ...args }) {
     const params = searchParams(args)
 
     if (municipio) {
-        return get(`${BASE_URL}deter/municipios?geocode=${municipio}&${params}`)
+        return get(`${deterApi}deter/municipios?geocode=${municipio}&${params}`)
     } else if (estado) {
-        return get(`${BASE_URL}deter/estados?estado=${estado}&${params}`)
+        return get(`${deterApi}deter/estados?estado=${estado}&${params}`)
     } else if (ti) {
-        return get(`${BASE_URL}deter/ti?cod=${ti}&${params}`)
+        return get(`${deterApi}deter/ti?cod=${ti}&${params}`)
     } else if (uc) {
-        return get(`${BASE_URL}deter/uc?cod=${uc}&${params}`)
+        return get(`${deterApi}deter/uc?cod=${uc}&${params}`)
     } else {
-        return get(`${BASE_URL}deter/basica?${params}`)
+        return get(`${deterApi}deter/basica?${params}`)
     }
 }
 
 export async function fetchIndigenousLands () {
-    return get(`${BASE_URL}deter/lista/ti`)
+    return get(`${deterApi}deter/lista/ti`)
 }
 
 export async function fetchLastDate () {
-    return get(`${BASE_URL}deter/last_date`)
+    return get(`${deterApi}deter/last_date`)
 }
 
 export async function fetchMunicipalities (uf) {
-    return get(`${BASE_URL}deter/lista/municipio?uf=${uf}`)
+    return get(`${deterApi}deter/lista/municipio?uf=${uf}`)
 }
 
 export async function fetchNews (state = '', pageNum = 1) {
-    return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/?_embed&state=${state}&page=${pageNum}`, false, true)
+    return get(`${wpRestApi}wp/v2/posts/?_embed&state=${state}&page=${pageNum}`, false, true)
 }
 
 export async function fetchUniqueNews (postId) {
-    return get(`${window.PlenamataDashboard.restUrl}wp/v2/posts/${postId}/?_embed`, false, false)
+    return get(`${wpRestApi}wp/v2/posts/${postId}/?_embed`, false, false)
 }
 
 export async function fetchProdesData ({ estado, municipio, ti, uc, ...args }) {
     const params = searchParams(args)
 
     if (municipio) {
-        return get(`${BASE_URL}prodes/municipios?geocode=${municipio}&${params}`)
+        return get(`${deterApi}prodes/municipios?geocode=${municipio}&${params}`)
     } else if (estado) {
-        return get(`${BASE_URL}prodes/taxaanoestado?uf=${estado}`)
+        return get(`${deterApi}prodes/taxaanoestado?uf=${estado}`)
     } else if (ti) {
-        return get(`${BASE_URL}prodes/ti?cod=${ti}&${params}`)
+        return get(`${deterApi}prodes/ti?cod=${ti}&${params}`)
     } else if (uc) {
-        return get(`${BASE_URL}prodes/uc?cod=${uc}&${params}`)
+        return get(`${deterApi}prodes/uc?cod=${uc}&${params}`)
     } else {
-        return get(`${BASE_URL}prodes/taxaano`)
+        return get(`${deterApi}prodes/taxaano`)
     }
 }

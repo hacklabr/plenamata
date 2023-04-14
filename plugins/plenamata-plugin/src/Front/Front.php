@@ -102,6 +102,13 @@ class Front {
         $dashboard_i18n = $this->get_dashboard_i18n();
         $language = apply_filters( 'wpml_current_language', NULL );
         $explainer_link = self::get_explainer_link();
+        $plenamata_options = get_option( 'plenamata_options' );
+
+        if ( !empty( $plenamata_options[ 'plenamata_dashboard_api_url' ] ) ) {
+            $deter_url = $plenamata_options[ 'plenamata_dashboard_api_url' ];
+        } else {
+            $deter_url = 'https://api.plenamata.eco/api/';
+        }
 
 		wp_enqueue_script(
 			'plenamata-plugin',
@@ -135,6 +142,7 @@ class Front {
         );
 
         wp_localize_script( 'estimatives-area-front-end', 'PlenamataDashboard', [
+            'deterUrl' => $deter_url,
             'explainerUrl' => $explainer_link,
             'i18n' => $dashboard_i18n,
             'language' => $language,
@@ -173,6 +181,7 @@ class Front {
             );
 
             wp_localize_script( 'plenamata-dashboard', 'PlenamataDashboard', [
+                'deterUrl' => $deter_url,
                 'explainerUrl' => $explainer_link,
                 'i18n' => $dashboard_i18n,
                 'language' => $language,
