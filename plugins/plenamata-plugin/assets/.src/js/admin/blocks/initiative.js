@@ -80,7 +80,15 @@ registerBlockType('plenamata/initiative', {
                         <MediaUploadCheck>
                             <MediaUpload
                                 allowedTypes={ ALLOW_IMAGES }
-                                onSelect={ (media) => setAttributes({ whereImage: media.sizes.medium.url }) }
+                                onSelect={ (media) => {
+                                    if (media.sizes.hasOwnProperty('medium')) {
+                                        setAttributes({ whereImage: media.sizes.medium.url })
+                                    } else if (media.sizes.hasOwnProperty('thumbnail')) {
+                                        setAttributes({ whereImage: media.sizes.thumbnail.url })
+                                    } else if (media.sizes.hasOwnProperty('full')) {
+                                        setAttributes({ whereImage: media.sizes.full.url })
+                                    }
+                                } }
                                 render={ ({ open }) => (
                                     <Button className="is-primary" onClick={ open }>
                                         { __('Upload image', 'plenamata') }
