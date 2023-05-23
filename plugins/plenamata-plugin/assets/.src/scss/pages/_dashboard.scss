@@ -165,6 +165,7 @@ main .dashboard {
             .fields {
                 display: flex;
                 height: 100%;
+                z-index: 1;
 
                 > .custom-drop {
                     flex: 1 1 0px;
