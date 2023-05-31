@@ -1,6 +1,6 @@
 <template>
     <VTooltip placement="top" theme="dropdown" :triggers="['click', 'focus']">
-        <img :src="`${$plenamata.pluginUrl}assets/build/img/tooltip-icon.svg`" :alt="alt">
+        <img :src="`${$plenamata.pluginUrl}assets/build/img/tooltip-icon.svg`" :alt="alt" @click.stop>
         <template #popper>
             <slot/>
         </template>

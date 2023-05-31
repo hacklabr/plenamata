@@ -14,8 +14,20 @@
                     <span class="fields">
                         <Dropdown id="select-estados" icon="map-states" keyId="uf" keyLabel="name" :activeField.sync="activeField" :options="states" :placeholder="__('All states', 'plenamata')" :title="__('All states', 'plenamata')" v-model="filters.estado"/>
                         <Dropdown id="select-municipios" icon="map-cities" keyId="mun_geo_cod" keyLabel="municipio" :activeField.sync="activeField" :disabled="filters.estado === ''" :options="data.municipalities" :placeholder="__('All municipalities', 'plenamata')" :title="__('All municipalities', 'plenamata')" v-model="filters.municipio"/>
-                        <Dropdown id="select-land" icon="lands" keyId="code" keyLabel="ti" :activeField.sync="activeField" :options="tis" :placeholder="__('All ILs', 'plenamata')" :title="__('Indigenous Land', 'plenamata')" v-model="filters.ti"/>
-                        <Dropdown id="select-unit" icon="units" keyId="code" keyLabel="uc" :activeField.sync="activeField" :options="ucs" :placeholder="__('All CUs', 'plenamata')" :title="__('Conservation Unit', 'plenamata')" v-model="filters.uc"/>
+                        <Dropdown id="select-land" icon="lands" keyId="code" keyLabel="ti" :activeField.sync="activeField" :options="tis" :placeholder="__('All ILs', 'plenamata')" :title="__('Indigenous Land', 'plenamata')" v-model="filters.ti">
+                            <template #tooltip>
+                                <Tooltip :alt="__('Indigenous Land', 'plenamata')">
+                                    <a :href="$dashboard.ucLink">{{ __('Indigenous Land', 'plenamata') }}</a>
+                                </Tooltip>
+                            </template>
+                        </Dropdown>
+                        <Dropdown id="select-unit" icon="units" keyId="code" keyLabel="uc" :activeField.sync="activeField" :options="ucs" :placeholder="__('All CUs', 'plenamata')" :title="__('Conservation Unit', 'plenamata')" v-model="filters.uc">
+                            <template #tooltip>
+                                <Tooltip :alt="__('Conservation Unit', 'plenamata')">
+                                    <a :href="$dashboard.tiLink">{{ __('Conservation Unit', 'plenamata') }}</a>
+                                </Tooltip>
+                            </template>
+                        </Dropdown>
                         <Dropdown id="select-year" icon="period" keyId="key" keyLabel="label" :activeField.sync="activeField" :options="range" :placeholder="__('All periods', 'plenamata')" :title="__('Select period', 'plenamata')" v-model="filters.year"/>
                     </span>
                     <span class="controls">
@@ -96,6 +108,7 @@
     import Dropdown from './Dropdown.vue'
     import FelledTreesThisYear from './FelledTreesThisYear.vue'
     import MonthlyDeforestationEvolution from './MonthlyDeforestationEvolution.vue'
+    import Tooltip from './Tooltip.vue'
     import TotalDeforestationThisYear from './TotalDeforestationThisYear.vue'
     import WeeklyDeforestationEvolution from './WeeklyDeforestationEvolution.vue'
     import YearlyDeforestationEvolutionDeter from './YearlyDeforestationEvolutionDeter.vue'
@@ -117,6 +130,7 @@
             Dropdown,
             FelledTreesThisYear,
             MonthlyDeforestationEvolution,
+            Tooltip,
             TotalDeforestationThisYear,
             WeeklyDeforestationEvolution,
             YearlyDeforestationEvolutionDeter,

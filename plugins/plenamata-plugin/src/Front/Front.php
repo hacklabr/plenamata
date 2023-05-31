@@ -102,6 +102,8 @@ class Front {
         $dashboard_i18n = $this->get_dashboard_i18n();
         $language = apply_filters( 'wpml_current_language', NULL );
         $explainer_link = self::get_explainer_link();
+        $ti_link = self::get_verbete_link('terra-indigena', 'recortes-territoriais');
+        $uc_link = self::get_verbete_link('unidade-de-conservacao', 'recortes-territoriais');
         $plenamata_options = get_option( 'plenamata_options' );
 
         if ( !empty( $plenamata_options[ 'plenamata_dashboard_api_url' ] ) ) {
@@ -187,6 +189,8 @@ class Front {
                 'language' => $language,
                 'pluginUrl' => PLENAMATA_PLUGIN_URL,
                 'restUrl' => get_rest_url(),
+                'tiLink' => $ti_link,
+                'ucLink' => $uc_link,
             ] );
         }
 

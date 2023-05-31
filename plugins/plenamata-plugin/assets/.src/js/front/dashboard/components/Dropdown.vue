@@ -3,7 +3,7 @@
         <em>
             <button class="toggle" :class="triggerClass" type="button" tabindex="0" :disabled="disabled">
                 <i :class="icon"></i>
-                <strong><span>{{ label }}</span></strong>
+                <strong><span>{{ label }} <slot name="tooltip"/></span></strong>
             </button>
         </em>
         <div class="custom-drop--options">
