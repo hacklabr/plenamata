@@ -8,6 +8,13 @@
 
 body.page-template-template-dashboard {
 
+    &.search-opened {
+
+        #page-search {
+            z-index: 99;
+        }
+    }
+
     // needed to work div map with position:sticky;
     #page {
         overflow: inherit !important;
@@ -165,7 +172,6 @@ main .dashboard {
             .fields {
                 display: flex;
                 height: 100%;
-                z-index: 1;
 
                 > .custom-drop {
                     flex: 1 1 0px;
@@ -956,7 +962,7 @@ main .dashboard {
             align-items: initial;
             width: 100vw;
             padding: 10px 19px 31px;
-            z-index: 9990;
+            z-index: 98;
             background: #FFFFFF;
             height: calc( 100vh - 57px );
 
