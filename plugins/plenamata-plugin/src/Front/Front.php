@@ -326,6 +326,19 @@ class Front {
     }
 
     /**
+     * Retrieve the link for verbete with a specific section selected
+     */
+    public static function get_verbete_link (string $slug, string $section = '') {
+        $verbete_post = get_page_by_path($slug, OBJECT, 'verbete');
+        $link = get_permalink($verbete_post->ID);
+        if (!empty($section)) {
+            $anchor = get_term_by('slug', $section, 'secao')->slug;
+            $link .= '?secao=' . $anchor;
+        }
+        return $link;
+    }
+
+    /**
      * Register JEO scripts.
      */
     private function register_jeo_assets(): void {
