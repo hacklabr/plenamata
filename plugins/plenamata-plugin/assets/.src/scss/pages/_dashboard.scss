@@ -193,10 +193,10 @@ main .dashboard {
                     display: block;
                 }
                 button.toggle {
-
                     display: flex;
                     flex-direction: column;
                     padding: 22px 16px 18px;
+                    position: relative;
 
                     &:after {
                         display: none;
@@ -265,6 +265,12 @@ main .dashboard {
                             transform: rotate(45deg);
                             transition: all .4s ease-in-out;
                         }
+                    }
+
+                    .v-popper {
+                        position: absolute;
+                        right: 37px;
+                        top: 27px;
                     }
                 }
 
@@ -1006,6 +1012,12 @@ main .dashboard {
                             width: 25px;
                             height: 25px;
                         }
+                    }
+
+                    .v-popper {
+                        right: 35px;
+                        top: calc(50% - 7px);
+                        z-index: 10;
                     }
                 }
 
