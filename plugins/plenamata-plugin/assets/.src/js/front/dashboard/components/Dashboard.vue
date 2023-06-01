@@ -17,14 +17,14 @@
                         <Dropdown id="select-land" icon="lands" keyId="code" keyLabel="ti" :activeField.sync="activeField" :options="tis" :placeholder="__('All ILs', 'plenamata')" :title="__('Indigenous Land', 'plenamata')" v-model="filters.ti">
                             <template #tooltip>
                                 <Tooltip :alt="__('Indigenous Land', 'plenamata')">
-                                    <a :href="$dashboard.ucLink">{{ __('Indigenous Land', 'plenamata') }}</a>
+                                    <a :href="$dashboard.tiLink" target="_blank">{{ __('Indigenous Land', 'plenamata') }}</a>
                                 </Tooltip>
                             </template>
                         </Dropdown>
                         <Dropdown id="select-unit" icon="units" keyId="code" keyLabel="uc" :activeField.sync="activeField" :options="ucs" :placeholder="__('All CUs', 'plenamata')" :title="__('Conservation Unit', 'plenamata')" v-model="filters.uc">
                             <template #tooltip>
                                 <Tooltip :alt="__('Conservation Unit', 'plenamata')">
-                                    <a :href="$dashboard.tiLink">{{ __('Conservation Unit', 'plenamata') }}</a>
+                                    <a :href="$dashboard.ucLink" target="_blank">{{ __('Conservation Unit', 'plenamata') }}</a>
                                 </Tooltip>
                             </template>
                         </Dropdown>
