@@ -419,6 +419,12 @@ Exemplo de resposta:
 
 Dados acumulados de cada estado.
 
+#### Parâmetros `GET`
+
+| Campo | Tipo | Obrigatório | Descrição |
+| --- | --- | --- | --- |
+| `uf` | string | Não | Sigla do estado |
+
 #### Resposta
 
 Array de objetos.
