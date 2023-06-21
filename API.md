@@ -513,4 +513,3 @@ Exemplo de resposta:
   }
 ]
 ```
-v
