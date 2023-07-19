@@ -242,8 +242,8 @@ msgid "Deforestation rate in"
 msgstr "Área Deforestada en"
 
 #: src/Front/Front.php:264
-msgid "Drag to see more"
-msgstr "Arrastra para ver más"
+msgid "Click and drag to see more"
+msgstr "Haga clic y arrastra para ver más"
 
 #: src/Front/Front.php:265
 msgid "during DETER year"

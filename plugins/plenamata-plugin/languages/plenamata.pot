@@ -299,7 +299,7 @@ msgstr ""
 
 #: src/Front/Front.php:229
 #: assets/build/js/dashboard.js:1
-msgid "Drag to see more"
+msgid "Click and drag to see more"
 msgstr ""
 
 #: src/Front/Front.php:230

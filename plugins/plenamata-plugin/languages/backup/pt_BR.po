@@ -230,8 +230,8 @@ msgid "Deforestation rate in"
 msgstr "Taxa de desmatamento em"
 
 #: src/Front/Front.php:261
-msgid "Drag to see more"
-msgstr "Arraste para ver mais"
+msgid "Click and drag to see more"
+msgstr "Clique e arraste para ver mais"
 
 #: src/Front/Front.php:262
 msgid "during DETER year"
