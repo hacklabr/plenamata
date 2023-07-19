@@ -9,7 +9,7 @@ export default {
         }
     },
     watch: {
-        filterKey: {
+        data: {
             handler () {
                 this.scrolled = this.chartOptions.scales.x.min === 0
             },
