@@ -74,7 +74,7 @@
                         <DeforestedAreaLastWeek :activeField.sync="activeField" :lastWeek="lastWeek" :unit.sync="unit" :updated="updated"/>
                     </div>
 
-                    <DeforestationCharts/>
+                    <DeforestationCharts :filteredYear="filters.year"/>
                     <WeeklyDeforestationEvolution :activeField.sync="activeField" :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="filters.year"/>
                     <MonthlyDeforestationEvolution :activeField.sync="activeField" :date="date" :filters="filters" :source.sync="source" :unit.sync="unit" :updated="updated" />
                     <YearlyDeforestationEvolutionDeter :activeField.sync="activeField" :date="date" :filters="filters" :unit.sync="unit" :updated="updated" />
