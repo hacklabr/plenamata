@@ -790,6 +790,7 @@ main .dashboard {
     display: flex;
     margin-bottom: 25px;
     background: #FFFFFF;
+    transition:200ms ease border;
 
     .texts {
         flex: 1;
@@ -846,6 +847,10 @@ main .dashboard {
             margin-left: 4px;
             width: 10px;
         }
+    }
+
+    &.selected {
+        border:1px solid #263f30;
     }
 }
 
