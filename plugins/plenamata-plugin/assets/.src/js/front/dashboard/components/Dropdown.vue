@@ -66,7 +66,7 @@ export default {
             let returnLabel = this.placeholder
             for (let i = 0; i < keys.length; i++) {
                 const option = this.options[keys[i]]
-                if (option[this.keyId] === this.value) {
+                if (String(option[this.keyId]) === String(this.value)) {
                     returnLabel = option[this.keyLabel]
                 }
             }

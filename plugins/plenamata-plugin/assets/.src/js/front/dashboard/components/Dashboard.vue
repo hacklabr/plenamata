@@ -271,22 +271,33 @@ export default {
     },
     watch: {
         filters: {
-            handler() {
+            async handler() {
                 this.closeFilters()
-                this.fetchData()
+
+
+                await this.fetchData()
+
+                const queryParams = new URLSearchParams(window.location.search);
+                queryParams.set('filter_estado', this.filters.estado);
+                queryParams.set('filter_municipio', this.filters.municipio);
+                queryParams.set('filter_ti', this.filters.ti);
+                queryParams.set('filter_uc', this.filters.uc);
+                queryParams.set('filter_year', this.filters.year);
+                window.history.replaceState({}, '', `${window.location.pathname}?${queryParams.toString()}`);
+
                 if (!this.filters.estado && !this.filters.municipio && !this.filters.ti && !this.filters.uc) {
                     wait(() => this.jeomap.map?.isStyleLoaded(), () => {
                         this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
                         this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                         this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
-                        this.flyTo({ lat: this.jeomap.getArg('center_lat'), long: this.jeomap.getArg('center_lon'), zoom: this.jeomap.getArg('initial_zoom') })
                     })
                 }
+
             },
             deep: true,
         },
         async 'filters.estado'() {
-            this.filters.municipio = ''
+            //this.filters.municipio = ''
 
             if (this.filters.estado) {
                 this.data.municipalities = await fetchMunicipalities(this.filters.estado)
@@ -352,16 +363,62 @@ export default {
         ])
         this.data = { municipalities: [], tis, ucs }
         this.lastUpdate = lastUpdate
+
         this.year = Number(lastUpdate.deter_last_date.slice(0, 4))
         await this.fetchData()
         this.fetchNews()
         this.addLayerDates()
+        const queryParams = new URLSearchParams(window.location.search);
+
+        let _filters = {};
+        _filters.estado = queryParams.get('filter_estado') || '';
+        _filters.municipio = queryParams.get('filter_municipio') || '';
+        _filters.ti = queryParams.get('filter_ti') || '';
+        _filters.uc = queryParams.get('filter_uc') || '';
+        _filters.year = queryParams.get('filter_year') || '';
+        _filters.lat = queryParams.get('lat') || '';
+        _filters.long = queryParams.get('lng') || '';
+        _filters.zoom = queryParams.get('zoom') || '';
+
+        if (_filters.municipio != '' || _filters.estado != '') {
+            this.filters.estado = _filters.estado;
+            wait(() => this.data.municipalities, () => {
+                this.filters.municipio = _filters.municipio;
+            });
+        }
+        if (_filters.ti != '') {
+            wait(() => this.data.tis, () => {
+                this.filters.ti = _filters.ti;
+            });
+        }
+        if (_filters.uc != '') {
+            wait(() => this.data.ucs, () => {
+                this.filters.uc = _filters.uc;
+            });
+        }
+        
+        if (_filters.year != '') {
+            wait(() => this.data, () => {
+                this.filters.year = _filters.year;
+            });
+        }
+
+        if( _filters.long != '' && _filters.lat != '' && _filters.zoom != '' ) {
+            wait(() => this.jeomap?.map?.isStyleLoaded(), () => {
+                this.flyTo(_filters);
+            });
+        } else { 
+            wait(() => this.jeomap?.map?.isStyleLoaded(), () => {
+                this.flyTo({ lat: this.jeomap.getArg('center_lat'), long: this.jeomap.getArg('center_lon'), zoom: this.jeomap.getArg('initial_zoom') })
+            });
+        }
     },
     mounted() {
         const mapEl = document.querySelector('.jeomap')
         this.$refs.map.appendChild(mapEl)
         this.setMapObject()
         this.setMapEvents()
+
     },
     beforeUpdate() {
         this.setMapObject()
@@ -394,6 +451,10 @@ export default {
             this.showFilters = false
         },
         async fetchData() {
+            if (!this.date) {
+                return;
+            }
+
             const weekAgo = this.date.minus({ days: 6 })
 
             const [thisYear, lastWeek] = await Promise.all([
@@ -508,14 +569,31 @@ export default {
             })
 
             wait(() => this.jeomap?.map, () => {
+
                 this.jeomap.map.on('click', 'unclustered-points', (e) => {
                     this.openNews(e.features[0].properties.id)
                 })
+
+                this.jeomap.map.on('moveend', () => {
+                    const { lng, lat } = this.jeomap.map.getCenter();
+                    const zoom = this.jeomap.map.getZoom();
+                    
+                    const queryParams = new URLSearchParams(window.location.search);
+                    queryParams.set('lat', lat);
+                    queryParams.set('lng', lng);
+                    queryParams.set('zoom', zoom);
+
+                    window.history.replaceState({}, '', `${window.location.pathname}?${queryParams.toString()}`);
+
+                });
+
                 wait(() => this.jeomap?.map?.isStyleLoaded(), () => {
                     this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')
                     this.jeomap.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
                     this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
+
                 })
+
             })
         },
 
