@@ -95,7 +95,7 @@
                             :updated="updated" />
                     </div>
 
-                    <DeforestationCharts :filteredYear="filters.year" />
+                    <DeforestationCharts :filteredYear="filters.year" :filters="filters" />
                     <WeeklyDeforestationEvolution :activeField.sync="activeField" :date="date" :filters="filters"
                         :source.sync="source" :unit.sync="unit" :updated="updated" :year.sync="filters.year" />
                     <MonthlyDeforestationEvolution :activeField.sync="activeField" :date="date" :filters="filters"
@@ -297,7 +297,7 @@ export default {
             deep: true,
         },
         async 'filters.estado'() {
-            //this.filters.municipio = ''
+            this.filters.municipio = ''
 
             if (this.filters.estado) {
                 this.data.municipalities = await fetchMunicipalities(this.filters.estado)
@@ -331,10 +331,12 @@ export default {
                 this.filters.estado = ''
                 this.filters.municipio = ''
                 this.filters.uc = ''
-                this.jeomap.map.setFilter('tis-brasil', ['==', ['get', 'terrai_cod'], +this.filters.ti])
-                this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'visible')
-                const { lat, long } = this.data.tis.find(item => item.code == this.filters.ti)
-                this.flyTo({ lat, long })
+                wait(() => this.jeomap.map?.isStyleLoaded(), () => {
+                    this.jeomap.map.setFilter('tis-brasil', ['==', ['get', 'terrai_cod'], +this.filters.ti])
+                    this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'visible')
+                    const { lat, long } = this.data.tis.find(item => item.code == this.filters.ti)
+                    this.flyTo({ lat, long })
+                })
             } else {
                 this.jeomap.map.setFilter('tis-brasil', null)
                 this.jeomap.map.setLayoutProperty('tis-brasil', 'visibility', 'none')
@@ -345,10 +347,13 @@ export default {
                 this.filters.estado = ''
                 this.filters.municipio = ''
                 this.filters.ti = ''
-                this.jeomap.map.setFilter('ucs-brasil', ['==', ['get', 'id'], +this.filters.uc])
-                this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'visible')
-                const { lat, long } = this.data.ucs.find(item => item.code == this.filters.uc)
-                this.flyTo({ lat, long })
+                wait(() => this.jeomap.map?.isStyleLoaded(), () => {
+                    this.jeomap.map.setFilter('ucs-brasil', ['==', ['get', 'id'], +this.filters.uc])
+                    this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'visible')
+                    const { lat, long } = this.data.ucs.find(item => item.code == this.filters.uc)
+                    this.flyTo({ lat, long })
+                })
+
             } else {
                 this.jeomap.map.setFilter('ucs-brasil', null)
                 this.jeomap.map.setLayoutProperty('ucs-brasil', 'visibility', 'none')

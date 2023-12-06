@@ -19,6 +19,7 @@ export default {
     props: {
         date: { type: DateTime, required: true },
         startDateEndDate: { required: false },
+        filters: { required: false }
     },
     data() {
         return {
@@ -32,7 +33,16 @@ export default {
                     this.fetchData();
                 });
             },
-            immediate: true, // para garantir que a função seja chamada imediatamente na criação
+            immediate: true,
+        },
+        'filters': {
+            handler() {
+                this.$nextTick(() => {
+                    this.fetchData();
+                });
+            },
+            immediate: true,
+            deep: true
         },
     },
     methods: {
@@ -40,10 +50,13 @@ export default {
             let baseDate = this.date
             let start, end;
 
-            if (this.startDateEndDate && typeof this.startDateEndDate == 'object' ) {
+            if (this.startDateEndDate && typeof this.startDateEndDate == 'object') {
                 start = DateTime.fromISO(this.startDateEndDate[0]);
                 end = DateTime.fromISO(this.startDateEndDate[1]);
             } else {
+                if (!baseDate || !baseDate.isValid) {
+                    return;
+                }
                 start = baseDate.startOf('year')
                 end = baseDate
 
@@ -54,8 +67,21 @@ export default {
                 }
             }
 
+            let requestParams = { data1: start.toISODate(), data2: end.toISODate(), group_by: 'semana' };
+            if( this.filters && typeof this.filters == 'object' ) {
+                if( this.filters.uc ) {
+                    requestParams.uc = this.filters.uc
+                } else if (this.filters.ti ) {
+                    requestParams.ti = this.filters.ti
+                } else if (this.filters.municipio ) {
+                    requestParams.municipio = this.filters.municipio
+                } else if( this.filters.estado ) {
+                    requestParams.estado = this.filters.estado
+                }
+            }
 
-            const data = await fetchDeterData({ data1: start.toISODate(), data2: end.toISODate(), group_by: 'semana' })
+            const data = await fetchDeterData( requestParams );
+
             this.data = data
         }
     },

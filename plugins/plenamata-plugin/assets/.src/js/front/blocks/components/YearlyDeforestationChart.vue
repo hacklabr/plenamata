@@ -53,8 +53,21 @@ export default {
                 intervals.unshift([start.minus({ years: i }), end.minus({ years: i }).endOf('year')])
             }
 
+            let requestParams = {};
+            if( this.filters && typeof this.filters == 'object' ) {
+                if( this.filters.uc ) {
+                    requestParams.uc = this.filters.uc
+                } else if (this.filters.ti ) {
+                    requestParams.ti = this.filters.ti
+                } else if (this.filters.municipio ) {
+                    requestParams.municipio = this.filters.municipio
+                } else if( this.filters.estado ) {
+                    requestParams.estado = this.filters.estado
+                }
+            }
+
             const data = await Promise.all(intervals.map(([start, end]) => {
-                return fetchDeterData({ data1: start.toISODate(), data2: end.toISODate(), group_by: 'ano' })
+                return fetchDeterData({ data1: start.toISODate(), data2: end.toISODate(), group_by: 'ano', ...requestParams })
             }))
 
             this.data = data

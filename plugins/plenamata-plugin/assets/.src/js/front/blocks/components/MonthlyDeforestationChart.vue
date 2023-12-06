@@ -35,6 +35,7 @@ export default {
     props: {
         date: { type: DateTime, required: true },
         startDateEndDate: { required: false },
+        filters: { required: false }
     },
     data() {
         return {
@@ -49,6 +50,15 @@ export default {
                 });
             },
             immediate: true, // para garantir que a função seja chamada imediatamente na criação
+        },
+        'filters': {
+            handler() {
+                this.$nextTick(() => {
+                    this.fetchData();
+                });
+            },
+            immediate: true,
+            deep: true
         },
     },
     methods: {
@@ -70,9 +80,22 @@ export default {
                 }
             }
 
+            let requestParams = { data1: start.toISODate(), data2: end.toISODate(), group_by: 'mes' };
+            if( this.filters && typeof this.filters == 'object' ) {
+                if( this.filters.uc ) {
+                    requestParams.uc = this.filters.uc
+                } else if (this.filters.ti ) {
+                    requestParams.ti = this.filters.ti
+                } else if (this.filters.municipio ) {
+                    requestParams.municipio = this.filters.municipio
+                } else if( this.filters.estado ) {
+                    requestParams.estado = this.filters.estado
+                }
+            }
 
-            const data = await fetchDeterData({ data1: start.toISODate(), data2: end.toISODate(), group_by: 'mes' });
+            const data = await fetchDeterData( requestParams );
             this.data = data
+
         }
     },
     computed: {

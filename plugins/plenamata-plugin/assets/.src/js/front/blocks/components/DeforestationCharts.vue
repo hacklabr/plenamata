@@ -22,12 +22,12 @@
                 </fieldset>
             </header>
             <template v-if="lastUpdate">
-                <div class="deforestation-charts__chart">
+                <div class="deforestation-charts__chart" v-if="date.isValid">
                     <keep-alive>
                         <WeeklyDeforestationChart key="week" :date="date" :startDateEndDate="startDateEndDate"
-                            v-if="view === 'week'" />
+                            :filters="filters" v-if="view === 'week'" />
                         <MonthlyDeforestationChart key="month" :date="date" :startDateEndDate="startDateEndDate"
-                            v-if="view === 'month'" />
+                            :filters="filters" v-if="view === 'month'" />
                         <YearlyDeforestationChart key="year" :date="date" :startDateEndDate="startDateEndDate"
                             v-if="view === 'year'" />
                     </keep-alive>
@@ -82,6 +82,9 @@ export default {
     props: {
         filteredYear: {
             required: false
+        },
+        filters: {
+            required: false
         }
     },
     data() {
@@ -127,6 +130,10 @@ export default {
     },
     computed: {
         date() {
+            if( ! this.lastUpdate ) {
+                return null;
+            }
+
             return DateTime.fromISO(this.lastUpdate.deter_last_date)
         },
         previousMonth() {
@@ -134,6 +141,9 @@ export default {
             return months[month]
         },
         updated() {
+            if( ! this.lastUpdate.deter_last_date ) {
+                return false;
+            }
             return {
                 deter: shortDate(this.lastUpdate?.deter_last_date).replaceAll('/', '.'),
                 sync: shortDate(this.lastUpdate?.last_sync).replaceAll('/', '.'),
