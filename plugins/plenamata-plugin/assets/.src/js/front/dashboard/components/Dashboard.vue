@@ -396,22 +396,33 @@ export default {
                 this.filters.uc = _filters.uc;
             });
         }
-        
+
         if (_filters.year != '') {
             wait(() => this.data, () => {
                 this.filters.year = _filters.year;
             });
         }
 
-        if( _filters.long != '' && _filters.lat != '' && _filters.zoom != '' ) {
+        if (_filters.long != '' && _filters.lat != '' && _filters.zoom != '') {
             wait(() => this.jeomap?.map?.isStyleLoaded(), () => {
                 this.flyTo(_filters);
             });
-        } else { 
+        } else {
             wait(() => this.jeomap?.map?.isStyleLoaded(), () => {
                 this.flyTo({ lat: this.jeomap.getArg('center_lat'), long: this.jeomap.getArg('center_lon'), zoom: this.jeomap.getArg('initial_zoom') })
             });
         }
+
+        wait(() => this.jeomap?.map?.isStyleLoaded(), () => {
+            const legend = document.querySelector('.legend-container .legends-wrapper > div:first-of-type span.legend-single-title');
+            if (legend) {
+                const currentHTML = legend.innerHTML;
+                legend.innerHTML = currentHTML.replace(/INPE/g, '<a href="https://www.gov.br/inpe/pt-br">INPE</a>')
+                    .replace(/PRODES/g, '<a href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes">PRODES</a>');
+            }
+
+        });
+
     },
     mounted() {
         const mapEl = document.querySelector('.jeomap')
@@ -577,7 +588,7 @@ export default {
                 this.jeomap.map.on('moveend', () => {
                     const { lng, lat } = this.jeomap.map.getCenter();
                     const zoom = this.jeomap.map.getZoom();
-                    
+
                     const queryParams = new URLSearchParams(window.location.search);
                     queryParams.set('lat', lat);
                     queryParams.set('lng', lng);
