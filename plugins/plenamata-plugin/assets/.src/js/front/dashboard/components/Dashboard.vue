@@ -20,7 +20,7 @@
                             :title="__('All states', 'plenamata')" v-model="filters.estado" />
                         <Dropdown id="select-municipios" icon="map-cities" keyId="mun_geo_cod" keyLabel="municipio"
                             :activeField.sync="activeField" :options="data.municipalities || []"
-                            :placeholder="__('All municipalities', 'plenamata')"
+                            :placeholder="municipalitiesPlaceholder"
                             :title="__('All municipalities', 'plenamata')" v-model="filters.municipio"
                             :onEmptyClick="openEstados" />
                         <Dropdown id="select-land" icon="lands" keyId="code" keyLabel="ti" :activeField.sync="activeField"
@@ -190,6 +190,7 @@ export default {
             view: 'data',
             wpApiTotalPages: 999999,
             year: DateTime.now().year,
+            municipalitiesPlaceholder: __('Select a state', 'plenamata')
         }
     },
     computed: {
@@ -298,8 +299,8 @@ export default {
         },
         async 'filters.estado'() {
             this.filters.municipio = ''
-
             if (this.filters.estado) {
+                this.municipalitiesPlaceholder = __('All municipalities', 'plenamata');
                 this.data.municipalities = await fetchMunicipalities(this.filters.estado)
                 this.filters.ti = ''
                 this.filters.uc = ''
@@ -308,6 +309,7 @@ export default {
                 const { lat, long, zoom } = this.states[this.filters.estado]
                 this.flyTo({ lat, long, zoom: zoom || JeoMap.getArg('initial_zoom') })
             } else {
+                this.municipalitiesPlaceholder = __('Select a state', 'plenamata');
                 this.data.municipalities = []
                 this.jeomap?.map.setFilter('uf-brasil', null)
                 this.jeomap?.map.setLayoutProperty('uf-brasil', 'visibility', 'none')
@@ -405,6 +407,7 @@ export default {
         if (_filters.year != '') {
             wait(() => this.data, () => {
                 this.filters.year = _filters.year;
+                this.year = _filters.year;
             });
         }
 
@@ -419,11 +422,15 @@ export default {
         }
 
         wait(() => this.jeomap?.map?.isStyleLoaded(), () => {
-            const legend = document.querySelector('.legend-container .legends-wrapper > div:first-of-type span.legend-single-title');
+            const legend = document.querySelectorAll('.legend-container .legends-wrapper > div span.legend-single-title');
             if (legend) {
-                const currentHTML = legend.innerHTML;
-                legend.innerHTML = currentHTML.replace(/INPE/g, '<a href="https://www.gov.br/inpe/pt-br">INPE</a>')
-                    .replace(/PRODES/g, '<a href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes">PRODES</a>');
+                legend.forEach((element) => {
+                    const currentHTML = element.innerHTML;
+                    element.innerHTML = currentHTML.replace(/INPE/g, '<a href="https://www.gov.br/inpe/pt-br" target="_blank">INPE</a>')
+                        .replace(/PRODES/g, '<a href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/prodes" target="_blank">PRODES</a>')
+                        .replace(/DETER/g, '<a href="http://www.obt.inpe.br/OBT/assuntos/programas/amazonia/deter/deter" target="_blank">DETER</a>');
+                });
+
             }
 
         });
@@ -624,13 +631,6 @@ export default {
             }
         },
         openEstados() {
-            if (this.activeField != 'select-estados') {
-                this.showFilters = true;
-                this.activeField = 'select-estados';
-            } else {
-                this.showFilters = false;
-                this.activeField = '';
-            }
 
         },
     },

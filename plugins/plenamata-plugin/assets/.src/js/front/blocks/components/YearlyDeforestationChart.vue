@@ -32,7 +32,7 @@ export default {
                     this.fetchData();
                 });
             },
-            immediate: true, // para garantir que a função seja chamada imediatamente na criação
+            immediate: true,
         },
     },
     methods: {

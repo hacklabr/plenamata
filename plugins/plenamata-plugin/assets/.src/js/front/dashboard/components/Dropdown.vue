@@ -16,10 +16,11 @@
             </div>
             <div class="list-wrapper">
                 <ul>
-                    <li v-if="value !== '' && placeholder">
+                    <li v-if="placeholder">
                         <input type="radio" :id="id + '-all'" :name="id" value="" v-model="valueModel">
-                        <label :for="id + '-all'" :title="placeholder" @click="close" @keypress.enter="close">{{ placeholder
-                        }}</label>
+                        <label data-label="essa" :for="id + '-all'" :title="placeholder" @click="close"
+                            @keypress.enter="close">{{ placeholder
+                            }}</label>
                     </li>
                     <li v-for="option of options" :key="getID(option)">
                         <input type="radio" :id="getID(option)" :name="id" :value="option[keyId]" v-model="valueModel">
@@ -34,6 +35,7 @@
 
 <script>
 import { vModel } from '../../utils/vue'
+import Tooltip from './Tooltip.vue'
 
 export default {
     name: 'Dropdown',
@@ -49,7 +51,11 @@ export default {
         triggerClass: { type: String, default: 'inline' },
         title: { type: [Boolean, String], default: false },
         value: { type: [Boolean, Number, String], default: null },
-        onEmptyClick: { default: false }
+        onEmptyClick: { default: false },
+        errorMessage: { default: false }
+    },
+    components: {
+        Tooltip
     },
     model: {
         prop: 'value',
@@ -57,9 +63,10 @@ export default {
     },
     computed: {
         label() {
-            if (this.value === '') {
-                return this.placeholder
+            if (this.value === '' || typeof this.value != 'string') {
+                return this.title
             }
+            console.log(this.value);
 
             const keys = (typeof this.options === 'object') ? Object.keys(this.options) : this.options.keys
 
@@ -96,7 +103,6 @@ export default {
         toggle() {
             if (this.options.length == 0 && this.onEmptyClick) {
                 this.onEmptyClick();
-                return;
             }
             this.$emit('update:activeField', (this.activeField === this.id ? '' : this.id))
         },
