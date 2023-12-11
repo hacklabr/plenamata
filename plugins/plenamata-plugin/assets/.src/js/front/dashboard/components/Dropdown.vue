@@ -63,7 +63,8 @@ export default {
     },
     computed: {
         label() {
-            if (this.value === '' || typeof this.value != 'string') {
+            if (this.value === '' || (typeof this.value != 'string' && typeof this.value != 'number')) {
+                console.log('aqui', this.value, typeof this.value )
                 return this.title
             }
             console.log(this.value);

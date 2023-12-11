@@ -103,7 +103,7 @@
                     <YearlyDeforestationEvolutionDeter :activeField.sync="activeField" :date="date" :filters="filters"
                         :unit.sync="unit" :updated="updated" />
                     <YearlyDeforestationEvolutionProdes :activeField.sync="activeField" :filters="filters" :unit.sync="unit"
-                        :year="year" />
+                        :year="Number(year)" />
                 </div>
 
                 <div class="dashboard__news" v-else-if="view === 'news'">
