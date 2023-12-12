@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16.13.0' # Update to desired version
+
     - name: Build # Remove or modify this step as needed
       run: |
         cd ${{ github.workspace }}/plugins/plenamata-plugin
