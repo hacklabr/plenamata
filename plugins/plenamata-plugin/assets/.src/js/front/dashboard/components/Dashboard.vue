@@ -297,6 +297,9 @@ export default {
             },
             deep: true,
         },
+        async 'filters.year'() {
+            this.year = this.filters.year;
+        },
         async 'filters.estado'() {
             this.filters.municipio = ''
             if (this.filters.estado) {
